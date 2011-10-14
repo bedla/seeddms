@@ -89,7 +89,7 @@ if ($_POST["reviewType"] == "ind") {
 		"VALUES ('". $reviewStatus["indstatus"][0]["reviewID"] ."', '".
 		$_POST["reviewStatus"] ."', '". $comment ."', NOW(), '". $user->getID() ."')";
 	$res=$db->getResult($queryStr);
-	if (is_bool($res) && !res) {
+	if (is_bool($res) && !$res) {
 		UI::exitError(getMLText("document_title", array("documentname" => $document->getName())),getMLText("review_update_failed"));
 	}
 	else {
@@ -142,7 +142,7 @@ else if ($_POST["reviewType"] == "grp") {
 		"VALUES ('". $grpStatus["reviewID"] ."', '".
 		$_POST["reviewStatus"] ."', '". $comment ."', NOW(), '". $user->getID() ."')";
 	$res=$db->getResult($queryStr);
-	if (is_bool($res) && !res) {
+	if (is_bool($res) && !$res) {
 		UI::exitError(getMLText("document_title", array("documentname" => $document->getName())),getMLText("review_update_failed"));
 	}
 	else {

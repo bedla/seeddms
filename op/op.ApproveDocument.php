@@ -94,7 +94,7 @@ if ($_POST["approvalType"] == "ind") {
 		"VALUES ('". $approvalStatus["indstatus"][0]["approveID"] ."', '".
 		$_POST["approvalStatus"] ."', '". $comment ."', NOW(), '". $user->getID() ."')";
 	$res=$db->getResult($queryStr);
-	if (is_bool($res) && !res) {
+	if (is_bool($res) && !$res) {
 		UI::exitError(getMLText("document_title", array("documentname" => $document->getName())),getMLText("approval_update_failed"));
 	}
 	else {
@@ -148,7 +148,7 @@ else if ($_POST["approvalType"] == "grp") {
 		"VALUES ('". $grpStatus["approveID"] ."', '".
 		$_POST["approvalStatus"] ."', '". $comment ."', NOW(), '". $user->getID() ."')";
 	$res=$db->getResult($queryStr);
-	if (is_bool($res) && !res) {
+	if (is_bool($res) && !$res) {
 		UI::exitError(getMLText("document_title", array("documentname" => $document->getName())),getMLText("approval_update_failed"));
 	}
 	else {

@@ -133,6 +133,7 @@ class HTTP_WebDAV_Server_LetoDMS extends HTTP_WebDAV_Server
 	 */
 	function reverseLookup($path) /* {{{ */
 	{
+		$path = urldecode($path);
 		if($this->logger)
 			$this->logger->log('reverseLookup: path='.$path.'', PEAR_LOG_DEBUG);
 

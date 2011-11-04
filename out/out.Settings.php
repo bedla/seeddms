@@ -238,6 +238,10 @@ if(!is_writeable($settings->_configFilePath)) {
             <OPTION VALUE="m" <?php if ($settings->_logFileRotation=="m") echo "SELECTED" ?> ><?php printMLText("monthly");?></OPTION>
           </SELECT>
       </tr>
+      <tr title="<?php printMLText("settings_enableLargeFileUpload_desc");?>">
+        <td><?php printMLText("settings_enableLargeFileUpload");?>:</td>
+        <td><input name="enableLargeFileUpload" type="checkbox" <?php if ($settings->_enableLargeFileUpload) echo "checked" ?> /></td>
+      </tr>
       <tr title="<?php printMLText("settings_partitionSize_desc");?>">
         <td><?php printMLText("settings_partitionSize");?>:</td>
         <td><input name="partitionSize" value="<?php echo $settings->_partitionSize ?>" size="100" /></td>

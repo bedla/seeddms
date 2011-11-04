@@ -46,15 +46,23 @@ if (!file_exists("settings.xml.template_install")) {
  * Functions
  */
 function printError($error) { /* {{{ */
-	print "<div class=\"error\">";
+	print "<div class=\"install_error\">";
+	print "Error<br />";
 	print $error;
 	print "</div>";
 } /* }}} */
 
+function printWarning($error) { /* {{{ */
+	print "<div class=\"install_warning\">";
+	print "Warning<br />";
+	print $error;
+	print "</div>";
+} /* }}} */
 function printCheckError($resCheck) { /* {{{ */
 	$hasError = false;
 	foreach($resCheck as $keyRes => $paramRes) {
-		$hasError = true;
+		if(isset($paramRes['type']) && $paramRes['type'] == 'error')
+			$hasError = true;
 		$errorMes = getMLText("settings_$keyRes"). " : " . getMLText("settings_".$paramRes["status"]);
 
 		if (isset($paramRes["currentvalue"]))
@@ -66,7 +74,10 @@ function printCheckError($resCheck) { /* {{{ */
 		if (isset($paramRes["systemerror"]))
 			$errorMes .= "<br/> =&gt; " . $paramRes["systemerror"];
 
-		printError($errorMes);
+		if(isset($paramRes['type']) && $paramRes['type'] == 'error')
+			printError($errorMes);
+		else
+			printWarning($errorMes);
 	}
 
 	return $hasError;
@@ -168,6 +179,7 @@ if (printCheckError( $settings->checkSystem())) {
 	}
 
 	echo "<br/>PHP version: " . phpversion();
+	echo "<br/>PHP include path: " . ini_get('include_path');
 
 	echo '<br/>';
 	echo '<br/>';
@@ -204,9 +216,9 @@ if ($action=="setSettings") {
   $settings->_luceneClassDir = $_POST["luceneClassDir"];
 
 	/**
-	 * Check Parameters
+	 * Check Parameters, require version 3.2.x
 	 */
-	$hasError = printCheckError( $settings->check());
+	$hasError = printCheckError( $settings->check('32'));
 
 	if (!$hasError)
 	{

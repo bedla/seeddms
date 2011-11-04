@@ -88,6 +88,8 @@ class Settings { /* {{{ */
 	var $_logFileEnable = true;
 	// the log file rotation
 	var $_logFileRotation = "d";
+	// Enable file upload by jumploader
+	var $_enableLargeFileUpload = false;
 	// size of partitions for file upload by jumploader
 	var $_partitionSize = 2000000;
 	// enable/disable users images
@@ -266,6 +268,7 @@ class Settings { /* {{{ */
 		$this->_luceneDir = strval($tab["luceneDir"]);
 		$this->_logFileEnable = Settings::boolVal($tab["logFileEnable"]);
 		$this->_logFileRotation = strval($tab["logFileRotation"]);
+		$this->_enableLargeFileUpload = Settings::boolVal($tab["enableLargeFileUpload"]);
 		$this->_partitionSize = strval($tab["partitionSize"]);
 
 		// XML Path: /configuration/system/authentication
@@ -475,6 +478,7 @@ class Settings { /* {{{ */
     $this->setXMLAttributValue($node, "luceneDir", $this->_luceneDir);
     $this->setXMLAttributValue($node, "logFileEnable", $this->_logFileEnable);
     $this->setXMLAttributValue($node, "logFileRotation", $this->_logFileRotation);
+    $this->setXMLAttributValue($node, "enableLargeFileUpload", $this->_enableLargeFileUpload);
     $this->setXMLAttributValue($node, "partitionSize", $this->_partitionSize);
 
     // XML Path: /configuration/system/authentication
@@ -672,7 +676,7 @@ class Settings { /* {{{ */
 	 *
 	 *  @return array
 	 */
-	function check() { /* {{{ */
+	function check($minversion) { /* {{{ */
 		// suggestion rootdir
 		if (file_exists("../inc/inc.Settings.php"))
 			$rootDir = realpath ("../inc/inc.Settings.php");
@@ -692,6 +696,7 @@ class Settings { /* {{{ */
 		if (!file_exists($this->_rootDir ."inc/inc.Settings.php")) {
 			$result["rootDir"] = array(
 				"status" => "notfound",
+				"type" => "error",
 				"currentvalue" => $this->_rootDir,
 				"suggestionvalue" => $rootDir
 				);
@@ -703,6 +708,7 @@ class Settings { /* {{{ */
 			if (!file_exists($this->_coreDir ."Core.php")) {
 				$result["coreDir"] = array(
 					"status" => "notfound",
+					"type" => "error",
 					"currentvalue" => $this->_coreDir,
 					"suggestionvalue" => $rootDir
 					);
@@ -712,6 +718,7 @@ class Settings { /* {{{ */
 			if(!$found) {
 				$result["coreDir"] = array(
 					"status" => "notfound",
+					"type" => "error",
 					"currentvalue" => $this->_coreDir,
 					"suggestionvalue" => $rootDir
 					);
@@ -724,6 +731,7 @@ class Settings { /* {{{ */
 		if (strpos($tmp, $this->_httpRoot) === false) {
 			$result["httpRoot"] = array(
 				"status" => "notfound",
+				"type" => "error",
 				"currentvalue" => $this->_httpRoot,
 				"suggestionvalue" => $tmp
 				);
@@ -734,12 +742,14 @@ class Settings { /* {{{ */
 			if (file_exists($rootDir.'data/')) {
 					$result["contentDir"] = array(
 						"status" => "notfound",
+						"type" => "error",
 						"currentvalue" => $this->_contentDir,
 						"suggestionvalue" => $rootDir . 'data/'
 					);
 			} else {
 					$result["contentDir"] = array(
 						"status" => "notfound",
+						"type" => "error",
 						"currentvalue" => $this->_contentDir,
 						"suggestion" => "createdirectory"
 					);
@@ -767,6 +777,7 @@ class Settings { /* {{{ */
 			if (!is_null($errorMsgPerms)) {
 				$result["contentDir"] = array(
 					"status" => "perms",
+					"type" => "error",
 					"currentvalue" => $this->_contentDir,
 					"systemerror" => $errorMsgPerms
 				);
@@ -777,6 +788,7 @@ class Settings { /* {{{ */
 		if (!file_exists($this->_stagingDir)) {
 			$result["stagingDir"] = array(
 				"status" => "notfound",
+				"type" => "error",
 				"currentvalue" => $this->_stagingDir,
 				"suggestionvalue" => $this->_contentDir . 'staging/'
 			);
@@ -786,6 +798,7 @@ class Settings { /* {{{ */
 		if (!file_exists($this->_luceneDir)) {
 			$result["luceneDir"] = array(
 				"status" => "notfound",
+				"type" => "error",
 				"currentvalue" => $this->_luceneDir,
 				"suggestionvalue" => $this->_contentDir . 'lucene/'
 			);
@@ -799,12 +812,14 @@ class Settings { /* {{{ */
 				if (file_exists($rootDir."adodb/adodb.inc.php")) {
 					$result["ADOdbPath"] = array(
 						"status" => "notfound",
+						"type" => "error",
 						"currentvalue" => $this->_ADOdbPath,
 						"suggestionvalue" => $rootDir
 						);
 				} else {
 					$result["ADOdbPath"] = array(
 						"status" => "notfound",
+						"type" => "error",
 						"currentvalue" => $this->_ADOdbPath,
 						"suggestion" => "installADOdb"
 						);
@@ -816,6 +831,7 @@ class Settings { /* {{{ */
 				$bCheckDB = false;
 				$result["ADOdbPath"] = array(
 					"status" => "notfound",
+					"type" => "error",
 					"currentvalue" => $this->_ADOdbPath,
 					"suggestion" => "installADOdb"
 					);
@@ -831,6 +847,7 @@ class Settings { /* {{{ */
 				if (!$connTmp) {
 					$result["dbDriver"] = array(
 						"status" => "notfound",
+						"type" => "error",
 						"currentvalue" => $this->_dbDriver,
 						"suggestionvalue" => "mysql"
 					);
@@ -840,9 +857,42 @@ class Settings { /* {{{ */
 					{
 						$result["dbDatabase"] = array(
 							"status" => "error",
+							"type" => "error",
 							"currentvalue" => '[host, user, database] -> [' . $this->_dbHostname . ',' . $this->_dbUser . ',' . $this->_dbDatabase .']',
 							"systemerror" => $connTmp->ErrorMsg()
 							);
+					} else {
+						/* Check if there wasn't a previous error while searching for
+						 * LetoDMS_Core.
+						 */
+						if(!isset($result["coreDir"])) {
+							/* Instanciate LetoDMS_Core to check version */
+							if(!empty($this->_coreDir))
+								require_once($this->_coreDir.'/Core.php');
+							else
+								require_once('LetoDMS/Core.php');
+							$tmpcore = new LetoDMS_Core_DMS(null, $this->_contentDir);
+							$db = new LetoDMS_Core_DatabaseAccess($this->_dbDriver, $this->_dbHostname, $this->_dbUser, $this->_dbPass, $this->_dbDatabase);
+							if(!$db->connect()) {
+								$result["dbDatabase"] = array(
+									"status" => "error",
+									"type" => "error",
+									"currentvalue" => '[host, user, database] -> [' . $this->_dbHostname . ',' . $this->_dbUser . ',' . $this->_dbDatabase .']',
+									"systemerror" => $connTmp->ErrorMsg()
+									);
+							} else {
+								$dms = new LetoDMS_Core_DMS($db, $this->_contentDir.$this->_contentOffsetDir);
+
+								if(!$dms->checkVersion()) {
+									$result["dbVersion"] = array(
+										"status" => "error",
+										"type" => "error",
+										"currentvalue" => $dms->version,
+										"suggestion" => 'updateDatabase'
+										);
+								}
+							}
+						}
 					}
 
 					$connTmp->Disconnect();
@@ -850,6 +900,7 @@ class Settings { /* {{{ */
 			} catch(Exception $e) {
 				$result["dbDatabase"] = array(
 					"status" => "error",
+					"type" => "error",
 					"currentvalue" => '[host, user, database] -> [' . $settings->_dbHostname . ',' . $settings->_dbUser . ',' . $settings->_dbDatabase .']',
 					"systemerror" => $e->getMessage()
 				);
@@ -875,6 +926,7 @@ class Settings { /* {{{ */
 			if (!in_array("mod_rewrite", $loaded_extensions)) {
 				$result["apache_mod_rewrite"] = array(
 					"status" => "notfound",
+					"type" => "error",
 					"suggestion" => "activate_module"
 				);
 			}
@@ -886,6 +938,7 @@ class Settings { /* {{{ */
 		if (!in_array("gd", $loaded_extensions)) {
 			$result["php_gd2"] = array(
 				"status" => "notfound",
+				"type" => "error",
 				"suggestion" => "activate_php_extension"
 			);
 		}
@@ -894,6 +947,7 @@ class Settings { /* {{{ */
 		if (!in_array("mbstring", $loaded_extensions)) {
 			$result["php_mbstring"] = array(
 				"status" => "notfound",
+				"type" => "error",
 				"suggestion" => "activate_php_extension"
 			);
 		}
@@ -902,12 +956,38 @@ class Settings { /* {{{ */
 		if (!in_array($this->_dbDriver, $loaded_extensions)) {
 			$result["php_dbDriver"] = array(
 				"status" => "notfound",
+				"type" => "error",
 				"currentvalue" => $this->_dbDriver,
 				"suggestion" => "activate_php_extension"
 			);
 		}
 
+		// Check for Log.php
+		if (!Settings::findInIncPath('Log.php')) {
+			$result["pear_log"] = array(
+				"status" => "notfound",
+				"type" => "error",
+				"suggestion" => "install_pear_package_log"
+			);
+		}
 
+		// Check for HTTP/WebDAV/Server.php
+		if (!Settings::findInIncPath('HTTP/WebDAV/Server.php')) {
+			$result["pear_webdav"] = array(
+				"status" => "notfound",
+				"type" => "warning",
+				"suggestion" => "install_pear_package_webdav"
+			);
+		}
+
+		// Check for Zend/Search/Lucene.php
+		if (!Settings::findInIncPath('Zend/Search/Lucene.php')) {
+			$result["zendframework"] = array(
+				"status" => "notfound",
+				"type" => "warning",
+				"suggestion" => "install_zendframework"
+			);
+		}
 		return $result;
 	} /* }}} */
 

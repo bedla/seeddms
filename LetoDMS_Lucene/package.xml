@@ -14,14 +14,14 @@
  <date>2011-07-23</date>
  <time>08:05:38</time>
  <version>
-  <release>1.0.0</release>
+  <release>1.0.1</release>
   <api>1.0.0</api>
  </version>
  <stability>
   <release>beta</release>
   <api>beta</api>
  </stability>
- <license uri="http://opensource.org/licenses/bsd-license">BSD License</license>
+ <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
  <notes>
 - Initial Release
  </notes>

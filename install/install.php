@@ -165,6 +165,10 @@ if (isset($_GET['disableinstall'])) {
 			echo getMLText("settings_install_disabled");
 			echo "<br/><br/>";
 			echo '<a href="' . $httpRoot . '/out/out.Settings.php">' . getMLText("settings_more_settings") .'</a>';
+		} else {
+			echo getMLText("settings_cannot_disable");
+			echo "<br/><br/>";
+			echo '<a href="install.php">' . getMLText("back") . '</a>';
 		}
 	} else {
 		echo getMLText("settings_cannot_disable");

@@ -220,7 +220,7 @@ class LetoDMS_Core_DMS {
 		$tbllist = $this->db->TableList();
 		$tbllist = explode(',',strtolower(join(',',$tbllist)));
 		if(!array_search('tblversion', $tbllist))
-			return false;
+			return true;
 		$queryStr = "SELECT * FROM tblVersion order by major,minor,subminor limit 1";
 		$resArr = $this->db->getResultArray($queryStr);
 		if (is_bool($resArr) && $resArr == false)

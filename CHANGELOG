@@ -1,4 +1,12 @@
 --------------------------------------------------------------------------------
+                     Changes in version 3.3.1
+--------------------------------------------------------------------------------
+- added missing check for access right in webdav server
+- update.sql creates table tblUserPasswordRequest
+- minor changes in language files
+- fixed link to login page on password forgotten page
+
+--------------------------------------------------------------------------------
                      Changes in version 3.3.0
 --------------------------------------------------------------------------------
 - all data is saved into the database without prior modification

@@ -30,6 +30,7 @@
  </stability>
  <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
  <notes>
+- new release
  </notes>
  <contents>
   <dir baseinstalldir="LetoDMS" name="/">

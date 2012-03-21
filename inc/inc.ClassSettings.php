@@ -885,6 +885,7 @@ class Settings { /* {{{ */
 									"systemerror" => $connTmp->ErrorMsg()
 									);
 							} else {
+							/*
 								$dms = new LetoDMS_Core_DMS($db, $this->_contentDir.$this->_contentOffsetDir);
 
 								if(!$dms->checkVersion()) {
@@ -895,6 +896,7 @@ class Settings { /* {{{ */
 										"suggestion" => 'updateDatabase'
 										);
 								}
+							*/
 							}
 						}
 					}

@@ -18,11 +18,11 @@
   <email></email>
   <active>no</active>
  </lead>
- <date>2012-03-22</date>
- <time>08:07:42</time>
+ <date>2012-03-28</date>
+ <time>08:42:35</time>
  <version>
-  <release>3.3.2</release>
-  <api>3.3.2</api>
+  <release>3.3.3</release>
+  <api>3.3.3</api>
  </version>
  <stability>
   <release>beta</release>
@@ -30,7 +30,7 @@
  </stability>
  <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
  <notes>
-- fixed bug in LetoDMS_Core_Document::getDir()
+- fixed bug in LetoDMS_Core_Document::getPath()
  </notes>
  <contents>
   <dir baseinstalldir="LetoDMS" name="/">
@@ -157,6 +157,22 @@ Initial release
    <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
    <notes>
 - new release
+   </notes>
+  </release>
+  <release>
+   <date>2012-03-22</date>
+   <time>08:07:42</time>
+   <version>
+    <release>3.3.2</release>
+    <api>3.3.2</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- fixed bug in LetoDMS_Core_Document::getDir()
    </notes>
   </release>
  </changelog>

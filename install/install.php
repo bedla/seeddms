@@ -97,6 +97,11 @@ $configDir = Settings::getConfigDir();
 /**
  * Check if ENABLE_INSTALL_TOOL exists in config dir
  */
+if (!$configDir) {
+	echo "Fatal error! I could not even find a configuration directory.";
+	exit;
+}
+
 if (!file_exists($configDir."/ENABLE_INSTALL_TOOL")) {
 	echo "For installation of LetoDMS, you must create the file conf/ENABLE_INSTALL_TOOL";
 	exit;

@@ -2,6 +2,8 @@
                      Changes in version 3.3.4
 --------------------------------------------------------------------------------
 - fixed another issue of incorrect document access if masDirID != 0
+- updated README
+- use common way to check for configuration file
 
 --------------------------------------------------------------------------------
                      Changes in version 3.3.3

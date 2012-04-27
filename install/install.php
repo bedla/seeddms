@@ -88,7 +88,7 @@ function printCheckError($resCheck) { /* {{{ */
  * Load default settings + set
  */
 define("LETODMS_INSTALL", "on");
-define("LETODMS_VERSION", "3.3.4");
+define("LETODMS_VERSION", "3.3.5");
 
 require_once('../inc/inc.ClassSettings.php');
 

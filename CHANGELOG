@@ -1,4 +1,10 @@
 --------------------------------------------------------------------------------
+                     Changes in version 3.3.5
+--------------------------------------------------------------------------------
+- extend the php include path with ADOdb path much earlier. This fixeѕ
+  problems with Log.php if installed in the same as ADOdb.
+
+--------------------------------------------------------------------------------
                      Changes in version 3.3.4
 --------------------------------------------------------------------------------
 - fixed another issue of incorrect document access if masDirID != 0

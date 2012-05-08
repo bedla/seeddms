@@ -492,6 +492,7 @@ class LetoDMS_Core_Folder {
 	 *        expiration date
 	 * @param object $owner owner of the new document
 	 * @param string $keywords keywords of new document
+	 * @param array $categories list of category ids
 	 * @param string $tmpFile the path of the file containing the content
 	 * @param string $orgFileName the original file name
 	 * @param string $fileType usually the extension of the filename
@@ -592,7 +593,10 @@ class LetoDMS_Core_Folder {
 	 * privileges. If $mode is set to M_ANY no restriction will apply
 	 * regardless of the value of $op. The returned array contains a list
 	 * of {@link LetoDMS_Core_UserAccess} and
-	 * {@link LetoDMS_Core_GroupAccess} objects.
+	 * {@link LetoDMS_Core_GroupAccess} objects. Even if the document
+	 * has no access list the returned array contains the two elements
+	 * 'users' and 'groups' which are than empty. The methode returns false
+	 * if the function fails.
 	 * 
 	 * @param integer $mode access mode (defaults to M_ANY)
 	 * @param integer $op operation (defaults to O_EQ)
@@ -730,6 +734,15 @@ class LetoDMS_Core_Folder {
 
 	/**
 	 * Get the access mode of a user on the folder
+	 *
+	 * This function returns the access mode for a given user. An administrator
+	 * and the owner of the folder has unrestricted access. A guest user has
+	 * read only access or no access if access rights are further limited
+	 * by access control lists. All other users have access rights according
+	 * to the access control lists or the default access. This function will
+	 * recursive check for access rights of parent folders if access rights
+	 * are inherited.
+	 *
 	 * This function returns the access mode for a given user. An administrator
 	 * and the owner of the folder has unrestricted access. A guest user has
 	 * read only access or no access if access rights are further limited
@@ -764,12 +777,17 @@ class LetoDMS_Core_Folder {
 				return $userAccess->getMode();
 			}
 		}
+		/* Get the highest right defined by a group */
+		$result = 0;
 		foreach ($accessList["groups"] as $groupAccess) {
 			if ($user->isMemberOfGroup($groupAccess->getGroup())) {
-//				if ($groupAccess->getMode()>$result)
-					return $groupAccess->getMode();
+				if ($groupAccess->getMode() > $result)
+					$result = $groupAccess->getMode();
+//					return $groupAccess->getMode();
 			}
 		}
+		if($result)
+			return $result;
 		$result = $this->getDefaultAccess();
 		return $result;
 	} /* }}} */

@@ -1,4 +1,4 @@
-VERSION=3.3.5
+VERSION=3.3.6
 SRC=CHANGELOG* inc conf utils index.php languages op out README README.Notification reset_db.sql drop-tables-innodb.sql delete_all_contents.sql styles js TODO LICENSE Makefile webdav install
 
 dist:
@@ -18,6 +18,6 @@ webdav:
 	rm -rf tmp
 
 doc:
-	phpdoc -d LetoDMS_Core -t html
+	phpdoc -d LetoDMS_Core --ignore 'getusers.php,getfoldertree.php,config.php,reverselookup.php' -t html
 
 .PHONY: webdav

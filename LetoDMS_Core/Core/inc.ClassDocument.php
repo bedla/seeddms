@@ -1915,7 +1915,7 @@ class LetoDMS_Core_DocumentContent { /* {{{ */
 		if (!isset($this->_reviewStatus)) {
 			/* First get a list of all reviews for this document content */
 			$queryStr=
-				"SELECT reviewId FROM tblDocumentReviewers WHERE `version`='".$this->_version
+				"SELECT reviewID FROM tblDocumentReviewers WHERE `version`='".$this->_version
 				."' AND `documentID` = '". $this->_document->getID() ."' ";
 			$recs = $db->getResultArray($queryStr);
 			if (is_bool($recs) && !$recs)
@@ -1931,7 +1931,7 @@ class LetoDMS_Core_DocumentContent { /* {{{ */
 						"LEFT JOIN `tblDocumentReviewLog` USING (`reviewID`) ".
 						"LEFT JOIN `tblUsers` on `tblUsers`.`id` = `tblDocumentReviewers`.`required`".
 						"LEFT JOIN `tblGroups` on `tblGroups`.`id` = `tblDocumentReviewers`.`required`".
-						"WHERE `tblDocumentReviewers`.`reviewId` = '". $rec['reviewId'] ."' ".
+						"WHERE `tblDocumentReviewers`.`reviewID` = '". $rec['reviewID'] ."' ".
 						"ORDER BY `tblDocumentReviewLog`.`reviewLogID` DESC LIMIT ".(int) $limit;
 
 					$res = $db->getResultArray($queryStr);

@@ -45,8 +45,8 @@ function checkForm()
 	msg = "";
 	if (document.form1.pwd.value != document.form1.pwdconf.value) msg += "<?php printMLText("js_pwd_not_conf");?>\n";
 	if (document.form1.fullname.value == "") msg += "<?php printMLText("js_no_name");?>\n";
-	// if (document.form1.email.value == "") msg += "<?php printMLText("js_no_email");?>\n";
-	if (document.form1.comment.value == "") msg += "<?php printMLText("js_no_comment");?>\n";
+	if (document.form1.email.value == "") msg += "<?php printMLText("js_no_email");?>\n";
+//	if (document.form1.comment.value == "") msg += "<?php printMLText("js_no_comment");?>\n";
 	if (msg != "")
 	{
 		alert(msg);
@@ -61,7 +61,6 @@ function checkForm()
 UI::contentHeading(getMLText("edit_user_details"));
 UI::contentContainerStart();
 ?>
-
 <form action="../op/op.EditUserData.php" enctype="multipart/form-data" method="post" name="form1" onsubmit="return checkForm();">
 <table>
 	<tr>

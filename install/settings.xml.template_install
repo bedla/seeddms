@@ -25,6 +25,7 @@
        - expandFolderTree: 0 to start with tree hidden
        -                   1 to start with tree shown and first level expanded
        -                   2 to start with tree shown fully expanded     
+       - stopWordsFile: path to stop word file for indexer
     -->   
     <edition
       strictFormCheck = "false"
@@ -35,6 +36,7 @@
       enableFullSearch = "true"
       enableFolderTree = "true"
       expandFolderTree = "1"
+      stopWordsFile = ""
   
     >
     </edition> 

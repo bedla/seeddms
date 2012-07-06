@@ -1,4 +1,18 @@
 --------------------------------------------------------------------------------
+                     Changes in version 3.3.6
+--------------------------------------------------------------------------------
+- fixed deletion of files over WebDAV for some clients
+- updated russian language
+- comment is no longer needed when adding a user, email is now required
+- added debug mode in DBAccess class
+- list of users/groups on 'Edit Access' page does not contain users/groups
+  which are already on the acl
+- if a document/folder has access rights based on a group, then the highest
+  access right will be used (not the one first assigned)
+- added configuration of path to stop words file
+- fixed creation of database dump file
+
+--------------------------------------------------------------------------------
                      Changes in version 3.3.5
 --------------------------------------------------------------------------------
 - extend the php include path with ADOdb path much earlier. This fixeѕ

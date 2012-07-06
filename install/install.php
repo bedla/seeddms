@@ -88,7 +88,7 @@ function printCheckError($resCheck) { /* {{{ */
  * Load default settings + set
  */
 define("LETODMS_INSTALL", "on");
-define("LETODMS_VERSION", "3.3.5");
+define("LETODMS_VERSION", "3.3.6");
 
 require_once('../inc/inc.ClassSettings.php');
 
@@ -139,6 +139,9 @@ if(!$settings->_contentDir) {
 	$settings->_stagingDir = $settings->_rootDir . 'data/staging/';
 }
 $settings->_httpRoot = $httpRoot;
+
+if(isset($settings->_ADOdbPath))
+	ini_set('include_path', $settings->_ADOdbPath. PATH_SEPARATOR .ini_get('include_path'));
 
 /**
  * Include GUI + Language
@@ -244,7 +247,7 @@ if ($action=="setSettings") {
 			$createOK = false;
 			$errorMsg = "";
 
-			require_once($settings->_ADOdbPath."adodb/adodb.inc.php");
+			require_once($settings->_ADOdbPath."/adodb/adodb.inc.php");
 			$connTmp = ADONewConnection($settings->_dbDriver);
 			if ($connTmp) {
 			 	$connTmp->Connect($settings->_dbHostname, $settings->_dbUser, $settings->_dbPass, $settings->_dbDatabase);

@@ -60,6 +60,8 @@ class Settings { /* {{{ */
 	var $_stagingDir = null;
 	// Where the lucene fulltext index is saved
 	var $_luceneDir = null;
+	// Where the stop word file is located
+	var $_stopWordsFile = null;
 	// enable/disable lucene fulltext search
 	var $_enableFullSearch = true;
 	// contentOffsetDirTo
@@ -251,6 +253,7 @@ class Settings { /* {{{ */
 		$this->_enableUsersView = Settings::boolVal($tab["enableUsersView"]);
 		$this->_enableFolderTree = Settings::boolVal($tab["enableFolderTree"]);
 		$this->_enableFullSearch = Settings::boolVal($tab["enableFullSearch"]);
+		$this->_stopWordsFile = strval($tab["stopWordsFile"]);
 		$this->_expandFolderTree = intval($tab["expandFolderTree"]);
 
 		// XML Path: /configuration/site/calendar
@@ -464,6 +467,7 @@ class Settings { /* {{{ */
     $this->setXMLAttributValue($node, "enableFolderTree", $this->_enableFolderTree);
     $this->setXMLAttributValue($node, "enableFullSearch", $this->_enableFullSearch);
     $this->setXMLAttributValue($node, "expandFolderTree", $this->_expandFolderTree);
+    $this->setXMLAttributValue($node, "stopWordsFile", $this->_stopWordsFile);
 
     // XML Path: /configuration/site/calendar
     $node = $this->getXMLNode($xml, '/configuration/site', 'calendar');
@@ -598,21 +602,6 @@ class Settings { /* {{{ */
 			if (file_exists($configDir."/settings.xml"))
 				return $configDir."/settings.xml";
 		}
-/*
-		// Search config file
-		$_tmp = dirname($_SERVER['SCRIPT_FILENAME']);
-		if(is_link($_tmp)) {
-			$_arr = preg_split('/\//', $_tmp);
-			array_pop($_arr);
-
-			$configFilePath = implode('/', $_arr)."/conf/settings.xml";
-		} else {
-			if (file_exists("../conf/settings.xml"))
-				$configFilePath = "../conf/settings.xml";
-			else if (file_exists("conf/settings.xml"))
-				$configFilePath = "conf/settings.xml";
-		}
-*/
 		return $configFilePath;
 	} /* }}} */
 
@@ -821,7 +810,7 @@ class Settings { /* {{{ */
 		// $this->_ADOdbPath
 		$bCheckDB = true;
 		if($this->_ADOdbPath) {
-			if (!file_exists($this->_ADOdbPath."adodb/adodb.inc.php")) {
+			if (!file_exists($this->_ADOdbPath."/adodb/adodb.inc.php")) {
 				$bCheckDB = false;
 				if (file_exists($rootDir."adodb/adodb.inc.php")) {
 					$result["ADOdbPath"] = array(

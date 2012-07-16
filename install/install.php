@@ -247,7 +247,7 @@ if ($action=="setSettings") {
 			$createOK = false;
 			$errorMsg = "";
 
-			require_once($settings->_ADOdbPath."/adodb/adodb.inc.php");
+			require_once($settings->_ADOdbPath."adodb/adodb.inc.php");
 			$connTmp = ADONewConnection($settings->_dbDriver);
 			if ($connTmp) {
 			 	$connTmp->Connect($settings->_dbHostname, $settings->_dbUser, $settings->_dbPass, $settings->_dbDatabase);

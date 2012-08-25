@@ -1,4 +1,11 @@
 --------------------------------------------------------------------------------
+                     Changes in version 3.3.7
+--------------------------------------------------------------------------------
+- major security update which fixeѕ lots of possible XSS and CSRF attacts
+- comment is no longer needed when adding a user, email is now required (this
+  time it is really changed)
+
+--------------------------------------------------------------------------------
                      Changes in version 3.3.6
 --------------------------------------------------------------------------------
 - fixed deletion of files over WebDAV for some clients

@@ -64,6 +64,10 @@ UI::contentContainerStart();
 <form action="../op/op.EditUserData.php" enctype="multipart/form-data" method="post" name="form1" onsubmit="return checkForm();">
 <table>
 	<tr>
+		<td><?php printMLText("current_password");?>:</td>
+		<td><input id="currentpwd" type="Password" name="currentpwd" size="30"></td>
+	</tr>
+	<tr>
 		<td><?php printMLText("password");?>:</td>
 		<td><input type="Password" name="pwd" size="30"></td>
 	</tr>

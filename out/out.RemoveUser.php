@@ -32,7 +32,7 @@ if (!isset($_GET["userid"]) || !is_numeric($_GET["userid"]) || intval($_GET["use
 	UI::exitError(getMLText("rm_user"),getMLText("invalid_user_id"));
 }
 
-$userid = $_GET["userid"];
+$userid = intval($_GET["userid"]);
 $currUser = $dms->getUser($userid);
 
 if ($userid==$user->getID()) {

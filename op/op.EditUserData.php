@@ -35,6 +35,11 @@ if (!$user->isAdmin() && ($settings->_disableSelfEdit)) {
 $fullname = $_POST["fullname"];
 $email    = $_POST["email"];
 $comment  = $_POST["comment"];
+$current_pwd  = $_POST["currentpwd"];
+
+if($user->getPwd() != md5($current_pwd)) {
+	UI::exitError(getMLText("edit_user_details"),getMLText("password_wrong"));
+}
 
 if (isset($_POST["pwd"]) && ($_POST["pwd"] != ""))
 	$user->setPwd(md5($_POST["pwd"]));

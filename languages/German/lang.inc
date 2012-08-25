@@ -2,7 +2,7 @@
 //    MyDMS. Document Management System
 //    Copyright (C) 2002-2005  Markus Westphal
 //    Copyright (C) 2006-2008 Malcolm Cowe
-//    Copyright (C) 2010 Uwe Steinmann
+//    Copyright (C) 2012 Uwe Steinmann
 //
 //    This program is free software; you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
@@ -114,6 +114,7 @@ $text["continue"] = "fortführen";
 $text["create_fulltext_index"] = "Erzeuge Volltextindex";
 $text["create_fulltext_index_warning"] = "Sie möchten den Volltextindex neu erzeugen. Dies kann beträchtlich Zeit in Anspruch nehmen und Gesamtleistung Ihres System beeinträchtigen. Bestätigen Sie bitte diese Operation.";
 $text["creation_date"] = "Erstellt am";
+$text["current_password"] = "Aktuelles Passwort";
 $text["current_version"] = "Aktuelle Version";
 $text["daily"] = "täglich";
 $text["databasesearch"] = "Datenbanksuche";
@@ -335,6 +336,7 @@ $text["password_forgotten_email_subject"] = "Passwort vergessen";
 $text["password_forgotten_email_body"] = "Sehr geehrter Anwender von LetoDMS,\n\nwir haben einen Anfrage zum Zurücksetzen Ihres Passworts erhalten und deshalb ein neues Passwort erzeugt.\n\nIhr neues Passwort lautet: ###PASSWORD###\n\nBitte ändern Sie es umgehend nachdem Sie sich erfolgreich angemeldet haben.\nSollen Sie danach immer noch Problem bei der Anmeldung haben, dann kontaktieren Sie bitte Ihren\nAdminstrator";
 $text["password_forgotten_send_password"] = "Ihr Passwort wurde an die E-Mail-Adresse des Benutzers gesendet.";
 $text["password_forgotten_title"] = "Passwort gesendet";
+$text["password_wrong"] = "Falsches Passwort";
 $text["personal_default_keywords"] = "Persönliche Stichwortlisten";
 $text["previous_versions"] = "Vorhergehende Versionen";
 $text["refresh"] = "Aktualisieren";

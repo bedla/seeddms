@@ -3,6 +3,7 @@
 //    Copyright (C) 2002-2005  Markus Westphal
 //    Copyright (C) 2006-2008 Malcolm Cowe
 //    Copyright (C) 2010 Matteo Lucarelli
+//    Copyright (C) 2012 Uwe Steinmann
 //
 //    This program is free software; you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
@@ -118,6 +119,7 @@ $text["continue"] = "Continue";
 $text["create_fulltext_index"] = "Create fulltext index";
 $text["create_fulltext_index_warning"] = "You are to recreate the fulltext index. This can take a considerable amount of time and reduce your overall system performance. If you really want to recreate the index, please confirm your operation.";
 $text["creation_date"] = "Created";
+$text["current_password"] = "Current Password";
 $text["current_version"] = "Current version";
 $text["daily"] = "Daily";
 $text["databasesearch"] = "Database search";
@@ -338,6 +340,7 @@ $text["password_forgotten_email_body"] = "Dear user of LetoDMS,\n\nwe have recei
 $text["password_forgotten_send_hash"] = "Instructions on how to proceed has been send to the user's email address";
 $text["password_forgotten_text"] = "Fill out the form below and follow the instructions in the email, which will be send to you.";
 $text["password_forgotten_title"] = "Password send";
+$text["password_wrong"] = "Wrong password";
 $text["personal_default_keywords"] = "Personal keywordlists";
 $text["previous_versions"] = "Previous Versions";
 $text["refresh"] = "Refresh";

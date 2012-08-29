@@ -1,7 +1,12 @@
 --------------------------------------------------------------------------------
+                     Changes in version 3.3.8
+--------------------------------------------------------------------------------
+- more security fixes for preventing CSRF attacks
+
+--------------------------------------------------------------------------------
                      Changes in version 3.3.7
 --------------------------------------------------------------------------------
-- major security update which fixeѕ lots of possible XSS and CSRF attacts
+- major security update which fixeѕ lots of possible XSS and CSRF attacks
 - comment is no longer needed when adding a user, email is now required (this
   time it is really changed)
 

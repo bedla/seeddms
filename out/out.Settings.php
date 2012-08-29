@@ -26,6 +26,10 @@ if (!$user->isAdmin()) {
 	UI::exitError(getMLText("admin_tools"),getMLText("access_denied"));
 }
 
+/* Set an encryption key if is not set */
+if(!trim($settings->_encryptionKey))
+	$settings->_encryptionKey = md5(uniqid());
+
 UI::htmlStartPage(getMLText("admin_tools"));
 UI::globalNavigation();
 UI::pageNavigation(getMLText("admin_tools"), "admin_tools");
@@ -268,6 +272,10 @@ if(!is_writeable($settings->_configFilePath)) {
       <tr title="<?php printMLText("settings_enablePasswordForgotten_desc");?>">
         <td><?php printMLText("settings_enablePasswordForgotten");?>:</td>
         <td><input name="enablePasswordForgotten" type="checkbox" <?php if ($settings->_enablePasswordForgotten) echo "checked" ?> /></td>
+      </tr>
+      <tr title="<?php printMLText("settings_encryptionKey_desc");?>">
+        <td><?php printMLText("settings_encryptionKey");?>:</td>
+        <td><input name="encryptionKey" value="<?php echo $settings->_encryptionKey; ?>" size="32" /></td>
       </tr>
 
       <!-- TODO Connectors -->

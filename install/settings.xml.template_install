@@ -84,6 +84,7 @@
        - restricted: Restricted access: only allow users to log in if they have an entry in the local database (irrespective of successful authentication with LDAP).
        - enableUserImage: enable users images
        - disableSelfEdit: if true user cannot edit his own profile
+			 - encryptionKey: arbitrary string used for creating identifiers
     -->    
     <authentication
       enableGuestLogin = "false"
@@ -91,6 +92,7 @@
       restricted = "true"
       enableUserImage = "false"
       disableSelfEdit = "false"
+			encryptionKey=""
     >
       <connectors>
         <!-- ***** CONNECTOR LDAP  *****

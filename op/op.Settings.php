@@ -90,6 +90,7 @@ if ($action == "saveSettings")
   $settings->_enableUserImage = getBoolValue("enableUserImage");
   $settings->_disableSelfEdit = getBoolValue("disableSelfEdit");
   $settings->_enablePasswordForgotten = getBoolValue("enablePasswordForgotten");
+  $settings->_encryptionKey = strval($_POST["encryptionKey"]);
 
   // TODO Connectors
 

@@ -1,7 +1,8 @@
 --------------------------------------------------------------------------------
                      Changes in version 3.3.8
 --------------------------------------------------------------------------------
-- more security fixes for preventing CSRF attacks
+- more security fixes for preventing CSRF, XSS and sql injection attacks
+- fixed search for special chars (e.g. german umlaute) in fulltext search
 
 --------------------------------------------------------------------------------
                      Changes in version 3.3.7

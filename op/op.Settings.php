@@ -67,6 +67,7 @@ if ($action == "saveSettings")
   $settings->_enableFullSearch = getBoolValue("enableFullSearch");
   $settings->_enableFolderTree = getBoolValue("enableFolderTree");
   $settings->_expandFolderTree = intval($_POST["expandFolderTree"]);
+  $settings->_stopWordsFile = $_POST["stopWordsFile"];
 
   // SETTINGS - SITE - CALENDAR
   $settings->_enableCalendar = getBoolValue("enableCalendar");

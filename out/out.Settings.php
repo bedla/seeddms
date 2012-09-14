@@ -154,6 +154,10 @@ if(!is_writeable($settings->_configFilePath)) {
         <td><?php printMLText("settings_enableFullSearch");?>:</td>
         <td><input name="enableFullSearch" type="checkbox" <?php if ($settings->_enableFullSearch) echo "checked" ?> /></td>
       </tr>
+      <tr title="<?php printMLText("settings_stopWordsFile_desc");?>">
+        <td><?php printMLText("settings_stopWordsFile");?>:</td>
+        <td><input name="stopWordsFile" value="<?php echo $settings->_stopWordsFile; ?>" size="100" /></td>
+      </tr>
       <tr title="<?php printMLText("settings_enableFolderTree_desc");?>">
         <td><?php printMLText("settings_enableFolderTree");?>:</td>
         <td><input name="enableFolderTree" type="checkbox" <?php if ($settings->_enableFolderTree) echo "checked" ?> /></td>

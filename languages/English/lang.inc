@@ -404,6 +404,8 @@ $text["set_owner"] = "Set Owner";
 $text["settings_install_welcome_title"] = "Welcome to the installation of letoDMS";
 $text["settings_install_welcome_text"] = "<p>Before you start to install letoDMS make sure you have created a file 'ENABLE_INSTALL_TOOL' in your configuration directory, otherwise the installation will not work. On Unix-System this can easily be done with 'touch conf/ENABLE_INSTALL_TOOL'. After you have finished the installation delete the file.</p><p>letoDMS has very minimal requirements. You will need a mysql database and a php enabled web server. For the lucene full text search, you will also need the Zend framework installed on disk where it can be found by php. Starting with version 3.2.0 of letoDMS ADOdb will not be part of the distribution anymore. Get a copy of it from <a href=\"http://adodb.sourceforge.net/\">http://adodb.sourceforge.net</a> and install it. The path to it can later be set during installation.</p><p>If you like to create the database before you start installation, then just create it manually with your favorite tool, optionally create a database user with access on the database and import one of the database dumps in the configuration directory. The installation script can do that for you as well, but it will need database access with sufficient rights to create databases.</p>";
 $text["settings_start_install"] = "Start installation";
+$text["settings_stopWordsFile"] = "Path to stop words file";
+$text["settings_stopWordsFile_desc"] = "If fulltext search is enabled, this file will contain stop words not being indexed";
 $text["settings_activate_module"] = "Activate module";
 $text["settings_activate_php_extension"] = "Activate PHP extension";
 $text["settings_adminIP"] = "Admin IP";

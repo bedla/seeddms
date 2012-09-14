@@ -22,6 +22,7 @@
 //    Reviewed : 15-sept-2011.  Francisco M. Garcia Claramonte
 //    Reviewed (for 3.2.0) : 22-sept-2011.   Francisco M. Garcia Claramonte
 //    Reviewed (for 3.3.0) : 3-mar-2012.   Francisco M. Garcia Claramonte
+//    Reviewed (for 3.3.8) : 13 sept-2012. Francisco M. García Claramonte
 
 $text = array();
 $text["accept"] = "Aceptar";
@@ -123,6 +124,7 @@ $text["continue"] = "Continuar";
 $text["create_fulltext_index"] = "Crear índice de texto completo";
 $text["create_fulltext_index_warning"] = "Usted va a regenerar el índice te texto completo. Esto puede tardar un tiempo considerable y consumir capacidad de su equipo. Si realmente quiere regenerar el índice, por favor confirme la operación.";
 $text["creation_date"] = "Creación";
+$text["current_password"] = "Contraseña actual";
 $text["current_version"] = "Versión actual";
 $text["daily"] = "Diaria";
 $text["databasesearch"] = "Búsqueda en base de datos";
@@ -230,7 +232,7 @@ $text["human_readable"] = "Archivo legible por humanos";
 $text["include_documents"] = "Incluir documentos";
 $text["include_subdirectories"] = "Incluir subdirectorios";
 $text["individuals"] = "Individuales";
-$text["inherits_access_msg"] = "Acceso heredado.";
+$text["inherits_access_msg"] = "El acceso se ha heredado.";
 $text["inherits_access_copy_msg"] = "Copiar lista de acceso heredado";
 $text["inherits_access_empty_msg"] = "Empezar con una lista de acceso vacía";
 $text["internal_error_exit"] = "Error interno. No es posible terminar la solicitud. Terminado.";
@@ -245,7 +247,7 @@ $text["invalid_file_id"] = "ID de fichero no válida";
 $text["invalid_folder_id"] = "ID de carpeta no válida";
 $text["invalid_group_id"] = "ID de grupo no válida";
 $text["invalid_link_id"] = "Identificador de enlace no válido";
-$text["invalid_request_token"] = "Translate: Invalid Request Token";
+$text["invalid_request_token"] = "Token de solicitud no válido";
 $text["invalid_review_status"] = "Estado de revisión no válido";
 $text["invalid_sequence"] = "Valor de secuencia no válido";
 $text["invalid_status"] = "Estado de documento no válido";
@@ -348,6 +350,7 @@ $text["password_forgotten_email_body"] = "Estimado usuario de LetoDMS,\n\nhemos 
 $text["password_forgotten_send_hash"] = "Las instrucciones para proceder al cambio se han enviado a la dirección de correo de usuario";
 $text["password_forgotten_text"] = "Rellene el siguiente formulario y siga las instrucciones del correo que se le enviará.";
 $text["password_forgotten_title"] = "Envío de contraseña";
+$text["password_wrong"] = "Contraseña equivocada";
 $text["personal_default_keywords"] = "Listas de palabras clave personales";
 $text["previous_versions"] = "Versiones anteriores";
 $text["refresh"] = "Actualizar";
@@ -472,16 +475,15 @@ $text["settings_enableFullSearch_desc"] = "Habilitar búsqueda de texto completo
 $text["settings_enableGuestLogin_desc"] = "Si quiere que cualquiera acceda como invitado, chequee esta opción. Nota: El acceso de invitado debería permitirse solo en entornos de confianza";
 $text["settings_enableGuestLogin"] = "Habilitar acceso de invitado";
 $text["settings_enableLargeFileUpload_desc"] = "Si se habilita, la carga de ficheros también estará disponible a través de un applet java llamado jumploader, sin límite de tamaño de fichero fijado por el navegador. También permite la carga de múltiples ficheros de una sola vez.";
-
-+$text["settings_enableLargeFileUpload"] = "Enable large file upload";
-+$text["settings_enablePasswordForgotten_desc"] = "If you want to allow user to set a new password and send it by mail, check this option.";
-+$text["settings_enablePasswordForgotten"] = "Enable Password forgotten";
-
-
+$text["settings_enableLargeFileUpload"] = "Habilitar la carga de ficheros grandes";
+$text["settings_enablePasswordForgotten_desc"] = "Si quiere permitir a los usuarios fijar una nueva contraseña recibiendo un correo electrónico, active esta opción.";
+$text["settings_enablePasswordForgotten"] = "Habilitar recordatorio de contraseña";
 $text["settings_enableUserImage_desc"] = "Habilitar imágenes de usuario";
 $text["settings_enableUserImage"] = "Habilitar imágenes de usuario";
 $text["settings_enableUsersView_desc"] = "Habilitar/Deshabilitar vista de usuario y grupo por todos los usuarios";
 $text["settings_enableUsersView"] = "Habilitar vista de usuarios";
+$text["settings_encryptionKey"] = "Clave de cifrado";
+$text["settings_encryptionKey_desc"] = "Esta cadena se utiliza para crear un identificador único que se añadirá como campo oculto a los formularios para prevenir ataques CSRF.";
 $text["settings_error"] = "Error";
 $text["settings_expandFolderTree_desc"] = "Expandir árbol de carpetas";
 $text["settings_expandFolderTree"] = "Expandir árbol de carpetas";

@@ -415,6 +415,8 @@ Unix puede hacerse fácilmente con «touch conf/ENABLE_INSTALL_TOOL». Después 
 para php. Para la búsqueda de texto completo lucene, necesitará tener instalado también el framework Zend donde
 pueda ser utilizado por php. Desde la versión 3.2.0 de letoDMS ADObd ya no forma parte de la distribución. Consiga una copia de él desde <a href=\"http://adodb.sourceforge.net/\">http://adodb.sourceforge.net</a> e instálelo. La ruta hacia él podrá ser establecida durante la instalación.</p><p> Si prefiere crear la base de datos antes de comenzar la instalación, simplemente créela manualmente con su herramienta preferida, opcionalmente cree un usuario de base de datos con acceso a esta base de datos e importe uno de los volcados del directorio de configuración. El script de instalación puede hacer esto también, pero necesitará acceso con privilegios suficientes para crear bases de datos.</p>";
 $text["settings_start_install"] = "Comenzar instalación";
+$text["settings_stopWordsFile"] = "Ruta del fichero de palabras vacías";
+$text["settings_stopWordsFile_desc"] = "Si la búsqueda de texto completo está habilitada, este fichero contendrá las palabras vacías que no se indexarán";
 $text["settings_activate_module"] = "Activar módulo";
 $text["settings_activate_php_extension"] = "Activar extensión PHP";
 $text["settings_adminIP"] = "IP de administración";

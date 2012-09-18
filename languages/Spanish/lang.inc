@@ -23,6 +23,7 @@
 //    Reviewed (for 3.2.0) : 22-sept-2011.   Francisco M. Garcia Claramonte
 //    Reviewed (for 3.3.0) : 3-mar-2012.   Francisco M. Garcia Claramonte
 //    Reviewed (for 3.3.8) : 13 sept-2012. Francisco M. García Claramonte
+//                           18 sept 2012. Francisco M. García Claramonte
 
 $text = array();
 $text["accept"] = "Aceptar";
@@ -566,7 +567,7 @@ $text["settings_viewOnlineFileTypes_desc"] = "Archivos con una de las siguientes
 $text["settings_viewOnlineFileTypes"] = "Ver en lineas las extensiones de fichero";
 $text["settings_zendframework"] = "Zend Framework";
 $text["signed_in_as"] = "Conectado como";
-$text["sign_in"] = "Concectar";
+$text["sign_in"] = "Conectar";
 $text["sign_out"] = "desconectar";
 $text["space_used_on_data_folder"] = "Espacio usado en la carpeta de datos";
 $text["status_approval_rejected"] = "Borrador rechazado";

@@ -166,7 +166,7 @@ UI::contentContainerStart();
 
 					if ($usr->isGuest()) continue;
 
-					print "<li class=\"cbSelectItem\"><input id='revUsr".$usr->getID()."' type='checkbox' name='usrReviewers[]' value='". $usr->getID() ."'>".$usr->getLogin();
+					print "<li class=\"cbSelectItem\"><input id='revUsr".$usr->getID()."' type='checkbox' name='usrReviewers[]' value='". $usr->getID() ."'>".htmlspecialchars($usr->getLogin());
 				}
 ?>
 				</ul>
@@ -196,7 +196,7 @@ UI::contentContainerStart();
 
 					if ($usr->isGuest()) continue;
 
-					print "<li class=\"cbSelectItem\"><input id='appUsr".$usr->getID()."' type='checkbox' name='usrApprovers[]' value='". $usr->getID() ."'>".$usr->getLogin();
+					print "<li class=\"cbSelectItem\"><input id='appUsr".$usr->getID()."' type='checkbox' name='usrApprovers[]' value='". $usr->getID() ."'>".htmlspecialchars($usr->getLogin());
 				}
 ?>
 				</ul>
@@ -228,7 +228,7 @@ UI::contentContainerStart();
 
 		print "<td id=\"keywords".$currUser->getID()."\" style=\"display : none;\">";
 
-		UI::contentSubHeading(getMLText("user")." : ".$currUser->getLogin());
+		UI::contentSubHeading(getMLText("user")." : ".htmlspecialchars($currUser->getLogin()));
 	?>
 
 	<a class="standardText" href="../out/out.RemoveUser.php?userid=<?php print $currUser->getID();?>"><img src="images/del.gif" width="15" height="15" border="0" align="absmiddle" alt=""> <?php printMLText("rm_user");?></a>
@@ -242,7 +242,7 @@ UI::contentContainerStart();
 	<table>
 		<tr>
 			<td><?php printMLText("user_login");?>:</td>
-			<td><input name="login" value="<?php print $currUser->getLogin();?>"></td>
+			<td><input name="login" value="<?php print htmlspecialchars($currUser->getLogin());?>"></td>
 		</tr>
 		<tr>
 			<td><?php printMLText("password");?>:</td>
@@ -312,7 +312,7 @@ UI::contentContainerStart();
 					$checked=false;
 					foreach ($res as $r) if ($r['reviewerUserID']==$usr->getID()) $checked=true;
 
-					print "<li class=\"cbSelectItem\"><input id='revUsr".$usr->getID()."' type='checkbox' ".($checked?"checked='checked' ":"")."name='usrReviewers[]' value='". $usr->getID() ."'>".$usr->getLogin()."</li>\n";
+					print "<li class=\"cbSelectItem\"><input id='revUsr".$usr->getID()."' type='checkbox' ".($checked?"checked='checked' ":"")."name='usrReviewers[]' value='". $usr->getID() ."'>".htmlspecialchars($usr->getLogin())."</li>\n";
 				}
 				?>
 				</ul>
@@ -352,7 +352,7 @@ UI::contentContainerStart();
 					$checked=false;
 					foreach ($res as $r) if ($r['approverUserID']==$usr->getID()) $checked=true;
 
-					print "<li class=\"cbSelectItem\"><input id='appUsr".$usr->getID()."' type='checkbox' ".($checked?"checked='checked' ":"")."name='usrApprovers[]' value='". $usr->getID() ."'>".$usr->getLogin()."</li>\n";
+					print "<li class=\"cbSelectItem\"><input id='appUsr".$usr->getID()."' type='checkbox' ".($checked?"checked='checked' ":"")."name='usrApprovers[]' value='". $usr->getID() ."'>".htmlspecialchars($usr->getLogin())."</li>\n";
 				}
 				?>
 				</ul>

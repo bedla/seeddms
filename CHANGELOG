@@ -1,4 +1,11 @@
 --------------------------------------------------------------------------------
+                     Changes in version 3.3.9
+--------------------------------------------------------------------------------
+- more security fixes for preventing XSS
+- minor fix in spanish translation
+- do not show document on mydocuments page twice
+
+--------------------------------------------------------------------------------
                      Changes in version 3.3.8
 --------------------------------------------------------------------------------
 - more security fixes for preventing CSRF, XSS and sql injection attacks

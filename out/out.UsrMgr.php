@@ -228,7 +228,7 @@ UI::contentContainerStart();
 
 		print "<td id=\"keywords".$currUser->getID()."\" style=\"display : none;\">";
 
-		UI::contentSubHeading(getMLText("user")." : ".htmlspecialchars($currUser->getLogin()));
+		UI::contentSubHeading(getMLText("user")." : ".$currUser->getLogin());
 	?>
 
 	<a class="standardText" href="../out/out.RemoveUser.php?userid=<?php print $currUser->getID();?>"><img src="images/del.gif" width="15" height="15" border="0" align="absmiddle" alt=""> <?php printMLText("rm_user");?></a>

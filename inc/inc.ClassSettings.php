@@ -428,7 +428,7 @@ class Settings { /* {{{ */
 		$node = $rootNode->xpath($parentNodeName . '/' . $name);
 
 		if (empty($node)) {
-			$node = $xml->xpath($parentNodeName);
+			$node = $rootNode->xpath($parentNodeName);
 			$node = $node[0]->addChild($name);
 		} else {
 			$node = $node[0];

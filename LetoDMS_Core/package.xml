@@ -18,19 +18,19 @@
   <email></email>
   <active>no</active>
  </lead>
- <date>2012-09-19</date>
- <time>08:43:18</time>
+ <date>2012-10-17</date>
+ <time>09:07:57</time>
  <version>
-  <release>3.3.9</release>
-  <api>3.3.9</api>
+  <release>3.3.10</release>
+  <api>3.3.10</api>
  </version>
  <stability>
-  <release>beta</release>
+  <release>stable</release>
   <api>stable</api>
  </stability>
  <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
  <notes>
-- version update to be in sync with letodms application
+- fixed bug when adding a new document category
  </notes>
  <contents>
   <dir baseinstalldir="LetoDMS" name="/">
@@ -238,8 +238,8 @@ New release
    <notes>
 - no changes, just keep same version as letodms application
    </notes>
-  <release>
   </release>
+  <release>
    <date>2012-08-25</date>
    <time>22:07:58</time>
    <version>
@@ -269,6 +269,22 @@ New release
    <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
    <notes>
 - more sql injection protection in LetoDMS_Core_User
+   </notes>
+  </release>
+  <release>
+   <date>2012-09-19</date>
+   <time>08:43:18</time>
+   <version>
+    <release>3.3.9</release>
+    <api>3.3.9</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- version update to be in sync with letodms application
    </notes>
   </release>
  </changelog>

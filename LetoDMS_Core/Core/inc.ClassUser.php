@@ -442,10 +442,6 @@ class LetoDMS_Core_User {
 		$queryStr = "DELETE FROM tblUserPasswordRequest WHERE userID = " . $this->_id;
 		if (!$db->getResult($queryStr)) return false;
 
-		// Delete user itself
-		$queryStr = "DELETE FROM tblUsers WHERE id = " . $this->_id;
-		if (!$db->getResult($queryStr)) return false;
-
 		// mandatory review/approve
 		$queryStr = "DELETE FROM tblMandatoryReviewers WHERE reviewerUserID = " . $this->_id;
 		if (!$db->getResult($queryStr)) return false;
@@ -461,6 +457,10 @@ class LetoDMS_Core_User {
 
 		// set administrator for deleted user's events
 		$queryStr = "UPDATE tblEvents SET userID = " . $assignTo . " WHERE userID = " . $this->_id;
+		if (!$db->getResult($queryStr)) return false;
+
+		// Delete user itself
+		$queryStr = "DELETE FROM tblUsers WHERE id = " . $this->_id;
 		if (!$db->getResult($queryStr)) return false;
 
 

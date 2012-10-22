@@ -191,9 +191,6 @@ class LetoDMS_Core_Group {
 	function remove($user) { /* {{{ */
 		$db = $this->_dms->getDB();
 
-		$queryStr = "DELETE FROM tblGroups WHERE id = " . $this->_id;
-		if (!$db->getResult($queryStr))
-			return false;
 		$queryStr = "DELETE FROM tblGroupMembers WHERE groupID = " . $this->_id;
 		if (!$db->getResult($queryStr))
 			return false;
@@ -207,6 +204,9 @@ class LetoDMS_Core_Group {
 		if (!$db->getResult($queryStr))
 			return false;
 		$queryStr = "DELETE FROM tblMandatoryApprovers WHERE approverGroupID = " . $this->_id;
+		if (!$db->getResult($queryStr))
+			return false;
+		$queryStr = "DELETE FROM tblGroups WHERE id = " . $this->_id;
 		if (!$db->getResult($queryStr))
 			return false;
 

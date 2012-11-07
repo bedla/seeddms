@@ -30,6 +30,8 @@ if (!$user->isAdmin()) {
 }
 
 $attrdefs = $dms->getAllAttributeDefinitions();
+
+UI::htmlStartPage(getMLText("admin_tools"));
 ?>
 
 <script language="JavaScript">
@@ -47,8 +49,6 @@ function showAttributeDefinitions(selectObj) {
 }
 </script>
 <?php
-
-UI::htmlStartPage(getMLText("admin_tools"));
 UI::globalNavigation();
 UI::pageNavigation(getMLText("admin_tools"), "admin_tools");
 UI::contentHeading(getMLText("attrdef_management"));

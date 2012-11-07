@@ -43,7 +43,7 @@ if (isset($_REQUEST["login"])) {
 
 if (!isset($login) || strlen($login)==0) {
 	_printMessage(getMLText("login_error_title"),	"<p>".getMLText("login_not_given")."</p>\n".
-		"<p><a href='".$settings->_httpRoot."op/op.Logout.php'>".getMLText("back")."</a></p>\n");
+		"<p><a href='"."../op/op.Logout.php'>".getMLText("back")."</a></p>\n");
 	exit;
 }
 

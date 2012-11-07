@@ -141,13 +141,23 @@ if (isset($_GET["ownerid"]) && is_numeric($_GET["ownerid"]) && $_GET["ownerid"]!
 $startdate = array();
 $stopdate = array();
 if (isset($_GET["creationdate"]) && $_GET["creationdate"]!=null) {
-	$startdate = array('year'=>$_GET["createstartyear"], 'month'=>$_GET["createstartmonth"], 'day'=>$_GET["createstartday"], 'hour'=>0, 'minute'=>0, 'second'=>0);
+	if($_GET['createstart']) {
+		$tmp = explode('-', $_GET['createstart']);
+		$startdate = array('year'=>$tmp[2], 'month'=>$tmp[1], 'day'=>$tmp[0], 'hour'=>0, 'minute'=>0, 'second'=>0);
+	} else {
+		$startdate = array('year'=>$_GET["createstartyear"], 'month'=>$_GET["createstartmonth"], 'day'=>$_GET["createstartday"], 'hour'=>0, 'minute'=>0, 'second'=>0);
+	}
 	if (!checkdate($startdate['month'], $startdate['day'], $startdate['year'])) {
 		UI::contentContainer(getMLText("invalid_create_date_start"));
 		UI::htmlEndPage();
 		exit;
 	}
-	$stopdate = array('year'=>$_GET["createendyear"], 'month'=>$_GET["createendmonth"], 'day'=>$_GET["createendday"], 'hour'=>23, 'minute'=>59, 'second'=>59);
+	if($_GET['createstop']) {
+		$tmp = explode('-', $_GET['createstop']);
+		$stopdate = array('year'=>$tmp[2], 'month'=>$tmp[1], 'day'=>$tmp[0], 'hour'=>0, 'minute'=>0, 'second'=>0);
+	} else {
+		$stopdate = array('year'=>$_GET["createendyear"], 'month'=>$_GET["createendmonth"], 'day'=>$_GET["createendday"], 'hour'=>23, 'minute'=>59, 'second'=>59);
+	}
 	if (!checkdate($stopdate['month'], $stopdate['day'], $stopdate['year'])) {
 		UI::contentContainer(getMLText("invalid_create_date_end"));
 		UI::htmlEndPage();

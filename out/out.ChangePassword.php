@@ -40,11 +40,20 @@ if (isset($_REQUEST["hash"]) && strlen($_REQUEST["hash"])>0) {
 	<table border="0">
 		<tr>
 			<td><?php printMLText("password");?></td>
-			<td><input type="password" name="newpassword" id="password"></td>
+			<td><input id="pwd" type="password" name="newpassword" id="password"> <div id="outerstrength" style="min-width: 100px; height: 14px; display: inline-block; border: 1px solid black; padding: 1px;"><div id="innerstrength" style="width: 0px; height: 14px; display: inline-block; border: 0px; padding: 0px; background-color: red;">&nbsp;</div> <div id="strength" style="display: inline-block;"></div></div></td>
 		</tr>
 		<tr>
 			<td><?php printMLText("password_repeat");?></td>
 			<td><input type="password" name="newpasswordrepeat" id="passwordrepeat"></td>
+<script type="text/javascript" src='../js/jquery.passwordstrength.js'></script>
+<script>
+	$(document).ready( function() {
+		$("#pwd").passStrength({
+			url: "../op/op.Ajax.php",
+			minscore: <?php echo (int) $settings->_passwordStrength; ?>
+		});
+	});
+</script>
 		</tr>
 		<tr>
 			<td colspan="2"><input type="Submit" value="<?php printMLText("submit_password") ?>"></td>
@@ -52,7 +61,7 @@ if (isset($_REQUEST["hash"]) && strlen($_REQUEST["hash"])>0) {
 	</table>
 </form>
 <?php UI::contentContainerEnd(); ?>
-<script language="JavaScript">document.form1.password.focus();</script>
+<script language="JavaScript">document.form1.newpassword.focus();</script>
 <p><a href="../out/out.Login.php"><?php echo getMLText("login"); ?></a></p>
 <?php
 	UI::htmlEndPage();

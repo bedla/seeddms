@@ -82,13 +82,6 @@ function showUser(selectObj) {
 	obj = document.getElementById("keywords" + id);
 	obj.style.display = "";
 }
-
-	$(document).ready( function() {
-		$(".pwd").passStrength({
-			url: "../op/op.Ajax.php",
-			minscore: <?php echo (int) $settings->_passwordStrength; ?>
-		});
-	});
 </script>
 <?php
 
@@ -129,6 +122,15 @@ UI::contentContainerStart();
 			<td><?php printMLText("password");?>:</td>
 			<td><input class="pwd" name="pwd" type="Password"> <div id="outerstrength" style="min-width: 100px; height: 14px; display: inline-block; border: 1px solid black; padding: 1px;"><div id="innerstrength" style="width: 0px; height: 14px; display: inline-block; border: 0px; padding: 0px; background-color: red;">&nbsp;</div> <div id="strength" style="display: inline-block;"></div></div></td>
 		</tr>
+<script language="JavaScript">
+	$(document).ready( function() {
+		$(".pwd").passStrength({
+			url: "../op/op.Ajax.php",
+			minscore: <?php echo (int) $settings->_passwordStrength; ?>,
+			target: '#outerstrength'
+		});
+	});
+</script>
 		<tr>
 			<td><?php printMLText("confirm_pwd");?>:</td>
 			<td><input type="Password" name="pwdconf"></td>
@@ -267,8 +269,17 @@ UI::contentContainerStart();
 		</tr>
 		<tr>
 			<td><?php printMLText("password");?>:</td>
-			<td><input type="Password" name="pwd"></td>
+			<td><input type="Password" id="pwd<?php echo $currUser->getID(); ?>" name="pwd"> <div id="outerstrength<?php echo $currUser->getID(); ?>" style="min-width: 100px; height: 14px; display: inline-block; border: 1px solid black; padding: 1px;"><div id="innerstrength" style="width: 0px; height: 14px; display: inline-block; border: 0px; padding: 0px; background-color: red;">&nbsp;</div> <div id="strength" style="display: inline-block;"></td>
 		</tr>
+<script language="JavaScript">
+	$(document).ready( function() {
+		$("#pwd<?php echo $currUser->getID(); ?>").passStrength({
+			url: "../op/op.Ajax.php",
+			minscore: <?php echo (int) $settings->_passwordStrength; ?>,
+			target: '#outerstrength<?php echo $currUser->getID(); ?>'
+		});
+	});
+</script>
 		<tr>
 			<td><?php printMLText("confirm_pwd");?>:</td>
 			<td><input type="Password" name="pwdconf"></td>

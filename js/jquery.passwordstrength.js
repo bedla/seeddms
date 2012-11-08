@@ -37,7 +37,8 @@
 	$.fn.passStrength = function(options) {  
 	  
 		var defaults = {
-			minscore: 50
+			minscore: 50,
+			target: '#outerstrength'
 		}; 
 		var opts = $.extend(defaults, options);  
 		      
@@ -46,20 +47,25 @@
 		 		
 		 	$(obj).unbind().keyup(function() {
 				if($(this).val())
-					$("#outerstrength").show();
+					$(opts.target).show();
 				else
-					$("#outerstrength").hide();
+					$(opts.target).hide();
 				$.getJSON(opts.url,
 					{command: 'checkpwstrength', pwd: $(this).val()},
 					function(data) {
 						if(data.error) {
 						} else {
-							$("#strength").html(Math.round(data.strength));
-							$("#innerstrength").width(data.strength);
+							kids = $(opts.target).children();
+							$(kids[1]).html(Math.round(data.strength));
+//							$("#strength").html(Math.round(data.strength));
+							$(kids[0]).width(data.strength);
+//							$("#innerstrength").width(data.strength);
 							if(data.strength > opts.minscore) {
-								$("#innerstrength").css('background-color', 'green');
+								$(kids[0]).css('background-color', 'green');
+//								$("#innerstrength").css('background-color', 'green');
 							} else {
-								$("#innerstrength").css('background-color', 'red');
+								$(kids[0]).css('background-color', 'red');
+//								$("#innerstrength").css('background-color', 'red');
 							}
 						}
 					}); 

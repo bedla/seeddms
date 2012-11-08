@@ -66,6 +66,8 @@
 			 - luceneDir: Where the lucene fulltext index iѕ saved
        - logFileEnable: set false to disable log system
        - logFileRotation: the log file rotation (h=hourly, d=daily, m=monthly)
+       - enableLargeFileUpload: support for jumploader
+       - partitionsize: size of chunk uploaded by jumploader
     -->
     <server
       rootDir = ""
@@ -86,11 +88,11 @@
        - restricted: Restricted access: only allow users to log in if they have an entry in the local database (irrespective of successful authentication with LDAP).
        - enableUserImage: enable users images
        - disableSelfEdit: if true user cannot edit his own profile
-			 - passwordStrength: minimum strength of password, set to 0 to disable
-			 - passwordExpiration: number of days after password expires
-			 - passwordHistory: number of remembered passwords
-			 - passwordStrengthAlgorithm: algorithm used to calculate password strenght (simple or advanced)
-			 - encryptionKey: arbitrary string used for creating identifiers
+       - passwordStrength: minimum strength of password, set to 0 to disable
+       - passwordExpiration: number of days after password expires
+       - passwordHistory: number of remembered passwords
+       - passwordStrengthAlgorithm: algorithm used to calculate password strenght (simple or advanced)
+       - encryptionKey: arbitrary string used for creating identifiers
     -->    
     <authentication
       enableGuestLogin = "false"
@@ -98,12 +100,12 @@
       restricted = "true"
       enableUserImage = "false"
       disableSelfEdit = "false"
-			passwordStrength="0"
-			passwordExpiration="0"
-			passwordHistory="0"
-			passwordStrengthAlgorithm="simple"
-			loginFailure="0"
-			encryptionKey=""
+      passwordStrength="0"
+      passwordExpiration="0"
+      passwordHistory="0"
+      passwordStrengthAlgorithm="simple"
+      loginFailure="0"
+      encryptionKey=""
     >
       <connectors>
         <!-- ***** CONNECTOR LDAP  *****
@@ -198,8 +200,8 @@
       versioningFileName = "versioning_info.txt"
     >
     </edition>
-		<!-- enableNotificationAppRev: true to send notifation if a user is added as a reviewer or approver
-		-->
+    <!-- enableNotificationAppRev: true to send notifation if a user is added as a reviewer or approver
+    -->
     <notification
       enableNotificationAppRev = "true"
     >
@@ -246,6 +248,3 @@
   </advanced>
 
 </configuration>
-
-
-

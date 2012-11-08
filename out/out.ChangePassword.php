@@ -22,6 +22,11 @@ include("../inc/inc.Settings.php");
 include("../inc/inc.Language.php");
 include("../inc/inc.ClassUI.php");
 
+if (!isset($_REQUEST["hash"])) {
+	header("Location: ../out/out.Login.php");
+	exit;
+}
+
 UI::htmlStartPage(getMLText("change_password"), "login");
 UI::globalBanner();
 UI::pageNavigation(getMLText("change_password"));

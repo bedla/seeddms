@@ -230,7 +230,7 @@ UI::contentContainerStart();
 <?php
 				foreach ($groups as $grp) {
 
-					print "<li class=\"cbSelectItem\"><input id='revGrp".$grp->getID()."' type='checkbox' name='grpApprovers[]' value='". $grp->getID() ."'>".htmlspecialchars($grp->getName());
+					print "<li class=\"cbSelectItem\"><input id='appGrp".$grp->getID()."' type='checkbox' name='grpApprovers[]' value='". $grp->getID() ."'>".htmlspecialchars($grp->getName());
 				}
 ?>
 				</ul>

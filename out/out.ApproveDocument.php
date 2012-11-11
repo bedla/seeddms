@@ -133,6 +133,7 @@ if ($approvalStatus['type'] == 0) {
 	}
 ?>
 	<form method="POST" action="../op/op.ApproveDocument.php" name="form1" onsubmit="return checkIndForm();">
+	<?php echo createHiddenFieldWithKey('approvedocument'); ?>
 	<table>
 	<tr><td><?php printMLText("comment")?>:</td>
 	<td><textarea name="comment" cols="80" rows="4"></textarea>
@@ -172,6 +173,7 @@ else if ($approvalStatus['type'] == 1) {
 
 ?>
 	<form method="POST" action="../op/op.ApproveDocument.php" name="form1" onsubmit="return checkGrpForm();">
+	<?php echo createHiddenFieldWithKey('approvedocument'); ?>
 	<table>
 	<tr><td><?php printMLText("comment")?>:</td>
 	<td><textarea name="comment" cols="80" rows="4"></textarea>

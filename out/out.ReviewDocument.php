@@ -173,6 +173,7 @@ else if ($reviewStatus['type'] == 1) {
 
 ?>
 	<form method="POST" action="../op/op.ReviewDocument.php" name="form1" onsubmit="return checkGrpForm();">
+	<?php echo createHiddenFieldWithKey('reviewdocument'); ?>
 	<table>
 	<tr><td><?php printMLText("comment")?>:</td>
 	<td><textarea name="comment" cols="80" rows="4"></textarea>

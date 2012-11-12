@@ -9,6 +9,7 @@
 - do not list documents in search result which cannot be accessed by the user
 - more database constraints and transaction management
 - documents, folders and document content can have user defined attributes
+- update of swedish language (Thanks to Thorsten M.)
 
 -------------------------------------------------------------------------------
                      Changes in version 3.3.8

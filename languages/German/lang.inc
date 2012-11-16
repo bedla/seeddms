@@ -70,7 +70,6 @@ $text["assign_user_property_to"] = "Assign user's properties to";
 $text["assumed_released"] = "Angenommen, freigegeben";
 $text["attrdef_management"] = "Attributdefinitions-Management";
 $text["attrdef_in_use"] = "Definition des Attributs wird noch verwendet";
-$text["attrdef_in_use"] = "Definition des Attributs noch in Gebrauch";
 $text["attrdef_name"] = "Name";
 $text["attrdef_multiple"] = "Mehrfachwerte erlaubt";
 $text["attrdef_objtype"] = "Objekttyp";

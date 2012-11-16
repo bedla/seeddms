@@ -64,7 +64,7 @@ CREATE TABLE `tblUsers` (
   `loginfailures` tinyint(4) NOT NULL default '0',
   `disabled` smallint(1) NOT NULL default '0',
   PRIMARY KEY (`id`),
-	UNIQUE (`login`)
+  UNIQUE (`login`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------

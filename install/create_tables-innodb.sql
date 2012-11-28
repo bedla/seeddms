@@ -325,23 +325,6 @@ CREATE TABLE `tblDocumentLocks` (
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table `tblDocumentReviewLog`
--- 
-
-CREATE TABLE `tblDocumentReviewLog` (
-  `reviewLogID` int(11) NOT NULL auto_increment,
-  `reviewID` int(11) NOT NULL default '0',
-  `status` tinyint(4) NOT NULL default '0',
-  `comment` text NOT NULL,
-  `date` datetime NOT NULL default '0000-00-00 00:00:00',
-  `userID` int(11) NOT NULL default '0',
-  PRIMARY KEY  (`reviewLogID`),
-  CONSTRAINT `tblDocumentReviewLog_user` FOREIGN KEY (`userID`) REFERENCES `tblUsers` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
--- 
 -- Table structure for table `tblDocumentReviewers`
 -- 
 
@@ -354,6 +337,24 @@ CREATE TABLE `tblDocumentReviewers` (
   PRIMARY KEY  (`reviewID`),
   UNIQUE KEY `documentID` (`documentID`,`version`,`type`,`required`),
   CONSTRAINT `tblDocumentReviewers_document` FOREIGN KEY (`documentID`) REFERENCES `tblDocuments` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `tblDocumentReviewLog`
+-- 
+
+CREATE TABLE `tblDocumentReviewLog` (
+  `reviewLogID` int(11) NOT NULL auto_increment,
+  `reviewID` int(11) NOT NULL default '0',
+  `status` tinyint(4) NOT NULL default '0',
+  `comment` text NOT NULL,
+  `date` datetime NOT NULL default '0000-00-00 00:00:00',
+  `userID` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`reviewLogID`),
+  CONSTRAINT `tblDocumentReviewLog_review` FOREIGN KEY (`reviewID`) REFERENCES `tblDocumentReviewers` (`reviewID`) ON DELETE CASCADE,
+  CONSTRAINT `tblDocumentReviewLog_user` FOREIGN KEY (`userID`) REFERENCES `tblUsers` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------

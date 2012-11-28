@@ -10,6 +10,7 @@
 - more database constraints and transaction management
 - documents, folders and document content can have user defined attributes
 - update of swedish language (Thanks to Thorsten M.)
+- update of french language (Thanks to Yves)
 
 -------------------------------------------------------------------------------
                      Changes in version 3.3.8

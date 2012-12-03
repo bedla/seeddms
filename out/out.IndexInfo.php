@@ -66,7 +66,7 @@ if($settings->_enableFullSearch) {
 	echo "<p>".count($terms)." Terms</p>";
 	echo "<pre>";
 	foreach($terms as $term) {
-		echo $term->field.":".$term->text."\n";
+		echo htmlspecialchars($term->field).":".htmlspecialchars($term->text)."\n";
 	}
 	echo "</pre>";
 } else {

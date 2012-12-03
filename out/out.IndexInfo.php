@@ -44,7 +44,10 @@ if($settings->_enableFullSearch) {
 
 	$index = LetoDMS_Lucene_Indexer::open($settings->_luceneDir);
 	if(!$index) {
-		UI::exitError(getMLText("admin_tools"),getMLText("no_fulltextindex"));
+		printMLText("no_fulltextindex");
+		UI::contentContainerEnd();
+		UI::htmlEndPage();
+		exit;
 	}     
 	    
 	$numDocs = $index->count();

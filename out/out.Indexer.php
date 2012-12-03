@@ -87,7 +87,6 @@ if($settings->_enableFullSearch) {
 			echo "<p>Recreating index</p>";
 			$index = LetoDMS_Lucene_Indexer::create($settings->_luceneDir);
 			LetoDMS_Lucene_Indexer::init($settings->_stopWordsFile);
-//			$index = Zend_Search_Lucene::create($settings->_luceneDir);
 		} else {
 			echo '<p>'.getMLText('create_fulltext_index_warning').'</p>';
 			echo '<a href="out.Indexer.php?create=1&confirm=1">'.getMLText('confirm_create_fulltext_index').'</a>';
@@ -96,10 +95,15 @@ if($settings->_enableFullSearch) {
 			exit;
 		}
 	} else {
-		echo "<p>Updating index</p>";
 		$index = LetoDMS_Lucene_Indexer::open($settings->_luceneDir);
+		if(!$index) {
+			printMLText("no_fulltextindex");
+			UI::contentContainerEnd();
+			UI::htmlEndPage();
+			exit;
+		}     
+		echo "<p>Updating index</p>";
 		LetoDMS_Lucene_Indexer::init($settings->_stopWordsFile);
-//		$index = Zend_Search_Lucene::open($settings->_luceneDir);
 	}
 
 /*

@@ -18,11 +18,11 @@
   <email></email>
   <active>no</active>
  </lead>
- <date>2012-11-26</date>
- <time>21:21:18</time>
+ <date>2012-12-03</date>
+ <time>10:29:23</time>
  <version>
-  <release>3.4.0RC5</release>
-  <api>3.4.0RC5</api>
+  <release>3.4.0RC6</release>
+  <api>3.4.0</api>
  </version>
  <stability>
   <release>beta</release>
@@ -350,6 +350,22 @@ New release
    <version>
     <release>3.4.0RC4</release>
     <api>3.4.0RC4</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- stay in sync with letodms application
+   </notes>
+  </release>
+  <release>
+   <date>2012-11-26</date>
+   <time>21:21:18</time>
+   <version>
+    <release>3.4.0RC5</release>
+    <api>3.4.0RC5</api>
    </version>
    <stability>
     <release>beta</release>

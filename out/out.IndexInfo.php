@@ -43,7 +43,10 @@ if($settings->_enableFullSearch) {
 		require_once('LetoDMS/Lucene.php');
 
 	$index = LetoDMS_Lucene_Indexer::open($settings->_luceneDir);
-
+	if(!$index) {
+		UI::exitError(getMLText("admin_tools"),getMLText("no_fulltextindex"));
+	}     
+	    
 	$numDocs = $index->count();
 	echo "<pre>";
 	for ($id = 0; $id < $numDocs; $id++) {

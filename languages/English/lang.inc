@@ -340,6 +340,7 @@ $text["no_docs_locked"] = "No documents locked.";
 $text["no_docs_to_approve"] = "There are currently no documents that require approval.";
 $text["no_docs_to_look_at"] = "No documents that need attention.";
 $text["no_docs_to_review"] = "There are currently no documents that require review.";
+$text["no_fulltextindex"] = "No fulltext index available";
 $text["no_group_members"] = "This group has no members";
 $text["no_groups"] = "No groups";
 $text["no"] = "No";

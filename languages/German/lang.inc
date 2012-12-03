@@ -339,6 +339,7 @@ $text["no_docs_locked"] = "Keine Dokumente gesperrt.";
 $text["no_docs_to_approve"] = "Es gibt z.Z. keine Dokumente, die eine Freigabe erfordern.";
 $text["no_docs_to_look_at"] = "Keine Dokumente, nach denen geschaut werden müsste.";
 $text["no_docs_to_review"] = "Es gibt z.Z. keine Dokumente, die eine Prüfung erfordern.";
+$text["no_fulltextindex"] = "Kein Volltext-Index verfügbar";
 $text["no_group_members"] = "Diese Gruppe hat keine Mitglieder";
 $text["no_groups"] = "keine Gruppen";
 $text["no"] = "Nein";

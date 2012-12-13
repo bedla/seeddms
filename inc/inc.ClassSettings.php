@@ -986,9 +986,8 @@ class Settings { /* {{{ */
 							*/
 							}
 						}
+						$connTmp->Disconnect();
 					}
-
-					$connTmp->Disconnect();
 				}
 			} catch(Exception $e) {
 				$result["dbDatabase"] = array(

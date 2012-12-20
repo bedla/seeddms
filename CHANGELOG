@@ -1,4 +1,11 @@
 --------------------------------------------------------------------------------
+                     Changes in version 3.4.1
+--------------------------------------------------------------------------------
+- fixed database update script
+- check if full text index is available before added new document
+- minor translation settings
+
+--------------------------------------------------------------------------------
                      Changes in version 3.4.0
 --------------------------------------------------------------------------------
 - check for password strength

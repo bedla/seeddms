@@ -54,22 +54,40 @@ $res = $db->Execute('select * from tblVersion');
 if($rec = $res->FetchRow()) {
 	if($_GET['version'] > $rec['major'].'.'.$rec['minor'].'.'.$rec['subminor']) {
 
-		$queries = file_get_contents('update-'.$_GET['version'].'/update.sql');
-		$queries = explode(";", $queries);
+//		$queries = file_get_contents('update-'.$_GET['version'].'/update.sql');
+//		$queries = explode(";", $queries);
+		$queries = file('update-'.$_GET['version'].'/update.sql');
 
 		// execute queries
 		if($queries) {
 			echo "<h3>Updating database schema</h3>";
+			$sqlquery = "";
 			foreach($queries as $query) {
 				$query = trim($query);
-				if (!empty($query)) {
-					echo $query."<br />";
-					$db->Execute($query);
+				/* check if comment or empty line */
+				if(substr($query, 0, 2) == "--" || $query == "") {
+					if($sqlquery) {
+						echo $sqlquery."<br />";
+						$db->Execute($sqlquery);
 
-					if ($db->ErrorNo()<>0) {
-						$errorMsg .= $db->ErrorMsg() . "<br/>";
+						if ($db->ErrorNo()<>0) {
+							$errorMsg .= $db->ErrorMsg() . "<br/>";
+						}
+						$sqlquery = "";
 					}
+				} else {
+					$sqlquery .= " ".$query;
 				}
+			}
+			/* run the last query */
+			if($sqlquery) {
+				echo $sqlquery."<br />";
+				$db->Execute($sqlquery);
+
+				if ($db->ErrorNo()<>0) {
+					$errorMsg .= $db->ErrorMsg() . "<br/>";
+				}
+				$sqlquery = "";
 			}
 		}
 	} else {

@@ -19,7 +19,7 @@
 
 class LetoDMS_Version {
 
-	var $_number = "3.4.1";
+	var $_number = "3.4.2";
 	var $_string = "LetoDMS";
 
 	function LetoDMS_Version() {

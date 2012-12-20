@@ -1,4 +1,9 @@
 --------------------------------------------------------------------------------
+                     Changes in version 3.4.2
+--------------------------------------------------------------------------------
+- fixed database update script (second trial)
+
+--------------------------------------------------------------------------------
                      Changes in version 3.4.1
 --------------------------------------------------------------------------------
 - fixed database update script
@@ -19,10 +24,29 @@
 - update of swedish language (Thanks to Thorsten M.)
 - update of french language (Thanks to Yves)
 
--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+                     Changes in version 3.3.11
+--------------------------------------------------------------------------------
+- fixed output of status in full text search result
+- do not allow to insert categories with an empty name
+
+--------------------------------------------------------------------------------
+                     Changes in version 3.3.10
+--------------------------------------------------------------------------------
+- fixed stupid error in addDocumentCategory
+
+--------------------------------------------------------------------------------
+                     Changes in version 3.3.9
+--------------------------------------------------------------------------------
+- more security fixes for preventing XSS
+- minor fix in spanish translation
+- do not show document on mydocuments page twice
+
+--------------------------------------------------------------------------------
                      Changes in version 3.3.8
 --------------------------------------------------------------------------------
-- more security fixes for preventing CSRF attacks
+- more security fixes for preventing CSRF, XSS and sql injection attacks
+- fixed search for special chars (e.g. german umlaute) in fulltext search
 
 --------------------------------------------------------------------------------
                      Changes in version 3.3.7

@@ -1,17 +1,21 @@
+DROP PROCEDURE IF EXISTS DROPFK;
 DELIMITER $$
-
-DROP PROCEDURE IF EXISTS DROPFK $$
 CREATE PROCEDURE DROPFK (
 IN parm_table_name VARCHAR(100),
 IN parm_key_name VARCHAR(100)
 )
 BEGIN
-IF EXISTS (SELECT NULL FROM information_schema.TABLE_CONSTRAINTS
-WHERE CONSTRAINT_SCHEMA = DATABASE() AND CONSTRAINT_NAME = parm_key_name) THEN
-ALTER TABLE parm_table_name DROP FOREIGN KEY parm_key_name;
-END IF;
+	SET @table_name = parm_table_name;
+	SET @key_name = parm_key_name;
+	SET @sql_text = concat('ALTER TABLE ',@table_name,' DROP FOREIGN KEY ',@key_name);
+	IF EXISTS (SELECT NULL FROM information_schema.TABLE_CONSTRAINTS
+		WHERE CONSTRAINT_SCHEMA = DATABASE() AND CONSTRAINT_NAME = parm_key_name) THEN
+		PREPARE stmt FROM @sql_text;
+		EXECUTE stmt;
+		DEALLOCATE PREPARE stmt;
+	END IF;
 END $$
-DELIMITER ; $$
+DELIMITER ;
 
 ALTER TABLE tblACLs ENGINE=InnoDB;
 ALTER TABLE tblCategory ENGINE=InnoDB;

@@ -856,7 +856,7 @@ mayscript>
         traceEvent( "uploaderFileStatusChanged, index=" + file.getIndex() + ", status=" + file.getStatus() + ", content=" + file.getResponseContent() );
         if( file.isFinished() ) { 
             var serverFileName = file.getId() + "." + file.getName(); 
-            var linkHtml = "<a href='/uploaded/" + serverFileName + "'>" + serverFileName + "</a> " + file.getLength() + " bytes"; 
+            var linkHtml = serverFileName + " - " + file.getLength() + " bytes"; 
             var container = document.getElementById( "fileLinks"); 
             container.innerHTML += linkHtml + "<br />"; 
         } 

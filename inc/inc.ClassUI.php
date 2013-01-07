@@ -802,7 +802,7 @@ archive="jl_core_z.jar"
 width="715"
 height="400"
 mayscript>
-  <param name="uc_uploadUrl" value="<?php echo $uploadurl ?>"/>
+  <param name="uc_uploadUrl" value="<?php echo $uploadurl."?folderid=".$attributes['folderid']; unset($attributes['folderid']); ?>"/>
   <param name="ac_fireAppletInitialized" value="true"/>
   <param name="ac_fireUploaderSelectionChanged" value="true"/>
   <param name="ac_fireUploaderFileStatusChanged" value="true"/>

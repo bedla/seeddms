@@ -37,7 +37,7 @@ if (isset($_GET["navBar"])) {
 	if(strlen($_GET["query"])==0) {
 		header("Location: ../out/out.SearchForm.php?folderid=".$folderid);
 	} else {
-		if($_GET["fullsearch"]) {
+		if(isset($_GET["fullsearch"]) && $_GET["fullsearch"]) {
 			header("Location: ../op/op.SearchFulltext.php?folderid=".$folderid."&query=".$_GET["query"]);
 		}
 	}

@@ -91,7 +91,7 @@ class LetoDMS_Core_User {
 	var $_role;
 
 	/**
-	 * @var string true if user shall be hidden
+	 * @var boolean true if user shall be hidden
 	 *
 	 * @access protected
 	 */
@@ -285,7 +285,7 @@ class LetoDMS_Core_User {
 	 * to a different user.
 	 *
 	 * @param object $user the user doing the removal (needed for entry in
-	 *        review log.
+	 *        review and approve log).
 	 * @param object $assignToUser the user who is new owner of folders and
 	 *        documents which previously were owned by the delete user.
 	 * @return boolean true on success or false in case of an error
@@ -465,6 +465,7 @@ class LetoDMS_Core_User {
 			$this->_groups = array();
 			foreach ($resArr as $row) {
 				$group = new LetoDMS_Core_Group($row["id"], $row["name"], $row["comment"]);
+				$group->setDMS($this->_dms);
 				array_push($this->_groups, $group);
 			}
 		}
@@ -548,7 +549,7 @@ class LetoDMS_Core_User {
 	 * further.
 	 *
 	 * For a detaile description of the result array see
-	 * {link LetoDMS_User::getApprovalStatus}
+	 * {link LetoDMS_Core_User::getApprovalStatus}
 	 *
 	 * @param int $documentID optional document id for which to retrieve the
 	 *        reviews
@@ -575,13 +576,20 @@ class LetoDMS_Core_User {
 			($documentID==null ? "" : "AND `tblDocumentReviewers`.`documentID` = '". (int) $documentID ."' ").
 			($version==null ? "" : "AND `tblDocumentReviewers`.`version` = '". (int) $version ."' ").
 			"AND `tblDocumentReviewers`.`required`='". $this->_id ."' ".
-			"ORDER BY `tblDocumentReviewLog`.`reviewLogID` DESC LIMIT 1";
+			"ORDER BY `tblDocumentReviewLog`.`reviewLogID` DESC";
 		$resArr = $db->getResultArray($queryStr);
 		if (is_bool($resArr) && $resArr == false)
 			return false;
 		if (count($resArr)>0) {
-			foreach ($resArr as $res)
-				$status["indstatus"][] = $res;
+			foreach ($resArr as $res) {
+				if(isset($status["indstatus"][$res['documentID']])) {
+					if($status["indstatus"][$res['documentID']]['date'] < $res['date']) {
+						$status["indstatus"][$res['documentID']] = $res;
+					}
+				} else {
+					$status["indstatus"][$res['documentID']] = $res;
+				}
+			}
 		}
 
 		// See if the user is the member of a group that has been assigned to
@@ -596,13 +604,20 @@ class LetoDMS_Core_User {
 			($documentID==null ? "" : "AND `tblDocumentReviewers`.`documentID` = '". (int) $documentID ."' ").
 			($version==null ? "" : "AND `tblDocumentReviewers`.`version` = '". (int) $version ."' ").
 			"AND `tblGroupMembers`.`userID`='". $this->_id ."' ".
-			"ORDER BY `tblDocumentReviewLog`.`reviewLogID` DESC LIMIT 1";
+			"ORDER BY `tblDocumentReviewLog`.`reviewLogID` DESC";
 		$resArr = $db->getResultArray($queryStr);
 		if (is_bool($resArr) && $resArr == false)
 			return false;
 		if (count($resArr)>0) {
-			foreach ($resArr as $res)
-				$status["grpstatus"][] = $res;
+			foreach ($resArr as $res) {
+				if(isset($status["grpstatus"][$res['documentID']])) {
+					if($status["grpstatus"][$res['documentID']]['date'] < $res['date']) {
+						$status["grpstatus"][$res['documentID']] = $res;
+					}
+				} else {
+					$status["grpstatus"][$res['documentID']] = $res;
+				}
+			}
 		}
 		return $status;
 	} /* }}} */
@@ -669,14 +684,21 @@ class LetoDMS_Core_User {
 			($documentID==null ? "" : "AND `tblDocumentApprovers`.`documentID` = '". (int) $documentID ."' ").
 			($version==null ? "" : "AND `tblDocumentApprovers`.`version` = '". (int) $version ."' ").
 			"AND `tblDocumentApprovers`.`required`='". $this->_id ."' ".
-			"ORDER BY `tblDocumentApproveLog`.`approveLogID` DESC LIMIT 1";
+			"ORDER BY `tblDocumentApproveLog`.`approveLogID` DESC";
 
 		$resArr = $db->getResultArray($queryStr);
 		if (is_bool($resArr) && $resArr == false)
 			return false;
 		if (count($resArr)>0) {
-			foreach ($resArr as $res)
-				$status["indstatus"][] = $res;
+			foreach ($resArr as $res) {
+				if(isset($status["indstatus"][$res['documentID']])) {
+					if($status["indstatus"][$res['documentID']]['date'] < $res['date']) {
+						$status["indstatus"][$res['documentID']] = $res;
+					}
+				} else {
+					$status["indstatus"][$res['documentID']] = $res;
+				}
+			}
 		}
 
 		// See if the user is the member of a group that has been assigned to
@@ -706,13 +728,20 @@ class LetoDMS_Core_User {
 			($documentID==null ? "" : "AND `tblDocumentApprovers`.`documentID` = '". (int) $documentID ."' ").
 			($version==null ? "" : "AND `tblDocumentApprovers`.`version` = '". (int) $version ."' ").
 			"AND `tblGroupMembers`.`userID`='". $this->_id ."' ".
-			"ORDER BY `tblDocumentApproveLog`.`approveLogID` DESC LIMIT 1";
+			"ORDER BY `tblDocumentApproveLog`.`approveLogID` DESC";
 		$resArr = $db->getResultArray($queryStr);
 		if (is_bool($resArr) && $resArr == false)
 			return false;
 		if (count($resArr)>0) {
-			foreach ($resArr as $res)
-				$status["grpstatus"][] = $res;
+			foreach ($resArr as $res) {
+				if(isset($status["grpstatus"][$res['documentID']])) {
+					if($status["grpstatus"][$res['documentID']]['date'] < $res['date']) {
+						$status["grpstatus"][$res['documentID']] = $res;
+					}
+				} else {
+					$status["grpstatus"][$res['documentID']] = $res;
+				}
+			}
 		}
 		return $status;
 	} /* }}} */
@@ -738,7 +767,7 @@ class LetoDMS_Core_User {
 
 	/**
 	 * Get a list of mandatory approvers
-	 * See {link LetoDMS_User::getMandatoryReviewers}
+	 * See {link LetoDMS_Core_User::getMandatoryReviewers}
 	 *
 	 * @return array list of arrays with two elements containing the user id
 	 *         (approverUserID) and group id (approverGroupID) of the approver.

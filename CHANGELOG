@@ -2,6 +2,9 @@
                      Changes in version 3.4.2
 --------------------------------------------------------------------------------
 - fixed database update script (second trial)
+- fixed jumploader upload
+- updated dutch language file
+- fixed list on MyDocuments page
 
 --------------------------------------------------------------------------------
                      Changes in version 3.4.1

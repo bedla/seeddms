@@ -113,7 +113,7 @@ if ($showInProcess){
 			UI::htmlEndPage();
 			exit;
 		}
-		
+
 		// Create an array to hold all of these results, and index the array by
 		// document id. This makes it easier to retrieve document ID information
 		// later on and saves us having to repeatedly poll the database every time

@@ -359,7 +359,7 @@ class LetoDMS_Core_Folder extends LetoDMS_Core_Object {
 	 * @return object object of type LetoDMS_Core_Folder or false in case of
 	 *         an error.
 	 */
-	function addSubFolder($name, $comment, $owner, $sequence, $attributes) { /* {{{ */
+	function addSubFolder($name, $comment, $owner, $sequence, $attributes=array()) { /* {{{ */
 		$db = $this->_dms->getDB();
 
 		// Set the folderList of the folder

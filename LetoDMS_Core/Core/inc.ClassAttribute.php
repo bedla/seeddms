@@ -218,7 +218,7 @@ class LetoDMS_Core_AttributeDefinition {
 		return true;
 	}
 
-	function hasMultipleValues() { return $this->_multiple; }
+	function getMultipleValues() { return $this->_multiple; }
 
 	function setMultipleValues($mv) {
 		$db = $this->_dms->getDB();

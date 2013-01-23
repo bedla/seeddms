@@ -93,14 +93,14 @@ if (strlen($docCSV)>0) {
 	// new document information is required.
 	$docIdx = array();
 	foreach ($resArr as $res) {
-	
+
 		// verify expiry
 		if ( $res["expires"] && time()>$res["expires"]+24*60*60 ){
 			if  ( $res["status"]==S_DRAFT_APP || $res["status"]==S_DRAFT_REV ){
 				$res["status"]=S_EXPIRED;
 			}
 		}
-		
+
 		$docIdx[$res["id"]][$res["version"]] = $res;
 	}
 }
@@ -109,7 +109,7 @@ $printheader=true;
 $iRev = array();
 foreach ($reviewStatus["indstatus"] as $st) {
 	if (isset($docIdx[$st["documentID"]][$st["version"]])) {
-	
+
 		if ($printheader){
 			print "<table class=\"folderView\">";
 			print "<thead>\n<tr>\n";
@@ -122,14 +122,14 @@ foreach ($reviewStatus["indstatus"] as $st) {
 			print "</tr>\n</thead>\n<tbody>\n";
 			$printheader=false;
 		}
-	
+
 		print "<tr>\n";
 		print "<td><a href=\"out.DocumentVersionDetail.php?documentid=".$st["documentID"]."&version=".$st["version"]."\">".htmlspecialchars($docIdx[$st["documentID"]][$st["version"]]["name"])."</a></td>";
 		print "<td>".htmlspecialchars($docIdx[$st["documentID"]][$st["version"]]["ownerName"])."</td>";
 		print "<td>".getOverallStatusText($docIdx[$st["documentID"]][$st["version"]]["status"])."</td>";
 		print "<td>".$st["version"]."</td>";
 		print "<td>".$st["date"]." ". htmlspecialchars($docIdx[$st["documentID"]][$st["version"]]["statusName"]) ."</td>";
-		print "<td>".(!$docIdx[$st["documentID"]][$st["version"]]["expires"] ? "-":getReadableDate($docIdx[$st["documentID"]][$st["version"]]["expires"]))."</td>";				
+		print "<td>".(!$docIdx[$st["documentID"]][$st["version"]]["expires"] ? "-":getReadableDate($docIdx[$st["documentID"]][$st["version"]]["expires"]))."</td>";
 		print "</tr>\n";
 	}
 	if ($st["status"]!=-2) {
@@ -149,7 +149,7 @@ UI::contentContainerStart();
 $printheader=true;
 foreach ($reviewStatus["grpstatus"] as $st) {
 	if (!in_array($st["documentID"], $iRev) && isset($docIdx[$st["documentID"]][$st["version"]])) {
-	
+
 		if ($printheader){
 			print "<table class=\"folderView\">";
 			print "<thead>\n<tr>\n";
@@ -161,15 +161,15 @@ foreach ($reviewStatus["grpstatus"] as $st) {
 			print "<th>".getMLText("expires")."</th>\n";
 			print "</tr>\n</thead>\n<tbody>\n";
 			$printheader=false;
-		}		
-	
+		}
+
 		print "<tr>\n";
 		print "<td><a href=\"out.DocumentVersionDetail.php?documentid=".$st["documentID"]."&version=".$st["version"]."\">".htmlspecialchars($docIdx[$st["documentID"]][$st["version"]]["name"])."</a></td>";
 		print "<td>".htmlspecialchars($docIdx[$st["documentID"]][$st["version"]]["ownerName"])."</td>";
 		print "<td>".getOverallStatusText($docIdx[$st["documentID"]][$st["version"]]["status"])."</td>";
 		print "<td>".$st["version"]."</td>";
 		print "<td>".$st["date"]." ". htmlspecialchars($docIdx[$st["documentID"]][$st["version"]]["statusName"]) ."</td>";
-		print "<td>".(!$docIdx[$st["documentID"]][$st["version"]]["expires"] ? "-":getReadableDate($docIdx[$st["documentID"]][$st["version"]]["expires"]))."</td>";				
+		print "<td>".(!$docIdx[$st["documentID"]][$st["version"]]["expires"] ? "-":getReadableDate($docIdx[$st["documentID"]][$st["version"]]["expires"]))."</td>";
 		print "</tr>\n";
 	}
 }

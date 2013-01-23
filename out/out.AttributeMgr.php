@@ -175,7 +175,7 @@ UI::contentContainerStart();
 							<?php printMLText("attrdef_type");?>:
 						</td>
 						<td>
-							<select name="type"><option value="<?php echo LetoDMS_Core_AttributeDefinition::type_int ?>" <?php if($attrdef->getType() == LetoDMS_Core_AttributeDefinition::type_int) echo "selected"; ?>>Integer</option><option value="<?php echo LetoDMS_Core_AttributeDefinition::type_float ?>" <?php if($attrdef->getType() == LetoDMS_Core_AttributeDefinition::type_float) echo "selected"; ?>>Float</option><option value="<?php echo LetoDMS_Core_AttributeDefinition::type_string ?>" <?php if($attrdef->getType() == LetoDMS_Core_AttributeDefinition::type_string) echo "selected"; ?>>String</option><option value="<?php echo LetoDMS_Core_AttributeDefinition::type_boolean ?>" <?php if($attrdef->getType() == LetoDMS_Core_AttributeDefinition::type_boolean) echo "selected"; ?>>Boolean</option></select><br />
+							<select name="type"><option value="<?php echo LetoDMS_Core_AttributeDefinition::type_int ?>" <?php if($attrdef->getType() == LetoDMS_Core_AttributeDefinition::type_int) echo "selected"; ?>>Integer</option><option value="<?php echo LetoDMS_Core_AttributeDefinition::type_float ?>" <?php if($attrdef->getType() == LetoDMS_Core_AttributeDefinition::type_float) echo "selected"; ?>>Float</option><option value="<?php echo LetoDMS_Core_AttributeDefinition::type_string ?>" <?php if($attrdef->getType() == LetoDMS_Core_AttributeDefinition::type_string) echo "selected"; ?>>String</option><option value="<?php echo LetoDMS_Core_AttributeDefinition::type_boolean ?>" <?php if($attrdef->getType() == LetoDMS_Core_AttributeDefinition::type_boolean) echo "selected"; ?>>Boolean</option></select>
 						</td>
 					</tr>
 					<tr>
@@ -183,7 +183,7 @@ UI::contentContainerStart();
 							<?php printMLText("attrdef_objtype");?>:
 						</td>
 						<td>
-							<select name="objtype"><option value="<?php echo LetoDMS_Core_AttributeDefinition::objtype_all ?>">All</option><option value="<?php echo LetoDMS_Core_AttributeDefinition::objtype_folder ?>" <?php if($attrdef->getObjType() == LetoDMS_Core_AttributeDefinition::objtype_folder) echo "selected"; ?>>Folder</option><option value="<?php echo LetoDMS_Core_AttributeDefinition::objtype_document ?>" <?php if($attrdef->getObjType() == LetoDMS_Core_AttributeDefinition::objtype_document) echo "selected"; ?>>Document</option><option value="<?php echo LetoDMS_Core_AttributeDefinition::objtype_documentcontent ?>" <?php if($attrdef->getObjType() == LetoDMS_Core_AttributeDefinition::objtype_documentcontent) echo "selected"; ?>>Document content</option></select><br />
+							<select name="objtype"><option value="<?php echo LetoDMS_Core_AttributeDefinition::objtype_all ?>">All</option><option value="<?php echo LetoDMS_Core_AttributeDefinition::objtype_folder ?>" <?php if($attrdef->getObjType() == LetoDMS_Core_AttributeDefinition::objtype_folder) echo "selected"; ?>>Folder</option><option value="<?php echo LetoDMS_Core_AttributeDefinition::objtype_document ?>" <?php if($attrdef->getObjType() == LetoDMS_Core_AttributeDefinition::objtype_document) echo "selected"; ?>>Document</option><option value="<?php echo LetoDMS_Core_AttributeDefinition::objtype_documentcontent ?>" <?php if($attrdef->getObjType() == LetoDMS_Core_AttributeDefinition::objtype_documentcontent) echo "selected"; ?>>Document content</option></select>
 						</td>
 					</tr>
 					<tr>
@@ -191,7 +191,7 @@ UI::contentContainerStart();
 							<?php printMLText("attrdef_multiple");?>:
 						</td>
 						<td>
-							<input type="checkbox" value="1" name="multiple" /><br />
+							<input type="checkbox" value="1" name="multiple" <?php echo $attrdef->getMultipleValues() ? "checked" : "" ?> />
 						</td>
 					</tr>
 					<tr>
@@ -199,7 +199,7 @@ UI::contentContainerStart();
 							<?php printMLText("attrdef_minvalues");?>:
 						</td>
 						<td>
-							<input type="text" value="<?php echo $attrdef->getMinValues() ?>" name="minvalues" /><br />
+							<input type="text" value="<?php echo $attrdef->getMinValues() ?>" name="minvalues" />
 						</td>
 					</tr>
 					<tr>
@@ -207,7 +207,7 @@ UI::contentContainerStart();
 							<?php printMLText("attrdef_maxvalues");?>:
 						</td>
 						<td>
-							<input type="text" value="<?php echo $attrdef->getMaxValues() ?>" name="maxvalues" /><br />
+							<input type="text" value="<?php echo $attrdef->getMaxValues() ?>" name="maxvalues" />
 						</td>
 					</tr>
 					<tr>
@@ -215,7 +215,7 @@ UI::contentContainerStart();
 							<?php printMLText("attrdef_valueset");?>:
 						</td>
 						<td>
-							<input type="text" value="<?php echo $attrdef->getValueSet() ?>" name="valueset" /><br />
+							<input type="text" value="<?php echo $attrdef->getValueSet() ?>" name="valueset" />
 						</td>
 					</tr>
 					<tr>

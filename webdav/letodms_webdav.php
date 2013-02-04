@@ -398,7 +398,20 @@ class HTTP_WebDAV_Server_LetoDMS extends HTTP_WebDAV_Server
 		$subfolders = $folder->getSubFolders();
 		$subfolders = LetoDMS_Core_DMS::filterAccess($subfolders, $this->user, M_READ);
 		$documents = $folder->getDocuments();
-		$documents = LetoDMS_Core_DMS::filterAccess($documents, $this->user, M_READ);
+		$docs = LetoDMS_Core_DMS::filterAccess($documents, $this->user, M_READ);
+		if(!$this->user->isAdmin()) {
+			$documents = array();
+			foreach($docs as $document) {
+				$lc = $document->getLatestContent();
+				$status = $lc->getStatus();
+				if($status['status'] == S_RELEASED) {
+					$documents[] = $document;
+				}
+			}
+		} else {
+			$documents = $docs;
+		}
+
 		$objs = array_merge($subfolders, $documents);
 
 		echo "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" /><title>Index of ".htmlspecialchars($options['path'])."</title></head>\n";
@@ -608,10 +621,19 @@ class HTTP_WebDAV_Server_LetoDMS extends HTTP_WebDAV_Server
 		}
 
 		if (get_class($obj) == 'LetoDMS_Core_Folder') {
+			if($obj->hasDocuments() || $obj->hasSubFolders()) {
+				return "409 Conflict";
+			}
 			if(!$obj->remove()) {
 				return "409 Conflict";
 			}
 		} else {
+			// check if user is admin
+			// only admins may delete documents
+			if(!$this->user->isAdmin()) {
+				return "403 Forbidden";				 
+			}
+
 			if(!$obj->remove()) {
 				return "409 Conflict";
 			}

@@ -121,7 +121,7 @@ function generateCalendarArrays()
 	
 	$dayNames = array();
 	foreach ( $dayNamesLong as $dn ){
-		 $dayNames[] = substr($dn,0,2);   
+		 $dayNames[] = substr($dn,0,3);   
 	}         
 }
 

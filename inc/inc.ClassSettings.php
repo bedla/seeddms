@@ -993,7 +993,7 @@ class Settings { /* {{{ */
 				$result["dbDatabase"] = array(
 					"status" => "error",
 					"type" => "error",
-					"currentvalue" => '[host, user, database] -> [' . $settings->_dbHostname . ',' . $settings->_dbUser . ',' . $settings->_dbDatabase .']',
+					"currentvalue" => '[host, user, database] -> [' . $this->_dbHostname . ',' . $this->_dbUser . ',' . $this->_dbDatabase .']',
 					"systemerror" => $e->getMessage()
 				);
 			}

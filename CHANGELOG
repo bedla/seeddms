@@ -1,4 +1,14 @@
 --------------------------------------------------------------------------------
+                     Changes in version 3.4.3
+--------------------------------------------------------------------------------
+- fixed saving of multiple values field for attribute definitions
+- update of french language
+- use 3 letters for abrіvated day names (because this fits more languages)
+- do not allow to delete folders
+- do not allow to delete documents unless you are admin
+- show only documents which are released (unless you admin)
+
+--------------------------------------------------------------------------------
                      Changes in version 3.4.2
 --------------------------------------------------------------------------------
 - fixed database update script (second trial)

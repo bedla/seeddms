@@ -21,7 +21,7 @@
  <date>2013-01-14</date>
  <time>16:33:28</time>
  <version>
-  <release>3.4.2</release>
+  <release>3.4.3</release>
   <api>3.4.0</api>
  </version>
  <stability>
@@ -30,7 +30,8 @@
  </stability>
  <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
  <notes>
-- better checking for valid database query result in LetoDMS_Core_DMS::search()
+- renamed LetoDMS_Core_Attribute::hasMultipleValue() to getMultipleValue()
+- make $attributes an optional parameter of LetoDMS_Core_Folder::addSubFolder()
  </notes>
  <contents>
   <dir baseinstalldir="LetoDMS" name="/">
@@ -328,6 +329,22 @@ New release
    <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
    <notes>
 - stay in sync with letodmѕ app
+   </notes>
+  </release>
+  <release>
+   <date>2013-01-14</date>
+   <time>16:33:28</time>
+   <version>
+    <release>3.4.2</release>
+    <api>3.4.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- better checking for valid database query result in LetoDMS_Core_DMS::search()
    </notes>
   </release>
  </changelog>

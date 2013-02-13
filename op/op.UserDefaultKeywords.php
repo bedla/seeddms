@@ -54,7 +54,7 @@ else if ($action == "removecategory") {
 
 	$categoryid = 0;
 	if (isset($_REQUEST["categoryid"]) && $_REQUEST["categoryid"]) {
-		$categoryid = intval($_POST["categoryid"]);
+		$categoryid = intval($_REQUEST["categoryid"]);
 	}
 	$category = $dms->getKeywordCategory($categoryid);
 	if (is_object($category)) {
@@ -76,7 +76,7 @@ else if ($action == "editcategory") {
 
 	$categoryid = 0;
 	if (isset($_REQUEST["categoryid"]) && $_REQUEST["categoryid"]) {
-		$categoryid = intval($_POST["categoryid"]);
+		$categoryid = intval($_REQUEST["categoryid"]);
 	}
 	$category = $dms->getKeywordCategory($categoryid);
 	if (is_object($category)) {
@@ -102,7 +102,7 @@ else if ($action == "newkeywords") {
 
 	$categoryid = 0;
 	if (isset($_REQUEST["categoryid"]) && $_REQUEST["categoryid"]) {
-		$categoryid = intval($_POST["categoryid"]);
+		$categoryid = intval($_REQUEST["categoryid"]);
 	}
 	$category = $dms->getKeywordCategory($categoryid);
 	if (is_object($category)) {
@@ -111,12 +111,7 @@ else if ($action == "newkeywords") {
 			UI::exitError(getMLText("personal_default_keywords"),getMLText("access_denied"));
 		}
 
-		if (isset($_POST["keywords"])) {
-			$keywords = $_POST["keywords"];
-		}
-		else {
-			$keywords = $_GET["keywords"];
-		}
+		$keywords = $_REQUEST["keywords"];
 		if (!$category->addKeywordList($keywords)) {
 			UI::exitError(getMLText("personal_default_keywords"),getMLText("error_occured"));
 		}
@@ -129,7 +124,7 @@ else if ($action == "editkeywords") {
 
 	$categoryid = 0;
 	if (isset($_REQUEST["categoryid"]) && $_REQUEST["categoryid"]) {
-		$categoryid = intval($_POST["categoryid"]);
+		$categoryid = intval($_REQUEST["categoryid"]);
 	}
 	
 	$category = $dms->getKeywordCategory($categoryid);
@@ -139,17 +134,12 @@ else if ($action == "editkeywords") {
 			UI::exitError(getMLText("personal_default_keywords"),getMLText("access_denied"));
 		}
 
-		if (isset($_POST["keywordsid"])) {
-			$keywordsid = intval($_POST["keywordsid"]);
-		}
-		else {
-			$keywordsid = intval($_GET["keywordsid"]);
-		}
+		$keywordsid = intval($_REQUEST["keywordsid"]);
 		if (!is_numeric($keywordsid)) {
 			UI::exitError(getMLText("personal_default_keywords"),getMLText("unknown_keyword_category"));
 		}
 		
-		if (!$category->editKeywordList($keywordsid, $_POST["keywords"])) {
+		if (!$category->editKeywordList($keywordsid, $_REQUEST["keywords"])) {
 			UI::exitError(getMLText("personal_default_keywords"),getMLText("error_occured"));
 		}
 	}
@@ -161,7 +151,7 @@ else if ($action == "removekeywords") {
 
 	$categoryid = 0;
 	if (isset($_REQUEST["categoryid"]) && $_REQUEST["categoryid"]) {
-		$categoryid = intval($_POST["categoryid"]);
+		$categoryid = intval($_REQUEST["categoryid"]);
 	}
 	$category = $dms->getKeywordCategory($categoryid);
 	if (is_object($category)) {
@@ -169,12 +159,7 @@ else if ($action == "removekeywords") {
 		if ($owner->getID() != $user->getID()) {
 			UI::exitError(getMLText("personal_default_keywords"),getMLText("access_denied"));
 		}
-		if (isset($_POST["keywordsid"])) {
-			$keywordsid = intval($_POST["keywordsid"]);
-		}
-		else {
-			$keywordsid = intval($_GET["keywordsid"]);
-		}
+		$keywordsid = intval($_REQUEST["keywordsid"]);
 		if (!is_numeric($keywordsid)) {
 			UI::exitError(getMLText("personal_default_keywords"),getMLText("unknown_keyword_category"));
 		}

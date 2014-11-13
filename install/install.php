@@ -50,7 +50,10 @@ function openDBConnection($settings) { /* {{{ */
 		case 'mysql':
 		case 'mysqli':
 		case 'mysqlnd':
-			$dsn = $settings->_dbDriver.":dbname=".$settings->_dbDatabase.";host=".$settings->_dbHostname;
+			$tmp = explode(":", $settings->_dbHostname);
+			$dsn = $settings->_dbDriver.":dbname=".$settings->_dbDatabase.";host=".$tmp[0];
+			if(isset($tmp[1]))
+				$dsn .= ";port=".$tmp[1];
 			break;
 		case 'sqlite':
 			$dsn = $settings->_dbDriver.":".$settings->_dbDatabase;

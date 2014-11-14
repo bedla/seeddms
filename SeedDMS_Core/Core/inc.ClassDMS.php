@@ -630,7 +630,7 @@ class SeedDMS_Core_DMS {
 								if($attrdef->getMultipleValues()) {
 									$searchAttributes[] = "`tblFolderAttributes`.`attrdef`=".$attrdefid." AND (`tblFolderAttributes`.`value` like '".$valueset[0].implode("%' OR `tblFolderAttributes`.`value` like '".$valueset[0], $attribute)."%')";
 								} else
-									$searchAttributes[] = "`tblFolderAttributes`.`attrdef`=".$attrdefid." AND `tblDocumentAttributes`.`value`='".$attribute."'";
+									$searchAttributes[] = "`tblFolderAttributes`.`attrdef`=".$attrdefid." AND `tblFolderAttributes`.`value`='".$attribute."'";
 							} else
 								$searchAttributes[] = "`tblFolderAttributes`.`attrdef`=".$attrdefid." AND `tblFolderAttributes`.`value` like '%".$attribute."%'";
 						}

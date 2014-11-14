@@ -34,6 +34,24 @@ function getLongReadableDate($timestamp) {
 	return date("Y-m-d H:i:s", $timestamp);
 }
 
+/*
+ * Converts a date/time string into a timestamp
+ *
+ * @param $date string date in form Y-m-d H:i:s
+ * @return integer/boolean unix timestamp or false in case of an error
+ */
+function makeTsFromLongDate($date) { /* }}} */
+	$tmp = explode(' ', $date);
+	if(count($tmp) != 2)
+		return false;
+	$tarr = explode(':', $tmp[1]);
+	$darr = explode('-', $tmp[0]);
+	if(count($tarr) != 3 || count($darr) != 3)
+		return false;
+	$ts = mktime($tarr[0], $tarr[1], $tarr[2], $darr[1], $darr[2], $darr[0]);
+	return $ts;
+} /* }}} */
+
 function getReadableDuration($secs) {
 	$s = "";
 	foreach ( getReadableDurationArray($secs) as $k => $v ) {
@@ -45,11 +63,11 @@ function getReadableDuration($secs) {
 
 function getReadableDurationArray($secs) {
 	$units = array(
-					getMLText("weeks")   => 7*24*3600,
-					getMLText("days")    =>   24*3600,
-					getMLText("hours")   =>      3600,
-					getMLText("minutes") =>        60,
-					getMLText("seconds") =>         1,
+		getMLText("weeks")   => 7*24*3600,
+		getMLText("days")    =>   24*3600,
+		getMLText("hours")   =>      3600,
+		getMLText("minutes") =>        60,
+		getMLText("seconds") =>         1,
 	);
 
 	foreach ( $units as &$unit ) {

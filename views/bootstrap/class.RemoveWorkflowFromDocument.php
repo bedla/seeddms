@@ -54,8 +54,7 @@ class SeedDMS_View_RemoveWorkflowFromDocument extends SeedDMS_Bootstrap_Style {
 			foreach($wkflog as $entry) {
 				if($entry->getTransition()->getNextState()->getID() == $currentstate->getID()) {
 					$enterdate = $entry->getDate();
-					$d = strptime($enterdate, '%Y-%m-%d %H:%M:%S');
-					$enterts = mktime($d['tm_hour'], $d['tm_min'], $d['tm_sec'], $d['tm_mon']+1, $d['tm_mday'], $d['tm_year']+1900);
+					$enterts = makeTsFromLongDate($enterdate);
 				}
 			}
 			$msg .= "The state was entered at ".$enterdate." which was ";

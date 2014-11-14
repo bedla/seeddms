@@ -623,4 +623,5 @@ switch($command) {
 		break; /* }}} */
 
 }
+add_log_line();
 ?>

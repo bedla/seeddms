@@ -2,6 +2,7 @@
                      Changes in version 4.3.12
 --------------------------------------------------------------------------------
 - log each operation in op/op.Ajax.php
+- fix another error when search for multi value attributes of folders
 
 --------------------------------------------------------------------------------
                      Changes in version 4.3.11

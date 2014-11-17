@@ -12,11 +12,11 @@
   <email>uwe@steinmann.cx</email>
   <active>yes</active>
  </lead>
- <date>2014-11-13</date>
+ <date>2014-11-17</date>
  <time>09:09:35</time>
  <version>
-  <release>4.3.11</release>
-  <api>4.3.11</api>
+  <release>4.3.12</release>
+  <api>4.3.12</api>
  </version>
  <stability>
   <release>stable</release>
@@ -24,8 +24,7 @@
  </stability>
  <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
  <notes>
-- fixed saving multivalue attributes
-- add method SeedDMS_Core_Attribute::getValueAsArray()
+- fix searching folders with multivalue attributes
  </notes>
  <contents>
   <dir baseinstalldir="SeedDMS" name="/">
@@ -715,6 +714,23 @@ no changes
    <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
    <notes>
 new release
+   </notes>
+  </release>
+  <release>
+   <date>2014-11-13</date>
+   <time>09:09:35</time>
+   <version>
+    <release>4.3.11</release>
+    <api>4.3.11</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+- fixed saving multivalue attributes
+- add method SeedDMS_Core_Attribute::getValueAsArray()
    </notes>
   </release>
  </changelog>

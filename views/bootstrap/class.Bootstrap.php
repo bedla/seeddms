@@ -900,7 +900,7 @@ function folderSelected<?php echo $formName ?>(id, name) {
 <?php
 	} /* }}} */
 
-	function printFolderChooser($form, $accessMode, $exclude = -1, $default = false, $formname) { /* {{{ */
+	function printFolderChooser($form, $accessMode, $exclude = -1, $default = false, $formname = '') { /* {{{ */
 		$formid = "targetid".$form;
 		if(!$formname)
 			$formname = "targetid";

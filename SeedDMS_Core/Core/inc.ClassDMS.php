@@ -692,7 +692,6 @@ class SeedDMS_Core_DMS {
 			 */
 			if($searchKey || $searchOwner || $searchCreateDate || $searchAttributes) {
 				// Count the number of rows that the search will produce.
-					echo $searchQuery;
 				$resArr = $this->db->getResultArray("SELECT COUNT(*) AS num FROM (SELECT DISTINCT `tblFolders`.id ".$searchQuery.") a");
 				if ($resArr && isset($resArr[0]) && is_numeric($resArr[0]["num"]) && $resArr[0]["num"]>0) {
 					$totalFolders = (integer)$resArr[0]["num"];

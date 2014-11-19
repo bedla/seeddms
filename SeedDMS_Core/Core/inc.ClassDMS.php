@@ -155,8 +155,8 @@ class SeedDMS_Core_DMS {
 	 * two objects, which isn't required. The method will first check
 	 * if the objects are instances of the same class.
 	 *
-	 * @param object $object1
-	 * @param object $object2
+	 * @param object $object1 first object to be compared
+	 * @param object $object2 second object to be compared
 	 * @return boolean true if objects are equal, otherwise false
 	 */
 	static function checkIfEqual($object1, $object2) { /* {{{ */
@@ -246,6 +246,14 @@ class SeedDMS_Core_DMS {
 			$this->version = '4.3.11';
 	} /* }}} */
 
+	/**
+	 * Return database where meta data is stored
+	 *
+	 * This method returns the database object as it was set by the first
+	 * parameter of the constructor.
+	 *
+	 * @return object database
+	 */
 	function getDB() { /* {{{ */
 		return $this->db;
 	} /* }}} */
@@ -309,13 +317,19 @@ class SeedDMS_Core_DMS {
 	/**
 	 * Set maximum number of subdirectories per directory
 	 *
-	 * The value of maxDirID is quite crucial because, all documents are
-	 * associated with a directory in the filesystem. Consequently, there is
-	 * maximum number of documents, because depending on the file system
+	 * The value of maxDirID is quite crucial, because each document is
+	 * stored within a directory in the filesystem. Consequently, there can be
+	 * a maximum number of documents, because depending on the file system
 	 * the maximum number of subdirectories is limited. Since version 3.3.0 of
-	 * SeedDMS an additional directory level has been introduced. All documents
+	 * SeedDMS an additional directory level has been introduced, which
+	 * will be created when maxDirID is not 0. All documents
 	 * from 1 to maxDirID-1 will be saved in 1/<docid>, documents from maxDirID
 	 * to 2*maxDirID-1 are stored in 2/<docid> and so on.
+	 *
+	 * Modern file systems like ext4 do not have any restrictions on the number
+	 * of subdirectories anymore. Therefore it is best if this parameter is
+	 * set to 0. Never change this parameter if documents has already been
+	 * created.
 	 *
 	 * This function must be called right after creating an instance of
 	 * {@link SeedDMS_Core_DMS}
@@ -1726,6 +1740,7 @@ class SeedDMS_Core_DMS {
 	/**
 	 * Return workflow by its Id
 	 *
+	 * @param integer $id internal id of workflow
 	 * @return object of instances of {@link SeedDMS_Core_Workflow} or false
 	 */
 	function getWorkflow($id) { /* {{{ */
@@ -1749,6 +1764,7 @@ class SeedDMS_Core_DMS {
 	/**
 	 * Return workflow by its name
 	 *
+	 * @param string $name name of workflow
 	 * @return object of instances of {@link SeedDMS_Core_Workflow} or false
 	 */
 	function getWorkflowByName($name) { /* {{{ */
@@ -1771,6 +1787,12 @@ class SeedDMS_Core_DMS {
 		return $workflow;
 	} /* }}} */
 
+	/**
+	 * Add a new workflow
+	 *
+	 * @param string $name name of workflow
+	 * @param string $initstate initial state of workflow
+	 */
 	function addWorkflow($name, $initstate) { /* {{{ */
 		$db = $this->db;
 		if (is_object($this->getWorkflowByName($name))) {

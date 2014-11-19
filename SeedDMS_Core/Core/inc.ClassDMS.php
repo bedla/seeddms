@@ -642,11 +642,11 @@ class SeedDMS_Core_DMS {
 						if($attrdef->getObjType() == SeedDMS_Core_AttributeDefinition::objtype_folder || $attrdef->getObjType() == SeedDMS_Core_AttributeDefinition::objtype_all) {
 							if($valueset = $attrdef->getValueSet()) {
 								if($attrdef->getMultipleValues()) {
-									$searchAttributes[] = "`tblFolderAttributes`.`attrdef`=".$attrdefid." AND (`tblFolderAttributes`.`value` like '".$valueset[0].implode("%' OR `tblFolderAttributes`.`value` like '".$valueset[0], $attribute)."%')";
+									$searchAttributes[] = "EXISTS (SELECT NULL FROM `tblFolderAttributes` WHERE `tblFolderAttributes`.`attrdef`=".$attrdefid." AND (`tblFolderAttributes`.`value` like '".$valueset[0].implode("%' OR `tblFolderAttributes`.`value` like '".$valueset[0], $attribute)."%' AND `tblFolderAttributes`.`folder`=`tblFolders`.`id`)";
 								} else
-									$searchAttributes[] = "`tblFolderAttributes`.`attrdef`=".$attrdefid." AND `tblFolderAttributes`.`value`='".$attribute."'";
+									$searchAttributes[] = "EXISTS (SELECT NULL FROM `tblFolderAttributes` WHERE `tblFolderAttributes`.`attrdef`=".$attrdefid." AND `tblFolderAttributes`.`value`='".$attribute."' AND `tblFolderAttributes`.`folder`=`tblFolders`.`id`)";
 							} else
-								$searchAttributes[] = "`tblFolderAttributes`.`attrdef`=".$attrdefid." AND `tblFolderAttributes`.`value` like '%".$attribute."%'";
+								$searchAttributes[] = "EXISTS (SELECT NULL FROM `tblFolderAttributes` WHERE `tblFolderAttributes`.`attrdef`=".$attrdefid." AND `tblFolderAttributes`.`value` like '%".$attribute."%' AND `tblFolderAttributes`.`folder`=`tblFolders`.`id`)";
 						}
 					}
 				}
@@ -692,6 +692,7 @@ class SeedDMS_Core_DMS {
 			 */
 			if($searchKey || $searchOwner || $searchCreateDate || $searchAttributes) {
 				// Count the number of rows that the search will produce.
+					echo $searchQuery;
 				$resArr = $this->db->getResultArray("SELECT COUNT(*) AS num FROM (SELECT DISTINCT `tblFolders`.id ".$searchQuery.") a");
 				if ($resArr && isset($resArr[0]) && is_numeric($resArr[0]["num"]) && $resArr[0]["num"]>0) {
 					$totalFolders = (integer)$resArr[0]["num"];
@@ -805,16 +806,16 @@ class SeedDMS_Core_DMS {
 						if($attrdef->getObjType() == SeedDMS_Core_AttributeDefinition::objtype_document || $attrdef->getObjType() == SeedDMS_Core_AttributeDefinition::objtype_all) {
 							if($valueset = $attrdef->getValueSet()) {
 								if($attrdef->getMultipleValues()) {
-									$searchAttributes[] = "`tblDocumentAttributes`.`attrdef`=".$attrdefid." AND (`tblDocumentAttributes`.`value` like '".$valueset[0].implode("%' OR `tblDocumentAttributes`.`value` like '".$valueset[0], $attribute)."%')";
+									$searchAttributes[] = "EXISTS (SELECT NULL FROM `tblDocumentAttributes` WHERE `tblDocumentAttributes`.`attrdef`=".$attrdefid." AND (`tblDocumentAttributes`.`value` like '".$valueset[0].implode("%' OR `tblDocumentAttributes`.`value` like '".$valueset[0], $attribute)."%') AND `tblDocumentAttributes`.document = `tblDocuments`.id)";
 								} else
-									$searchAttributes[] = "`tblDocumentAttributes`.`attrdef`=".$attrdefid." AND `tblDocumentAttributes`.`value`='".$attribute."'";
+									$searchAttributes[] = "EXISTS (SELECT NULL FROM `tblDocumentAttributes` WHERE `tblDocumentAttributes`.`attrdef`=".$attrdefid." AND `tblDocumentAttributes`.`value`='".$attribute."' AND `tblDocumentAttributes`.document = `tblDocuments`.id)";
 							} else
-								$searchAttributes[] = "`tblDocumentAttributes`.`attrdef`=".$attrdefid." AND `tblDocumentAttributes`.`value` like '%".$attribute."%'";
+								$searchAttributes[] = "EXISTS (SELECT NULL FROM `tblDocumentAttributes` WHERE `tblDocumentAttributes`.`attrdef`=".$attrdefid." AND `tblDocumentAttributes`.`value` like '%".$attribute."%') AND `tblDocumentAttributes`.document = `tblDocuments`.id";
 						} elseif($attrdef->getObjType() == SeedDMS_Core_AttributeDefinition::objtype_documentcontent) {
 							if($attrdef->getValueSet())
-								$searchAttributes[] = "`tblDocumentContentAttributes`.`attrdef`=".$attrdefid." AND `tblDocumentContentAttributes`.`value`='".$attribute."'";
+								$searchAttributes[] = "EXISTS (SELECT NULL FROM `tblDocumentAttributes` WHERE `tblDocumentContentAttributes`.`attrdef`=".$attrdefid." AND `tblDocumentContentAttributes`.`value`='".$attribute."' AND `tblDocumentContentAttributes`.content = `tblDocumentContent`.id";
 							else
-								$searchAttributes[] = "`tblDocumentContentAttributes`.`attrdef`=".$attrdefid." AND `tblDocumentContentAttributes`.`value` like '%".$attribute."%'";
+								$searchAttributes[] = "EXISTS (SELECT NULL FROM `tblDocumentAttributes` WHERE `tblDocumentContentAttributes`.`attrdef`=".$attrdefid." AND `tblDocumentContentAttributes`.`value` like '%".$attribute."%' AND `tblDocumentContentAttributes`.content = `tblDocumentContent`.id";
 						}
 					}
 				}

@@ -2,6 +2,8 @@ VERSION=4.3.12
 SRC=CHANGELOG inc conf utils index.php languages views op out README.md README.Notification README.Ubuntu drop-tables-innodb.sql styles js TODO LICENSE Makefile webdav install restapi
 # webapp
 
+PHPDOC=~/Downloads/phpDocumentor-2.8.1/bin/phpdoc
+
 dist:
 	mkdir -p tmp/seeddms-$(VERSION)
 	cp -a $(SRC) tmp/seeddms-$(VERSION)
@@ -26,6 +28,6 @@ webapp:
 	rm -rf tmp
 
 doc:
-	phpdoc -d SeedDMS_Core --ignore 'getusers.php,getfoldertree.php,config.php,reverselookup.php' -t html
+	$(PHPDOC) -d SeedDMS_Core --ignore 'getusers.php,getfoldertree.php,config.php,reverselookup.php' --force -t html
 
 .PHONY: webdav webapp

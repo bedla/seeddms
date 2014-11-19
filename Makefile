@@ -1,4 +1,4 @@
-VERSION=4.3.11
+VERSION=4.3.13
 SRC=CHANGELOG inc conf utils index.php languages views op out controllers README.md README.Notification README.Ubuntu drop-tables-innodb.sql styles js TODO LICENSE Makefile webdav install restapi
 # webapp
 
@@ -6,6 +6,8 @@ EXTENSIONS := \
 	dynamic_content.tar.gz\
 	login_action.tar.gz\
 	example.tar.gz
+
+PHPDOC=~/Downloads/phpDocumentor-2.8.1/bin/phpdoc
 
 dist:
 	mkdir -p tmp/seeddms-$(VERSION)
@@ -42,6 +44,6 @@ login_action.tar.gz: ext/login_action
 extensions: $(EXTENSIONS)
 
 doc:
-	phpdoc -d SeedDMS_Core --ignore 'getusers.php,getfoldertree.php,config.php,reverselookup.php' -t html
+	$(PHPDOC) -d SeedDMS_Core --ignore 'getusers.php,getfoldertree.php,config.php,reverselookup.php' --force -t html
 
 .PHONY: webdav webapp

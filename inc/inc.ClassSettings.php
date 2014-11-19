@@ -1089,7 +1089,10 @@ class Settings { /* {{{ */
 					case 'mysql':
 					case 'mysqli':
 					case 'mysqlnd':
-						$dsn = $this->_dbDriver.":dbname=".$this->_dbDatabase.";host=".$this->_dbHostname;
+						$tmp = explode(":", $this->_dbHostname);
+						$dsn = $this->_dbDriver.":dbname=".$this->_dbDatabase.";host=".$tmp[0];
+						if(!empty($tmp[1]))
+							$dsn .= ";port=".$tmp[1];
 						break;
 					case 'sqlite':
 						$dsn = $this->_dbDriver.":".$this->_dbDatabase;

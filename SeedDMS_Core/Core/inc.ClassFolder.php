@@ -486,9 +486,13 @@ class SeedDMS_Core_Folder extends SeedDMS_Core_Object {
 	} /* }}} */
 
 	/**
-	 * Returns a unix file system path
+	 * Returns a file system path
 	 *
-	 * @return string path separated with '/'
+	 * This path contains spaces around the slashes for better readability.
+	 * Run str_replace(' / ', '/', $path) on it to get a valid unix
+	 * file system path.
+	 *
+	 * @return string path separated with ' / '
 	 */
 	function getFolderPathPlain() { /* {{{ */
 		$path="";

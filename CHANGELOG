@@ -1,4 +1,13 @@
 --------------------------------------------------------------------------------
+                     Changes in version 4.3.12
+--------------------------------------------------------------------------------
+- log each operation in op/op.Ajax.php
+- fix another error when search for multi value attributes of folders
+- do not use strptime anymore (Bug #129)
+- fix specfying port for database in hostname (Bug #173)
+- propperly check for min/max values of attributes
+
+--------------------------------------------------------------------------------
                      Changes in version 4.3.11
 --------------------------------------------------------------------------------
 - translation updates

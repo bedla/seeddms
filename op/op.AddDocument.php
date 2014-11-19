@@ -76,6 +76,14 @@ foreach($attributes as $attrdefid=>$attribute) {
 				UI::exitError(getMLText("folder_title", array("foldername" => $folder->getName())),getMLText("attr_no_regex_match"));
 			}
 		}
+		if(is_array($attribute)) {
+			if($attrdef->getMinValues() > count($attribute)) {
+				UI::exitError(getMLText("folder_title", array("foldername" => $folder->getName())),getMLText("attr_min_values", array("attrname"=>$attrdef->getName())));
+			}
+			if($attrdef->getMaxValues() && $attrdef->getMaxValues() < count($attribute)) {
+				UI::exitError(getMLText("folder_title", array("foldername" => $folder->getName())),getMLText("attr_max_values", array("attrname"=>$attrdef->getName())));
+			}
+		}
 	}
 }
 
@@ -89,6 +97,14 @@ foreach($attributes_version as $attrdefid=>$attribute) {
 		if($attrdef->getRegex()) {
 			if(!preg_match($attrdef->getRegex(), $attribute)) {
 				UI::exitError(getMLText("folder_title", array("foldername" => $folder->getName())),getMLText("attr_no_regex_match"));
+			}
+		}
+		if(is_array($attribute)) {
+			if($attrdef->getMinValues() > count($attribute)) {
+				UI::exitError(getMLText("folder_title", array("foldername" => $folder->getName())),getMLText("attr_min_values", array("attrname"=>$attrdef->getName())));
+			}
+			if($attrdef->getMaxValues() && $attrdef->getMaxValues() < count($attribute)) {
+				UI::exitError(getMLText("folder_title", array("foldername" => $folder->getName())),getMLText("attr_max_values", array("attrname"=>$attrdef->getName())));
 			}
 		}
 	}

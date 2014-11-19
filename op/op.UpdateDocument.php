@@ -187,7 +187,7 @@ if ($_FILES['userfile']['error'] == 0) {
 					if($attrdef->getMinValues() > count($attribute)) {
 						UI::exitError(getMLText("document_title", array("documentname" => $document->getName())),getMLText("attr_min_values", array("attrname"=>$attrdef->getName())));
 					}
-					if($attrdef->getMaxValues() < count($attribute)) {
+					if($attrdef->getMaxValues() && $attrdef->getMaxValues() < count($attribute)) {
 						UI::exitError(getMLText("document_title", array("documentname" => $document->getName())),getMLText("attr_max_values", array("attrname"=>$attrdef->getName())));
 					}
 				}

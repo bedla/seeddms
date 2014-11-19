@@ -167,7 +167,7 @@ if($attributes) {
 				if($attrdef->getMinValues() > count($attribute)) {
 					UI::exitError(getMLText("folder_title", array("foldername" => $folder->getName())),getMLText("attr_min_values", array("attrname"=>$attrdef->getName())));
 				}
-				if($attrdef->getMaxValues() < count($attribute)) {
+				if($attrdef->getMaxValues() && $attrdef->getMaxValues() < count($attribute)) {
 					UI::exitError(getMLText("folder_title", array("foldername" => $folder->getName())),getMLText("attr_max_values", array("attrname"=>$attrdef->getName())));
 				}
 			}

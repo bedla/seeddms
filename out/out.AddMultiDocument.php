@@ -41,7 +41,7 @@ if ($folder->getAccessMode($user) < M_READWRITE) {
 	UI::exitError(getMLText("folder_title", array("foldername" => htmlspecialchars($folder->getName()))),getMLText("access_denied"));
 }
 
-$remain = checkQuota();
+$remain = checkQuota($user);
 if ($remain < 0) {
 	UI::exitError(getMLText("folder_title", array("foldername" => htmlspecialchars($folder->getName()))),getMLText("quota_exceeded", array('bytes'=>SeedDMS_Core_File::format_filesize(abs($remain)))));
 }

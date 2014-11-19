@@ -45,7 +45,7 @@ class SeedDMS_View_MyAccount extends SeedDMS_Bootstrap_Style {
 		$this->pageNavigation(getMLText("my_account"), "my_account");
 
 		if($quota > 0) {
-			if(($remain = checkQuota()) < 0) {
+			if(($remain = checkQuota($user)) < 0) {
 				$this->warningMsg(getMLText('quota_warning', array('bytes'=>SeedDMS_Core_File::format_filesize(abs($remain)))));
 			}
 		}

@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1911)
+//    Translators: Admin (1914)
 
 $text = array(
 'accept' => 'Übernehmen',
@@ -131,10 +131,13 @@ URL: [url]',
 'attribute_changed_email_subject' => '[sitename]: [name] - Attribut geändert',
 'attribute_count' => 'Anzahl Verwendungen',
 'attribute_value' => 'Attributwert',
+'attr_max_values' => 'Die maximale Anzahl der erlaubten Werte für das Attribut [attrname] ist überschritten.',
+'attr_min_values' => 'Die minimal Anzahl von Werte für das Attribut [attrname] ist nicht erreicht.',
 'attr_no_regex_match' => 'The attribute value does not match the regular expression',
 'at_least_n_users_of_group' => 'Mindestens [number_of_users] Benutzer der Gruppe [group]',
 'august' => 'August',
 'authentication' => 'Authentifizierung',
+'author' => 'Autor',
 'automatic_status_update' => 'Automatischer Statuswechsel',
 'back' => 'Zurück',
 'backup_list' => 'Liste vorhandener Backups',

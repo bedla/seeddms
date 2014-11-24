@@ -316,16 +316,21 @@ class SeedDMS_View_ViewDocument extends SeedDMS_Bootstrap_Style {
 		*/
 		$previewer = new SeedDMS_Preview_Previewer($cachedir, $previewwidthdetail);
 		$previewer->createPreview($latestContent);
-		if ($viewonlinefiletypes && in_array(strtolower($latestContent->getFileType()), $viewonlinefiletypes))
-			print "<a target=\"_blank\" href=\"../op/op.ViewOnline.php?documentid=".$documentid."&version=". $latestContent->getVersion()."\">";
-		else
-			print "<a href=\"../op/op.Download.php?documentid=".$documentid."&version=".$latestContent->getVersion()."\">";
+		if ($file_exists) {
+			if ($viewonlinefiletypes && in_array(strtolower($latestContent->getFileType()), $viewonlinefiletypes)) {
+				print "<a target=\"_blank\" href=\"../op/op.ViewOnline.php?documentid=".$documentid."&version=". $latestContent->getVersion()."\">";
+			} else {
+				print "<a href=\"../op/op.Download.php?documentid=".$documentid."&version=".$latestContent->getVersion()."\">";
+			}
+		}
 		if($previewer->hasPreview($latestContent)) {
 			print("<img class=\"mimeicon\" width=\"".$previewwidthdetail."\" src=\"../op/op.Preview.php?documentid=".$document->getID()."&version=".$latestContent->getVersion()."&width=".$previewwidthdetail."\" title=\"".htmlspecialchars($latestContent->getMimeType())."\">");
 		} else {
 			print "<img class=\"mimeicon\" src=\"".$this->getMimeIcon($latestContent->getFileType())."\" title=\"".htmlspecialchars($latestContent->getMimeType())."\">";
 		}
-		print "</a>";
+		if ($file_exists) {
+			print "</a>";
+		}
 		print "</td>\n";
 
 		print "<td><ul class=\"actions unstyled\">\n";
@@ -908,17 +913,22 @@ class SeedDMS_View_ViewDocument extends SeedDMS_Bootstrap_Style {
 
 				print "<tr>\n";
 				print "<td nowrap>";
-				if ($viewonlinefiletypes && in_array(strtolower($version->getFileType()), $viewonlinefiletypes))
-					print "<a target=\"_blank\" href=\"../op/op.ViewOnline.php?documentid=".$documentid."&version=".$version->getVersion()."\">";
-				else
-					print "<a href=\"../op/op.Download.php?documentid=".$documentid."&version=".$version->getVersion()."\">";
+				if($file_exists) {
+					if ($viewonlinefiletypes && in_array(strtolower($version->getFileType()), $viewonlinefiletypes)) {
+							print "<a target=\"_blank\" href=\"../op/op.ViewOnline.php?documentid=".$documentid."&version=".$version->getVersion()."\">";
+					} else {
+						print "<a href=\"../op/op.Download.php?documentid=".$documentid."&version=".$version->getVersion()."\">";
+					}
+				}
 				$previewer->createPreview($version);
 				if($previewer->hasPreview($version)) {
 					print("<img class=\"mimeicon\" width=\"".$previewwidthdetail."\" src=\"../op/op.Preview.php?documentid=".$document->getID()."&version=".$version->getVersion()."&width=".$previewwidthdetail."\" title=\"".htmlspecialchars($version->getMimeType())."\">");
 				} else {
 					print "<img class=\"mimeicon\" src=\"".$this->getMimeIcon($version->getFileType())."\" title=\"".htmlspecialchars($version->getMimeType())."\">";
 				}
-				print "</a>\n";
+				if($file_exists) {
+					print "</a>\n";
+				}
 				print "</td>\n";
 				print "<td><ul class=\"unstyled\">\n";
 				print "<li>".$version->getOriginalFileName()."</li>\n";
@@ -996,16 +1006,20 @@ class SeedDMS_View_ViewDocument extends SeedDMS_Bootstrap_Style {
 				print "<tr>";
 				print "<td>";
 				$previewer->createPreview($file, $previewwidthdetail);
-				if ($viewonlinefiletypes && in_array(strtolower($file->getFileType()), $viewonlinefiletypes))
-					print "<a target=\"_blank\" href=\"../op/op.ViewOnline.php?documentid=".$documentid."&file=". $file->getID()."\">";
-				else
-					print "<a href=\"../op/op.Download.php?documentid=".$documentid."&file=".$file->getID()."\">";
+				if($file_exists) {
+					if ($viewonlinefiletypes && in_array(strtolower($file->getFileType()), $viewonlinefiletypes))
+						print "<a target=\"_blank\" href=\"../op/op.ViewOnline.php?documentid=".$documentid."&file=". $file->getID()."\">";
+					else
+						print "<a href=\"../op/op.Download.php?documentid=".$documentid."&file=".$file->getID()."\">";
+				}
 				if($previewer->hasPreview($file)) {
 					print("<img class=\"mimeicon\" width=\"".$previewwidthdetail."\" src=\"../op/op.Preview.php?documentid=".$document->getID()."&file=".$file->getID()."&width=".$previewwidthdetail."\" title=\"".htmlspecialchars($file->getMimeType())."\">");
 				} else {
 					print "<img class=\"mimeicon\" src=\"".$this->getMimeIcon($file->getFileType())."\" title=\"".htmlspecialchars($file->getMimeType())."\">";
 				}
-				print "</a>";
+				if($file_exists) {
+					print "</a>";
+				}
 				print "</td>";
 				
 				print "<td><ul class=\"unstyled\">\n";

@@ -208,8 +208,6 @@ switch($command) {
 	case 'testmail': /* {{{ */
 		if($user && $user->isAdmin()) {
 			if($user->getEmail()) {
-				include("../inc/inc.ClassEmail.php");
-
 				$emailobj = new SeedDMS_Email($settings->_smtpSendFrom, $settings->_smtpServer, $settings->_smtpPort, $settings->_smtpUser, $settings->_smtpPassword);
 				$params = array();
 

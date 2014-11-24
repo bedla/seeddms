@@ -101,11 +101,30 @@ class SeedDMS_Core_DMS {
 	public $rootFolderID;
 
 	/**
+	 * @var integer $maxDirID maximum number of documents per folder on the
+	 *      filesystem. If this variable is set to a value != 0, the content
+	 *      directory will have a two level hierarchy for document storage.
+	 * @access public
+	 */
+	public $maxDirID;
+
+	/**
 	 * @var boolean $enableConverting set to true if conversion of content
 	 *      is desired
 	 * @access public
 	 */
 	public $enableConverting;
+
+	/**
+	 * @var boolean $forceRename use renameFile() instead of copyFile() when
+	 *      copying the document content into the data store. The default is
+	 *      to copy the file. This parameter only affects the methods
+	 *      SeedDMS_Core_Document::addDocument() and
+	 *      SeedDMS_Core_Document::addDocumentFile(). Setting this to true
+	 *      may save resources especially for large files.
+	 * @access public
+	 */
+	public $forceRename;
 
 	/**
 	 * @var array $convertFileTypes list of files types that shall be converted
@@ -239,6 +258,7 @@ class SeedDMS_Core_DMS {
 			$this->contentDir = $contentDir.'/';
 		$this->rootFolderID = 1;
 		$this->maxDirID = 0; //31998;
+		$this->forceRename = false;
 		$this->enableConverting = false;
 		$this->convertFileTypes = array();
 		$this->version = '@package_version@';
@@ -361,6 +381,10 @@ class SeedDMS_Core_DMS {
 
 	function setViewOnlineFileTypes($types) { /* {{{ */
 		$this->viewOnlineFileTypes = $types;
+	} /* }}} */
+
+	function setForceRename($enable) { /* {{{ */
+		$this->forceRename = $enable;
 	} /* }}} */
 
 	/**

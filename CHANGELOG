@@ -1,6 +1,14 @@
 --------------------------------------------------------------------------------
                      Changes in version 4.3.12
 --------------------------------------------------------------------------------
+- more error fixes when searching for attributes
+- fix saving multi value attributes without a maximum number of values
+- webdav sets propper modification time
+- add button to select all log files for removal
+
+--------------------------------------------------------------------------------
+                     Changes in version 4.3.12
+--------------------------------------------------------------------------------
 - log each operation in op/op.Ajax.php
 - fix another error when search for multi value attributes of folders
 - do not use strptime anymore (Bug #129)

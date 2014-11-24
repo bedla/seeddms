@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1049), netixw (14)
+//    Translators: Admin (1052), netixw (14)
 
 $text = array(
 'accept' => 'Accept',
@@ -131,10 +131,13 @@ URL: [url]',
 'attribute_changed_email_subject' => '[sitename]: [name] - Attribute changed',
 'attribute_count' => 'Number of uses',
 'attribute_value' => 'Value of attribute',
+'attr_max_values' => 'The maximum number of required values for attributes [attrname] is exceeded.',
+'attr_min_values' => 'The minimum number of required values for attributes [attrname] is not reached.',
 'attr_no_regex_match' => 'The attribute value does not match the regular expression',
 'at_least_n_users_of_group' => 'At least [number_of_users] users of [group]',
 'august' => 'August',
 'authentication' => 'Authentication',
+'author' => 'Author',
 'automatic_status_update' => 'Automatic status change',
 'back' => 'Go back',
 'backup_list' => 'Existings backup list',

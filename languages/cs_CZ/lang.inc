@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (616), kreml (442)
+//    Translators: Admin (616), kreml (445)
 
 $text = array(
 'accept' => 'Přijmout',
@@ -131,10 +131,13 @@ URL: [url]',
 'attribute_changed_email_subject' => '[sitename]: [name] - Atributy změněny',
 'attribute_count' => 'Počet použití',
 'attribute_value' => 'Hodnota atributu',
+'attr_max_values' => 'Maximální počet pažadovaných hodnot pro atribut [attrname] je překročen.',
+'attr_min_values' => 'Není dosaženo minimálního počtu požadovaných hodnot pro atribut [attrname].',
 'attr_no_regex_match' => 'Hodnota atributu nesouhlasí s regulárním výrazem',
 'at_least_n_users_of_group' => 'Alespoň [number_of_users] uživatelů z [group]',
 'august' => 'Srpen',
 'authentication' => 'Autentizace',
+'author' => 'Autor',
 'automatic_status_update' => 'Automatická změna stavu',
 'back' => 'Přejít zpět',
 'backup_list' => 'Existující záložní seznam',

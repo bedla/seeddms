@@ -7,6 +7,8 @@
 - add button to select all log files for removal
 - deleted folders and documents on the clipboard don't crash seeddms anymore
   when moving into a different folder (Bug #186)
+- Download of documents whose content is gone will not be possible anymore
+  (Bug #185)
 
 --------------------------------------------------------------------------------
                      Changes in version 4.3.12

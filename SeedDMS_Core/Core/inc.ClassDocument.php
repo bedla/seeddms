@@ -1144,7 +1144,11 @@ class SeedDMS_Core_Document extends SeedDMS_Core_Object { /* {{{ */
 			$db->rollbackTransaction();
 			return false;
 		}
-		if (!SeedDMS_Core_File::copyFile($tmpFile, $this->_dms->contentDir . $dir . $version . $fileType)) {
+		if($this->_dms->forceRename)
+			$err = SeedDMS_Core_File::renameFile($tmpFile, $this->_dms->contentDir . $dir . $version . $fileType);
+		else
+			$err = SeedDMS_Core_File::copyFile($tmpFile, $this->_dms->contentDir . $dir . $version . $fileType);
+		if (!$err) {
 			$db->rollbackTransaction();
 			return false;
 		}
@@ -1584,7 +1588,11 @@ class SeedDMS_Core_Document extends SeedDMS_Core_Object { /* {{{ */
 
 		// copy file
 		if (!SeedDMS_Core_File::makeDir($this->_dms->contentDir . $dir)) return false;
-		if (!SeedDMS_Core_File::copyFile($tmpFile, $this->_dms->contentDir . $file->getPath() )) return false;
+		if($this->_dms->forceRename)
+			$err = SeedDMS_Core_File::renameFile($tmpFile, $this->_dms->contentDir . $file->getPath());
+		else
+			$err = SeedDMS_Core_File::copyFile($tmpFile, $this->_dms->contentDir . $file->getPath());
+		if (!$err) return false;
 
 		return true;
 	} /* }}} */

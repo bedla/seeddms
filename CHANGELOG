@@ -3,6 +3,8 @@
 --------------------------------------------------------------------------------
 - more error fixes when searching for attributes
 - fix saving multi value attributes without a maximum number of values
+- webdav sets propper modification time
+- add button to select all log files for removal
 
 --------------------------------------------------------------------------------
                      Changes in version 4.3.12

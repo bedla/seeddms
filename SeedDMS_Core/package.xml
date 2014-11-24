@@ -26,6 +26,7 @@
  <notes>
 - fix searching for attributes
 - add some more documentation
+- SeedDMS_Core_DMS::getDocumentCategories() returns categories sorted by name (Bug #181)
  </notes>
  <contents>
   <dir baseinstalldir="SeedDMS" name="/">

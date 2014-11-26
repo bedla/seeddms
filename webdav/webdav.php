@@ -1003,7 +1003,7 @@ class HTTP_WebDAV_Server_SeedDMS extends HTTP_WebDAV_Server
 			return false;
 		}
 
-		if($obj->isLocked()) {
+		if($obj->isLocked() && $this->user->getLogin() != $obj->getLockingUser()->getLogin()) {
 			$lockuser = $obj->getLockingUser();
 			if($this->logger)
 				$this->logger->log('checkLock: object is locked by '.$lockuser->getLogin(), PEAR_LOG_INFO);

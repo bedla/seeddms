@@ -542,9 +542,21 @@ class HTTP_WebDAV_Server_SeedDMS extends HTTP_WebDAV_Server
 				$lc = $document->getLatestContent();
 				if($lc->getChecksum() == SeedDMS_Core_File::checksum($tmpFile)) {
 					$lc->setDate();
-				} elseif(!$document->addContent('', $this->user, $tmpFile, $name, $fileType, $mimetype, array(), array(), 0)) {
-					unlink($tmpFile);
-					return "409 Conflict";
+				} else {
+					if($this->user->getID() == $lc->getUser()->getID() &&
+						 $name == $lc->getOriginalFileName() &&
+						 $fileType == $lc->getFileType() &&
+						 $mimetype == $lc->getMimeType()) {
+						if(!$document->replaceContent($lc->getVersion(), $this->user, $tmpFile, $name, $fileType, $mimetype)) {
+							unlink($tmpFile);
+							return "403 Forbidden";
+						}
+					} else {
+						if(!$document->addContent('', $this->user, $tmpFile, $name, $fileType, $mimetype, array(), array(), 0)) {
+							unlink($tmpFile);
+							return "409 Conflict";
+						}
+					}
 				}
 			}
 

@@ -1097,12 +1097,14 @@ class SeedDMS_Core_Document extends SeedDMS_Core_Object { /* {{{ */
 	 * @param object $user user who shall be the owner of this content
 	 * @param string $tmpFile file containing the actuall content
 	 * @param string $orgFileName original file name
+	 * @param string $fileType
 	 * @param string $mimeType MimeType of the content
 	 * @param array $reviewers list of reviewers
 	 * @param array $approvers list of approvers
 	 * @param integer $version version number of content or 0 if next higher version shall be used.
 	 * @param array $attributes list of version attributes. The element key
 	 *        must be the id of the attribute definition.
+	 * @param object $workflow
 	 * @return bool/array false in case of an error or a result set
 	 */
 	function addContent($comment, $user, $tmpFile, $orgFileName, $fileType, $mimeType, $reviewers=array(), $approvers=array(), $version=0, $attributes=array(), $workflow=null) { /* {{{ */
@@ -1245,6 +1247,87 @@ class SeedDMS_Core_Document extends SeedDMS_Core_Object { /* {{{ */
 
 		$db->commitTransaction();
 		return $docResultSet;
+	} /* }}} */
+
+	/**
+	 * Replace a version of a document
+	 *
+	 * Each document may have any number of content elements attached to it.
+	 * This function replaces the file content of a given version.
+	 * Using this function is highly discourage, because it undermines the
+	 * idea of keeping all versions of a document as originally saved.
+	 * Content will only be replaced if the mimetype, filetype, user and
+	 * original filename are identical to the version being updated.
+	 *
+	 * This function was introduced for the webdav server because any saving
+	 * of a document created a new version.
+	 *
+	 * @param object $user user who shall be the owner of this content
+	 * @param string $tmpFile file containing the actuall content
+	 * @param string $orgFileName original file name
+	 * @param string $fileType
+	 * @param string $mimeType MimeType of the content
+	 * @param integer $version version number of content or 0 if next higher version shall be used.
+	 * @return bool/array false in case of an error or a result set
+	 */
+	function replaceContent($version, $user, $tmpFile, $orgFileName, $fileType, $mimeType) { /* {{{ */
+		$db = $this->_dms->getDB();
+
+		// the doc path is id/version.filetype
+		$dir = $this->getDir();
+
+		$date = time();
+
+		/* If $version < 1 than replace the content of the latest version.
+		 */
+		if ((int) $version<1) {
+			$queryStr = "SELECT MAX(version) as m from tblDocumentContent where document = ".$this->_id;
+			$resArr = $db->getResultArray($queryStr);
+			if (is_bool($resArr) && !$res)
+				return false;
+
+			$version = $resArr[0]['m'];
+		}
+
+		$content = $this->getContentByVersion($version);
+		if(!$content)
+			return false;
+
+		/* Check if $user, $orgFileName, $fileType and $mimetype are the same */
+		if($user->getID() != $content->getUser()->getID()) {
+			return false;
+		}
+		if($orgFileName != $content->getOriginalFileName()) {
+			return false;
+		}
+		if($fileType != $content->getFileType()) {
+			return false;
+		}
+		if($mimeType != $content->getMimeType()) {
+			return false;
+		}
+
+		$filesize = SeedDMS_Core_File::fileSize($tmpFile);
+		$checksum = SeedDMS_Core_File::checksum($tmpFile);
+
+		$db->startTransaction();
+		$queryStr = "UPDATE tblDocumentContent set date=".$date.", fileSize=".$filesize.", checksum=".$db->qstr($checksum)." WHERE id=".$content->getID();
+		if (!$db->getResult($queryStr)) {
+			$db->rollbackTransaction();
+			return false;
+		}
+
+		// copy file
+		if (!SeedDMS_Core_File::copyFile($tmpFile, $this->_dms->contentDir . $dir . $version . $fileType)) {
+			$db->rollbackTransaction();
+			return false;
+		}
+
+		unset($this->_content);
+		unset($this->_latestContent);
+		$db->commitTransaction();
+
+		return true;
 	} /* }}} */
 
 	/**

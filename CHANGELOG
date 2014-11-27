@@ -11,6 +11,9 @@
   (Bug #185)
 - allow user to access a locked document via webdav if he/she is the owner
   of that document
+- saving a document via webdav will not in any case create a new version
+  anymore. If the user and mimetype hasn't changed the content is just
+  replaced.
 
 --------------------------------------------------------------------------------
                      Changes in version 4.3.12

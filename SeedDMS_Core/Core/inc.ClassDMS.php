@@ -1471,7 +1471,7 @@ class SeedDMS_Core_DMS {
 	} /* }}} */
 
 	function getDocumentCategories() { /* {{{ */
-		$queryStr = "SELECT * FROM tblCategory";
+		$queryStr = "SELECT * FROM tblCategory order by name";
 
 		$resArr = $this->db->getResultArray($queryStr);
 		if (is_bool($resArr) && !$resArr)

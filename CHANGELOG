@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------
-                     Changes in version 4.3.12
+                     Changes in version 4.3.13
 --------------------------------------------------------------------------------
 - more error fixes when searching for attributes
 - fix saving multi value attributes without a maximum number of values
@@ -9,6 +9,11 @@
   when moving into a different folder (Bug #186)
 - Download of documents whose content is gone will not be possible anymore
   (Bug #185)
+- allow user to access a locked document via webdav if he/she is the owner
+  of that document
+- saving a document via webdav will not in any case create a new version
+  anymore. If the user and mimetype hasn't changed the content is just
+  replaced.
 
 --------------------------------------------------------------------------------
                      Changes in version 4.3.12

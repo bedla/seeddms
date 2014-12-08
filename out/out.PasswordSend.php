@@ -20,6 +20,8 @@
 
 include("../inc/inc.Settings.php");
 include("../inc/inc.Language.php");
+include("../inc/inc.Init.php");
+include("../inc/inc.Extension.php");
 include("../inc/inc.ClassUI.php");
 
 include $settings->_rootDir . "languages/" . $settings->_language . "/lang.inc";

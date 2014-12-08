@@ -18,9 +18,11 @@
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 include("../inc/inc.Settings.php");
-include("../inc/inc.ClassUI.php");
-include("../inc/inc.DBInit.php");
 include("../inc/inc.Language.php");
+include("../inc/inc.Init.php");
+include("../inc/inc.Extension.php");
+include("../inc/inc.DBInit.php");
+include("../inc/inc.ClassUI.php");
 include("../inc/inc.Authentication.php");
 
 $form = preg_replace('/[^A-Za-z0-9_]+/', '', $_GET["form"]);

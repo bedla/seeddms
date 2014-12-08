@@ -26,7 +26,7 @@ if (!isset($theme) || strlen($theme)==0) {
 	$theme = $settings->_theme;
 }
 if (strlen($theme)==0) {
-	$theme="blue";
+	$theme="bootstrap";
 }
 
 /* Sooner or later the parent will be removed, because all output will
@@ -45,15 +45,29 @@ class UI extends UI_Default {
 	 * @return object an object of a class implementing the view
 	 */
 	static function factory($theme, $class='', $params=array()) { /* {{{ */
-		global $settings, $session;
+		global $settings, $session, $EXT_CONF;
 		if(!$class) {
 			$class = 'Bootstrap';
 			$classname = "SeedDMS_Bootstrap_Style";
 		} else {
 			$classname = "SeedDMS_View_".$class;
 		}
-		$filename = $settings->_rootDir."views/".$theme."/class.".$class.".php";
-		if(file_exists($filename)) {
+		/* Do not check for class file anymore but include it relative
+		 * to rootDir or an extension dir if it has set the include path
+		 */
+		$filename = '';
+		foreach($EXT_CONF as $extname=>$extconf) {
+			$filename = '../ext/'.$extname.'/views/'.$theme."/class.".$class.".php";
+			if(file_exists($filename)) {
+				break;
+			}
+			$filename = '';
+		}
+		if(!$filename)
+			$filename = $settings->_rootDir."views/".$theme."/class.".$class.".php";
+		if(!file_exists($filename))
+			$filename = '';
+		if($filename) {
 			require($filename);
 			$view = new $classname($params, $theme);
 			/* Set some configuration parameters */

@@ -167,6 +167,35 @@ class SeedDMS_Core_Document extends SeedDMS_Core_Object { /* {{{ */
 		$this->_notifyList = array();
 	} /* }}} */
 
+	public static function getInstance($id, $dms) { /* {{{ */
+		$db = $dms->getDB();
+
+		$queryStr = "SELECT * FROM tblDocuments WHERE id = " . (int) $id;
+		$resArr = $db->getResultArray($queryStr);
+		if (is_bool($resArr) && $resArr == false)
+			return false;
+		if (count($resArr) != 1)
+			return false;
+		$resArr = $resArr[0];
+
+		// New Locking mechanism uses a separate table to track the lock.
+		$queryStr = "SELECT * FROM tblDocumentLocks WHERE document = " . (int) $id;
+		$lockArr = $db->getResultArray($queryStr);
+		if ((is_bool($lockArr) && $lockArr==false) || (count($lockArr)==0)) {
+			// Could not find a lock on the selected document.
+			$lock = -1;
+		}
+		else {
+			// A lock has been identified for this document.
+			$lock = $lockArr[0]["userID"];
+		}
+
+		$document = new self($resArr["id"], $resArr["name"], $resArr["comment"], $resArr["date"], $resArr["expires"], $resArr["owner"], $resArr["folder"], $resArr["inheritAccess"], $resArr["defaultAccess"], $lock, $resArr["keywords"], $resArr["sequence"]);
+		$document->setDMS($dms);
+		return $document;
+	} /* }}} */
+
+
 	/*
 	 * Return the directory of the document in the file system relativ
 	 * to the contentDir

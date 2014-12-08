@@ -27,13 +27,6 @@
  */
 class SeedDMS_Extension_Mgr {
 	/**
-	 * @var object $db reference to database object. This must be an instance
-	 *      of {@link SeedDMS_Core_DatabaseAccess}.
-	 * @access protected
-	 */
-	protected $db;
-
-	/**
 	 * @var string $extdir directory where extensions are located
 	 * @access protected
 	 */
@@ -47,8 +40,7 @@ class SeedDMS_Extension_Mgr {
 	protected $cachedir;
 
 
-	function __construct($db, $extdir = '', $cachedir = '') {
-		$this->db = $db;
+	function __construct($extdir = '', $cachedir = '') {
 		$this->cachedir = $cachedir;
 		$this->extdir = $extdir;
 	}

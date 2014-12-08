@@ -30,14 +30,25 @@ class Controller {
 	 * @return object an object of a class implementing the view
 	 */
 	static function factory($class, $params=array()) { /* {{{ */
-		global $settings, $session, $dms, $user;
+		global $settings, $session, $dms, $user, $EXT_CONF;
 		if(!$class) {
 			return null;
 		}
 
 		$classname = "SeedDMS_Controller_".$class;
-		$filename = "../controllers/class.".$class.".php";
-		if(file_exists($filename)) {
+		$filename = '';
+		foreach($EXT_CONF as $extname=>$extconf) {
+			$filename = '../ext/'.$extname.'/controllers/class.'.$class.".php";
+			if(file_exists($filename)) {
+				break;
+			}
+			$filename = '';
+		}
+		if(!$filename)
+			$filename = $settings->_rootDir."controllers/class.".$class.".php";
+		if(!file_exists($filename))
+			$filename = '';
+		if($filename) {
 			require($filename);
 			$controller = new $classname($params);
 			/* Set some configuration parameters */

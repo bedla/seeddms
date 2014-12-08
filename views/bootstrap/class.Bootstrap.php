@@ -22,7 +22,14 @@
 
 class SeedDMS_Bootstrap_Style extends SeedDMS_View_Common {
 	var $imgpath;
-	var $extraheader;
+
+	/**
+	 * @var string $extraheader extra html code inserted in the html header
+	 * of the page
+	 *
+	 * @access protected
+	 */
+	protected $extraheader;
 
 	function __construct($params, $theme='bootstrap') {
 		$this->theme = $theme;
@@ -233,6 +240,7 @@ $(document).ready(function () {
 	} /* }}} */
 
 	function globalNavigation($folder=null) { /* {{{ */
+		$dms = $this->params['dms'];
 		echo "<div class=\"navbar navbar-inverse navbar-fixed-top\">\n";
 		echo " <div class=\"navbar-inner\">\n";
 		echo "  <div class=\"container-fluid\">\n";
@@ -299,7 +307,7 @@ $(document).ready(function () {
 			echo "    <li><a href=\"../out/out.Help.php\">".getMLText("help")."</a></li>\n";
 			echo "   </ul>\n";
 			echo "     <form action=\"../op/op.Search.php\" class=\"form-inline navbar-search pull-left\" autocomplete=\"off\">";
-			if ($folder!=null && is_object($folder) && !strcasecmp(get_class($folder), "SeedDMS_Core_Folder")) {
+			if ($folder!=null && is_object($folder) && !strcasecmp(get_class($folder), $dms->getClassname('folder'))) {
 				echo "      <input type=\"hidden\" name=\"folderid\" value=\"".$folder->getID()."\" />";
 			}
 			echo "      <input type=\"hidden\" name=\"navBar\" value=\"1\" />";
@@ -386,7 +394,8 @@ $(document).ready(function () {
 	} /* }}} */
 
 	private function folderNavigationBar($folder) { /* {{{ */
-		if (!is_object($folder) || strcasecmp(get_class($folder), "SeedDMS_Core_Folder")) {
+		$dms = $this->params['dms'];
+		if (!is_object($folder) || strcasecmp(get_class($folder), $dms->getClassname('folder'))) {
 			echo "<ul class=\"nav\">\n";
 			echo "</ul>\n";
 			return;
@@ -1075,6 +1084,16 @@ function clearFilename<?php print $formName ?>() {
 			return $this->imgpath.$img;
 		}
 		return "../out/images/$img";
+	} /* }}} */
+
+	function getCountryFlag($lang) { /* {{{ */
+		switch($lang) {
+		case "en_GB":
+			return 'flags/gb.png';
+			break;
+		default:
+			return 'flags/'.substr($lang, 0, 2).'.png';
+		}
 	} /* }}} */
 
 	function printImgPath($img) { /* {{{ */

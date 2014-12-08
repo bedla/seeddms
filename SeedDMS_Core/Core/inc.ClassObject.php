@@ -74,13 +74,13 @@ class SeedDMS_Core_Object { /* {{{ */
 			$db = $this->_dms->getDB();
 
 			switch(get_class($this)) {
-				case "SeedDMS_Core_Document":
+				case $this->_dms->getClassname('document'):
 					$queryStr = "SELECT * FROM tblDocumentAttributes WHERE document = " . $this->_id." ORDER BY `id`";
 					break;
-				case "SeedDMS_Core_DocumentContent":
+				case $this->_dms->getClassname('documentcontent'):
 					$queryStr = "SELECT * FROM tblDocumentContentAttributes WHERE content = " . $this->_id." ORDER BY `id`";
 					break;
-				case "SeedDMS_Core_Folder":
+				case $this->_dms->getClassname('folder'):
 					$queryStr = "SELECT * FROM tblFolderAttributes WHERE folder = " . $this->_id." ORDER BY `id`";
 					break;
 				default:
@@ -145,13 +145,13 @@ class SeedDMS_Core_Object { /* {{{ */
 		}
 		if(!isset($this->_attributes[$attrdef->getId()])) {
 			switch(get_class($this)) {
-				case "SeedDMS_Core_Document":
+				case $this->_dms->getClassname('document'):
 					$queryStr = "INSERT INTO tblDocumentAttributes (document, attrdef, value) VALUES (".$this->_id.", ".$attrdef->getId().", ".$db->qstr($value).")";
 					break;
-				case "SeedDMS_Core_DocumentContent":
+				case $this->_dms->getClassname('documentcontent'):
 					$queryStr = "INSERT INTO tblDocumentContentAttributes (content, attrdef, value) VALUES (".$this->_id.", ".$attrdef->getId().", ".$db->qstr($value).")";
 					break;
-				case "SeedDMS_Core_Folder":
+				case $this->_dms->getClassname('folder'):
 					$queryStr = "INSERT INTO tblFolderAttributes (folder, attrdef, value) VALUES (".$this->_id.", ".$attrdef->getId().", ".$db->qstr($value).")";
 					break;
 				default:
@@ -184,13 +184,13 @@ class SeedDMS_Core_Object { /* {{{ */
 		}
 		if(isset($this->_attributes[$attrdef->getId()])) {
 			switch(get_class($this)) {
-				case "SeedDMS_Core_Document":
+				case $this->_dms->getClassname('document'):
 					$queryStr = "DELETE FROM tblDocumentAttributes WHERE document=".$this->_id." AND attrdef=".$attrdef->getId();
 					break;
-				case "SeedDMS_Core_DocumentContent":
+				case $this->_dms->getClassname('documentcontent'):
 					$queryStr = "DELETE FROM tblDocumentContentAttributes WHERE content=".$this->_id." AND attrdef=".$attrdef->getId();
 					break;
-				case "SeedDMS_Core_Folder":
+				case $this->_dms->getClassname('folder'):
 					$queryStr = "DELETE FROM tblFolderAttributes WHERE folder=".$this->_id." AND attrdef=".$attrdef->getId();
 					break;
 				default:

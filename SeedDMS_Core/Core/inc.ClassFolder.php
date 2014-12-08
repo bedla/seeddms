@@ -797,7 +797,7 @@ class SeedDMS_Core_Folder extends SeedDMS_Core_Object {
 		}
 
 		//Entfernen der Datenbankeinträge
-		$db->rollbackTransaction();
+		$db->startTransaction();
 		$queryStr = "DELETE FROM tblFolders WHERE id =  " . $this->_id;
 		if (!$db->getResult($queryStr)) {
 			$db->rollbackTransaction();

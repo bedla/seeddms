@@ -80,6 +80,13 @@ class SeedDMS_Core_DMS {
 	protected $db;
 
 	/**
+	 * @var array $classnames list of classnames for objects being instanciate
+	 *      by the dms
+	 * @access protected
+	 */
+	protected $classnames;
+
+	/**
 	 * @var object $user reference to currently logged in user. This must be
 	 *      an instance of {@link SeedDMS_Core_User}. This variable is currently not
 	 *      used. It is set by {@link setUser}.
@@ -261,9 +268,55 @@ class SeedDMS_Core_DMS {
 		$this->forceRename = false;
 		$this->enableConverting = false;
 		$this->convertFileTypes = array();
+		$this->classnames = array();
+		$this->classnames['folder'] = 'SeedDMS_Core_Folder';
+		$this->classnames['document'] = 'SeedDMS_Core_Document';
+		$this->classnames['documentcontent'] = 'SeedDMS_Core_DocumentContent';
+		$this->classnames['user'] = 'SeedDMS_Core_User';
+		$this->classnames['group'] = 'SeedDMS_Core_Group';
 		$this->version = '@package_version@';
 		if($this->version[0] == '@')
 			$this->version = '4.3.13';
+	} /* }}} */
+
+	/**
+	 * Return class name of instantiated objects
+	 *
+	 * This method returns the class name of those objects being instatiated
+	 * by the dms. Each class has an internal place holder, which must be
+	 * passed to function.
+	 *
+	 * @param string placeholder (can be one of 'folder', 'document',
+	 * 'documentcontent', 'user', 'group'
+	 *
+	 * @return string/boolean name of class or false if placeholder is invalid
+	 */
+	function getClassname($objectname) { /* {{{ */
+		if(isset($this->classnames[$objectname]))
+			return $this->classnames[$objectname];
+		else
+			return false;
+	} /* }}} */
+
+	/**
+	 * Set class name of instantiated objects
+	 *
+	 * This method sets the class name of those objects being instatiated
+	 * by the dms.
+	 *
+	 * @param string placeholder (can be one of 'folder', 'document',
+	 * 'documentcontent', 'user', 'group'
+	 * @param string name of class
+	 *
+	 * @return string/boolean name of old class or false if not set
+	 */
+	function setClassname($objectname, $classname) { /* {{{ */
+		if(isset($this->classnames[$objectname]))
+			$oldclass =  $this->classnames[$objectname];
+		else
+			$oldclass = false;
+		$this->classnames[$objectname] = $classname;
+		return $oldclass;
 	} /* }}} */
 
 	/**
@@ -424,31 +477,8 @@ class SeedDMS_Core_DMS {
 	 * @return object instance of {@link SeedDMS_Core_Document} or false
 	 */
 	function getDocument($id) { /* {{{ */
-		if (!is_numeric($id)) return false;
-
-		$queryStr = "SELECT * FROM tblDocuments WHERE id = " . (int) $id;
-		$resArr = $this->db->getResultArray($queryStr);
-		if (is_bool($resArr) && $resArr == false)
-			return false;
-		if (count($resArr) != 1)
-			return false;
-		$resArr = $resArr[0];
-
-		// New Locking mechanism uses a separate table to track the lock.
-		$queryStr = "SELECT * FROM tblDocumentLocks WHERE document = " . (int) $id;
-		$lockArr = $this->db->getResultArray($queryStr);
-		if ((is_bool($lockArr) && $lockArr==false) || (count($lockArr)==0)) {
-			// Could not find a lock on the selected document.
-			$lock = -1;
-		}
-		else {
-			// A lock has been identified for this document.
-			$lock = $lockArr[0]["userID"];
-		}
-
-		$document = new SeedDMS_Core_Document($resArr["id"], $resArr["name"], $resArr["comment"], $resArr["date"], $resArr["expires"], $resArr["owner"], $resArr["folder"], $resArr["inheritAccess"], $resArr["defaultAccess"], $lock, $resArr["keywords"], $resArr["sequence"]);
-		$document->setDMS($this);
-		return $document;
+		$classname = $this->classnames['document'];
+		return $classname::getInstance($id, $this);
 	} /* }}} */
 
 	/**
@@ -1025,20 +1055,8 @@ class SeedDMS_Core_DMS {
 	 * @return object instance of SeedDMS_Core_Folder or false
 	 */
 	function getFolder($id) { /* {{{ */
-		if (!is_numeric($id)) return false;
-
-		$queryStr = "SELECT * FROM tblFolders WHERE id = " . (int) $id;
-		$resArr = $this->db->getResultArray($queryStr);
-
-		if (is_bool($resArr) && $resArr == false)
-			return false;
-		else if (count($resArr) != 1)
-			return false;
-
-		$resArr = $resArr[0];
-		$folder = new SeedDMS_Core_Folder($resArr["id"], $resArr["name"], $resArr["parent"], $resArr["comment"], $resArr["date"], $resArr["owner"], $resArr["inheritAccess"], $resArr["defaultAccess"], $resArr["sequence"]);
-		$folder->setDMS($this);
-		return $folder;
+		$classname = $this->classnames['folder'];
+		return $classname::getInstance($id, $this);
 	} /* }}} */
 
 	/**
@@ -1069,7 +1087,7 @@ class SeedDMS_Core_DMS {
 			return false;
 
 		$resArr = $resArr[0];
-		$folder = new SeedDMS_Core_Folder($resArr["id"], $resArr["name"], $resArr["parent"], $resArr["comment"], $resArr["date"], $resArr["owner"], $resArr["inheritAccess"], $resArr["defaultAccess"], $resArr["sequence"]);
+		$folder = new $this->classnames['folder']($resArr["id"], $resArr["name"], $resArr["parent"], $resArr["comment"], $resArr["date"], $resArr["owner"], $resArr["inheritAccess"], $resArr["defaultAccess"], $resArr["sequence"]);
 		$folder->setDMS($this);
 		return $folder;
 	} /* }}} */

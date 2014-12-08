@@ -19,9 +19,11 @@
 
 include("../inc/inc.Settings.php");
 include("../inc/inc.Utils.php");
+include("../inc/inc.Language.php");
+include("../inc/inc.Init.php");
+include("../inc/inc.Extension.php");
 include("../inc/inc.ClassEmail.php");
 include("../inc/inc.DBInit.php");
-include("../inc/inc.Language.php");
 include("../inc/inc.ClassUI.php");
 include("../inc/inc.Authentication.php");
 

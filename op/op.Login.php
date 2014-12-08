@@ -21,12 +21,13 @@ include("../inc/inc.Settings.php");
 include("../inc/inc.LogInit.php");
 include("../inc/inc.Utils.php");
 include("../inc/inc.Language.php");
+include("../inc/inc.Init.php");
+include("../inc/inc.Extension.php");
 include("../inc/inc.ClassSession.php");
 include("../inc/inc.DBInit.php");
 include("../inc/inc.ClassUI.php");
 include("../inc/inc.ClassController.php");
 include("../inc/inc.ClassEmail.php");
-include("../inc/inc.Extension.php");
 
 include $settings->_rootDir . "languages/" . $settings->_language . "/lang.inc";
 

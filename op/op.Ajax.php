@@ -19,12 +19,14 @@
 include("../inc/inc.Settings.php");
 include("../inc/inc.LogInit.php");
 include("../inc/inc.Utils.php");
-include("../inc/inc.ClassEmail.php");
-include("../inc/inc.DBInit.php");
 include("../inc/inc.Language.php");
+include("../inc/inc.Init.php");
+include("../inc/inc.Extension.php");
+include("../inc/inc.Init.php");
+include("../inc/inc.DBInit.php");
+include("../inc/inc.ClassEmail.php");
 include("../inc/inc.ClassUI.php");
 
-require_once("../inc/inc.Utils.php");
 require_once("../inc/inc.ClassSession.php");
 include("../inc/inc.ClassPasswordStrength.php");
 include("../inc/inc.ClassPasswordHistoryManager.php");

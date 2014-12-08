@@ -17,8 +17,21 @@
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 class SeedDMS_Controller_Common {
+	/**
+	 * @var array $params list of parameters
+	 * @access protected
+	 */
+	protected $params;
+
+	/**
+	 * @var integer $error error number of last run
+	 * @access protected
+	 */
+	protected $error;
+
 	function __construct($params) {
 		$this->params = $params;
+		$this->error = 0;
 	}
 
 	function setParams($params) {
@@ -36,6 +49,15 @@ class SeedDMS_Controller_Common {
 
 	function run() {
 	}
+
+	/**
+	 * Get error number of last run
+	 *
+	 * @return integer error number
+	 */
+	public function getErrorNo() { /* {{{ */
+		return $this->error;
+	} /* }}} */
 
 	/**
 	 * Call a controller hook

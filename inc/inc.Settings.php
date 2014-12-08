@@ -91,4 +91,9 @@ if (get_magic_quotes_gpc()) {
 	}
 	unset($process);
 }
+
+/* Add root Dir. Needed because the view classes are included
+ * relative to it.
+ */
+ini_set('include_path', $settings->_rootDir. PATH_SEPARATOR .ini_get('include_path'));
 ?>

@@ -18,13 +18,32 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-if(!empty($settings->_coreDir))
-	require_once($settings->_coreDir.'/Core.php');
-else
-	require_once('SeedDMS/Core.php');
+if(isset($GLOBALS['SEEDDMS_HOOKS']['initDB'])) {
+	foreach($GLOBALS['SEEDDMS_HOOKS']['initDB'] as $hookObj) {
+		if (method_exists($hookObj, 'pretInitDB')) {
+			$hookObj->preInitDB(array('settings'=>$settings));
+		}
+	}
+}
 
 $db = new SeedDMS_Core_DatabaseAccess($settings->_dbDriver, $settings->_dbHostname, $settings->_dbUser, $settings->_dbPass, $settings->_dbDatabase);
 $db->connect() or die ("Could not connect to db-server \"" . $settings->_dbHostname . "\"");
+
+if(isset($GLOBALS['SEEDDMS_HOOKS']['initDB'])) {
+	foreach($GLOBALS['SEEDDMS_HOOKS']['initDB'] as $hookObj) {
+		if (method_exists($hookObj, 'postInitDB')) {
+			$hookObj->postInitDB(array('db'=>$db, 'settings'=>$settings));
+		}
+	}
+}
+
+if(isset($GLOBALS['SEEDDMS_HOOKS']['initDMS'])) {
+	foreach($GLOBALS['SEEDDMS_HOOKS']['initDMS'] as $hookObj) {
+		if (method_exists($hookObj, 'pretInitDMS')) {
+			$hookObj->preInitDMS(array('db'=>$db, 'settings'=>$settings));
+		}
+	}
+}
 
 $dms = new SeedDMS_Core_DMS($db, $settings->_contentDir.$settings->_contentOffsetDir);
 
@@ -37,4 +56,13 @@ $dms->setRootFolderID($settings->_rootFolderID);
 $dms->setMaxDirID($settings->_maxDirID);
 $dms->setEnableConverting($settings->_enableConverting);
 $dms->setViewOnlineFileTypes($settings->_viewOnlineFileTypes);
+
+if(isset($GLOBALS['SEEDDMS_HOOKS']['initDMS'])) {
+	foreach($GLOBALS['SEEDDMS_HOOKS']['initDMS'] as $hookObj) {
+		if (method_exists($hookObj, 'postInitDMS')) {
+			$hookObj->postInitDMS(array('dms'=>$dms, 'settings'=>$settings));
+		}
+	}
+}
+
 ?>

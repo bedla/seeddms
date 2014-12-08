@@ -87,19 +87,35 @@ class SeedDMS_Core_Folder extends SeedDMS_Core_Object {
 		$this->_notifyList = array();
 	} /* }}} */
 
+	public static function getInstance($id, $dms) { /* {{{ */
+		$db = $dms->getDB();
+
+		$queryStr = "SELECT * FROM tblFolders WHERE id = " . (int) $id;
+		$resArr = $db->getResultArray($queryStr);
+		if (is_bool($resArr) && $resArr == false)
+			return false;
+		else if (count($resArr) != 1)
+			return false;
+
+		$resArr = $resArr[0];
+		$folder = new self($resArr["id"], $resArr["name"], $resArr["parent"], $resArr["comment"], $resArr["date"], $resArr["owner"], $resArr["inheritAccess"], $resArr["defaultAccess"], $resArr["sequence"]);
+		$folder->setDMS($dms);
+		return $folder;
+	} /* }}} */
+
 	/*
 	 * Get the name of the folder.
 	 *
 	 * @return string name of folder
 	 */
-	function getName() { return $this->_name; }
+	public function getName() { return $this->_name; }
 
 	/*
 	 * Set the name of the folder.
 	 *
 	 * @param string $newName set a new name of the folder
 	 */
-	function setName($newName) { /* {{{ */
+	public function setName($newName) { /* {{{ */
 		$db = $this->_dms->getDB();
 
 		$queryStr = "UPDATE tblFolders SET name = " . $db->qstr($newName) . " WHERE id = ". $this->_id;
@@ -111,9 +127,9 @@ class SeedDMS_Core_Folder extends SeedDMS_Core_Object {
 		return true;
 	} /* }}} */
 
-	function getComment() { return $this->_comment; }
+	public function getComment() { return $this->_comment; }
 
-	function setComment($newComment) { /* {{{ */
+	public function setComment($newComment) { /* {{{ */
 		$db = $this->_dms->getDB();
 
 		$queryStr = "UPDATE tblFolders SET comment = " . $db->qstr($newComment) . " WHERE id = ". $this->_id;
@@ -129,7 +145,7 @@ class SeedDMS_Core_Folder extends SeedDMS_Core_Object {
 	 *
 	 * @return integer unix timestamp of creation date
 	 */
-	function getDate() { /* {{{ */
+	public function getDate() { /* {{{ */
 		return $this->_date;
 	} /* }}} */
 
@@ -138,7 +154,7 @@ class SeedDMS_Core_Folder extends SeedDMS_Core_Object {
 	 *
 	 * @return object parent folder or false if there is no parent folder
 	 */
-	function getParent() { /* {{{ */
+	public function getParent() { /* {{{ */
 		if ($this->_id == $this->_dms->rootFolderID || empty($this->_parentID)) {
 			return false;
 		}
@@ -158,7 +174,7 @@ class SeedDMS_Core_Folder extends SeedDMS_Core_Object {
 	 * @param object $subFolder potential sub folder
 	 * @return boolean true if passes folder is a subfolder
 	 */
-	function isSubFolder($subfolder) { /* {{{ */
+	public function isSubFolder($subfolder) { /* {{{ */
 		$db = $this->_dms->getDB();
 
 		$path = $this->getPath();
@@ -182,7 +198,7 @@ class SeedDMS_Core_Folder extends SeedDMS_Core_Object {
 	 * @param object $newParent new parent folder
 	 * @return boolean true if operation was successful otherwise false
 	 */
-	function setParent($newParent) { /* {{{ */
+	public function setParent($newParent) { /* {{{ */
 		$db = $this->_dms->getDB();
 
 		if ($this->_id == $this->_dms->rootFolderID || empty($this->_parentID)) {
@@ -256,7 +272,7 @@ class SeedDMS_Core_Folder extends SeedDMS_Core_Object {
 	 *
 	 * @return object owner of the folder
 	 */
-	function getOwner() { /* {{{ */
+	public function getOwner() { /* {{{ */
 		if (!isset($this->_owner))
 			$this->_owner = $this->_dms->getUser($this->_ownerID);
 		return $this->_owner;
@@ -405,7 +421,6 @@ class SeedDMS_Core_Folder extends SeedDMS_Core_Object {
 
 			$this->_subFolders = array();
 			for ($i = 0; $i < count($resArr); $i++)
-//				$this->_subFolders[$i] = new SeedDMS_Core_Folder($resArr[$i]["id"], $resArr[$i]["name"], $resArr[$i]["parent"], $resArr[$i]["comment"], $resArr[$i]["owner"], $resArr[$i]["inheritAccess"], $resArr[$i]["defaultAccess"], $resArr[$i]["sequence"]);
 				$this->_subFolders[$i] = $this->_dms->getFolder($resArr[$i]["id"]);
 		}
 
@@ -768,6 +783,53 @@ class SeedDMS_Core_Folder extends SeedDMS_Core_Object {
 		return array($document, $res);
 	} /* }}} */
 
+	/**
+	 * Remove a single folder
+	 *
+	 * Removes just a single folder, but not its subfolders or documents
+	 * This function will fail if the folder has subfolders or documents
+	 * because of referencial integrity errors.
+	 *
+	 * @return boolean true on success, false in case of an error
+	 */
+	protected function removeFromDatabase() { /* {{{ */
+		$db = $this->_dms->getDB();
+
+		//Entfernen der Datenbankeinträge
+		$db->startTransaction();
+		$queryStr = "DELETE FROM tblFolders WHERE id =  " . $this->_id;
+		if (!$db->getResult($queryStr)) {
+			$db->rollbackTransaction();
+			return false;
+		}
+		$queryStr = "DELETE FROM tblFolderAttributes WHERE folder =  " . $this->_id;
+		if (!$db->getResult($queryStr)) {
+			$db->rollbackTransaction();
+			return false;
+		}
+		$queryStr = "DELETE FROM tblACLs WHERE target = ". $this->_id. " AND targetType = " . T_FOLDER;
+		if (!$db->getResult($queryStr)) {
+			$db->rollbackTransaction();
+			return false;
+		}
+
+		$queryStr = "DELETE FROM tblNotify WHERE target = ". $this->_id. " AND targetType = " . T_FOLDER;
+		if (!$db->getResult($queryStr)) {
+			$db->rollbackTransaction();
+			return false;
+		}
+		$db->commitTransaction();
+
+		return true;
+	} /* }}} */
+
+	/**
+	 * Remove recursively a folder
+	 *
+	 * Removes a folder, all its subfolders and documents
+	 *
+	 * @return boolean true on success, false in case of an error
+	 */
 	function remove() { /* {{{ */
 		$db = $this->_dms->getDB();
 
@@ -796,32 +858,7 @@ class SeedDMS_Core_Folder extends SeedDMS_Core_Object {
 			}
 		}
 
-		//Entfernen der Datenbankeinträge
-		$db->rollbackTransaction();
-		$queryStr = "DELETE FROM tblFolders WHERE id =  " . $this->_id;
-		if (!$db->getResult($queryStr)) {
-			$db->rollbackTransaction();
-			return false;
-		}
-		$queryStr = "DELETE FROM tblFolderAttributes WHERE folder =  " . $this->_id;
-		if (!$db->getResult($queryStr)) {
-			$db->rollbackTransaction();
-			return false;
-		}
-		$queryStr = "DELETE FROM tblACLs WHERE target = ". $this->_id. " AND targetType = " . T_FOLDER;
-		if (!$db->getResult($queryStr)) {
-			$db->rollbackTransaction();
-			return false;
-		}
-
-		$queryStr = "DELETE FROM tblNotify WHERE target = ". $this->_id. " AND targetType = " . T_FOLDER;
-		if (!$db->getResult($queryStr)) {
-			$db->rollbackTransaction();
-			return false;
-		}
-		$db->commitTransaction();
-
-		return true;
+		return $this->removeFromDatabase();
 	} /* }}} */
 
 	/**

@@ -2,6 +2,7 @@
                      Changes in version 4.3.14
 --------------------------------------------------------------------------------
 - add missing start in transaction in SeedDMS_Core_Folder::remove()
+- pass access object to view in out.ReviewDocument.php (Bug #191)
 
 --------------------------------------------------------------------------------
                      Changes in version 4.3.13

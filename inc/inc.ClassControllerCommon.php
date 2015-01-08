@@ -42,6 +42,35 @@ class SeedDMS_Controller_Common {
 		$this->params[$name] = $value;
 	}
 
+	/**
+	 * Return value of a parameter with the given name
+	 *
+	 * This function may return null if the parameter does not exist or
+	 * has a value of null. If in doubt call hasParam() to check if the
+	 * parameter exists.
+	 *
+	 * @param string $name name of parameter
+	 * @return mixed value of parameter or null if parameter does not exist
+	 */
+	function getParam($name) {
+		return isset($this->params[$name]) ? $this->params[$name] : null;
+	}
+
+	/**
+	 * Check if the controller has a parameter with the given name
+	 *
+	 * @param string $name name of parameter
+	 * @return boolean true if parameter exists otherwise false
+	 */
+	function hasParam($name) {
+		return isset($this->params[$name]) ? true : false;
+	}
+
+	/**
+	 * Remove a parameter with the given name
+	 *
+	 * @param string $name name of parameter
+	 */
 	function unsetParam($name) {
 		if(isset($this->params[$name]))
 			unset($this->params[$name]);

@@ -29,7 +29,6 @@ include("../inc/inc.DBInit.php");
 include("../inc/inc.ClassUI.php");
 include("../inc/inc.ClassController.php");
 include("../inc/inc.Authentication.php");
-include("../inc/inc.Extension.php");
 
 $tmp = explode('.', basename($_SERVER['SCRIPT_FILENAME']));
 $controller = Controller::factory($tmp[1]);

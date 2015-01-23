@@ -3,6 +3,7 @@
 --------------------------------------------------------------------------------
 - add missing start in transaction in SeedDMS_Core_Folder::remove()
 - pass access object to view in out.ReviewDocument.php (Bug #191)
+- unset setting expiration date works again
 
 --------------------------------------------------------------------------------
                      Changes in version 4.3.13

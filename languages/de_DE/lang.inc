@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1914)
+//    Translators: Admin (1916)
 
 $text = array(
 'accept' => 'Übernehmen',
@@ -74,19 +74,19 @@ URL: [url]',
 'already_subscribed' => 'Bereits aboniert',
 'and' => 'und',
 'apply' => 'Anwenden',
-'approval_deletion_email' => 'Freigabeaufforderung gelöscht',
+'approval_deletion_email' => 'Genehmigungsaufforderung gelöscht',
 'approval_group' => 'Berechtigungsgruppe',
 'approval_log' => 'Freigabeprotokoll',
-'approval_request_email' => 'Aufforderung zur Freigabe',
-'approval_request_email_body' => 'Aufforderung zur Freigabe
+'approval_request_email' => 'Aufforderung zur Genehmigung',
+'approval_request_email_body' => 'Aufforderung zur Genehmigung
 Dokument: [name]
 Version: [version]
 Elternordner: [folder_path]
 Benutzer: [username]
 URL: [url]',
-'approval_request_email_subject' => '[sitename]: [name] - Aufforderung zur Freigabe',
+'approval_request_email_subject' => '[sitename]: [name] - Aufforderung zur Genehmigung',
 'approval_status' => 'Freigabestatus',
-'approval_submit_email_body' => 'Freigabe erteilen
+'approval_submit_email_body' => 'Genehmigung erteilen
 Dokument: [name]
 Version: [version]
 Elternordner: [folder_path]
@@ -94,7 +94,7 @@ Status: [status]
 Kommentar: [comment]
 Benutzer: [username]
 URL: [url]',
-'approval_submit_email_subject' => 'Freigabe erteilen',
+'approval_submit_email_subject' => 'Genehmigung erteilen',
 'approval_summary' => 'Übersicht Freigaben',
 'approval_update_failed' => 'Störung bei der Aktualisierung des Berechtigungsstatus. Aktualisierung gescheitert',
 'approvers' => 'Freigebender',
@@ -422,6 +422,7 @@ URL: [url]',
 'guest_login' => 'Als Gast anmelden',
 'guest_login_disabled' => 'Anmeldung als Gast ist gesperrt.',
 'help' => 'Hilfe',
+'home_folder' => 'Heimatordner',
 'hourly' => 'stündlich',
 'hours' => 'Stunden',
 'human_readable' => 'Menschenlesbares Archiv',
@@ -740,6 +741,7 @@ URL: [url]',
 'role_admin' => 'Administrator',
 'role_guest' => 'Gast',
 'role_user' => 'Benutzer',
+'ro_RO' => 'Rumänisch',
 'run_subworkflow' => 'Sub-Workflow starten',
 'run_subworkflow_email_body' => 'Subworkflow wurde gestartet
 Dokument: [name]
@@ -828,7 +830,7 @@ URL: [url]',
 'settings_dropFolderDir' => 'Verzeichnis für Ablageordner',
 'settings_dropFolderDir_desc' => 'Dieses Verzeichnis kann dazu benutzt werden Dokumente auf dem Server abzulegen und von dort zu importieren anstatt sie über den Browser hochzuladen. Das Verzeichnis muss ein Unterverzeichnis mit dem Login-Namen des angemeldeten Benutzers beinhalten.',
 'settings_Edition' => 'Funktions-Einstellungen',
-'settings_enableAdminRevApp' => 'Admin darf freigeben/prüfen',
+'settings_enableAdminRevApp' => 'Admin darf genehmigen/prüfen',
 'settings_enableAdminRevApp_desc' => 'Anwählen, um Administratoren in der Liste der Prüfer und Freigeber auszugeben',
 'settings_enableCalendar' => 'Kalender einschalten',
 'settings_enableCalendar_desc' => 'Kalender ein/ausschalten',

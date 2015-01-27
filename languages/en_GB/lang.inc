@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1052), netixw (14)
+//    Translators: Admin (1055), netixw (14)
 
 $text = array(
 'accept' => 'Accept',
@@ -209,7 +209,7 @@ URL: [url]',
 'content' => 'Content',
 'continue' => 'Continue',
 'create_fulltext_index' => 'Create fulltext index',
-'create_fulltext_index_warning' => 'You are to recreate the fulltext index. This can take a considerable amount of time and reduce your overall system performance. If you really want to recreate the index, please confirm your operation.',
+'create_fulltext_index_warning' => 'You are about to recreate the fulltext index. This can take a considerable amount of time and reduce your overall system performance. If you really want to recreate the index, please confirm your operation.',
 'creation_date' => 'Created',
 'cs_CZ' => 'Czech',
 'current_password' => 'Current Password',
@@ -422,6 +422,7 @@ URL: [url]',
 'guest_login' => 'Login as guest',
 'guest_login_disabled' => 'Guest login is disabled.',
 'help' => 'Help',
+'home_folder' => 'Home folder',
 'hourly' => 'Hourly',
 'hours' => 'hours',
 'human_readable' => 'Human readable archive',
@@ -740,6 +741,7 @@ URL: [url]',
 'role_admin' => 'Administrator',
 'role_guest' => 'Guest',
 'role_user' => 'User',
+'ro_RO' => 'Romanian',
 'run_subworkflow' => 'Run sub workflow',
 'run_subworkflow_email_body' => 'Subworkflow was started
 Document: [name]

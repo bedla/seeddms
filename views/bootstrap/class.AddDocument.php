@@ -161,7 +161,7 @@ $(document).ready(function() {
 		<tr>
 			<td><?php printMLText("expires");?>:</td>
 			<td>
-        <span class="input-append date span12" id="expirationdate" data-date="<?php echo date('d-m-Y'); ?>" data-date-format="dd-mm-yyyy" data-date-language="<?php echo str_replace('_', '-', $this->params['session']->getLanguage()); ?>">
+        <span class="input-append date span12" id="expirationdate" data-date="<?php echo date('d-m-Y', $expts); ?>" data-date-format="dd-mm-yyyy" data-date-language="<?php echo str_replace('_', '-', $this->params['session']->getLanguage()); ?>">
           <input class="span3" size="16" name="expdate" type="text" value="<?php echo date('d-m-Y', $expts); ?>">
           <span class="add-on"><i class="icon-calendar"></i></span>
         </span>&nbsp;

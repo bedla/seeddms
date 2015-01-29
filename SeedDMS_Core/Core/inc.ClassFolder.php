@@ -159,18 +159,12 @@ class SeedDMS_Core_Folder extends SeedDMS_Core_Object {
 	 * @return boolean true if passes folder is a subfolder
 	 */
 	function isSubFolder($subfolder) { /* {{{ */
-		$db = $this->_dms->getDB();
-
-		$path = $this->getPath();
-		$sfpath = $subfolder->getPath();
-		/* It is a potential sub folder start with the path of the current folder.
-		 * If the path differs, it can't be a sub folder.
-		 */
-		for($i=0; $i < count($path); $i++) { 
-			if($path[$i] != $sfpath[$i])
-				return false;
+		$target_path = $subfolder->getPath();
+		foreach($target_path as $next_folder) {
+			// the target folder contains this instance in the parent path
+			if($this->getID() == $next_folder->getID()) return true;
 		}
-		return true;
+		return false;
 	} /* }}} */
 
 	/**

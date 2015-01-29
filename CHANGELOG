@@ -6,6 +6,7 @@
 - unset expiration date works again
 - complete revised italian translate (Thanks to Diego Fiorani)
 - preset expiration date for documents in settings
+- fix checking for subfolders when moving folder (Bug #194)
 
 --------------------------------------------------------------------------------
                      Changes in version 4.3.13

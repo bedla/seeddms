@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1052), netixw (14)
+//    Translators: Admin (1059), netixw (14)
 
 $text = array(
 'accept' => 'Accept',
@@ -209,7 +209,7 @@ URL: [url]',
 'content' => 'Content',
 'continue' => 'Continue',
 'create_fulltext_index' => 'Create fulltext index',
-'create_fulltext_index_warning' => 'You are to recreate the fulltext index. This can take a considerable amount of time and reduce your overall system performance. If you really want to recreate the index, please confirm your operation.',
+'create_fulltext_index_warning' => 'You are about to recreate the fulltext index. This can take a considerable amount of time and reduce your overall system performance. If you really want to recreate the index, please confirm your operation.',
 'creation_date' => 'Created',
 'cs_CZ' => 'Czech',
 'current_password' => 'Current Password',
@@ -422,6 +422,7 @@ URL: [url]',
 'guest_login' => 'Login as guest',
 'guest_login_disabled' => 'Guest login is disabled.',
 'help' => 'Help',
+'home_folder' => 'Home folder',
 'hourly' => 'Hourly',
 'hours' => 'hours',
 'human_readable' => 'Human readable archive',
@@ -740,6 +741,7 @@ URL: [url]',
 'role_admin' => 'Administrator',
 'role_guest' => 'Guest',
 'role_user' => 'User',
+'ro_RO' => 'Romanian',
 'run_subworkflow' => 'Run sub workflow',
 'run_subworkflow_email_body' => 'Subworkflow was started
 Document: [name]
@@ -943,12 +945,14 @@ URL: [url]',
 'settings_php_gd2' => 'PHP extension : php_gd2',
 'settings_php_mbstring' => 'PHP extension : php_mbstring',
 'settings_php_version' => 'PHP version',
+'settings_presetExpirationDate' => 'Preset expiration date',
+'settings_presetExpirationDate_desc' => 'All new uploaded documents will have an expiration date set to this value. The date entered can be specified as understood by PHP\'s strtotime() function, e.g. +5 weeks.',
 'settings_previewWidthDetail' => 'Width of preview images (detail)',
 'settings_previewWidthDetail_desc' => 'Width of preview image shown on details page',
 'settings_previewWidthList' => 'Width of preview images (list)',
 'settings_previewWidthList_desc' => 'Width of preview images shown in lists',
 'settings_printDisclaimer' => 'Print Disclaimer',
-'settings_printDisclaimer_desc' => 'If true the disclaimer message the lang.inc files will be print on the bottom of the page',
+'settings_printDisclaimer_desc' => 'If enabled, the disclaimer message will be printed on the bottom of every page',
 'settings_quota' => 'User\'s quota',
 'settings_quota_desc' => 'The maximum number of bytes a user may use on disk. Set this to 0 for unlimited disk space. This value can be overridden for each uses in his profile.',
 'settings_restricted' => 'Restricted access',

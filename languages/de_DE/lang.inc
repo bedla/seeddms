@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1914)
+//    Translators: Admin (1918)
 
 $text = array(
 'accept' => 'Übernehmen',
@@ -422,6 +422,7 @@ URL: [url]',
 'guest_login' => 'Als Gast anmelden',
 'guest_login_disabled' => 'Anmeldung als Gast ist gesperrt.',
 'help' => 'Hilfe',
+'home_folder' => 'Heimatordner',
 'hourly' => 'stündlich',
 'hours' => 'Stunden',
 'human_readable' => 'Menschenlesbares Archiv',
@@ -740,6 +741,7 @@ URL: [url]',
 'role_admin' => 'Administrator',
 'role_guest' => 'Gast',
 'role_user' => 'Benutzer',
+'ro_RO' => 'Rumänisch',
 'run_subworkflow' => 'Sub-Workflow starten',
 'run_subworkflow_email_body' => 'Subworkflow wurde gestartet
 Dokument: [name]
@@ -943,6 +945,8 @@ URL: [url]',
 'settings_php_gd2' => 'PHP-Erweiterung: php_gd2',
 'settings_php_mbstring' => 'PHP-Erweiterung: php_mbstring',
 'settings_php_version' => 'PHP Version',
+'settings_presetExpirationDate' => 'Voreingestelltes Ablaufdatum',
+'settings_presetExpirationDate_desc' => 'Alle neu hochgeladenen Dokumente bekommen das eingegebene Datum als Ablaufdatum. Das Datum muss der Form entsprechen, wie es von der PHP-Funktion strtotime() verstanden wird, z.B. +5 weeks.',
 'settings_previewWidthDetail' => 'Breite der Vorschaubilder (Detail)',
 'settings_previewWidthDetail_desc' => 'Breite des Vorschaubildes, das auf der Detailseite angezeigt wird',
 'settings_previewWidthList' => 'Breite der Vorschaubilder (Liste)',

@@ -556,9 +556,14 @@ switch($command) {
 
 				$workflow = $user->getMandatoryWorkflow();
 
+				$expires = false;
+				if($settings->_presetExpirationDate) {
+					$expires = strtotime($settings->_presetExpirationDate);
+				}
+
 				$cats = array();
 
-				$res = $folder->addDocument($name, '', false, $user, '',
+				$res = $folder->addDocument($name, '', $expires, $user, '',
 																		array(), $userfiletmp, basename($userfilename),
 																		$fileType, $userfiletype, 0,
 																		$reviewers, $approvers, 1,

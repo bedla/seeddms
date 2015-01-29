@@ -276,7 +276,7 @@ class SeedDMS_Core_DMS {
 		$this->classnames['group'] = 'SeedDMS_Core_Group';
 		$this->version = '@package_version@';
 		if($this->version[0] == '@')
-			$this->version = '4.3.13';
+			$this->version = '4.3.14';
 	} /* }}} */
 
 	/**

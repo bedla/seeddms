@@ -184,7 +184,7 @@ if ($_POST["expires"] != "false") {
 	}
 }
 
-if ($expires) {
+//if ($expires) {
 	if($document->setExpires($expires)) {
 		if($notifier) {
 			$notifyList = $document->getNotifyList();
@@ -207,7 +207,7 @@ if ($expires) {
 	} else {
 		UI::exitError(getMLText("document_title", array("documentname" => $document->getName())),getMLText("error_occured"));
 	}
-}
+//}
 
 if (($oldkeywords = $document->getKeywords()) != $keywords) {
 	if($document->setKeywords($keywords)) {

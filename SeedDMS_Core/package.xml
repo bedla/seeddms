@@ -25,6 +25,7 @@
  <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
  <notes>
 - add missing start transaction in SeedDMD_Core_Folder::remove()
+- SeedDMD_Core_Folder::isSubFolder() doesn't compare object instances anymore (Bug #194)
  </notes>
  <contents>
   <dir baseinstalldir="SeedDMS" name="/">

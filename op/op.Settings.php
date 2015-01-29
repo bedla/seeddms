@@ -144,6 +144,7 @@ if ($action == "saveSettings")
 
   // SETTINGS - ADVANCED - EDITION
   $settings->_versioningFileName = $_POST["versioningFileName"];
+  $settings->_presetExpirationDate = $_POST["presetExpirationDate"];
   $settings->_workflowMode = $_POST["workflowMode"];
   $settings->_enableAdminRevApp = getBoolValue("enableAdminRevApp");
   $settings->_enableOwnerRevApp = getBoolValue("enableOwnerRevApp");

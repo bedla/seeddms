@@ -468,6 +468,10 @@ if(!is_writeable($settings->_configFilePath)) {
         <td><?php printMLText("settings_versioningFileName");?>:</td>
         <td><input type="text" name="versioningFileName" value="<?php echo $settings->_versioningFileName ?>" /></td>
       </tr>
+      <tr title="<?php printMLText("settings_presetExpirationDate_desc");?>">
+        <td><?php printMLText("settings_presetExpirationDate");?>:</td>
+        <td><input name="presetExpirationDate" type="text" value="<?php echo $settings->_presetExpirationDate; ?>" /></td>
+      </tr>
       <tr title="<?php printMLText("settings_enableAdminRevApp_desc");?>">
         <td><?php printMLText("settings_enableAdminRevApp");?>:</td>
         <td><input name="enableAdminRevApp" type="checkbox" <?php if ($settings->_enableAdminRevApp) echo "checked" ?> /></td>

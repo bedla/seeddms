@@ -5,6 +5,7 @@
 - pass access object to view in out.ReviewDocument.php (Bug #191)
 - unset expiration date works again
 - complete revised italian translate (Thanks to Diego Fiorani)
+- preset expiration date for documents in settings
 
 --------------------------------------------------------------------------------
                      Changes in version 4.3.13

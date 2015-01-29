@@ -123,6 +123,8 @@ class Settings { /* {{{ */
 	var $_enableDuplicateDocNames = true;
 	// enable/disable notification when added as a reviewer/approver
 	var $_enableNotificationAppRev = true;
+	// preset expiration date
+	var $_presetExpirationDate = "";
 	// the name of the versioning info file created by the backup tool
 	var $_versioningFileName = "versioning_info.txt";
 	// the mode of workflow
@@ -470,6 +472,7 @@ class Settings { /* {{{ */
 		$this->_enableAdminRevApp = Settings::boolval($tab["enableAdminRevApp"]);
 		$this->_enableOwnerRevApp = Settings::boolval($tab["enableOwnerRevApp"]);
 		$this->_enableSelfRevApp = Settings::boolval($tab["enableSelfRevApp"]);
+		$this->_presetExpirationDate = strval($tab["presetExpirationDate"]);
 		$this->_versioningFileName = strval($tab["versioningFileName"]);
 		$this->_workflowMode = strval($tab["workflowMode"]);
 		$this->_enableVersionDeletion = Settings::boolval($tab["enableVersionDeletion"]);
@@ -720,7 +723,9 @@ class Settings { /* {{{ */
     $this->setXMLAttributValue($node, "enableAdminRevApp", $this->_enableAdminRevApp);
     $this->setXMLAttributValue($node, "enableOwnerRevApp", $this->_enableOwnerRevApp);
     $this->setXMLAttributValue($node, "enableSelfRevApp", $this->_enableSelfRevApp);
+    $this->setXMLAttributValue($node, "presetExpirationDate", $this->_presetExpirationDate);
     $this->setXMLAttributValue($node, "versioningFileName", $this->_versioningFileName);
+    $this->setXMLAttributValue($node, "presetExpirationDate", $this->_presetExpirationDate);
     $this->setXMLAttributValue($node, "workflowMode", $this->_workflowMode);
     $this->setXMLAttributValue($node, "enableVersionDeletion", $this->_enableVersionDeletion);
     $this->setXMLAttributValue($node, "enableVersionModification", $this->_enableVersionModification);

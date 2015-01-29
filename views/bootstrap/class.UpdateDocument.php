@@ -43,6 +43,7 @@ class SeedDMS_View_UpdateDocument extends SeedDMS_Bootstrap_Style {
 		$enableselfrevapp = $this->params['enableselfrevapp'];
 		$dropfolderdir = $this->params['dropfolderdir'];
 		$workflowmode = $this->params['workflowmode'];
+		$presetexpiration = $this->params['presetexpiration'];
 		$documentid = $document->getId();
 
 		$this->htmlStartPage(getMLText("document_title", array("documentname" => htmlspecialchars($document->getName()))));
@@ -150,11 +151,19 @@ function checkForm()
 				<textarea name="comment" rows="4" cols="80"></textarea>
 			</td>
 		</tr>
+<?php
+			if($presetexpiration) {
+				if(!($expts = strtotime($presetexpiration)))
+					$expts = time();
+			} else {
+				$expts = time();
+			}
+?>
 		<tr>
 			<td><?php printMLText("expires");?>:</td>
 			<td class="standardText">
-        <span class="input-append date span12" id="expirationdate" data-date="<?php echo date('d-m-Y'); ?>" data-date-format="dd-mm-yyyy" data-date-language="<?php echo str_replace('_', '-', $this->params['session']->getLanguage()); ?>">
-          <input class="span3" size="16" name="expdate" type="text" value="<?php echo date('d-m-Y'); ?>">
+        <span class="input-append date span12" id="expirationdate" data-date="<?php echo date('d-m-Y', $expts); ?>" data-date-format="dd-mm-yyyy" data-date-language="<?php echo str_replace('_', '-', $this->params['session']->getLanguage()); ?>">
+          <input class="span3" size="16" name="expdate" type="text" value="<?php echo date('d-m-Y', $expts); ?>">
           <span class="add-on"><i class="icon-calendar"></i></span>
         </span><br />
         <label class="checkbox inline">

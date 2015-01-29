@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (959), jeromerobert (50), lonnnew (9)
+//    Translators: Admin (960), jeromerobert (50), lonnnew (9)
 
 $text = array(
 'accept' => 'Accepter',
@@ -922,6 +922,8 @@ URL: [url]',
 'settings_php_gd2' => 'PHP extension : php_gd2',
 'settings_php_mbstring' => 'PHP extension : php_mbstring',
 'settings_php_version' => 'Version de PHP',
+'settings_presetExpirationDate' => '',
+'settings_presetExpirationDate_desc' => '',
 'settings_previewWidthDetail' => 'Largeur des vignettes (vue détaillée)',
 'settings_previewWidthDetail_desc' => 'Largeur des vignettes affichées sur la vue détaillée',
 'settings_previewWidthList' => 'Largeur des vignettes (vue liste)',

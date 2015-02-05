@@ -409,9 +409,9 @@ class SeedDMS_View_Search extends SeedDMS_Bootstrap_Style {
 		$foldercount = $doccount = 0;
 		if($entries) {
 			foreach ($entries as $entry) {
-				if(get_class($entry) == 'SeedDMS_Core_Document') {
+				if(get_class($entry) == $dms->getClassname('document')) {
 					$doccount++;
-				} elseif(get_class($entry) == 'SeedDMS_Core_Folder') {
+				} elseif(get_class($entry) == $dms->getClassname('document')) {
 					$foldercount++;
 				}
 			}
@@ -430,7 +430,7 @@ class SeedDMS_View_Search extends SeedDMS_Bootstrap_Style {
 
 			$previewer = new SeedDMS_Preview_Previewer($cachedir, $previewwidth);
 			foreach ($entries as $entry) {
-				if(get_class($entry) == 'SeedDMS_Core_Document') {
+				if(get_class($entry) == $dms->getClassname('document')) {
 					$txt = $this->callHook('documentListItem', $entry, $previewer);
 					if(is_string($txt))
 						echo $txt;
@@ -523,7 +523,7 @@ class SeedDMS_View_Search extends SeedDMS_Bootstrap_Style {
 
 						print "</tr>\n";
 					}
-				} elseif(get_class($entry) == 'SeedDMS_Core_Folder') {
+				} elseif(get_class($entry) == $dms->getClassname('folder')) {
 					$folder = $entry;
 					$owner = $folder->getOwner();
 					if (in_array(2, $searchin)) {

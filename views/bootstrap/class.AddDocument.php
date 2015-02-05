@@ -102,13 +102,17 @@ $(document).ready(function() {
 		// Retrieve a list of all users and groups that have review / approve
 		// privileges.
 		$docAccess = $folder->getReadAccessList($enableadminrevapp, $enableownerrevapp);
-		$this->contentSubHeading(getMLText("document_infos"));
 ?>
 		<form action="../op/op.AddDocument.php" enctype="multipart/form-data" method="post" name="form1" onsubmit="return checkForm();">
 		<?php echo createHiddenFieldWithKey('adddocument'); ?>
 		<input type="hidden" name="folderid" value="<?php print $folderid; ?>">
 		<input type="hidden" name="showtree" value="<?php echo showtree();?>">
 		<table class="table-condensed">
+		<tr>
+			<td>
+		<?php $this->contentSubHeading(getMLText("document_infos")); ?>
+			</td>
+		</tr>
 		<tr>
 			<td><?php printMLText("name");?>:</td>
 			<td><input type="text" name="name" size="60"></td>

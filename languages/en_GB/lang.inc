@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1059), netixw (14)
+//    Translators: Admin (1060), dgrutsch (2), netixw (14)
 
 $text = array(
 'accept' => 'Accept',
@@ -608,6 +608,7 @@ URL: [url]',
 'no_update_cause_locked' => 'You can therefore not update this document. Please contact the locking user.',
 'no_user_image' => 'No image found',
 'no_version_check' => 'Checking for a new version of SeedDMS has failed! This could be caused by allow_url_fopen being set to 0 in your php configuration.',
+'no_workflow_available' => '',
 'objectcheck' => 'Folder/Document check',
 'obsolete' => 'Obsolete',
 'october' => 'October',
@@ -789,7 +790,7 @@ URL: [url]',
 'settings_activate_module' => 'Activate module',
 'settings_activate_php_extension' => 'Activate PHP extension',
 'settings_adminIP' => 'Admin IP',
-'settings_adminIP_desc' => 'If set admin can login only by specified IP addres, leave empty to avoid the control. NOTE: works only with local autentication (no LDAP)',
+'settings_adminIP_desc' => 'If set, admin can login only by specified IP address. Leave empty to avoid lose of access. NOTE: works only with local autentication (no LDAP)',
 'settings_Advanced' => 'Advanced',
 'settings_apache_mod_rewrite' => 'Apache - Module Rewrite',
 'settings_Authentication' => 'Authentication settings',
@@ -937,6 +938,7 @@ URL: [url]',
 'settings_passwordStrengthAlgorithm_desc' => 'The algorithm used for calculating the password strength. The \'simple\' algorithm just checks for at least eight chars total, a lower case letter, an upper case letter, a number and a special char. If those conditions are met the returned score is 100 otherwise 0.',
 'settings_passwordStrengthAlgorithm_valadvanced' => 'advanced',
 'settings_passwordStrengthAlgorithm_valsimple' => 'simple',
+'settings_passwordStrength_desc' => '',
 'settings_passwordЅtrength_desc' => 'The minimum password strength is an integer value from 0 to 100. Setting it to 0 will turn off checking for the minimum password strength.',
 'settings_pear_log' => 'Pear package : Log',
 'settings_pear_webdav' => 'Pear package : HTTP_WebDAV_Server',
@@ -1103,6 +1105,7 @@ User: [username]
 URL: [url]',
 'transition_triggered_email_subject' => '[sitename]: [name] - Workflow transition triggered',
 'trigger_workflow' => 'Workflow',
+'tr_TR' => 'Turkish',
 'tuesday' => 'Tuesday',
 'tuesday_abbr' => 'Tu',
 'type_to_search' => 'Type to search',

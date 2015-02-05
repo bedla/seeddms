@@ -532,7 +532,7 @@ class SeedDMS_Core_DMS {
 			return false;
 
 		$row = $resArr[0];
-		$document = new SeedDMS_Core_Document($row["id"], $row["name"], $row["comment"], $row["date"], $row["expires"], $row["owner"], $row["folder"], $row["inheritAccess"], $row["defaultAccess"], $row["lockUser"], $row["keywords"], $row["sequence"]);
+		$document = new $this->classnames['document']($row["id"], $row["name"], $row["comment"], $row["date"], $row["expires"], $row["owner"], $row["folder"], $row["inheritAccess"], $row["defaultAccess"], $row["lockUser"], $row["keywords"], $row["sequence"]);
 		$document->setDMS($this);
 		return $document;
 	} /* }}} */
@@ -557,7 +557,7 @@ class SeedDMS_Core_DMS {
 		$row = $resArr[0];
 
 		$document = $this->getDocument($row['document']);
-		$version = new SeedDMS_Core_DocumentContent($row['id'], $document, $row['version'], $row['comment'], $row['date'], $row['createdBy'], $row['dir'], $row['orgFileName'], $row['fileType'], $row['mimeType'], $row['fileSize'], $row['checksum']);
+		$version = new $this->classnames['documentcontent']($row['id'], $document, $row['version'], $row['comment'], $row['date'], $row['createdBy'], $row['dir'], $row['orgFileName'], $row['fileType'], $row['mimeType'], $row['fileSize'], $row['checksum']);
 		return $version;
 	} /* }}} */
 
@@ -644,16 +644,9 @@ class SeedDMS_Core_DMS {
 		$totalFolders = 0;
 		if($mode & 0x2) {
 			$searchKey = "";
-			$searchFields = array();
-			if (in_array(2, $searchin)) {
-				$searchFields[] = "`tblFolders`.`name`";
-			}
-			if (in_array(3, $searchin)) {
-				$searchFields[] = "`tblFolders`.`comment`";
-			}
-			if (in_array(4, $searchin)) {
-				$searchFields[] = "`tblFolderAttributes`.`value`";
-			}
+
+			$classname = $this->classnames['folder'];
+			$searchFields = $classname::getSearchFields($searchin);
 
 			if (count($searchFields)>0) {
 				foreach ($tkeys as $key) {
@@ -723,7 +716,7 @@ class SeedDMS_Core_DMS {
 				}
 			}
 
-			$searchQuery = "FROM `tblFolders` LEFT JOIN `tblFolderAttributes` on `tblFolders`.`id`=`tblFolderAttributes`.`folder` WHERE 1=1";
+			$searchQuery = "FROM ".$classname::getSearchTables()." WHERE 1=1";
 
 			if (strlen($searchKey)>0) {
 				$searchQuery .= " AND (".$searchKey.")";
@@ -2078,9 +2071,9 @@ class SeedDMS_Core_DMS {
 
 		$versions = array();
 		foreach($resArr as $row) {
-			$document = new SeedDMS_Core_Document($row['document'], '', '', '', '', '', '', '', '', '', '', '');
+			$document = new $this->classnames['document']($row['document'], '', '', '', '', '', '', '', '', '', '', '');
 			$document->setDMS($this);
-			$version = new SeedDMS_Core_DocumentContent($row['id'], $document, $row['version'], $row['comment'], $row['date'], $row['createdBy'], $row['dir'], $row['orgFileName'], $row['fileType'], $row['mimeType'], $row['fileSize'], $row['checksum']);
+			$version = new $this->classnames['documentcontent']($row['id'], $document, $row['version'], $row['comment'], $row['date'], $row['createdBy'], $row['dir'], $row['orgFileName'], $row['fileType'], $row['mimeType'], $row['fileSize'], $row['checksum']);
 			$versions[] = $version;
 		}
 		return $versions;
@@ -2102,9 +2095,9 @@ class SeedDMS_Core_DMS {
 
 		$versions = array();
 		foreach($resArr as $row) {
-			$document = new SeedDMS_Core_Document($row['document'], '', '', '', '', '', '', '', '', '', '', '');
+			$document = new $this->classnames['document']($row['document'], '', '', '', '', '', '', '', '', '', '', '');
 			$document->setDMS($this);
-			$version = new SeedDMS_Core_DocumentContent($row['id'], $document, $row['version'], $row['comment'], $row['date'], $row['createdBy'], $row['dir'], $row['orgFileName'], $row['fileType'], $row['mimeType'], $row['fileSize'], $row['checksum'], $row['fileSize'], $row['checksum']);
+			$version = new $this->classnames['documentcontent']($row['id'], $document, $row['version'], $row['comment'], $row['date'], $row['createdBy'], $row['dir'], $row['orgFileName'], $row['fileType'], $row['mimeType'], $row['fileSize'], $row['checksum'], $row['fileSize'], $row['checksum']);
 			$versions[] = $version;
 		}
 		return $versions;
@@ -2126,9 +2119,9 @@ class SeedDMS_Core_DMS {
 
 		$versions = array();
 		foreach($resArr as $row) {
-			$document = new SeedDMS_Core_Document($row['document'], '', '', '', '', '', '', '', '', '', '', '');
+			$document = new $this->classnames['document']($row['document'], '', '', '', '', '', '', '', '', '', '', '');
 			$document->setDMS($this);
-			$version = new SeedDMS_Core_DocumentContent($row['id'], $document, $row['version'], $row['comment'], $row['date'], $row['createdBy'], $row['dir'], $row['orgFileName'], $row['fileType'], $row['mimeType'], $row['fileSize'], $row['checksum']);
+			$version = new $this->classnames['documentcontent']($row['id'], $document, $row['version'], $row['comment'], $row['date'], $row['createdBy'], $row['dir'], $row['orgFileName'], $row['fileType'], $row['mimeType'], $row['fileSize'], $row['checksum']);
 			$versions[] = $version;
 		}
 		return $versions;

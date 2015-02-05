@@ -87,6 +87,39 @@ class SeedDMS_Core_Folder extends SeedDMS_Core_Object {
 		$this->_notifyList = array();
 	} /* }}} */
 
+	/**
+	 * Return an array of database fields which used for searching
+	 * a term entered in the database search form
+	 *
+	 * @param array $searchin integer list of search scopes (2=name, 3=comment,
+	 * 4=attributes)
+	 * @return array list of database fields
+	 */
+	public static function getSearchFields($searchin) { /* {{{ */
+		$searchFields = array();
+		if (in_array(2, $searchin)) {
+			$searchFields[] = "`tblFolders`.`name`";
+		}
+		if (in_array(3, $searchin)) {
+			$searchFields[] = "`tblFolders`.`comment`";
+		}
+		if (in_array(4, $searchin)) {
+			$searchFields[] = "`tblFolderAttributes`.`value`";
+		}
+		return $searchFields;
+	} /* }}} */
+
+	/**
+	 * Return a sql statement with all tables used for searching.
+	 * This must be a syntactically correct left join of all tables.
+	 *
+	 * @return string sql expression for left joining tables
+	 */
+	public static function getSearchTables() { /* {{{ */
+		$sql = "`tblFolders` LEFT JOIN `tblFolderAttributes` on `tblFolders`.`id`=`tblFolderAttributes`.`folder`";
+		return $sql;
+	} /* }}} */
+
 	public static function getInstance($id, $dms) { /* {{{ */
 		$db = $dms->getDB();
 

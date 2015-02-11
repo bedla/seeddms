@@ -135,7 +135,7 @@ if ($action == "delnotify"){
 // add notification
 else if ($action == "addnotify") {
 
-	if ($userid) {
+	if ($userid > 0) {
 		$res = $document->addNotify($userid, true);
 		switch ($res) {
 			case -1:

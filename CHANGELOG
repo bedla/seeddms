@@ -4,7 +4,7 @@
 - new language turkish
 - SeedDMS_Core_DMS::getAllUsers() returns now previously missing
   language and theme of user
-- fix setting a user notification only (Bug #201)
+- fix setting a group notification only (Bug #201)
 
 --------------------------------------------------------------------------------
                      Changes in version 4.3.14

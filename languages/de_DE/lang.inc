@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1919), dgrutsch (12)
+//    Translators: Admin (1925), dgrutsch (12)
 
 $text = array(
 'accept' => 'Übernehmen',
@@ -699,7 +699,7 @@ URL: [url]',
 'reviewer_already_removed' => 'Prüfer wurde bereits aus dem Prüfvorgang entfernt oder hat die Prüfung bereits abgeschlossen',
 'review_deletion_email' => 'Prüfungsaufforderung gelöscht',
 'review_group' => 'Gruppe: prüfen',
-'review_log' => 'Bisherige Prüfungen',
+'review_log' => 'Prüfungsprotokoll',
 'review_request_email' => 'Aufforderung zur Prüfung',
 'review_status' => 'Status:',
 'review_submit_email' => 'Prüfung ausgeführt',
@@ -1084,6 +1084,10 @@ URL: [url]',
 'sunday_abbr' => 'So',
 'sv_SE' => 'Schwedisch',
 'switched_to' => 'Gewechselt zu',
+'takeOverGrpApprover' => 'Übernehme Gruppe von Freigebenden von letzter Version.',
+'takeOverGrpReviewer' => 'Übernehme Gruppe von Prüfern von letzter Version.',
+'takeOverIndApprover' => 'Übernehme Einzelfreigebende von letzter Version.',
+'takeOverIndReviewer' => 'Übernehme die Einzelprüfer von der letzten Version.',
 'testmail_body' => 'Diese Mail ist lediglich zum Test der Mail-Konfiguration von SeedDMS',
 'testmail_subject' => 'Test Mail',
 'theme' => 'Aussehen',

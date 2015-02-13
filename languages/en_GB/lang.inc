@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1060), dgrutsch (2), netixw (14)
+//    Translators: Admin (1065), dgrutsch (2), netixw (14)
 
 $text = array(
 'accept' => 'Accept',
@@ -1084,6 +1084,10 @@ URL: [url]',
 'sunday_abbr' => 'Su',
 'sv_SE' => 'Swedish',
 'switched_to' => 'Switched to',
+'takeOverGrpApprover' => 'Take over group of approvers from last version.',
+'takeOverGrpReviewer' => 'Take over group of reviewers from last version.',
+'takeOverIndApprover' => 'Take over individual approver from last version.',
+'takeOverIndReviewer' => 'Take over individual reviewer from last version.',
 'testmail_body' => 'This mail is just for testing the mail configuration of SeedDMS',
 'testmail_subject' => 'Test mail',
 'theme' => 'Theme',

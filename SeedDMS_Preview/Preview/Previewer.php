@@ -91,7 +91,7 @@ class SeedDMS_Preview_Previewer {
 		if(!file_exists($file))
 			return false;
 		$target = $this->getFileName($object, $width);
-		if($target !== false && !file_exists($target)) {
+		if($target !== false && (!file_exists($target) || filectime($target) < $object->getDate())) {
 			$cmd = '';
 			switch($object->getMimeType()) {
 				case "image/png":
@@ -129,7 +129,7 @@ class SeedDMS_Preview_Previewer {
 		if(!$this->previewDir)
 			return false;
 		$target = $this->getFileName($object, $width);
-		if($target && file_exists($target)) {
+		if($target !== false && file_exists($target) && filectime($target) >= $object->getDate()) {
 			return true;
 		}
 		return false;

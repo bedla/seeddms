@@ -21,7 +21,7 @@ $(document).ready( function() {
 			$(ev.currentTarget).datepicker('hide');
 		});
 
-	$(".chzn-select").chosen();
+	$(".chzn-select").chosen({width: "95%"});
 	$(".chzn-select-deselect").chosen({allow_single_deselect:true});
 
 	/* change the color and length of the bar graph showing the password

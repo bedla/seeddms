@@ -294,10 +294,11 @@ $(document).ready(function () {
 			echo "    </li>\n";
 			echo "   </ul>\n";
 
-			echo "   <div id=\"menu-clipboard\">";
-			echo $this->menuClipboard($this->params['session']->getClipboard());
-			echo "   </div>";
-
+			if($this->params['enableclipboard']) {
+				echo "   <div id=\"menu-clipboard\">";
+				echo $this->menuClipboard($this->params['session']->getClipboard());
+				echo "   </div>";
+			}
 
 			echo "   <ul class=\"nav\">\n";
 	//		echo "    <li id=\"first\"><a href=\"../out/out.ViewFolder.php?folderid=".$this->params['rootfolderid']."\">".getMLText("content")."</a></li>\n";
@@ -1467,6 +1468,7 @@ $('#delete-folder-btn-".$folderid."').popover({
 		$showtree = $this->params['showtree'];
 		$workflowmode = $this->params['workflowmode'];
 		$previewwidth = $this->params['previewWidthList'];
+		$enableClipboard = $this->params['enableClipboard'];
 
 		$content = '';
 
@@ -1547,7 +1549,9 @@ $('#delete-folder-btn-".$folderid."').popover({
 			if($document->getAccessMode($user) >= M_READWRITE) {
 				$content .= $this->printLockButton($document, 'splash_document_locked', 'splash_document_unlocked', true);
 			}
-			$content .= '<a class="addtoclipboard" rel="D'.$docID.'" msg="'.getMLText('splash_added_to_clipboard').'" title="'.getMLText("add_to_clipboard").'"><i class="icon-copy"></i></a>';
+			if($enableClipboard) {
+				$content .= '<a class="addtoclipboard" rel="D'.$docID.'" msg="'.getMLText('splash_added_to_clipboard').'" title="'.getMLText("add_to_clipboard").'"><i class="icon-copy"></i></a>';
+			}
 			$content .= "</div>";
 			$content .= "</td>";
 		}
@@ -1563,6 +1567,7 @@ $('#delete-folder-btn-".$folderid."').popover({
 		$showtree = $this->params['showtree'];
 		$enableRecursiveCount = $this->params['enableRecursiveCount'];
 		$maxRecursiveCount = $this->params['maxRecursiveCount'];
+		$enableClipboard = $this->params['enableClipboard'];
 
 		$owner = $subFolder->getOwner();
 		$comment = $subFolder->getComment();
@@ -1616,7 +1621,9 @@ $('#delete-folder-btn-".$folderid."').popover({
 		} else {
 			$content .= '<span style="padding: 2px; color: #CCC;"><i class="icon-edit"></i></span>';
 		}
-		$content .= '<a class="addtoclipboard" rel="F'.$subFolder->getID().'" msg="'.getMLText('splash_added_to_clipboard').'" title="'.getMLText("add_to_clipboard").'"><i class="icon-copy"></i></a>';
+		if($enableClipboard) {
+			$content .= '<a class="addtoclipboard" rel="F'.$subFolder->getID().'" msg="'.getMLText('splash_added_to_clipboard').'" title="'.getMLText("add_to_clipboard").'"><i class="icon-copy"></i></a>';
+		}
 		$content .= "</div>";
 		$content .= "</td>";
 		$content .= "</tr>\n";

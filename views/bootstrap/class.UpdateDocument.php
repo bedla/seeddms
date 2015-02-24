@@ -31,6 +31,25 @@ require_once("class.Bootstrap.php");
  */
 class SeedDMS_View_UpdateDocument extends SeedDMS_Bootstrap_Style {
 
+	function __takeOverButton($name, $users) { /* {{{ */
+?>
+	<span id="<?php echo $name; ?>_btn" style="cursor: pointer;" title="<?php printMLText("takeOver".$name); ?>"><i class="icon-arrow-left"></i></span>
+<script>
+$(document).ready( function() {
+	$('#<?php echo $name; ?>_btn').click(function(ev){
+		ev.preventDefault();
+<?php
+		foreach($users as $_id) {
+			echo "$(\"#".$name." option[value='".$_id."']\").attr(\"selected\", \"selected\");\n";
+		}
+?>
+		$("#<?php echo $name; ?>").trigger("chosen:updated");
+	});
+});
+</script>
+<?php
+	} /* }}} */
+
 	function show() { /* {{{ */
 		$dms = $this->params['dms'];
 		$user = $this->params['user'];
@@ -110,8 +129,10 @@ function checkForm()
 			print "</div>";
 		}
 
+		$latestContent = $document->getLatestContent();
+		$reviewStatus = $latestContent->getReviewStatus();
+		$approvalStatus = $latestContent->getApprovalStatus();
 		if($workflowmode != 'traditional') {
-			$latestContent = $document->getLatestContent();
 			if($status = $latestContent->getStatus()) {
 				if($status["status"] == S_IN_WORKFLOW) {
 					$this->warningMsg("The current version of this document is in a workflow. This will be interrupted and cannot be completed if you upload a new version.");
@@ -197,8 +218,8 @@ function checkForm()
       <td>
 				<div class="cbSelectTitle"><?php printMLText("individuals");?>:</div>
       </td>
-      <td>
-        <select class="chzn-select span9" name="indReviewers[]" multiple="multiple" data-placeholder="<?php printMLText('select_ind_reviewers'); ?>" data-no_results_text="<?php printMLText('unknown_owner'); ?>">
+			<td>
+        <select id="IndReviewer" class="chzn-select span9" name="indReviewers[]" multiple="multiple" data-placeholder="<?php printMLText('select_ind_reviewers'); ?>" data-no_results_text="<?php printMLText('unknown_owner'); ?>">
 <?php
 				$res=$user->getMandatoryReviewers();
 				foreach ($docAccess["users"] as $usr) {
@@ -210,8 +231,23 @@ function checkForm()
 					else print "<option value=\"".$usr->getID()."\">". htmlspecialchars($usr->getLogin()." - ".$usr->getFullName())."</option>";
 				}
 ?>
-        </select>
+				</select>
 <?php
+				$tmp = array();
+				foreach($reviewStatus as $r) {
+					$mandatory=false;
+					if($r['type'] == 0 && $res) {
+						foreach ($res as $rr)
+							if ($rr['reviewerUserID']==$r['required']) {
+								$mandatory=true;
+							}
+						if(!$mandatory)
+							$tmp[] = $r['required'];
+					}
+				}
+				if($tmp) {
+					$this->__takeOverButton("IndReviewer", $tmp);
+				}
 				/* List all mandatory reviewers */
 				if($res) {
 					$tmp = array();
@@ -249,8 +285,23 @@ function checkForm()
 				<div class="cbSelectTitle"><?php printMLText("groups");?>:</div>
       </td>
       <td>
-        <select class="chzn-select span9" name="grpReviewers[]" multiple="multiple" data-placeholder="<?php printMLText('select_grp_reviewers'); ?>" data-no_results_text="<?php printMLText('unknown_group'); ?>">
+        <select id="GrpReviewer" class="chzn-select span9" name="grpReviewers[]" multiple="multiple" data-placeholder="<?php printMLText('select_grp_reviewers'); ?>" data-no_results_text="<?php printMLText('unknown_group'); ?>">
 <?php
+				$tmp = array();
+				foreach($reviewStatus as $r) {
+					$mandatory=false;
+					if($r['type'] == 1 && $res) {
+						foreach ($res as $rr)
+							if ($rr['reviewerGroupID']==$r['required']) {
+								$mandatory=true;
+							}
+						if(!$mandatory)
+							$tmp[] = $r['required'];
+					}
+				}
+				if($tmp) {
+					$this->__takeOverButton("GrpReviewer", $tmp);
+				}
 				foreach ($docAccess["groups"] as $grp) {
 				
 					$mandatory=false;
@@ -305,7 +356,7 @@ function checkForm()
 				<div class="cbSelectTitle"><?php printMLText("individuals");?>:</div>
       </td>
       <td>
-        <select class="chzn-select span9" name="indApprovers[]" multiple="multiple" data-placeholder="<?php printMLText('select_ind_approvers'); ?>" data-no_results_text="<?php printMLText('unknown_owner'); ?>">
+        <select id="IndApprover" class="chzn-select span9" name="indApprovers[]" multiple="multiple" data-placeholder="<?php printMLText('select_ind_approvers'); ?>" data-no_results_text="<?php printMLText('unknown_owner'); ?>">
 <?php
 				$res=$user->getMandatoryApprovers();
 				foreach ($docAccess["users"] as $usr) {
@@ -320,6 +371,21 @@ function checkForm()
 ?>
         </select>
 <?php
+				$tmp = array();
+				foreach($approvalStatus as $r) {
+					$mandatory=false;
+					if($r['type'] == 0 && $res) {
+						foreach ($res as $rr)
+							if ($rr['approverUserID']==$r['required']) {
+								$mandatory=true;
+							}
+						if(!$mandatory)
+							$tmp[] = $r['required'];
+					}
+				}
+				if($tmp) {
+					$this->__takeOverButton("IndApprover", $tmp);
+				}
 				/* List all mandatory approvers */
 				if($res) {
 					$tmp = array();
@@ -357,7 +423,7 @@ function checkForm()
 				<div class="cbSelectTitle"><?php printMLText("groups");?>:</div>
       </td>
       <td>
-        <select class="chzn-select span9" name="grpApprovers[]" multiple="multiple" data-placeholder="<?php printMLText('select_grp_approvers'); ?>" data-no_results_text="<?php printMLText('unknown_group'); ?>">
+        <select id="GrpApprover" class="chzn-select span9" name="grpApprovers[]" multiple="multiple" data-placeholder="<?php printMLText('select_grp_approvers'); ?>" data-no_results_text="<?php printMLText('unknown_group'); ?>">
 <?php
 				foreach ($docAccess["groups"] as $grp) {
 				
@@ -371,6 +437,21 @@ function checkForm()
 ?>
         </select>
 <?php
+				$tmp = array();
+				foreach($approvalStatus as $r) {
+					$mandatory=false;
+					if($r['type'] == 1 && $res) {
+						foreach ($res as $rr)
+							if ($rr['approverGroupID']==$r['required']) {
+								$mandatory=true;
+							}
+						if(!$mandatory)
+							$tmp[] = $r['required'];
+					}
+				}
+				if($tmp) {
+					$this->__takeOverButton("GrpApprover", $tmp);
+				}
 				/* List all mandatory groups of approvers */
 				if($res) {
 					$tmp = array();

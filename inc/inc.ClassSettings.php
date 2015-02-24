@@ -514,7 +514,10 @@ class Settings { /* {{{ */
 		$this->_converters = array();
 		foreach($converters as $converter) {
 			$tab = $converter->attributes();
-			$this->_converters[trim(strval($tab['mimeType']))] = trim(strval($converter));
+			if(empty(trim(strval($tab['target']))))
+				$this->_converters['fulltext'][trim(strval($tab['mimeType']))] = trim(strval($converter));
+			else
+				$this->_converters[trim(strval($tab['target']))][trim(strval($tab['mimeType']))] = trim(strval($converter));
 		}
 
 		// XML Path: /configuration/extensions
@@ -768,7 +771,7 @@ class Settings { /* {{{ */
     $this->setXMLAttributValue($node, "maxExecutionTime", $this->_maxExecutionTime);
 
     // XML Path: /configuration/advanced/converters
-    foreach($this->_converters as $mimeType => $cmd)
+    foreach($this->_converters['fulltext'] as $mimeType => $cmd)
     {
       // search XML node
       $node = $xml->xpath('/configuration/advanced/converters/converter[@mimeType="'. $mimeType .'"]');
@@ -782,7 +785,7 @@ class Settings { /* {{{ */
         else
         {
           $nodeParent = $xml->xpath('/configuration/advanced/converters');
-          $node = $nodeParent[0]->addChild("converters");
+          $node = $nodeParent[0]->addChild("converter");
         }
 
 				$node[0] = $cmd;

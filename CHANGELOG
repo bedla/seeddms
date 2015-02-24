@@ -5,6 +5,10 @@
 - SeedDMS_Core_DMS::getAllUsers() returns now previously missing
   language and theme of user
 - fix setting a group notification only (Bug #201)
+- old cached preview images will be replaced with a new version
+- reviewers and approvers can be taken over from the previous version
+- disabling clipboard will disable all clipboard functions not just
+  the clipboard area on the ViewFolder page
 
 --------------------------------------------------------------------------------
                      Changes in version 4.3.14

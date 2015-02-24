@@ -162,7 +162,7 @@ if ($action == "saveSettings")
   $settings->_maxExecutionTime = intval($_POST["maxExecutionTime"]);
 
   // SETTINGS - ADVANCED - INDEX CMD
-  $settings->_converters = $_POST["converters"];
+  $settings->_converters['fulltext'] = $_POST["converters"];
 
   // -------------------------------------------------------------------------
   // save

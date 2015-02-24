@@ -545,7 +545,7 @@ if(!is_writeable($settings->_configFilePath)) {
 
       <tr ><td><b> <?php printMLText("index_converters");?></b></td> </tr>
 <?php
-	foreach($settings->_converters as $mimetype=>$cmd) {
+	foreach($settings->_converters['fulltext'] as $mimetype=>$cmd) {
 ?>
       <tr title="<?php echo $mimetype;?>">
         <td><?php echo $mimetype;?>:</td>
@@ -554,6 +554,10 @@ if(!is_writeable($settings->_configFilePath)) {
 <?php
 	}
 ?>
+      <tr title="">
+        <td><input type="text" name="converters_newmimetype" value="" />:</td>
+        <td><input type="text" name="converters_newcmd" value="" /></td>
+      </tr>
     </table>
 <?php		$this->contentContainerEnd(); ?>
   </div>

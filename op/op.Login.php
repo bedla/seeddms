@@ -58,10 +58,12 @@ if(isset($_POST['pwd'])) {
 	}
 }
 
-$guestUser = $dms->getUser($settings->_guestID);
-if ((!isset($pwd) || strlen($pwd)==0) && ($login != $guestUser->getLogin()))  {
-	_printMessage(getMLText("login_error_title"),	getMLText("login_error_text")."\n");
-	exit;
+if($settings->_enableGuestLogin && (int) $settings->_guestID) {
+	$guestUser = $dms->getUser((int) $settings->_guestID);
+	if ((!isset($pwd) || strlen($pwd)==0) && ($login != $guestUser->getLogin()))  {
+		_printMessage(getMLText("login_error_title"),	getMLText("login_error_text")."\n");
+		exit;
+	}
 }
 
 //

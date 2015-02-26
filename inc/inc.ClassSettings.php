@@ -506,7 +506,7 @@ class Settings { /* {{{ */
 		$this->_converters = array();
 		foreach($converters as $converter) {
 			$tab = $converter->attributes();
-			if(empty(trim(strval($tab['target']))))
+			if(!trim(strval($tab['target'])))
 				$this->_converters['fulltext'][trim(strval($tab['mimeType']))] = trim(strval($converter));
 			else
 				$this->_converters[trim(strval($tab['target']))][trim(strval($tab['mimeType']))] = trim(strval($converter));

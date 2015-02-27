@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1240)
+//    Translators: Admin (1241)
 
 $text = array(
 'accept' => 'Принять',
@@ -75,6 +75,8 @@ URL: [url]',
 'and' => 'и',
 'apply' => 'Применить',
 'approval_deletion_email' => 'Запрос на утверждение удалён',
+'approval_deletion_email_body' => '',
+'approval_deletion_email_subject' => '',
 'approval_group' => 'Утверждающая группа',
 'approval_log' => '',
 'approval_request_email' => 'Запрос на утверждение',
@@ -689,9 +691,13 @@ URL: [url]',
 'reviewer_already_assigned' => 'уже назначен на рецензирование',
 'reviewer_already_removed' => 'уже удалён из списка рецензирующих или уже оставил рецензию',
 'review_deletion_email' => 'Запрос на рецензию удалён',
+'review_deletion_email_body' => '',
+'review_deletion_email_subject' => '',
 'review_group' => 'Рецензирующая группа',
 'review_log' => '',
 'review_request_email' => 'Запрос на рецензию',
+'review_request_email_body' => '',
+'review_request_email_subject' => '',
 'review_status' => 'Статус рецензии',
 'review_submit_email' => 'Отправленная рецензия',
 'review_submit_email_body' => 'Отправлена рецензия
@@ -830,7 +836,7 @@ URL: [url]',
 'settings_enableClipboard_desc' => 'Включить/отключить буфер обмена.',
 'settings_enableConverting' => 'Включить преобразование',
 'settings_enableConverting_desc' => 'Включить/отключить преобразование файлов.',
-'settings_enableDropUpload' => '',
+'settings_enableDropUpload' => 'Включить быструю загрузку',
 'settings_enableDropUpload_desc' => '',
 'settings_enableDuplicateDocNames' => 'Разрешить документы<br/>с одинаковым названием',
 'settings_enableDuplicateDocNames_desc' => 'Разрешить документы с одинаковым названием в каталоге.',

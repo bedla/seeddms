@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1925), dgrutsch (12)
+//    Translators: Admin (1932), dgrutsch (18)
 
 $text = array(
 'accept' => 'Übernehmen',
@@ -75,6 +75,13 @@ URL: [url]',
 'and' => 'und',
 'apply' => 'Anwenden',
 'approval_deletion_email' => 'Genehmigungsaufforderung gelöscht',
+'approval_deletion_email_body' => 'Genehmigungsaufforderung gelöscht
+Dokument: [name]
+Version: [version]
+Elternordner: [folder_path]
+Benutzer: [username]
+URL: [url]',
+'approval_deletion_email_subject' => '[sitename]: [name] - Genehmigungsaufforderung gelöscht',
 'approval_group' => 'Berechtigungsgruppe',
 'approval_log' => 'Freigabeprotokoll',
 'approval_request_email' => 'Aufforderung zur Genehmigung',
@@ -365,14 +372,14 @@ URL: [url]',
 'folders' => 'Verzeichnisse',
 'folders_and_documents_statistic' => 'Ordner- und Dokumentenübersicht',
 'folder_comment_changed_email' => 'Kommentar geändert',
-'folder_comment_changed_email_body' => 'Comment changed
+'folder_comment_changed_email_body' => 'Kommentar geändert
 Ordner: [name]
-Old comment: [old_comment]
-Comment: [new_comment]
+Vorheriger Kommentar: [old_comment]
+Kommentar: [new_comment]
 Elternordner: [folder_path]
 Benutzer: [username]
 URL: [url]',
-'folder_comment_changed_email_subject' => '[sitename]: [name] - Comment changed',
+'folder_comment_changed_email_subject' => '[sitename]: [name] - Kommentar geändert',
 'folder_contents' => 'Ordner enthält',
 'folder_deleted_email' => 'Ordner gelöscht',
 'folder_deleted_email_body' => 'Ordner gelöscht
@@ -642,8 +649,8 @@ Dies kann durch den folgenden Link erfolgen:
 
 Sollen Sie danach immer noch Problem bei der Anmeldung haben, dann kontaktieren Sie bitte Ihren Adminstrator',
 'password_forgotten_email_subject' => 'Passwort vergessen',
-'password_forgotten_send_hash' => 'Instructions on how to proceed has been send to the user\'s email address',
-'password_forgotten_text' => 'Fill out the form below and follow the instructions in the email, which will be sent to you.',
+'password_forgotten_send_hash' => 'Anweisungen zum weiteren Vorgehen wurden an die E-Mail Adresse des Benutzers versandt',
+'password_forgotten_text' => 'Füllen Sie bitte untenstehendes Formular aus. Weitere Anweisungen erhalten Sie dann in einer E-Mail die an Sie gesandt wird',
 'password_forgotten_title' => 'Passwort gesendet',
 'password_repeat' => 'Passwort wiederholen',
 'password_send' => 'Passwort verschickt',
@@ -698,9 +705,23 @@ URL: [url]',
 'reviewer_already_assigned' => 'Prüfer bereits zugewiesen',
 'reviewer_already_removed' => 'Prüfer wurde bereits aus dem Prüfvorgang entfernt oder hat die Prüfung bereits abgeschlossen',
 'review_deletion_email' => 'Prüfungsaufforderung gelöscht',
+'review_deletion_email_body' => 'Prüfungsaufforderung gelöscht
+Dokument: [name]
+Version: [version]
+Elternordner: [folder_path]
+Benutzer: [username]
+URL: [url]',
+'review_deletion_email_subject' => '[sitename]: [name] - Prüfungsaufforderung gelöscht',
 'review_group' => 'Gruppe: prüfen',
 'review_log' => 'Prüfungsprotokoll',
 'review_request_email' => 'Aufforderung zur Prüfung',
+'review_request_email_body' => 'Aufforderung zur Prüfung
+Dokument: [name]
+Version: [version]
+Elternordner: [folder_path]
+Benutzer: [username]
+URL: [url]',
+'review_request_email_subject' => '[sitename]: [name] - Aufforderung zur Prüfung',
 'review_status' => 'Status:',
 'review_submit_email' => 'Prüfung ausgeführt',
 'review_submit_email_body' => 'Prüfung ausgeführt
@@ -1059,7 +1080,7 @@ URL: [url]',
 'splash_settings_saved' => 'Einstellungen gesichert',
 'splash_substituted_user' => 'Benutzer gewechselt',
 'splash_switched_back_user' => 'Zum ursprünglichen Benutzer zurückgekehrt',
-'splash_toogle_group_manager' => 'Group manager toogled',
+'splash_toogle_group_manager' => 'Gruppenverwalter gewechselt',
 'state_and_next_state' => 'Status/Nächster Status',
 'statistic' => 'Statistik',
 'status' => 'Status',
@@ -1179,7 +1200,7 @@ URL: [url]',
 'week_view' => 'Wochenansicht',
 'workflow' => 'Workflow',
 'workflow_actions_management' => 'Workflow-Aktions-Management',
-'workflow_action_in_use' => 'This action is currently used by workflows.',
+'workflow_action_in_use' => 'Diese Aktion wird zur Zeit von Workflows benutzt',
 'workflow_action_name' => 'Name',
 'workflow_editor' => 'Workflow Editor',
 'workflow_group_summary' => 'Gruppenübersicht',

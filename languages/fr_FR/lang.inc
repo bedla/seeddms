@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (960), jeromerobert (50), lonnnew (9)
+//    Translators: Admin (961), jeromerobert (50), lonnnew (9)
 
 $text = array(
 'accept' => 'Accepter',
@@ -75,6 +75,8 @@ URL: [url]',
 'and' => 'et',
 'apply' => 'Appliquer',
 'approval_deletion_email' => 'Demande d\'approbation supprimée',
+'approval_deletion_email_body' => '',
+'approval_deletion_email_subject' => '',
 'approval_group' => 'Groupe d\'approbation',
 'approval_log' => 'Journal des approbations',
 'approval_request_email' => 'Demande d\'approbation',
@@ -688,9 +690,13 @@ URL: [url]',
 'reviewer_already_assigned' => 'est déjà déclaré en tant que correcteur',
 'reviewer_already_removed' => 'a déjà été retiré du processus de correction ou a déjà soumis une correction',
 'review_deletion_email' => 'Demande de correction supprimée',
+'review_deletion_email_body' => '',
+'review_deletion_email_subject' => '',
 'review_group' => 'Groupe de correction',
 'review_log' => '',
 'review_request_email' => 'Demande de correction',
+'review_request_email_body' => '',
+'review_request_email_subject' => '',
 'review_status' => 'Statut de correction',
 'review_submit_email' => 'Correction soumise',
 'review_submit_email_body' => 'Correction soumise
@@ -726,7 +732,7 @@ URL: [url]',
 'role_admin' => 'Administrateur',
 'role_guest' => 'Invité',
 'role_user' => 'Utilisateur',
-'ro_RO' => '',
+'ro_RO' => 'Roumain',
 'run_subworkflow' => 'Lancer le sous-workflow',
 'run_subworkflow_email_body' => '',
 'run_subworkflow_email_subject' => '[sitename]: [name] - Sous-workflow initialisé',

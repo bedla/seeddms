@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1356)
+//    Translators: Admin (1357)
 
 $text = array(
 'accept' => 'Accetta',
@@ -75,6 +75,8 @@ URL: [url]',
 'and' => 'e',
 'apply' => 'Applica',
 'approval_deletion_email' => 'Cancellata la richiesta di approvazione',
+'approval_deletion_email_body' => '',
+'approval_deletion_email_subject' => '',
 'approval_group' => 'Gruppo di approvazione',
 'approval_log' => 'Registro delle approvazioni',
 'approval_request_email' => 'Richiesta di approvazione',
@@ -699,9 +701,13 @@ URL: [url]',
 'reviewer_already_assigned' => 'è già assegnato come revisore',
 'reviewer_already_removed' => 'è già stato rimosso dal processo di revisione oppure ha già inserito una revisione.',
 'review_deletion_email' => 'Richiesta di revisione cancellata',
+'review_deletion_email_body' => '',
+'review_deletion_email_subject' => '',
 'review_group' => 'Gruppo revisori',
 'review_log' => 'Rivedi log',
 'review_request_email' => 'Richiesta di revisione',
+'review_request_email_body' => '',
+'review_request_email_subject' => '',
 'review_status' => 'Stato revisioni:',
 'review_submit_email' => 'Sottoposta revisione',
 'review_submit_email_body' => 'Sottoposta revisione
@@ -743,7 +749,7 @@ URL: [url]',
 'role_admin' => 'Amministratore',
 'role_guest' => 'Ospite',
 'role_user' => 'Utente',
-'ro_RO' => '',
+'ro_RO' => 'Rumeno',
 'run_subworkflow' => 'Inizia un sotto-flusso di lavoro',
 'run_subworkflow_email_body' => 'Sotto-flusso di lavoro iniziato
 Documento: [name]

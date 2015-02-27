@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1065), dgrutsch (2), netixw (14)
+//    Translators: Admin (1072), dgrutsch (3), netixw (14)
 
 $text = array(
 'accept' => 'Accept',
@@ -75,6 +75,13 @@ URL: [url]',
 'and' => 'and',
 'apply' => 'Apply',
 'approval_deletion_email' => 'Approval request deleted',
+'approval_deletion_email_body' => 'Approval request deleted
+Dokument: [name]
+Version: [version]
+Elternordner: [folder_path]
+Benutzer: [username]
+URL: [url]',
+'approval_deletion_email_subject' => '[sitename]: [name] - Approval request deleted',
 'approval_group' => 'Approval Group',
 'approval_log' => 'Approval Log',
 'approval_request_email' => 'Approval request',
@@ -698,9 +705,23 @@ URL: [url]',
 'reviewer_already_assigned' => 'is already assigned as a reviewer',
 'reviewer_already_removed' => 'has already been removed from review process or has already submitted a review',
 'review_deletion_email' => 'Review request deleted',
+'review_deletion_email_body' => 'Review request deleted
+Dokument: [name]
+Version: [version]
+Elternordner: [folder_path]
+Benutzer: [username]
+URL: [url]',
+'review_deletion_email_subject' => '[sitename]: [name] - Review request deleted',
 'review_group' => 'Review group',
 'review_log' => 'Review log',
 'review_request_email' => 'Review request',
+'review_request_email_body' => 'Review request
+Document: [name]
+Version: [version]
+Parent folder: [folder_path]
+User: [username]
+URL: [url]',
+'review_request_email_subject' => '[sitename]: [name] - Review request',
 'review_status' => 'Review status:',
 'review_submit_email' => 'Submitted review',
 'review_submit_email_body' => 'Submitted review
@@ -956,7 +977,7 @@ URL: [url]',
 'settings_printDisclaimer' => 'Print Disclaimer',
 'settings_printDisclaimer_desc' => 'If enabled, the disclaimer message will be printed on the bottom of every page',
 'settings_quota' => 'User\'s quota',
-'settings_quota_desc' => 'The maximum number of bytes a user may use on disk. Set this to 0 for unlimited disk space. This value can be overridden for each uses in his profile.',
+'settings_quota_desc' => 'The maximum number of bytes a user may use on disk. Set this to 0 for unlimited disk space. This value can be overridden for each user in his profile.',
 'settings_restricted' => 'Restricted access',
 'settings_restricted_desc' => 'Only allow users to log in if they have an entry in the local database (irrespective of successful authentication with LDAP)',
 'settings_rootDir' => 'Root directory',

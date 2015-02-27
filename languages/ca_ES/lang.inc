@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (647)
+//    Translators: Admin (649)
 
 $text = array(
 'accept' => 'Acceptar',
@@ -71,11 +71,18 @@ $text = array(
 'and' => 'i',
 'apply' => 'Apply',
 'approval_deletion_email' => 'Demanda d\'aprovació esborrada',
+'approval_deletion_email_body' => '',
+'approval_deletion_email_subject' => '',
 'approval_group' => 'Grup aprovador',
 'approval_log' => '',
 'approval_request_email' => 'Petició d\'aprovació',
-'approval_request_email_body' => '',
-'approval_request_email_subject' => '',
+'approval_request_email_body' => 'Petició d\'aprovació
+Dokument: [name]
+Version: [version]
+Elternordner: [folder_path]
+Benutzer: [username]
+URL: [url]',
+'approval_request_email_subject' => '[sitename]: [name] - Petició d\'aprovació',
 'approval_status' => 'Estat d\'aprovació',
 'approval_submit_email_body' => '',
 'approval_submit_email_subject' => 'Aprovació enviada',
@@ -569,9 +576,13 @@ $text = array(
 'reviewer_already_assigned' => 'Ja està asignat com revisor',
 'reviewer_already_removed' => 'Ja ha estat eliminat del procés de revisió o ja ha enviat una revisió',
 'review_deletion_email' => 'Petició de revisió eliminada',
+'review_deletion_email_body' => '',
+'review_deletion_email_subject' => '',
 'review_group' => 'Grup de revisió',
 'review_log' => '',
 'review_request_email' => 'Petició de revisió',
+'review_request_email_body' => '',
+'review_request_email_subject' => '',
 'review_status' => 'Estat de revisió',
 'review_submit_email' => 'Revisió enviada',
 'review_submit_email_body' => '',

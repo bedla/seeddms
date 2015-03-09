@@ -1,6 +1,8 @@
 --------------------------------------------------------------------------------
                      Changes in version 4.3.15
 --------------------------------------------------------------------------------
+- propperly escape quotes in strings to confirm deletion when clicking
+  on the delete icon in the folder/document list (Bug #189, #204)
 - new language turkish
 - SeedDMS_Core_DMS::getAllUsers() returns now previously missing
   language and theme of user

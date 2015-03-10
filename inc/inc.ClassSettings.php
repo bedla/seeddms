@@ -804,7 +804,7 @@ class Settings { /* {{{ */
 	 */
 	function getConfigDir() { /* {{{ */
 		$_tmp = dirname($_SERVER['SCRIPT_FILENAME']);
-		$_arr = preg_split('/\//', $_tmp);
+		$_arr = preg_split('/\//', rtrim(str_replace('\\', '/', $_tmp)));
 		$configDir = null;
 		if(file_exists(implode('/', $_arr)."/conf/"))
 			$configDir = implode('/', $_arr)."/conf/";

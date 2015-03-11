@@ -177,6 +177,6 @@ if ($action == "saveSettings")
 $session->setSplashMsg(array('type'=>'success', 'msg'=>getMLText('splash_settings_saved')));
 
 
-header("Location:../out/out.Settings.php");
+header("Location:../out/out.Settings.php?currenttab=".$_POST['currenttab']);
 
 ?>

@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1932), dgrutsch (18)
+//    Translators: Admin (1935), dgrutsch (18)
 
 $text = array(
 'accept' => 'Übernehmen',
@@ -543,7 +543,7 @@ URL: [url]',
 'my_account' => 'Mein Profil',
 'my_documents' => 'Meine Dokumente',
 'name' => 'Name',
-'needs_workflow_action' => 'Diese Dokument erfordert eine Aktion. Bitte schauen Sie auf den Workflow-Reiter.',
+'needs_workflow_action' => 'Dieses Dokument erfordert eine Aktion. Bitte schauen Sie auf den Workflow-Reiter.',
 'never' => 'nie',
 'new' => 'Neu',
 'new_attrdef' => 'Neue Attributdefinition',
@@ -689,6 +689,8 @@ URL: [url]',
 'remove_marked_files' => 'Markierte Dateien löschen',
 'repaired' => 'repariert',
 'repairing_objects' => 'Repariere Dokumente und Ordner.',
+'request_workflow_action_email_body' => '',
+'request_workflow_action_email_subject' => '',
 'results_page' => 'Ergebnis-Seite',
 'return_from_subworkflow' => 'Rückkehr aus Sub-Workflow',
 'return_from_subworkflow_email_body' => 'Rückkehr vom Subworkflow
@@ -878,6 +880,8 @@ URL: [url]',
 'settings_enableLargeFileUpload_desc' => 'Wenn dies gesetzt ist, dann ist ebenfalls der Upload von Dokumenten durch ein java applet mit Namen \'jumploader\' ohne Begrenzung der maximalen Dateigröße möglich. Auch das Hochladen mehrerer Dokumente in einem Schritt wird dadurch ermöglicht. Das Einschalten bewirkt, dass keine http only Cookies mehr gesetzt werden.',
 'settings_enableNotificationAppRev' => 'Prűfer/Freigeber benachrichtigen',
 'settings_enableNotificationAppRev_desc' => 'Setzen Sie diese Option, wenn die Prüfer und Freigeber eines Dokuments beim Hochladen einer neuen Version benachrichtigt werden sollen.',
+'settings_enableNotificationWorkflow' => 'Sende Benachrichtigung an Benutzer im nächsten Workflow-Schritt',
+'settings_enableNotificationWorkflow_desc' => 'Wenn diese Option eingeschaltet ist, werden die Benutzer und Gruppen, die im nächsten Workflow-Schritt aktiv werden müssen, informiert. Selbst dann, wenn Sie für das Dokument keine Benachrichtigung eingetragen haben.',
 'settings_enableOwnerNotification' => 'Besitzer als Beobachter eintragen',
 'settings_enableOwnerNotification_desc' => 'Setzen Sie diese Option, wenn der Besitzer eines Dokuments nach dem Hochladen in die Liste der Beobachter eingetragen werden soll.',
 'settings_enableOwnerRevApp' => 'Erlaube Prüfung/Freigabe durch Besitzer',

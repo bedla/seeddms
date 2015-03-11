@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1072), dgrutsch (3), netixw (14)
+//    Translators: Admin (1077), dgrutsch (3), netixw (14)
 
 $text = array(
 'accept' => 'Accept',
@@ -689,6 +689,15 @@ URL: [url]',
 'remove_marked_files' => 'Remove marked files',
 'repaired' => 'repaired',
 'repairing_objects' => 'Repairing documents and folders.',
+'request_workflow_action_email_body' => 'The workflow has reached a state which requires your action.
+Document: [name]
+Version: [version]
+Workflow: [workflow]
+Current state: [current_state]
+Parent folder: [folder_path]
+User: [username]
+URL: [url]',
+'request_workflow_action_email_subject' => 'Workflow action required',
 'results_page' => 'Results Page',
 'return_from_subworkflow' => 'Return from sub workflow',
 'return_from_subworkflow_email_body' => 'Return from subworkflow
@@ -878,6 +887,8 @@ URL: [url]',
 'settings_enableLargeFileUpload_desc' => 'If set, file upload is also available through a java applet called jumploader without a file size limit set by the browser. It also allows to upload several files in one step. Turning this on will turn off http only cookies.',
 'settings_enableNotificationAppRev' => 'Enable reviewer/approver notification',
 'settings_enableNotificationAppRev_desc' => 'Check to send a notification to the reviewer/approver when a new document version is added',
+'settings_enableNotificationWorkflow' => 'Send notification to users in next workflow transition',
+'settings_enableNotificationWorkflow_desc' => 'If this option is enabled, the users and groups which need to take action in the next workflow transiton will be notified. Even if they have not added a notification for the document.',
 'settings_enableOwnerNotification' => 'Enable owner notification by default',
 'settings_enableOwnerNotification_desc' => 'Check for adding a notification for the owner if a document when it is added.',
 'settings_enableOwnerRevApp' => 'Allow review/approval for owner',

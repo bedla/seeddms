@@ -517,6 +517,10 @@ if(!is_writeable($settings->_configFilePath)) {
         <td><?php printMLText("settings_enableNotificationAppRev");?>:</td>
         <td><input name="enableNotificationAppRev" type="checkbox" <?php if ($settings->_enableNotificationAppRev) echo "checked" ?> /></td>
       </tr>
+      <tr title="<?php printMLText("settings_enableNotificationWorkflow_desc");?>">
+        <td><?php printMLText("settings_enableNotificationWorkflow");?>:</td>
+        <td><input name="enableNotificationWorkflow" type="checkbox" <?php if ($settings->_enableNotificationWorkflow) echo "checked" ?> /></td>
+      </tr>
 
       <!--
         -- SETTINGS - ADVANCED - SERVER

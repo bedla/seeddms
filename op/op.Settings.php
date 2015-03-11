@@ -152,6 +152,7 @@ if ($action == "saveSettings")
   // SETTINGS - ADVANCED - NOTIFICATION
   $settings->_enableOwnerNotification = getBoolValue("enableOwnerNotification");
   $settings->_enableNotificationAppRev = getBoolValue("enableNotificationAppRev");
+  $settings->_enableNotificationWorkflow = getBoolValue("enableNotificationWorkflow");
 
   // SETTINGS - ADVANCED - SERVER
   $settings->_coreDir = $_POST["coreDir"];

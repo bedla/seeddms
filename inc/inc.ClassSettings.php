@@ -123,6 +123,11 @@ class Settings { /* {{{ */
 	var $_enableDuplicateDocNames = true;
 	// enable/disable notification when added as a reviewer/approver
 	var $_enableNotificationAppRev = true;
+	// enable/disable notification of users/group who need to take action for
+	// next transition. This is not like enableNotificationAppRev where a
+	// notification is added to the document. If this is turned on, the
+	// notification will be send in any case.
+	var $_enableNotificationWorkflow = false;
 	// preset expiration date
 	var $_presetExpirationDate = "";
 	// the name of the versioning info file created by the backup tool
@@ -485,6 +490,7 @@ class Settings { /* {{{ */
 			$tab = $node[0]->attributes();
 			$this->_enableNotificationAppRev = Settings::boolval($tab["enableNotificationAppRev"]);
 			$this->_enableOwnerNotification = Settings::boolval($tab["enableOwnerNotification"]);
+			$this->_enableNotificationWorkflow = Settings::boolval($tab["enableNotificationWorkflow"]);
 		}
 
 		// XML Path: /configuration/advanced/server
@@ -738,6 +744,7 @@ class Settings { /* {{{ */
     $node = $this->getXMLNode($xml, '/configuration/advanced', 'notification');
     $this->setXMLAttributValue($node, "enableNotificationAppRev", $this->_enableNotificationAppRev);
     $this->setXMLAttributValue($node, "enableOwnerNotification", $this->_enableOwnerNotification);
+    $this->setXMLAttributValue($node, "enableNotificationWorkflow", $this->_enableNotificationWorkflow);
 
     // XML Path: /configuration/advanced/server
     $node = $this->getXMLNode($xml, '/configuration/advanced', 'server');

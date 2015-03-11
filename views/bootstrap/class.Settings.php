@@ -44,8 +44,16 @@ class SeedDMS_View_Settings extends SeedDMS_Bootstrap_Style {
 
 ?>
 
+		<script language="JavaScript">
+		$(document).ready( function() {
+			$('#settingstab li a').click(function(event) {
+				$('#currenttab').val($(event.currentTarget).data('target'));
+			});
+		}); 
+		</script>
   <form action="../op/op.Settings.php" method="post" enctype="multipart/form-data" name="form0" >
   <input type="hidden" name="action" value="saveSettings" />
+	<input type="hidden" id="currenttab" name="currenttab" value="<?php echo (isset($_POST['currenttab']) ? $_POST['currenttab'] : 'site' ); ?>" />
 <?php
 if(!is_writeable($settings->_configFilePath)) {
 	print "<div class=\"alert alert-warning\">";
@@ -55,9 +63,9 @@ if(!is_writeable($settings->_configFilePath)) {
 ?>
 
   <ul class="nav nav-tabs" id="settingstab">
-	  <li class="active"><a data-target="#site" data-toggle="tab"><?php printMLText('settings_Site'); ?></a></li>
-	  <li><a data-target="#system" data-toggle="tab"><?php printMLText('settings_System'); ?></a></li>
-	  <li><a data-target="#advanced" data-toggle="tab"><?php printMLText('settings_Advanced'); ?></a></li>
+		<li class="<?php if(!isset($_POST['currenttab']) || $_POST['currenttab'] == 'site') echo 'active'; ?>"><a data-target="#site" data-toggle="tab"><?php printMLText('settings_Site'); ?></a></li>
+	  <li class="<?php if($_POST['currenttab'] == 'system') echo 'active'; ?>"><a data-target="#system" data-toggle="tab"><?php printMLText('settings_System'); ?></a></li>
+	  <li class="<?php if($_POST['currenttab'] == 'advanced') echo 'active'; ?>"><a data-target="#advanced" data-toggle="tab"><?php printMLText('settings_Advanced'); ?></a></li>
 	</ul>
 
 	<div class="tab-content">

@@ -42,6 +42,11 @@ if(USE_PHP_SESSION) {
 			else
 				exit;
 		}
+		if($userobj->isAdmin()) {
+			if($resArr["su"]) {
+				$userobj = $dms->getUser($resArr["su"]);
+			}
+		}
 		$dms->setUser($userobj);
 	}
 }

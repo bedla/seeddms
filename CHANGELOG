@@ -16,6 +16,7 @@
 - reviewers and approvers can be taken over from the previous version
 - disabling clipboard will disable all clipboard functions not just
   the clipboard area on the ViewFolder page
+- if a user substitution was done, it will be done in the restapi too
 
 --------------------------------------------------------------------------------
                      Changes in version 4.3.14

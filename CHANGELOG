@@ -17,6 +17,9 @@
 - disabling clipboard will disable all clipboard functions not just
   the clipboard area on the ViewFolder page
 - if a user substitution was done, it will be done in the restapi too
+- doSearch() in restapi applies the limit after filtering the hits
+  by access rights. This slows down search, but at least returns a
+  result set in cases where the user has access to very few documents only.
 
 --------------------------------------------------------------------------------
                      Changes in version 4.3.14

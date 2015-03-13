@@ -77,7 +77,7 @@ class SeedDMS_View_ViewFolder extends SeedDMS_Bootstrap_Style {
 		$folder = $this->params['folder'];
 		$orderby = $this->params['orderby'];
 		$enableFolderTree = $this->params['enableFolderTree'];
-		$enableClipboard = $this->params['enableClipboard'];
+		$enableClipboard = $this->params['enableclipboard'];
 		$enableDropUpload = $this->params['enableDropUpload'];
 		$expandFolderTree = $this->params['expandFolderTree'];
 		$showtree = $this->params['showtree'];

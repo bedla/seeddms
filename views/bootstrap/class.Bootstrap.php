@@ -1424,7 +1424,7 @@ $('#delete-folder-btn-".$folderid."').popover({
 		$showtree = $this->params['showtree'];
 		$workflowmode = $this->params['workflowmode'];
 		$previewwidth = $this->params['previewWidthList'];
-		$enableClipboard = $this->params['enableClipboard'];
+		$enableClipboard = $this->params['enableclipboard'];
 
 		$content = '';
 
@@ -1523,7 +1523,7 @@ $('#delete-folder-btn-".$folderid."').popover({
 		$showtree = $this->params['showtree'];
 		$enableRecursiveCount = $this->params['enableRecursiveCount'];
 		$maxRecursiveCount = $this->params['maxRecursiveCount'];
-		$enableClipboard = $this->params['enableClipboard'];
+		$enableClipboard = $this->params['enableclipboard'];
 
 		$owner = $subFolder->getOwner();
 		$comment = $subFolder->getComment();

@@ -59,6 +59,8 @@ if ($overallStatus["status"]==S_REJECTED || $overallStatus["status"]==S_OBSOLETE
 	UI::exitError(getMLText("document_title", array("documentname" => $document->getName())),getMLText("cannot_assign_invalid_state"));
 }
 
+$folder = $document->getFolder();
+
 // Retrieve a list of all users and groups that have review / approve
 // privileges.
 $docAccess = $document->getReadAccessList();
@@ -118,16 +120,19 @@ foreach ($pIndRev as $p) {
 						// Send an email notification to the new reviewer.
 						if($settings->_enableNotificationAppRev) {
 							if ($notifier) {
-								$subject = "###SITENAME###: ".$document->getName().", v.".$content->_version." - ".getMLText("review_request_email");
-								$message = getMLText("review_request_email")."\r\n";
-								$message .= 
-									getMLText("document").": ".$document->getName()."\r\n".
-									getMLText("version").": ".$content->_version."\r\n".
-									getMLText("comment").": ".$content->getComment()."\r\n".
-									getMLText("user").": ".$user->getFullName()." <". $user->getEmail() .">\r\n".
-									"URL: ###URL_PREFIX###out/out.ViewDocument.php?documentid=".$document->getID()."&version=".$content->_version."\r\n";
+								$subject = "review_request_email_subject";
+								$message = "review_request_email_body";
+								$params = array();
+								$params['name'] = $document->getName();
+								$params['folder_path'] = $folder->getFolderPathPlain();
+								$params['version'] = $content->_version;
+								$params['comment'] = $content->getComment();
+								$params['username'] = $user->getFullName();
+								$params['url'] = "http".((isset($_SERVER['HTTPS']) && (strcmp($_SERVER['HTTPS'],'off')!=0)) ? "s" : "")."://".$_SERVER['HTTP_HOST'].$settings->_httpRoot."out/out.ViewDocument.php?documentid=".$document->getID();
+								$params['sitename'] = $settings->_siteName;
+								$params['http_root'] = $settings->_httpRoot;
 								
-								$notifier->toIndividual($user, $docAccess["users"][$accessIndex["i"][$p]], $subject, $message);
+								$notifier->toIndividual($user, $docAccess["users"][$accessIndex["i"][$p]], $subject, $message, $params);
 							}
 						}
 						break;
@@ -174,16 +179,19 @@ if (count($reviewIndex["i"]) > 0) {
 						// Send an email notification to the reviewer.
 						if($settings->_enableNotificationAppRev) {
 							if ($notifier) {
-								$subject = "###SITENAME###: ".$document->getName().", v.".$content->_version." - ".getMLText("review_deletion_email");
-								$message = getMLText("review_deletion_email")."\r\n";
-								$message .= 
-									getMLText("document").": ".$document->getName()."\r\n".
-									getMLText("version").": ".$content->_version."\r\n".
-									getMLText("comment").": ".$content->getComment()."\r\n".
-									getMLText("user").": ".$user->getFullName()." <". $user->getEmail() .">\r\n".			
-									"URL: ###URL_PREFIX###out/out.ViewDocument.php?documentid=".$document->getID()."\r\n";
+								$subject = "review_deletion_email_subject";
+								$message = "review_deletion_email_body";
+								$params = array();
+								$params['name'] = $document->getName();
+								$params['folder_path'] = $folder->getFolderPathPlain();
+								$params['version'] = $content->_version;
+								$params['comment'] = $content->getComment();
+								$params['username'] = $user->getFullName();
+								$params['url'] = "http".((isset($_SERVER['HTTPS']) && (strcmp($_SERVER['HTTPS'],'off')!=0)) ? "s" : "")."://".$_SERVER['HTTP_HOST'].$settings->_httpRoot."out/out.ViewDocument.php?documentid=".$document->getID();
+								$params['sitename'] = $settings->_siteName;
+								$params['http_root'] = $settings->_httpRoot;
 								
-								$notifier->toIndividual($user, $docAccess["users"][$accessIndex["i"][$rx]], $subject, $message);
+								$notifier->toIndividual($user, $docAccess["users"][$accessIndex["i"][$rx]], $subject, $message, $params);
 							}
 						}
 						break;
@@ -218,16 +226,19 @@ foreach ($pGrpRev as $p) {
 						// Send an email notification to the new reviewer.
 						if($settings->_enableNotificationAppRev) {
 							if ($notifier) {
-								$subject = "###SITENAME###: ".$document->getName().", v.".$content->_version." - ".getMLText("review_request_email");
-								$message = getMLText("review_request_email")."\r\n";
-								$message .=
-									getMLText("document").": ".$document->getName()."\r\n".
-									getMLText("version").": ".$content->_version."\r\n".
-									getMLText("comment").": ".$content->getComment()."\r\n".
-									getMLText("user").": ".$user->getFullName()." <". $user->getEmail() .">\r\n".
-									"URL: ###URL_PREFIX###out/out.ViewDocument.php?documentid=".$document->getID()."&version=".$content->_version."\r\n";
+								$subject = "review_request_email_subject";
+								$message = "review_request_email_body";
+								$params = array();
+								$params['name'] = $document->getName();
+								$params['folder_path'] = $folder->getFolderPathPlain();
+								$params['version'] = $content->_version;
+								$params['comment'] = $content->getComment();
+								$params['username'] = $user->getFullName();
+								$params['url'] = "http".((isset($_SERVER['HTTPS']) && (strcmp($_SERVER['HTTPS'],'off')!=0)) ? "s" : "")."://".$_SERVER['HTTP_HOST'].$settings->_httpRoot."out/out.ViewDocument.php?documentid=".$document->getID();
+								$params['sitename'] = $settings->_siteName;
+								$params['http_root'] = $settings->_httpRoot;
 							
-								$notifier->toGroup($user, $docAccess["groups"][$accessIndex["g"][$p]], $subject, $message);
+								$notifier->toGroup($user, $docAccess["groups"][$accessIndex["g"][$p]], $subject, $message, $params);
 							}
 						}
 						break;
@@ -271,17 +282,19 @@ if (count($reviewIndex["g"]) > 0) {
 						// Send an email notification to the review group.
 						if($settings->_enableNotificationAppRev) {
 							if ($notifier) {
+								$subject = "review_deletion_email_subject";
+								$message = "review_deletion_email_body";
+								$params = array();
+								$params['name'] = $document->getName();
+								$params['folder_path'] = $folder->getFolderPathPlain();
+								$params['version'] = $content->_version;
+								$params['comment'] = $content->getComment();
+								$params['username'] = $user->getFullName();
+								$params['url'] = "http".((isset($_SERVER['HTTPS']) && (strcmp($_SERVER['HTTPS'],'off')!=0)) ? "s" : "")."://".$_SERVER['HTTP_HOST'].$settings->_httpRoot."out/out.ViewDocument.php?documentid=".$document->getID();
+								$params['sitename'] = $settings->_siteName;
+								$params['http_root'] = $settings->_httpRoot;
 							
-								$subject = "###SITENAME###: ".$document->getName().", v.".$content->_version." - ".getMLText("review_deletion_email");
-								$message = getMLText("review_deletion_email")."\r\n";
-								$message .= 
-									getMLText("document").": ".$document->getName()."\r\n".
-									getMLText("version").": ".$content->_version."\r\n".
-									getMLText("comment").": ".$content->getComment()."\r\n".
-									getMLText("user").": ".$user->getFullName()." <". $user->getEmail() .">\r\n".			
-									"URL: ###URL_PREFIX###out/out.ViewDocument.php?documentid=".$document->getID()."\r\n";
-
-								$notifier->toGroup($user, $docAccess["groups"][$accessIndex["g"][$rx]], $subject, $message);
+								$notifier->toGroup($user, $docAccess["groups"][$accessIndex["g"][$rx]], $subject, $message, $params);
 							}
 						}
 						break;
@@ -321,16 +334,19 @@ foreach ($pIndApp as $p) {
 						// Send an email notification to the new approver.
 						if($settings->_enableNotificationAppRev) {
 							if ($overallStatus["status"]!=0 && $notifier) {
-								$subject = "###SITENAME###: ".$document->getName().", v.".$content->_version." - ".getMLText("approval_request_email");
-								$message = getMLText("approval_request_email")."\r\n";
-								$message .= 
-									getMLText("document").": ".$document->getName()."\r\n".
-									getMLText("version").": ".$content->_version."\r\n".
-									getMLText("comment").": ".$content->getComment()."\r\n".
-									getMLText("user").": ".$user->getFullName()." <". $user->getEmail() .">\r\n".			
-									"URL: ###URL_PREFIX###out/out.ViewDocument.php?documentid=".$document->getID()."&version=".$content->_version."\r\n";
+								$subject = "approval_request_email_subject";
+								$message = "approval_request_email_body";
+								$params = array();
+								$params['name'] = $document->getName();
+								$params['folder_path'] = $folder->getFolderPathPlain();
+								$params['version'] = $content->_version;
+								$params['comment'] = $content->getComment();
+								$params['username'] = $user->getFullName();
+								$params['url'] = "http".((isset($_SERVER['HTTPS']) && (strcmp($_SERVER['HTTPS'],'off')!=0)) ? "s" : "")."://".$_SERVER['HTTP_HOST'].$settings->_httpRoot."out/out.ViewDocument.php?documentid=".$document->getID();
+								$params['sitename'] = $settings->_siteName;
+								$params['http_root'] = $settings->_httpRoot;
 
-								$notifier->toIndividual($user, $docAccess["users"][$accessIndex["i"][$p]], $subject, $message);
+								$notifier->toIndividual($user, $docAccess["users"][$accessIndex["i"][$p]], $subject, $message, $params);
 							}
 						}
 						break;
@@ -375,16 +391,19 @@ if (count($approvalIndex["i"]) > 0) {
 						// Send an email notification to the approver.
 						if($settings->_enableNotificationAppRev) {
 							if ($notifier) {
-								$subject = "###SITENAME###: ".$document->getName().", v.".$content->_version." - ".getMLText("approval_deletion_email");
-								$message = getMLText("approval_deletion_email")."\r\n";
-								$message .= 
-									getMLText("document").": ".$document->getName()."\r\n".
-									getMLText("version").": ".$content->_version."\r\n".
-									getMLText("comment").": ".$content->getComment()."\r\n".
-									getMLText("user").": ".$user->getFullName()." <". $user->getEmail() .">\r\n".			
-									"URL: ###URL_PREFIX###out/out.ViewDocument.php?documentid=".$document->getID()."\r\n";
+								$subject = "approval_deletion_email_subject";
+								$message = "approval_deletion_email_body";
+								$params = array();
+								$params['name'] = $document->getName();
+								$params['folder_path'] = $folder->getFolderPathPlain();
+								$params['version'] = $content->_version;
+								$params['comment'] = $content->getComment();
+								$params['username'] = $user->getFullName();
+								$params['url'] = "http".((isset($_SERVER['HTTPS']) && (strcmp($_SERVER['HTTPS'],'off')!=0)) ? "s" : "")."://".$_SERVER['HTTP_HOST'].$settings->_httpRoot."out/out.ViewDocument.php?documentid=".$document->getID();
+								$params['sitename'] = $settings->_siteName;
+								$params['http_root'] = $settings->_httpRoot;
 
-								$notifier->toIndividual($user, $docAccess["users"][$accessIndex["i"][$rx]], $subject, $message);
+								$notifier->toIndividual($user, $docAccess["users"][$accessIndex["i"][$rx]], $subject, $message, $params);
 							}
 						}
 						break;
@@ -419,16 +438,18 @@ foreach ($pGrpApp as $p) {
 						// Send an email notification to the new approver.
 						if($settings->_enableNotificationAppRev) {
 							if ($overallStatus["status"]!=0 && $notifier) {
-								$subject = "###SITENAME###: ".$document->getName().", v.".$content->_version." - ".getMLText("approval_request_email");
-								$message = getMLText("approval_request_email")."\r\n";
-								$message .=
-									getMLText("document").": ".$document->getName()."\r\n".
-									getMLText("version").": ".$content->_version."\r\n".
-									getMLText("comment").": ".$content->getComment()."\r\n".
-									getMLText("user").": ".$user->getFullName()." <". $user->getEmail() .">\r\n".			
-									"URL: ###URL_PREFIX###out/out.ViewDocument.php?documentid=".$document->getID()."&version=".$content->_version."\r\n";
+								$subject = "approval_request_email_subject";
+								$message = "approval_request_email_body";
+								$params = array();
+								$params['name'] = $document->getName();
+								$params['folder_path'] = $folder->getFolderPathPlain();
+								$params['version'] = $content->_version;
+								$params['comment'] = $content->getComment();
+								$params['username'] = $user->getFullName();
+								$params['sitename'] = $settings->_siteName;
+								$params['http_root'] = $settings->_httpRoot;
 
-								$notifier->toGroup($user, $docAccess["groups"][$accessIndex["g"][$p]], $subject, $message);
+								$notifier->toGroup($user, $docAccess["groups"][$accessIndex["g"][$p]], $subject, $message, $params);
 							}
 						}
 						break;
@@ -473,17 +494,19 @@ if (count($approvalIndex["g"]) > 0) {
 						// Send an email notification to the approval group.
 						if($settings->_enableNotificationAppRev) {
 							if ($notifier) {
+								$subject = "approval_deletion_email_subject";
+								$message = "approval_deletion_email_body";
+								$params = array();
+								$params['name'] = $document->getName();
+								$params['folder_path'] = $folder->getFolderPathPlain();
+								$params['version'] = $content->_version;
+								$params['comment'] = $content->getComment();
+								$params['username'] = $user->getFullName();
+								$params['url'] = "http".((isset($_SERVER['HTTPS']) && (strcmp($_SERVER['HTTPS'],'off')!=0)) ? "s" : "")."://".$_SERVER['HTTP_HOST'].$settings->_httpRoot."out/out.ViewDocument.php?documentid=".$document->getID();
+								$params['sitename'] = $settings->_siteName;
+								$params['http_root'] = $settings->_httpRoot;
 							
-								$subject = "###SITENAME###: ".$document->getName().", v.".$content->_version." - ".getMLText("approval_deletion_email");
-								$message = getMLText("approval_deletion_email")."\r\n";
-								$message .= 
-									getMLText("document").": ".$document->getName()."\r\n".
-									getMLText("version").": ".$content->_version."\r\n".
-									getMLText("comment").": ".$content->getComment()."\r\n".
-									getMLText("user").": ".$user->getFullName()." <". $user->getEmail() .">\r\n".			
-									"URL: ###URL_PREFIX###out/out.ViewDocument.php?documentid=".$document->getID()."\r\n";
-
-								$notifier->toGroup($user, $docAccess["groups"][$accessIndex["g"][$rx]], $subject, $message);
+								$notifier->toGroup($user, $docAccess["groups"][$accessIndex["g"][$rx]], $subject, $message, $params);
 							}
 						}
 						break;

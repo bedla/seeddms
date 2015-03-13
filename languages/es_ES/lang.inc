@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (930), angel (123), francisco (2), jaimem (14)
+//    Translators: Admin (932), angel (123), francisco (2), jaimem (14)
 
 $text = array(
 'accept' => 'Aceptar',
@@ -75,6 +75,8 @@ URL: [url]',
 'and' => 'y',
 'apply' => 'Aplicar',
 'approval_deletion_email' => 'Petición de aprobación eliminada',
+'approval_deletion_email_body' => '',
+'approval_deletion_email_subject' => '',
 'approval_group' => 'Grupo aprobador',
 'approval_log' => 'Traza de aprovación',
 'approval_request_email' => 'Petición de aprobación',
@@ -683,6 +685,8 @@ nURL: [url]',
 'remove_marked_files' => 'Eliminar ficheros marcados',
 'repaired' => 'Reparado',
 'repairing_objects' => 'Reparando documentos y carpetas.',
+'request_workflow_action_email_body' => '',
+'request_workflow_action_email_subject' => '',
 'results_page' => 'Página de resultados',
 'return_from_subworkflow' => 'Regreso a sub Flujo de trabajo',
 'return_from_subworkflow_email_body' => 'Retorno del subflujo de trabajo
@@ -699,9 +703,13 @@ nURL: [url]',
 'reviewer_already_assigned' => 'Ya está asignado como revisor',
 'reviewer_already_removed' => 'Ya ha sido eliminado del proceso de revisión o ya ha enviado una revisión',
 'review_deletion_email' => 'Petición de revisión eliminada',
+'review_deletion_email_body' => '',
+'review_deletion_email_subject' => '',
 'review_group' => 'Grupo de revisión',
 'review_log' => 'Traza de revisión',
 'review_request_email' => 'Petición de revisión',
+'review_request_email_body' => '',
+'review_request_email_subject' => '',
 'review_status' => 'Estado de revisión',
 'review_submit_email' => 'Revisión enviada',
 'review_submit_email_body' => 'Revisión enviada
@@ -743,7 +751,7 @@ URL: [url]',
 'role_admin' => 'Administrador',
 'role_guest' => 'Invitado',
 'role_user' => 'Usuario',
-'ro_RO' => '',
+'ro_RO' => 'Rumano',
 'run_subworkflow' => 'Ejecutar sub flujo de trabajo',
 'run_subworkflow_email_body' => 'Subflujo de trabajo iniciado
 Documento: [name]
@@ -858,6 +866,8 @@ URL: [url]',
 'settings_enableLargeFileUpload_desc' => 'Si se habilita, la carga de ficheros también estará disponible a través de un applet java llamado jumploader, sin límite de tamaño de fichero fijado por el navegador. También permite la carga de múltiples ficheros de una sola vez.',
 'settings_enableNotificationAppRev' => 'Habilitar notificación a revisor/aprobador',
 'settings_enableNotificationAppRev_desc' => 'Habilitar para enviar notificación a revisor/aprobador cuando se añade una nueva versión de documento',
+'settings_enableNotificationWorkflow' => '',
+'settings_enableNotificationWorkflow_desc' => '',
 'settings_enableOwnerNotification' => 'Habilitar notificación al propietario por defecto',
 'settings_enableOwnerNotification_desc' => 'Marcar para añadir una notificación al propietario del documento cuando es añadido.',
 'settings_enableOwnerRevApp' => 'Permitir al propietario revisar/aprobar',
@@ -1110,7 +1120,7 @@ Usuario: [username]
 URL: [url]',
 'transition_triggered_email_subject' => '[sitename]: [name] - Workflow transition triggered',
 'trigger_workflow' => 'Flujo de Trabajo',
-'tr_TR' => '',
+'tr_TR' => 'Turco',
 'tuesday' => 'Martes',
 'tuesday_abbr' => 'M',
 'type_to_search' => 'Tipo de búsqueda',

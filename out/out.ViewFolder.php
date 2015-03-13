@@ -57,7 +57,6 @@ if($view) {
 	$view->setParam('folder', $folder);
 	$view->setParam('orderby', $orderby);
 	$view->setParam('enableFolderTree', $settings->_enableFolderTree);
-	$view->setParam('enableClipboard', $settings->_enableClipboard);
 	$view->setParam('enableDropUpload', $settings->_enableDropUpload);
 	$view->setParam('expandFolderTree', $settings->_expandFolderTree);
 	$view->setParam('showtree', showtree());

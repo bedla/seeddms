@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1065), dgrutsch (2), netixw (14)
+//    Translators: Admin (1077), dgrutsch (3), netixw (14)
 
 $text = array(
 'accept' => 'Accept',
@@ -75,6 +75,13 @@ URL: [url]',
 'and' => 'and',
 'apply' => 'Apply',
 'approval_deletion_email' => 'Approval request deleted',
+'approval_deletion_email_body' => 'Approval request deleted
+Dokument: [name]
+Version: [version]
+Elternordner: [folder_path]
+Benutzer: [username]
+URL: [url]',
+'approval_deletion_email_subject' => '[sitename]: [name] - Approval request deleted',
 'approval_group' => 'Approval Group',
 'approval_log' => 'Approval Log',
 'approval_request_email' => 'Approval request',
@@ -682,6 +689,15 @@ URL: [url]',
 'remove_marked_files' => 'Remove marked files',
 'repaired' => 'repaired',
 'repairing_objects' => 'Repairing documents and folders.',
+'request_workflow_action_email_body' => 'The workflow has reached a state which requires your action.
+Document: [name]
+Version: [version]
+Workflow: [workflow]
+Current state: [current_state]
+Parent folder: [folder_path]
+User: [username]
+URL: [url]',
+'request_workflow_action_email_subject' => 'Workflow action required',
 'results_page' => 'Results Page',
 'return_from_subworkflow' => 'Return from sub workflow',
 'return_from_subworkflow_email_body' => 'Return from subworkflow
@@ -698,9 +714,23 @@ URL: [url]',
 'reviewer_already_assigned' => 'is already assigned as a reviewer',
 'reviewer_already_removed' => 'has already been removed from review process or has already submitted a review',
 'review_deletion_email' => 'Review request deleted',
+'review_deletion_email_body' => 'Review request deleted
+Dokument: [name]
+Version: [version]
+Elternordner: [folder_path]
+Benutzer: [username]
+URL: [url]',
+'review_deletion_email_subject' => '[sitename]: [name] - Review request deleted',
 'review_group' => 'Review group',
 'review_log' => 'Review log',
 'review_request_email' => 'Review request',
+'review_request_email_body' => 'Review request
+Document: [name]
+Version: [version]
+Parent folder: [folder_path]
+User: [username]
+URL: [url]',
+'review_request_email_subject' => '[sitename]: [name] - Review request',
 'review_status' => 'Review status:',
 'review_submit_email' => 'Submitted review',
 'review_submit_email_body' => 'Submitted review
@@ -857,6 +887,8 @@ URL: [url]',
 'settings_enableLargeFileUpload_desc' => 'If set, file upload is also available through a java applet called jumploader without a file size limit set by the browser. It also allows to upload several files in one step. Turning this on will turn off http only cookies.',
 'settings_enableNotificationAppRev' => 'Enable reviewer/approver notification',
 'settings_enableNotificationAppRev_desc' => 'Check to send a notification to the reviewer/approver when a new document version is added',
+'settings_enableNotificationWorkflow' => 'Send notification to users in next workflow transition',
+'settings_enableNotificationWorkflow_desc' => 'If this option is enabled, the users and groups which need to take action in the next workflow transiton will be notified. Even if they have not added a notification for the document.',
 'settings_enableOwnerNotification' => 'Enable owner notification by default',
 'settings_enableOwnerNotification_desc' => 'Check for adding a notification for the owner if a document when it is added.',
 'settings_enableOwnerRevApp' => 'Allow review/approval for owner',
@@ -956,7 +988,7 @@ URL: [url]',
 'settings_printDisclaimer' => 'Print Disclaimer',
 'settings_printDisclaimer_desc' => 'If enabled, the disclaimer message will be printed on the bottom of every page',
 'settings_quota' => 'User\'s quota',
-'settings_quota_desc' => 'The maximum number of bytes a user may use on disk. Set this to 0 for unlimited disk space. This value can be overridden for each uses in his profile.',
+'settings_quota_desc' => 'The maximum number of bytes a user may use on disk. Set this to 0 for unlimited disk space. This value can be overridden for each user in his profile.',
 'settings_restricted' => 'Restricted access',
 'settings_restricted_desc' => 'Only allow users to log in if they have an entry in the local database (irrespective of successful authentication with LDAP)',
 'settings_rootDir' => 'Root directory',

@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1356)
+//    Translators: Admin (1357)
 
 $text = array(
 'accept' => 'Accetta',
@@ -75,6 +75,8 @@ URL: [url]',
 'and' => 'e',
 'apply' => 'Applica',
 'approval_deletion_email' => 'Cancellata la richiesta di approvazione',
+'approval_deletion_email_body' => '',
+'approval_deletion_email_subject' => '',
 'approval_group' => 'Gruppo di approvazione',
 'approval_log' => 'Registro delle approvazioni',
 'approval_request_email' => 'Richiesta di approvazione',
@@ -683,6 +685,8 @@ URL: [url]',
 'remove_marked_files' => 'Rimuovi i files contrassegnati',
 'repaired' => 'riparato',
 'repairing_objects' => 'Riparazione documenti e cartelle in corso...',
+'request_workflow_action_email_body' => '',
+'request_workflow_action_email_subject' => '',
 'results_page' => 'Pagina dei risultati',
 'return_from_subworkflow' => 'Ritorno dal sotto-flusso di lavoro',
 'return_from_subworkflow_email_body' => 'Ritorno dal sotto-flusso di lavoro
@@ -699,9 +703,13 @@ URL: [url]',
 'reviewer_already_assigned' => 'è già assegnato come revisore',
 'reviewer_already_removed' => 'è già stato rimosso dal processo di revisione oppure ha già inserito una revisione.',
 'review_deletion_email' => 'Richiesta di revisione cancellata',
+'review_deletion_email_body' => '',
+'review_deletion_email_subject' => '',
 'review_group' => 'Gruppo revisori',
 'review_log' => 'Rivedi log',
 'review_request_email' => 'Richiesta di revisione',
+'review_request_email_body' => '',
+'review_request_email_subject' => '',
 'review_status' => 'Stato revisioni:',
 'review_submit_email' => 'Sottoposta revisione',
 'review_submit_email_body' => 'Sottoposta revisione
@@ -743,7 +751,7 @@ URL: [url]',
 'role_admin' => 'Amministratore',
 'role_guest' => 'Ospite',
 'role_user' => 'Utente',
-'ro_RO' => '',
+'ro_RO' => 'Rumeno',
 'run_subworkflow' => 'Inizia un sotto-flusso di lavoro',
 'run_subworkflow_email_body' => 'Sotto-flusso di lavoro iniziato
 Documento: [name]
@@ -858,6 +866,8 @@ URL: [url]',
 'settings_enableLargeFileUpload_desc' => 'Se selezionato, il caricamento (upload) dei files può essere effettuato anche attraverso un\'applet Java chiamata Jumploader evitando il limite di dimensioni file imposto dal browser; Jumploader permette anche il caricamento di diversi files contemporaneamente.',
 'settings_enableNotificationAppRev' => 'Abilita/disabilita notifica a revisore/approvatore',
 'settings_enableNotificationAppRev_desc' => 'Spuntare per inviare una notifica al revisore/approvatore nel momento in cui viene aggiunta una nuova versione del documento.',
+'settings_enableNotificationWorkflow' => '',
+'settings_enableNotificationWorkflow_desc' => '',
 'settings_enableOwnerNotification' => 'Abilita/disabilita notifica al proprietario',
 'settings_enableOwnerNotification_desc' => 'Spuntare per inviare una notifica al proprietario del documento nel momento in cui questo viene aggiunto.',
 'settings_enableOwnerRevApp' => 'Permetti la revisione/approvazione per il proprietario',

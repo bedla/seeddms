@@ -680,18 +680,17 @@ function doSearch() { /* {{{ */
 	$mode = $app->request()->get('mode');
 	if(!$limit = $app->request()->get('limit'))
 		$limit = 8;
-	$resArr = $dms->search($querystr, $limit);
+	$resArr = $dms->search($querystr);
 	$entries = array();
 	$count = 0;
 	if($resArr['folders']) {
 		foreach ($resArr['folders'] as $entry) {
 			if ($entry->getAccessMode($userobj) >= M_READ) {
 				$entries[] = $entry;
-				if($count < $limit)
-					$count++;
-				else
-					break;
+				$count++;
 			}
+			if($count >= $limit)
+				break;
 		}
 	}
 	$count = 0;
@@ -699,11 +698,10 @@ function doSearch() { /* {{{ */
 		foreach ($resArr['docs'] as $entry) {
 			if ($entry->getAccessMode($userobj) >= M_READ) {
 				$entries[] = $entry;
-				if($count < $limit)
-					$count++;
-				else
-					break;
+				$count++;
 			}
+			if($count >= $limit)
+				break;
 		}
 	}
 

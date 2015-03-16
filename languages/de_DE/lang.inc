@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1936), dgrutsch (18)
+//    Translators: Admin (1937), dgrutsch (18)
 
 $text = array(
 'accept' => 'Übernehmen',
@@ -153,6 +153,7 @@ URL: [url]',
 'backup_remove' => 'Backup löschen',
 'backup_tools' => 'Backup tools',
 'between' => 'zwischen',
+'bg_BG' => 'Bulgarisch',
 'browse' => 'Durchsuchen',
 'calendar' => 'Kalender',
 'calendar_week' => 'Kalenderwoche',

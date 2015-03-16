@@ -126,6 +126,7 @@ $text = array(
 'backup_remove' => 'Odstrániť zálohu',
 'backup_tools' => 'Zálohovacie nástroje',
 'between' => 'medzi',
+'bg_BG' => '',
 'browse' => '',
 'calendar' => 'Kalendár',
 'calendar_week' => '',

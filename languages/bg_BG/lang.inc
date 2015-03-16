@@ -126,6 +126,7 @@ $text = array(
 'backup_remove' => 'Изтрий бекъп',
 'backup_tools' => 'Иструменти за бекъп',
 'between' => 'между',
+'bg_BG' => '',
 'browse' => '',
 'calendar' => 'Календар',
 'calendar_week' => '',

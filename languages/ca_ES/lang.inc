@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (649)
+//    Translators: Admin (651)
 
 $text = array(
 'accept' => 'Acceptar',
@@ -44,6 +44,7 @@ $text = array(
 'action_review' => '',
 'action_revise' => '',
 'add' => 'Afegir',
+'add_approval' => 'Enviar aprovació',
 'add_document' => 'Afegir document',
 'add_document_link' => 'Afegir vincle',
 'add_doc_reviewer_approver_warning' => 'Els documents N.B. es marquen automàticament com a publicats si no hi ha revisors o aprovadors assignats',
@@ -53,6 +54,7 @@ $text = array(
 'add_member' => 'Afegir membre',
 'add_multiple_documents' => 'Add multiple documents',
 'add_multiple_files' => 'Afegir múltiples fitxers (s\'utilitzarà el nom de fitxer com a nom del document)',
+'add_review' => 'Enviar revisiót',
 'add_subfolder' => 'Afegir subdirectori',
 'add_to_clipboard' => '',
 'add_user' => 'Afegir nou usuari',

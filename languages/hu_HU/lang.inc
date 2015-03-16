@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (545), ribaz (1019)
+//    Translators: Admin (547), ribaz (1019)
 
 $text = array(
 'accept' => 'Elfogad',
@@ -48,6 +48,7 @@ URL: [url]',
 'action_review' => 'Áttekintés',
 'action_revise' => 'Felülvizsgálat',
 'add' => 'Hozzáad',
+'add_approval' => 'Jóváhagyás küldése',
 'add_document' => 'Dokumentum hozzáadása',
 'add_document_link' => 'Hivatkozás hozzáadása',
 'add_doc_reviewer_approver_warning' => 'A dokumentumok automatikusan kiadásra lesznek jelölve, ha nincs hozzájuk rendelve felülvizsgáló vagy elfogadó.',
@@ -57,6 +58,7 @@ URL: [url]',
 'add_member' => 'Tag hozzáadása',
 'add_multiple_documents' => 'Több dokumentum hozzáadása',
 'add_multiple_files' => 'Több állomány hozzáadása (az állomány nevét használja dokumentum névként)',
+'add_review' => 'Felülvizsgálat küldése',
 'add_subfolder' => 'Alkönyvtár hozzáadása',
 'add_to_clipboard' => 'Vágólaphoz hozzáad',
 'add_user' => 'Új felhasználó hozzáadása',

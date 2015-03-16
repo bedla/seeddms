@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1000), balan (6)
+//    Translators: Admin (1002), balan (6)
 
 $text = array(
 'accept' => 'Accept',
@@ -48,6 +48,7 @@ URL: [url]',
 'action_review' => 'Revizuire',
 'action_revise' => 'Revizui',
 'add' => 'Adauga',
+'add_approval' => 'Trimite aprobare',
 'add_document' => 'Adaugă document',
 'add_document_link' => 'Adauga link',
 'add_doc_reviewer_approver_warning' => 'N.B. Documentele care nu au atasat revizuitori(reviwers) și/sau aprobatori sunt automat marcate ca "final(released)".',
@@ -57,6 +58,7 @@ URL: [url]',
 'add_member' => 'Adaugă un membru',
 'add_multiple_documents' => 'Adaugă documente multiple',
 'add_multiple_files' => 'Adaugă fisiere multiple (va folosi numele fișierului ca nume de document)',
+'add_review' => 'Trimite revizuire',
 'add_subfolder' => 'Adaugă subfolder',
 'add_to_clipboard' => 'Adaugă in clipboard',
 'add_user' => 'Adaugă utilizator nou',

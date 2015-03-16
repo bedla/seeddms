@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1083), tmichelfelder (106)
+//    Translators: Admin (1085), tmichelfelder (106)
 
 $text = array(
 'accept' => 'Godkänn',
@@ -48,6 +48,7 @@ URL: [url]',
 'action_review' => 'Granska',
 'action_revise' => 'Revidera',
 'add' => 'Lägg till',
+'add_approval' => 'Skicka godkännande',
 'add_document' => 'Lägg till dokument',
 'add_document_link' => 'Lägg till länkat dokument',
 'add_doc_reviewer_approver_warning' => 'OBS! Dokumentet kommer automatiskt att markeras klart för användning, om ingen person anges för granskning eller godkännande av dokumentet.',
@@ -57,6 +58,7 @@ URL: [url]',
 'add_member' => 'Lägg till användare',
 'add_multiple_documents' => 'Lägg till flera dokument',
 'add_multiple_files' => 'Lägg till flera dokument (använder filnamnet som dokumentnamn)',
+'add_review' => 'Skicka granskning',
 'add_subfolder' => 'Lägg till katalog',
 'add_to_clipboard' => 'Flytta till Urklipp',
 'add_user' => 'Lägg till ny användare',

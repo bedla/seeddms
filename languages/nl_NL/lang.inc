@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (688), pepijn (45), reinoutdijkstra@hotmail.com (270)
+//    Translators: Admin (690), pepijn (45), reinoutdijkstra@hotmail.com (270)
 
 $text = array(
 'accept' => 'Accept',
@@ -48,6 +48,7 @@ URL: [url]',
 'action_review' => 'Beoordelen',
 'action_revise' => 'Herzie',
 'add' => 'Toevoegen',
+'add_approval' => 'Verzend [Goedkeuring]',
 'add_document' => 'Document toevoegen',
 'add_document_link' => 'Link toevoegen',
 'add_doc_reviewer_approver_warning' => 'N.B. Documenten zijn automatisch gemarkeeerd als [Gepubliceerd] als geen [Autoriseerder] of [Controleur] is toegewezen.',
@@ -57,6 +58,7 @@ URL: [url]',
 'add_member' => 'Lid toevoegen',
 'add_multiple_documents' => 'Meerdere Documenten Toevoegen',
 'add_multiple_files' => 'Meerdere bestanden toevoegen (Gebruikt bestandsnaam als document naam)',
+'add_review' => 'Verzend [Controle]',
 'add_subfolder' => 'Submap toevoegen',
 'add_to_clipboard' => 'Toevoegen aan klembord',
 'add_user' => 'Nieuwe gebruiker toevoegen',

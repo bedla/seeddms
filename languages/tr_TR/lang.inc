@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1000), aydin (83)
+//    Translators: Admin (1002), aydin (83)
 
 $text = array(
 'accept' => 'Kabul',
@@ -47,6 +47,7 @@ URL: [url]',
 'action_review' => 'Gözden geçir',
 'action_revise' => 'Revize et',
 'add' => 'Ekle',
+'add_approval' => 'Onay ver',
 'add_document' => 'Doküman ekle',
 'add_document_link' => 'Link ekle',
 'add_doc_reviewer_approver_warning' => 'NOT: Dokümanlara onay veren veya gözden geçiren kimse atanmamışsa otomatik olarak yayınlanırlar.',
@@ -56,6 +57,7 @@ URL: [url]',
 'add_member' => 'Yeni üye ekle',
 'add_multiple_documents' => 'Çoklu doküman ekleme',
 'add_multiple_files' => 'Çoklu dosya ekle (dosya adı dokümanın adı olarak kullanılacak)',
+'add_review' => 'Kabul et',
 'add_subfolder' => 'Alt klasör ekle',
 'add_to_clipboard' => 'Panoya ekle',
 'add_user' => 'Yeni kullanıcı ekle',

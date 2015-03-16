@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1357)
+//    Translators: Admin (1359)
 
 $text = array(
 'accept' => 'Accetta',
@@ -48,6 +48,7 @@ URL: [url]',
 'action_review' => 'Rivedi',
 'action_revise' => 'Revisiona',
 'add' => 'Aggiungi',
+'add_approval' => 'Invio approvazione',
 'add_document' => 'Aggiungi documento',
 'add_document_link' => 'Aggiungi collegamento',
 'add_doc_reviewer_approver_warning' => 'Nota: i documenti saranno automaticamente contrassegnati come rilasciati se non è stato assegnato un revisore o un approvatore.',
@@ -57,6 +58,7 @@ URL: [url]',
 'add_member' => 'Aggiungi un membro',
 'add_multiple_documents' => 'Aggiungi documenti multipli',
 'add_multiple_files' => 'Aggiungi documenti multipli (il nome del file verrà usato come nome del documento)',
+'add_review' => 'Invio revisione',
 'add_subfolder' => 'Aggiungi sottocartella',
 'add_to_clipboard' => 'Aggiungi agli appunti',
 'add_user' => 'Aggiungi un nuovo utente',

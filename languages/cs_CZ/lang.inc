@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (675), kreml (455)
+//    Translators: Admin (677), kreml (455)
 
 $text = array(
 'accept' => 'Přijmout',
@@ -48,6 +48,7 @@ URL: [url]',
 'action_review' => 'Přezkoumání',
 'action_revise' => 'Revidovat',
 'add' => 'Přidat',
+'add_approval' => 'Poslat ke schválení',
 'add_document' => 'Přidat dokument',
 'add_document_link' => 'Přidat odkaz',
 'add_doc_reviewer_approver_warning' => 'Pozn.: Dokumenty se automaticky označí jako vydané, když není přidělen žádný kontrolor nebo schvalovatel.',
@@ -57,6 +58,7 @@ URL: [url]',
 'add_member' => 'Přidat člena',
 'add_multiple_documents' => 'Přidat více dokumentů',
 'add_multiple_files' => 'Přidat více souborů (název souboru se použije jako název dokumentu)',
+'add_review' => 'Poslat ke kontrole',
 'add_subfolder' => 'Přidat podsložku',
 'add_to_clipboard' => 'Přidat do schránky',
 'add_user' => 'Přidat nového uživatele',

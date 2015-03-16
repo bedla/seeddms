@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (2332)
+//    Translators: Admin (2334)
 
 $text = array(
 'accept' => '接受',
@@ -48,6 +48,7 @@ URL: [url]',
 'action_review' => '檢查',
 'action_revise' => '',
 'add' => '添加',
+'add_approval' => '提交審核',
 'add_document' => '添加文檔',
 'add_document_link' => '添加連結',
 'add_doc_reviewer_approver_warning' => '備註:如果沒有指派校對人或審核人那麼文檔將被自動標注為發佈',
@@ -57,6 +58,7 @@ URL: [url]',
 'add_member' => '添加成員',
 'add_multiple_documents' => '添加多個檔',
 'add_multiple_files' => '批量添加文檔(文檔名無法手動修改)',
+'add_review' => '提交校對',
 'add_subfolder' => '添加子資料夾',
 'add_to_clipboard' => '複製',
 'add_user' => '添加新用戶',

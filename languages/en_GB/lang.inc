@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1079), dgrutsch (3), netixw (14)
+//    Translators: Admin (1081), dgrutsch (3), netixw (14)
 
 $text = array(
 'accept' => 'Accept',
@@ -48,6 +48,7 @@ URL: [url]',
 'action_review' => 'Review',
 'action_revise' => 'Revise',
 'add' => 'Add',
+'add_approval' => 'Add approval',
 'add_document' => 'Add document',
 'add_document_link' => 'Add link',
 'add_doc_reviewer_approver_warning' => 'N.B. Documents are automatically marked as released if no reviewer or approver is assigned.',
@@ -57,6 +58,7 @@ URL: [url]',
 'add_member' => 'Add a member',
 'add_multiple_documents' => 'Add multiple documents',
 'add_multiple_files' => 'Add multiple files (will use filename as document name)',
+'add_review' => 'Add review',
 'add_subfolder' => 'Add subfolder',
 'add_to_clipboard' => 'Add to clipboard',
 'add_user' => 'Add new user',

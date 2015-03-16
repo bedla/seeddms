@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (961), jeromerobert (50), lonnnew (9)
+//    Translators: Admin (963), jeromerobert (50), lonnnew (9)
 
 $text = array(
 'accept' => 'Accepter',
@@ -48,6 +48,7 @@ URL: [url]',
 'action_review' => 'Vérifier',
 'action_revise' => 'Réviser',
 'add' => 'Ajouter',
+'add_approval' => 'Soumettre approbation',
 'add_document' => 'Ajouter un document',
 'add_document_link' => 'Ajouter un lien',
 'add_doc_reviewer_approver_warning' => 'N.B. Les documents sont automatiquement marqués comme publiés si il n\'y a pas de correcteur ou d\'approbateur désigné.',
@@ -57,6 +58,7 @@ URL: [url]',
 'add_member' => 'Ajouter un membre',
 'add_multiple_documents' => 'Ajouter plusieurs documents',
 'add_multiple_files' => 'Ajouter plusieurs fichiers (le nom du fichier servira de nom de document)',
+'add_review' => 'Soumettre la correction',
 'add_subfolder' => 'Ajouter un sous-dossier',
 'add_to_clipboard' => 'Ajouter au presse-papiers',
 'add_user' => 'Ajouter un utilisateur',

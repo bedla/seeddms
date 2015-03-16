@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1241)
+//    Translators: Admin (1243)
 
 $text = array(
 'accept' => 'Принять',
@@ -48,6 +48,7 @@ URL: [url]',
 'action_review' => 'Рецензировать',
 'action_revise' => 'Пересмотреть',
 'add' => 'Добавить',
+'add_approval' => 'Утвердить',
 'add_document' => 'Добавить документ',
 'add_document_link' => 'Добавить ссылку',
 'add_doc_reviewer_approver_warning' => 'Документ получает статус <b>утверждён</b> автоматически, если не назначены ни рецензент, ни утверждающий.',
@@ -57,6 +58,7 @@ URL: [url]',
 'add_member' => 'Добавить члена',
 'add_multiple_documents' => 'Добавить документы',
 'add_multiple_files' => 'Добавить несколько файлов (название файла будет названием документа)',
+'add_review' => 'Рецензировать',
 'add_subfolder' => 'Добавить подкаталог',
 'add_to_clipboard' => 'Добавить в буфер',
 'add_user' => 'Добавить пользователя',

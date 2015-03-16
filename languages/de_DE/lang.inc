@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1937), dgrutsch (18)
+//    Translators: Admin (1939), dgrutsch (18)
 
 $text = array(
 'accept' => 'Übernehmen',
@@ -48,6 +48,7 @@ URL: [url]',
 'action_review' => 'Prüfen',
 'action_revise' => 'Erneut prüfen',
 'add' => 'Anlegen',
+'add_approval' => 'Freigabe hinzufügen',
 'add_document' => 'Dokument anlegen',
 'add_document_link' => 'Verweis hinzufügen',
 'add_doc_reviewer_approver_warning' => 'Anmerkung: Dokumente werden automatisch geprüft und als freigegeben markiert, wenn kein Prüfer oder keine Freigabe zugewiesen wird.',
@@ -57,6 +58,7 @@ URL: [url]',
 'add_member' => 'Gruppenmitglied anlegen',
 'add_multiple_documents' => 'Mehrere Dokumente anlegen',
 'add_multiple_files' => 'Mehrere Dateien hochladen (Dateiname wird als Dokumentenname verwendet)',
+'add_review' => 'Überprüfung hinzufügen',
 'add_subfolder' => 'Unterordner anlegen',
 'add_to_clipboard' => 'Zur Zwischenablage hinzufügen',
 'add_user' => 'Neuen Benutzer anlegen',

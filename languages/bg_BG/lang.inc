@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (776)
+//    Translators: Admin (778)
 
 $text = array(
 'accept' => 'Приеми',
@@ -44,6 +44,7 @@ $text = array(
 'action_review' => 'Преглед',
 'action_revise' => 'Ревизия',
 'add' => 'Добави',
+'add_approval' => 'Утвърди',
 'add_document' => 'Добави документ',
 'add_document_link' => 'Добави препратка',
 'add_doc_reviewer_approver_warning' => 'Документът получава статус ДОСТЪПЕН автоматично ако няма нито рецензент нито утвърждаващ',
@@ -53,6 +54,7 @@ $text = array(
 'add_member' => 'Добави член',
 'add_multiple_documents' => 'Добави няколко документа',
 'add_multiple_files' => 'Добави няколко файла (името на файла ще бъде използвано като име на документа)',
+'add_review' => 'Рецензирай',
 'add_subfolder' => 'Добави подпапка',
 'add_to_clipboard' => 'Добави към clipboard',
 'add_user' => 'Добави потребител',

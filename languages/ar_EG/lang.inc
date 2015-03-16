@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1241)
+//    Translators: Admin (1243)
 
 $text = array(
 'accept' => 'وافق',
@@ -48,6 +48,7 @@ URL: [url]',
 'action_review' => 'مراجعة',
 'action_revise' => 'تنقيح',
 'add' => 'إضافة',
+'add_approval' => 'ادخال موافقة',
 'add_document' => 'إضافة مستند',
 'add_document_link' => 'إضافة رابط',
 'add_doc_reviewer_approver_warning' => 'ملاحظة : يتم اعتبار المستندات نهائية اذا لم يتم تعيين مراجع او موافق للمستند',
@@ -57,6 +58,7 @@ URL: [url]',
 'add_member' => 'إضافة عضو',
 'add_multiple_documents' => 'إضافة مستندات عديدة',
 'add_multiple_files' => 'إضافة مستندات عديدة - سيتم استخدام اسم الملف كاسم المستند',
+'add_review' => 'بدأ المراجعة',
 'add_subfolder' => 'إضافة مجلد فرعي',
 'add_to_clipboard' => 'اضف الى لوحة القصاصات',
 'add_user' => 'إضافة مستخدم',

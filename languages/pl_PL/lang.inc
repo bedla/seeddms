@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (696), netixw (84), romi (93), uGn (112)
+//    Translators: Admin (698), netixw (84), romi (93), uGn (112)
 
 $text = array(
 'accept' => 'Akceptuj',
@@ -48,6 +48,7 @@ URL: [url]',
 'action_review' => 'Zrecenzuj',
 'action_revise' => 'Korekta',
 'add' => 'Dodaj',
+'add_approval' => 'Zaakceptuj',
 'add_document' => 'Dodaj dokument',
 'add_document_link' => 'Dodaj link',
 'add_doc_reviewer_approver_warning' => 'Nota Bene. Dokumenty są automatycznie oznaczane jako wydane, jeśli recenzent lub zatwierdzający nie jest przypisany.',
@@ -57,6 +58,7 @@ URL: [url]',
 'add_member' => 'Dodaj członka',
 'add_multiple_documents' => 'Dodaj wiele dokumentów',
 'add_multiple_files' => 'Dodaj wiele plików (Nazwy plików zostaną użyte jako nazwy dokumentów)',
+'add_review' => 'Zatwierdź recenzję',
 'add_subfolder' => 'Dodaj podfolder',
 'add_to_clipboard' => 'Dodaj do schowka',
 'add_user' => 'Dodaj nowego użytkownika',

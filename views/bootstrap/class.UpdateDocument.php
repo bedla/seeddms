@@ -132,7 +132,7 @@ function checkForm()
 		$latestContent = $document->getLatestContent();
 		$reviewStatus = $latestContent->getReviewStatus();
 		$approvalStatus = $latestContent->getApprovalStatus();
-		if($workflowmode != 'traditional') {
+		if($workflowmode == 'advanced') {
 			if($status = $latestContent->getStatus()) {
 				if($status["status"] == S_IN_WORKFLOW) {
 					$this->warningMsg("The current version of this document is in a workflow. This will be interrupted and cannot be completed if you upload a new version.");
@@ -204,10 +204,11 @@ function checkForm()
 <?php
 		}
 	}
-	if($workflowmode == 'traditional') {
+	if($workflowmode == 'traditional' || $workflowmode == 'traditional_only_approval') {
 		// Retrieve a list of all users and groups that have review / approve
 		// privileges.
 		$docAccess = $folder->getReadAccessList($enableadminrevapp, $enableownerrevapp);
+		if($workflowmode != 'traditional_only_approval') {
 ?>
 		<tr>
 			<td colspan="2">
@@ -345,7 +346,8 @@ function checkForm()
 				}
 ?>
       </td>
-    </tr>
+		</tr>
+<?php } ?>
     <tr>
 			<td colspan=2>
 				<?php $this->contentSubHeading(getMLText("assign_approvers")); ?>	

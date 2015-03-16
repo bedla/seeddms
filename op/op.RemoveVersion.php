@@ -109,18 +109,24 @@ else {
 	/* Before deleting the content get a list of all users that should
 	 * be informed about the removal.
 	 */
-	$emailList = array();
-	$emailList[] = $version->_userID;
+	$emailUserList = array();
+	$emailUserList[] = $version->_userID;
 	$status = $version->getReviewStatus();
 	foreach ($status as $st) {
-		if ($st["status"]==0 && !in_array($st["required"], $emailList)) {
-			$emailList[] = $st["required"];
+		if ($st["status"]==0 && !in_array($st["required"], $emailUserList)) {
+			if($st['type'] == 0)
+				$emailUserList[] = $st["required"];
+			else
+				$emailGroupList[] = $st["required"];
 		}
 	}
 	$status = $version->getApprovalStatus();
 	foreach ($status as $st) {
-		if ($st["status"]==0 && !in_array($st["required"], $emailList)) {
-			$emailList[] = $st["required"];
+		if ($st["status"]==0 && !in_array($st["required"], $emailUserList)) {
+			if($st['type'] == 0)
+				$emailUserList[] = $st["required"];
+			else
+				$emailGroupList[] = $st["required"];
 		}
 	}
 
@@ -130,16 +136,21 @@ else {
 		// Notify affected users.
 		if ($notifier){
 			$nl=$document->getNotifyList();
-			$recipients = array();
-			foreach ($emailList as $eID) {
+			$userrecipients = array();
+			foreach ($emailUserList as $eID) {
 				$eU = $version->_document->_dms->getUser($eID);
-				$recipients[] = $eU;
+				$userrecipients[] = $eU;
+			}
+			$grouprecipients = array();
+			foreach ($emailGroupList as $eID) {
+				$eU = $version->_document->_dms->getGroup($eID);
+				$grouprecipients[] = $eU;
 			}
 /*
 			$subject = "###SITENAME###: ".$document->getName().", v.".$version->_version." - ".getMLText("version_deleted_email");
 			$message = getMLText("version_deleted_email")."\r\n";
 			$message .= 
-				getMLText("document").": ".$document->getName()."\r\n".
+				getMLText("document").": "User.$document->getName()."\r\n".
 				getMLText("version").": ".$version->_version."\r\n".
 				getMLText("comment").": ".$version->getComment()."\r\n".
 				getMLText("user").": ".$user->getFullName()." <". $user->getEmail() ."> ";
@@ -162,8 +173,11 @@ else {
 			$params['username'] = $user->getFullName();
 			$params['sitename'] = $settings->_siteName;
 			$params['http_root'] = $settings->_httpRoot;
-			$notifier->toList($user, $recipients, $subject, $message, $params);
+			$notifier->toList($user, $userrecipients, $subject, $message, $params);
 			$notifier->toList($user, $nl["users"], $subject, $message, $params);
+			foreach($grouprecipients as $grp) {
+				$notifier->toGroup($user, $grp, $subject, $message, $params);
+			}
 			foreach ($nl["groups"] as $grp) {
 				$notifier->toGroup($user, $grp, $subject, $message, $params);
 			}

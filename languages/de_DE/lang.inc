@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1935), dgrutsch (18)
+//    Translators: Admin (1936), dgrutsch (18)
 
 $text = array(
 'accept' => 'Übernehmen',
@@ -93,6 +93,7 @@ Benutzer: [username]
 URL: [url]',
 'approval_request_email_subject' => '[sitename]: [name] - Aufforderung zur Genehmigung',
 'approval_status' => 'Freigabestatus',
+'approval_submit_email' => '',
 'approval_submit_email_body' => 'Genehmigung erteilen
 Dokument: [name]
 Version: [version]
@@ -199,6 +200,7 @@ URL: [url]',
 'clipboard' => 'Zwischenablage',
 'close' => 'Schließen',
 'comment' => 'Kommentar',
+'comment_changed_email' => '',
 'comment_for_current_version' => 'Kommentar zur aktuellen Version',
 'confirm_create_fulltext_index' => 'Ja, Ich möchte den Volltextindex neu erzeugen!.',
 'confirm_pwd' => 'Passwort-Bestätigung',
@@ -814,6 +816,8 @@ URL: [url]',
 'settings_activate_php_extension' => 'PHP-Erweiterung aktivieren',
 'settings_adminIP' => 'Admin IP',
 'settings_adminIP_desc' => 'Wenn hier eine IP-Nummer eingetragen wird, kann eine Anmeldung als Administrator nur von dieser Adresse erfolgen. Funktioniert nur mit Anmeldung über die Datenbank (nicht LDAP)',
+'settings_ADOdbPath' => '',
+'settings_ADOdbPath_desc' => '',
 'settings_Advanced' => 'Erweitert',
 'settings_apache_mod_rewrite' => 'Apache - Module Rewrite',
 'settings_Authentication' => 'Authentifikations-Einstellungen',
@@ -965,6 +969,7 @@ URL: [url]',
 'settings_passwordStrengthAlgorithm_valsimple' => 'einfach',
 'settings_passwordStrength_desc' => '',
 'settings_passwordЅtrength_desc' => 'Die minimale Passwortstärke ist ein ganzzahliger werden zwischen 0 und 100. Ein Wert von 0 schaltet die Überprüfung auf starke Passwörter aus.',
+'settings_passwordР…trength_desc' => '',
 'settings_pear_log' => 'Pear package : Log',
 'settings_pear_webdav' => 'Pear package : HTTP_WebDAV_Server',
 'settings_perms' => 'Berechtigungen',
@@ -1045,6 +1050,7 @@ URL: [url]',
 'settings_workflowMode_desc' => 'Der erweiterte Workflow-Modes erlaubt es eigene Workflows zu erstellen.',
 'settings_workflowMode_valadvanced' => 'erweitert',
 'settings_workflowMode_valtraditional' => 'traditionell',
+'settings_workflowMode_valtraditional_only_approval' => 'traditional (ohne Prüfung)',
 'settings_zendframework' => 'Zend Framework',
 'set_expiry' => 'Ablaufdatum festlegen',
 'set_owner' => 'Besitzer festlegen',

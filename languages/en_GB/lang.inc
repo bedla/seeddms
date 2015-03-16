@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1077), dgrutsch (3), netixw (14)
+//    Translators: Admin (1078), dgrutsch (3), netixw (14)
 
 $text = array(
 'accept' => 'Accept',
@@ -93,6 +93,7 @@ User: [username]
 URL: [url]',
 'approval_request_email_subject' => '[sitename]: [name] - Approval request',
 'approval_status' => 'Approval Status',
+'approval_submit_email' => '',
 'approval_submit_email_body' => 'Approval of document
 Document: [name]
 Version: [version]
@@ -199,6 +200,7 @@ URL: [url]',
 'clipboard' => 'Clipboard',
 'close' => 'Close',
 'comment' => 'Comment',
+'comment_changed_email' => '',
 'comment_for_current_version' => 'Version comment',
 'confirm_create_fulltext_index' => 'Yes, I would like to recreate the fulltext index!',
 'confirm_pwd' => 'Confirm Password',
@@ -821,6 +823,8 @@ URL: [url]',
 'settings_activate_php_extension' => 'Activate PHP extension',
 'settings_adminIP' => 'Admin IP',
 'settings_adminIP_desc' => 'If set, admin can login only by specified IP address. Leave empty to avoid lose of access. NOTE: works only with local autentication (no LDAP)',
+'settings_ADOdbPath' => '',
+'settings_ADOdbPath_desc' => '',
 'settings_Advanced' => 'Advanced',
 'settings_apache_mod_rewrite' => 'Apache - Module Rewrite',
 'settings_Authentication' => 'Authentication settings',
@@ -972,6 +976,7 @@ URL: [url]',
 'settings_passwordStrengthAlgorithm_valsimple' => 'simple',
 'settings_passwordStrength_desc' => '',
 'settings_passwordЅtrength_desc' => 'The minimum password strength is an integer value from 0 to 100. Setting it to 0 will turn off checking for the minimum password strength.',
+'settings_passwordР…trength_desc' => '',
 'settings_pear_log' => 'Pear package : Log',
 'settings_pear_webdav' => 'Pear package : HTTP_WebDAV_Server',
 'settings_perms' => 'Permissions',
@@ -1052,6 +1057,7 @@ URL: [url]',
 'settings_workflowMode_desc' => 'The advanced workflow allows to specify your own release workflow for document versions.',
 'settings_workflowMode_valadvanced' => 'advanced',
 'settings_workflowMode_valtraditional' => 'traditional',
+'settings_workflowMode_valtraditional_only_approval' => 'traditional (without review)',
 'settings_zendframework' => 'Zend Framework',
 'set_expiry' => 'Set Expiration',
 'set_owner' => 'Set Owner',

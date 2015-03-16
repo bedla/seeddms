@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1359)
+//    Translators: Admin (1360)
 
 $text = array(
 'accept' => 'Accetta',
@@ -1129,7 +1129,7 @@ Utente: [username]
 URL: [url]',
 'transition_triggered_email_subject' => 'Transizione del flusso di lavoro iniziata',
 'trigger_workflow' => 'Flusso di lavoro',
-'tr_TR' => '',
+'tr_TR' => 'Turco',
 'tuesday' => 'Martedì',
 'tuesday_abbr' => 'Mar',
 'type_to_search' => 'Digitare per cercare',

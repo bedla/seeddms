@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (690), pepijn (45), reinoutdijkstra@hotmail.com (270)
+//    Translators: Admin (692), pepijn (45), reinoutdijkstra@hotmail.com (270)
 
 $text = array(
 'accept' => 'Accept',
@@ -747,7 +747,7 @@ URL: [url]',
 'role_admin' => 'Beheerder',
 'role_guest' => 'Gast',
 'role_user' => 'Gebruiker',
-'ro_RO' => '',
+'ro_RO' => 'Roemeens',
 'run_subworkflow' => 'Voer sub workflow uit',
 'run_subworkflow_email_body' => 'Subworkflow is gestart
 Document: [name]
@@ -1120,7 +1120,7 @@ User: [username]
 URL: [url]',
 'transition_triggered_email_subject' => '[sitename]: [name] - Workflow overgang geactiveerd',
 'trigger_workflow' => 'Workflow',
-'tr_TR' => '',
+'tr_TR' => 'Turks',
 'tuesday' => 'Dinsdag',
 'tuesday_abbr' => 'Tu',
 'type_to_search' => 'voer in om te zoeken',

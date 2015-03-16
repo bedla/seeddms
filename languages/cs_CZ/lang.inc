@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (677), kreml (455)
+//    Translators: Admin (678), kreml (455)
 
 $text = array(
 'accept' => 'Přijmout',
@@ -1123,7 +1123,7 @@ Uživatel: [uživatelské jméno]
 URL: [url]',
 'transition_triggered_email_subject' => '[sitename]: [name] - Transformace praconího postupu spuštěna',
 'trigger_workflow' => 'Pracovní postup',
-'tr_TR' => '',
+'tr_TR' => 'Turecky',
 'tuesday' => 'Úterý',
 'tuesday_abbr' => 'Út',
 'type_to_search' => 'Zadejte hledaný výraz',

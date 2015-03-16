@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (698), netixw (84), romi (93), uGn (112)
+//    Translators: Admin (700), netixw (84), romi (93), uGn (112)
 
 $text = array(
 'accept' => 'Akceptuj',
@@ -735,7 +735,7 @@ URL: [url]',
 'role_admin' => 'Administrator',
 'role_guest' => 'Gość',
 'role_user' => 'Użytkownik',
-'ro_RO' => '',
+'ro_RO' => 'Rumuński',
 'run_subworkflow' => 'Uruchom podproces',
 'run_subworkflow_email_body' => 'Uruchomienie pod procesu
 Dokument: [name]
@@ -1108,7 +1108,7 @@ Użytkownik: [username]
 URL: [url]',
 'transition_triggered_email_subject' => '[sitename]: [name] - Uruchomiono proces przepływu',
 'trigger_workflow' => 'Proces',
-'tr_TR' => '',
+'tr_TR' => 'Turecki',
 'tuesday' => 'Wtorek',
 'tuesday_abbr' => 'Wt',
 'type_to_search' => 'Wpisz wyszukiwane',

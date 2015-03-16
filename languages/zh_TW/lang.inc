@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (2334)
+//    Translators: Admin (2335)
 
 $text = array(
 'accept' => '接受',
@@ -617,7 +617,7 @@ URL: [url]',
 'role_admin' => '管理員',
 'role_guest' => '來賓',
 'role_user' => '用戶',
-'ro_RO' => '',
+'ro_RO' => '羅馬尼亞文',
 'run_subworkflow' => '',
 'run_subworkflow_email_body' => '',
 'run_subworkflow_email_subject' => '',

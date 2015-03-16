@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (874), flaviove (627), lfcristofoli (352)
+//    Translators: Admin (875), flaviove (627), lfcristofoli (352)
 
 $text = array(
 'accept' => 'Aceitar',
@@ -753,7 +753,7 @@ URL: [url]',
 'role_admin' => 'Administrador',
 'role_guest' => 'Convidado',
 'role_user' => 'Usuário',
-'ro_RO' => '',
+'ro_RO' => 'Romeno',
 'run_subworkflow' => 'Executar sub fluxo de trabalho',
 'run_subworkflow_email_body' => 'Sub fluxo de trabalho foi iniciado
 Documento: [nome]

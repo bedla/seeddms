@@ -222,7 +222,7 @@ $(document).ready(function() {
 <?php
 				}
 			}
-		if($workflowmode != 'traditional') {
+		if($workflowmode == 'advanced') {
 ?>
 		<tr>	
       <td>
@@ -262,6 +262,7 @@ $(document).ready(function() {
 		</tr>	
 <?php
 		} else {
+			if($workflowmode == 'traditional') {
 ?>
 		<tr>
       <td>
@@ -372,7 +373,7 @@ $(document).ready(function() {
 ?>
 			</td>
 			</tr>
-			
+<?php } ?>
 		  <tr>	
         <td>
 		<?php $this->contentSubHeading(getMLText("assign_approvers")); ?>

@@ -185,6 +185,7 @@ class SeedDMS_View_UsrMgr extends SeedDMS_Bootstrap_Style {
 
 <?php
 		}
+		if($workflowmode == "traditional" || $workflowmode == 'traditional_only_approval') {
 		if($workflowmode == "traditional") {
 ?>
 
@@ -236,7 +237,9 @@ class SeedDMS_View_UsrMgr extends SeedDMS_Bootstrap_Style {
 				</select>
 			</td>
 		</tr>
-
+<?php
+				}
+?>
 		<tr>
 			<td colspan="2"><?php printMLText("approvers");?>:</td>
 		</tr>

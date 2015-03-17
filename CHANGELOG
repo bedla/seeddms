@@ -20,7 +20,7 @@
 - doSearch() in restapi applies the limit after filtering the hits
   by access rights. This slows down search, but at least returns a
   result set in cases where the user has access to very few documents only.
-- workflow mode can be set to traditional with review process
+- workflow mode can be set to traditional without review process
 - add bulgarian translation
 
 --------------------------------------------------------------------------------

@@ -168,6 +168,25 @@ class SeedDMS_Core_DMS {
 	} /* }}} */
 
 	/**
+	 * Checks if a list of objects contains a single object 
+	 *
+	 * The regular php check done by '==' compares all attributes of
+	 * two objects, which isn't required. The method will first check
+	 * if the objects are instances of the same class.
+	 *
+	 * @param object $object1 object to look for (needle)
+	 * @param array $list list of objects (haystack)
+	 * @return boolean true if object was found, otherwise false
+	 */
+	static function inList($object, $list) { /* {{{ */
+		foreach($list as $item) {
+			if(get_class($item) == get_class($object) && $item->getID() == $object->getID())
+				return true;
+		}
+		return false;
+	} /* }}} */
+
+	/**
 	 * Filter objects out which are not accessible in a given mode by a user.
 	 *
 	 * @param array $objArr list of objects (either documents or folders)

@@ -470,6 +470,7 @@ if(!is_writeable($settings->_configFilePath)) {
         <td>
 				  <select name="workflowMode">
 					  <option value="traditional" <?php if ($settings->_workflowMode=='traditional') echo "selected" ?>><?php printMLText("settings_workflowMode_valtraditional");?></option>
+					  <option value="traditional_only_approval" <?php if ($settings->_workflowMode=='traditional_only_approval') echo "selected" ?>><?php printMLText("settings_workflowMode_valtraditional_only_approval");?></option>
 						<option value="advanced" <?php if ($settings->_workflowMode=='advanced') echo "selected" ?>><?php printMLText("settings_workflowMode_valadvanced");?></option>
 					</select>
 				</td>

@@ -37,6 +37,7 @@ class SeedDMS_View_SetReviewersApprovers extends SeedDMS_Bootstrap_Style {
 		$folder = $this->params['folder'];
 		$document = $this->params['document'];
 		$content = $this->params['version'];
+		$workflowmode = $this->params['workflowmode'];
 		$enableadminrevapp = $this->params['enableadminrevapp'];
 		$enableownerrevapp = $this->params['enableownerrevapp'];
 		$enableselfrevapp = $this->params['enableselfrevapp'];
@@ -82,6 +83,9 @@ class SeedDMS_View_SetReviewersApprovers extends SeedDMS_Bootstrap_Style {
 
 <form action="../op/op.SetReviewersApprovers.php" method="post" name="form1">
 
+<?php
+		if($workflowmode != 'traditional_only_approval') {
+?>
 <?php $this->contentSubHeading(getMLText("update_reviewers"));?>
 
   <div class="cbSelectTitle"><?php printMLText("individuals")?>:</div>
@@ -151,6 +155,7 @@ class SeedDMS_View_SetReviewersApprovers extends SeedDMS_Bootstrap_Style {
 		}
 ?>
   </select>
+<?php } ?>
 
 <?php $this->contentSubHeading(getMLText("update_approvers"));?>
 

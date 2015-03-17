@@ -156,6 +156,7 @@ if ($action == "saveSettings")
   // SETTINGS - ADVANCED - NOTIFICATION
   $settings->_enableOwnerNotification = getBoolValue("enableOwnerNotification");
   $settings->_enableNotificationAppRev = getBoolValue("enableNotificationAppRev");
+  $settings->_enableNotificationWorkflow = getBoolValue("enableNotificationWorkflow");
 
   // SETTINGS - ADVANCED - SERVER
   $settings->_coreDir = $_POST["coreDir"];
@@ -183,6 +184,6 @@ if ($action == "saveSettings")
 $session->setSplashMsg(array('type'=>'success', 'msg'=>getMLText('splash_settings_saved')));
 
 
-header("Location:../out/out.Settings.php");
+header("Location:../out/out.Settings.php?currenttab=".$_POST['currenttab']);
 
 ?>

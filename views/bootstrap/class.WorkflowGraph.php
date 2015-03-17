@@ -62,7 +62,7 @@ class SeedDMS_View_WorkflowGraph extends SeedDMS_Bootstrap_Style {
 					foreach($transusers as $transuser) {
 						$unames[] = $transuser->getUser()->getFullName();
 					}
-					echo "ggg.addNode(\"A".$transition->getID()."-".$action->getID()."\", { render: render_action, maxtime: '".implode(", ", $unames)."', label : \"".$action->getName()."\", color: '".$color."' });\n";
+					echo "ggg.addNode(\"A".$transition->getID()."-".$action->getID()."\", { render: render_action, maxtime: \"".str_replace('"', "\\\"", implode(", ", $unames))."\", label : \"".str_replace('"', "\\\"", $action->getName())."\", color: '".$color."' });\n";
 				}
 
 				if(!isset($this->states[$state->getID()])) {
@@ -70,11 +70,11 @@ class SeedDMS_View_WorkflowGraph extends SeedDMS_Bootstrap_Style {
 					$initstate = '';
 					if($state == $this->workflow->getInitState())
 						$initstate = " (START)";
-					echo "ggg.addNode(\"S".$state->getID()."\", { label : \"".$state->getName()." ".$initstate."\" });\n";
+					echo "ggg.addNode(\"S".$state->getID()."\", { label : \"".str_replace('"', "\\\"", $state->getName()." ".$initstate)."\" });\n";
 				}
 				if(!isset($this->states[$nextstate->getID()])) {
 					$this->states[$state->getID()] = $nextstate;
-					echo "ggg.addNode(\"S".$nextstate->getID()."\", { label : \"".$nextstate->getName()."\" });\n";
+					echo "ggg.addNode(\"S".$nextstate->getID()."\", { label : \"".str_replace('"', "\\\"", $nextstate->getName())."\" });\n";
 				}
 			}
 

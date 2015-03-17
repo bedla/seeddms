@@ -123,6 +123,11 @@ class Settings { /* {{{ */
 	var $_enableDuplicateDocNames = true;
 	// enable/disable notification when added as a reviewer/approver
 	var $_enableNotificationAppRev = true;
+	// enable/disable notification of users/group who need to take action for
+	// next transition. This is not like enableNotificationAppRev where a
+	// notification is added to the document. If this is turned on, the
+	// notification will be send in any case.
+	var $_enableNotificationWorkflow = false;
 	// preset expiration date
 	var $_presetExpirationDate = "";
 	// the name of the versioning info file created by the backup tool
@@ -493,6 +498,7 @@ class Settings { /* {{{ */
 			$tab = $node[0]->attributes();
 			$this->_enableNotificationAppRev = Settings::boolval($tab["enableNotificationAppRev"]);
 			$this->_enableOwnerNotification = Settings::boolval($tab["enableOwnerNotification"]);
+			$this->_enableNotificationWorkflow = Settings::boolval($tab["enableNotificationWorkflow"]);
 		}
 
 		// XML Path: /configuration/advanced/server
@@ -514,7 +520,7 @@ class Settings { /* {{{ */
 		$this->_converters = array();
 		foreach($converters as $converter) {
 			$tab = $converter->attributes();
-			if(empty(trim(strval($tab['target']))))
+			if(!trim(strval($tab['target'])))
 				$this->_converters['fulltext'][trim(strval($tab['mimeType']))] = trim(strval($converter));
 			else
 				$this->_converters[trim(strval($tab['target']))][trim(strval($tab['mimeType']))] = trim(strval($converter));
@@ -759,6 +765,7 @@ class Settings { /* {{{ */
     $node = $this->getXMLNode($xml, '/configuration/advanced', 'notification');
     $this->setXMLAttributValue($node, "enableNotificationAppRev", $this->_enableNotificationAppRev);
     $this->setXMLAttributValue($node, "enableOwnerNotification", $this->_enableOwnerNotification);
+    $this->setXMLAttributValue($node, "enableNotificationWorkflow", $this->_enableNotificationWorkflow);
 
     // XML Path: /configuration/advanced/server
     $node = $this->getXMLNode($xml, '/configuration/advanced', 'server');
@@ -848,7 +855,7 @@ class Settings { /* {{{ */
 	 */
 	function getConfigDir() { /* {{{ */
 		$_tmp = dirname($_SERVER['SCRIPT_FILENAME']);
-		$_arr = preg_split('/\//', $_tmp);
+		$_arr = preg_split('/\//', rtrim(str_replace('\\', '/', $_tmp)));
 		$configDir = null;
 		/* new code starts here */
 		while($_arr && !$configDir) {

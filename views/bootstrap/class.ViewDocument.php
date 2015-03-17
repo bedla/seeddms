@@ -116,7 +116,7 @@ class SeedDMS_View_ViewDocument extends SeedDMS_Bootstrap_Style {
 		/* Retrieve latest content */
 		$latestContent = $document->getLatestContent();
 		$needwkflaction = false;
-		if($workflowmode == 'traditional') {
+		if($workflowmode == 'traditional' || $workflowmode == 'traditional_only_approval') {
 		} else {
 			$workflow = $latestContent->getWorkflow();
 			if($workflow) {
@@ -260,11 +260,11 @@ class SeedDMS_View_ViewDocument extends SeedDMS_Bootstrap_Style {
 		  <li><a data-target="#previous" data-toggle="tab"><?php printMLText('previous_versions'); ?></a></li>
 <?php
 			}
-			if($workflowmode == 'traditional') {
+			if($workflowmode == 'traditional' || $workflowmode == 'traditional_only_approval') {
 				if((is_array($reviewStatus) && count($reviewStatus)>0) ||
 					(is_array($approvalStatus) && count($approvalStatus)>0)) {
 ?>
-		  <li><a data-target="#revapp" data-toggle="tab"><?php echo getMLText('reviewers')."/".getMLText('approvers'); ?></a></li>
+		  <li><a data-target="#revapp" data-toggle="tab"><?php if($workflowmode == 'traditional') echo getMLText('reviewers')."/"; echo getMLText('approvers'); ?></a></li>
 <?php
 				}
 			} else {
@@ -384,7 +384,7 @@ class SeedDMS_View_ViewDocument extends SeedDMS_Bootstrap_Style {
 		if($accessop->mayOverwriteStatus()) {
 			print "<li><a href='../out/out.OverrideContentStatus.php?documentid=".$documentid."&version=".$latestContent->getVersion()."'><i class=\"icon-align-justify\"></i>".getMLText("change_status")."</a></li>";
 		}
-		if($workflowmode == 'traditional') {
+		if($workflowmode == 'traditional' || $workflowmode == 'traditional_only_approval') {
 			// Allow changing reviewers/approvals only if not reviewed
 			if($accessop->maySetReviewersApprovers()) {
 				print "<li><a href='../out/out.SetReviewersApprovers.php?documentid=".$documentid."&version=".$latestContent->getVersion()."'><i class=\"icon-edit\"></i>".getMLText("change_assignments")."</a></li>";
@@ -455,7 +455,7 @@ class SeedDMS_View_ViewDocument extends SeedDMS_Bootstrap_Style {
 ?>
 		</div>
 <?php
-		if($workflowmode == 'traditional') {
+		if($workflowmode == 'traditional' || $workflowmode == 'traditional_only_approval') {
 			if((is_array($reviewStatus) && count($reviewStatus)>0) ||
 				(is_array($approvalStatus) && count($approvalStatus)>0)) {
 ?>
@@ -464,7 +464,7 @@ class SeedDMS_View_ViewDocument extends SeedDMS_Bootstrap_Style {
 		$this->contentContainerstart();
 		print "<table class=\"table-condensed\">\n";
 
-		if (is_array($reviewStatus) && count($reviewStatus)>0) {
+		if ($workflowmode != 'traditional_only_approval' && is_array($reviewStatus) && count($reviewStatus)>0) {
 
 			print "<tr><td colspan=5>\n";
 			$this->contentSubHeading(getMLText("reviewers"));
@@ -517,7 +517,7 @@ class SeedDMS_View_ViewDocument extends SeedDMS_Bootstrap_Style {
 
 				if($accessop->mayReview()) {
 					if ($is_reviewer && $r["status"]==0) {
-						print "<li><a href=\"../out/out.ReviewDocument.php?documentid=".$documentid."&version=".$latestContent->getVersion()."&reviewid=".$r['reviewID']."\" class=\"btn btn-mini\">".getMLText("submit_review")."</a></li>";
+						print "<li><a href=\"../out/out.ReviewDocument.php?documentid=".$documentid."&version=".$latestContent->getVersion()."&reviewid=".$r['reviewID']."\" class=\"btn btn-mini\">".getMLText("add_review")."</a></li>";
 					}else if (($updateUser==$user)&&(($r["status"]==1)||($r["status"]==-1))&&(!$document->hasExpired())){
 						print "<li><a href=\"../out/out.ReviewDocument.php?documentid=".$documentid."&version=".$latestContent->getVersion()."&reviewid=".$r['reviewID']."\" class=\"btn btn-mini\">".getMLText("edit")."</a></li>";
 					}
@@ -581,7 +581,7 @@ class SeedDMS_View_ViewDocument extends SeedDMS_Bootstrap_Style {
 
 				if($accessop->mayApprove()) {
 					if ($is_approver && $status["status"]==S_DRAFT_APP) {
-						print "<li><a class=\"btn btn-mini\" href=\"../out/out.ApproveDocument.php?documentid=".$documentid."&version=".$latestContent->getVersion()."&approveid=".$a['approveID']."\">".getMLText("submit_approval")."</a></li>";
+						print "<li><a class=\"btn btn-mini\" href=\"../out/out.ApproveDocument.php?documentid=".$documentid."&version=".$latestContent->getVersion()."&approveid=".$a['approveID']."\">".getMLText("add_approval")."</a></li>";
 					}else if (($updateUser==$user)&&(($a["status"]==1)||($a["status"]==-1))&&(!$document->hasExpired())){
 						print "<li><a class=\"btn btn-mini\" href=\"../out/out.ApproveDocument.php?documentid=".$documentid."&version=".$latestContent->getVersion()."&approveid=".$a['approveID']."\">".getMLText("edit")."</a></li>";
 					}
@@ -648,6 +648,9 @@ class SeedDMS_View_ViewDocument extends SeedDMS_Bootstrap_Style {
 ?>
 					</table>
 				</div>
+<?php
+					if($workflowmode != 'traditional_only_approval') {
+?>
 				<div class="span6">
 				<legend><?php printMLText('review_log'); ?></legend>
 				<table class="table condensed">
@@ -699,6 +702,7 @@ class SeedDMS_View_ViewDocument extends SeedDMS_Bootstrap_Style {
 				</table>
 				</div>
 <?php
+				}
 			}
 ?>
 			</div>

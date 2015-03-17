@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1065), dgrutsch (2), netixw (14)
+//    Translators: Admin (1081), dgrutsch (3), netixw (14)
 
 $text = array(
 'accept' => 'Accept',
@@ -48,6 +48,7 @@ URL: [url]',
 'action_review' => 'Review',
 'action_revise' => 'Revise',
 'add' => 'Add',
+'add_approval' => 'Add approval',
 'add_document' => 'Add document',
 'add_document_link' => 'Add link',
 'add_doc_reviewer_approver_warning' => 'N.B. Documents are automatically marked as released if no reviewer or approver is assigned.',
@@ -57,6 +58,7 @@ URL: [url]',
 'add_member' => 'Add a member',
 'add_multiple_documents' => 'Add multiple documents',
 'add_multiple_files' => 'Add multiple files (will use filename as document name)',
+'add_review' => 'Add review',
 'add_subfolder' => 'Add subfolder',
 'add_to_clipboard' => 'Add to clipboard',
 'add_user' => 'Add new user',
@@ -75,6 +77,13 @@ URL: [url]',
 'and' => 'and',
 'apply' => 'Apply',
 'approval_deletion_email' => 'Approval request deleted',
+'approval_deletion_email_body' => 'Approval request deleted
+Dokument: [name]
+Version: [version]
+Elternordner: [folder_path]
+Benutzer: [username]
+URL: [url]',
+'approval_deletion_email_subject' => '[sitename]: [name] - Approval request deleted',
 'approval_group' => 'Approval Group',
 'approval_log' => 'Approval Log',
 'approval_request_email' => 'Approval request',
@@ -86,6 +95,7 @@ User: [username]
 URL: [url]',
 'approval_request_email_subject' => '[sitename]: [name] - Approval request',
 'approval_status' => 'Approval Status',
+'approval_submit_email' => '',
 'approval_submit_email_body' => 'Approval of document
 Document: [name]
 Version: [version]
@@ -145,6 +155,7 @@ URL: [url]',
 'backup_remove' => 'Remove backup file',
 'backup_tools' => 'Backup tools',
 'between' => 'between',
+'bg_BG' => 'Bulgarian',
 'browse' => 'Browse',
 'calendar' => 'Calendar',
 'calendar_week' => 'Calendar week',
@@ -192,6 +203,7 @@ URL: [url]',
 'clipboard' => 'Clipboard',
 'close' => 'Close',
 'comment' => 'Comment',
+'comment_changed_email' => '',
 'comment_for_current_version' => 'Version comment',
 'confirm_create_fulltext_index' => 'Yes, I would like to recreate the fulltext index!',
 'confirm_pwd' => 'Confirm Password',
@@ -682,6 +694,15 @@ URL: [url]',
 'remove_marked_files' => 'Remove marked files',
 'repaired' => 'repaired',
 'repairing_objects' => 'Repairing documents and folders.',
+'request_workflow_action_email_body' => 'The workflow has reached a state which requires your action.
+Document: [name]
+Version: [version]
+Workflow: [workflow]
+Current state: [current_state]
+Parent folder: [folder_path]
+User: [username]
+URL: [url]',
+'request_workflow_action_email_subject' => 'Workflow action required',
 'results_page' => 'Results Page',
 'return_from_subworkflow' => 'Return from sub workflow',
 'return_from_subworkflow_email_body' => 'Return from subworkflow
@@ -698,9 +719,23 @@ URL: [url]',
 'reviewer_already_assigned' => 'is already assigned as a reviewer',
 'reviewer_already_removed' => 'has already been removed from review process or has already submitted a review',
 'review_deletion_email' => 'Review request deleted',
+'review_deletion_email_body' => 'Review request deleted
+Dokument: [name]
+Version: [version]
+Elternordner: [folder_path]
+Benutzer: [username]
+URL: [url]',
+'review_deletion_email_subject' => '[sitename]: [name] - Review request deleted',
 'review_group' => 'Review group',
 'review_log' => 'Review log',
 'review_request_email' => 'Review request',
+'review_request_email_body' => 'Review request
+Document: [name]
+Version: [version]
+Parent folder: [folder_path]
+User: [username]
+URL: [url]',
+'review_request_email_subject' => '[sitename]: [name] - Review request',
 'review_status' => 'Review status:',
 'review_submit_email' => 'Submitted review',
 'review_submit_email_body' => 'Submitted review
@@ -791,6 +826,8 @@ URL: [url]',
 'settings_activate_php_extension' => 'Activate PHP extension',
 'settings_adminIP' => 'Admin IP',
 'settings_adminIP_desc' => 'If set, admin can login only by specified IP address. Leave empty to avoid lose of access. NOTE: works only with local autentication (no LDAP)',
+'settings_ADOdbPath' => '',
+'settings_ADOdbPath_desc' => '',
 'settings_Advanced' => 'Advanced',
 'settings_apache_mod_rewrite' => 'Apache - Module Rewrite',
 'settings_Authentication' => 'Authentication settings',
@@ -857,6 +894,8 @@ URL: [url]',
 'settings_enableLargeFileUpload_desc' => 'If set, file upload is also available through a java applet called jumploader without a file size limit set by the browser. It also allows to upload several files in one step. Turning this on will turn off http only cookies.',
 'settings_enableNotificationAppRev' => 'Enable reviewer/approver notification',
 'settings_enableNotificationAppRev_desc' => 'Check to send a notification to the reviewer/approver when a new document version is added',
+'settings_enableNotificationWorkflow' => 'Send notification to users in next workflow transition',
+'settings_enableNotificationWorkflow_desc' => 'If this option is enabled, the users and groups which need to take action in the next workflow transiton will be notified. Even if they have not added a notification for the document.',
 'settings_enableOwnerNotification' => 'Enable owner notification by default',
 'settings_enableOwnerNotification_desc' => 'Check for adding a notification for the owner if a document when it is added.',
 'settings_enableOwnerRevApp' => 'Allow review/approval for owner',
@@ -940,6 +979,7 @@ URL: [url]',
 'settings_passwordStrengthAlgorithm_valsimple' => 'simple',
 'settings_passwordStrength_desc' => '',
 'settings_passwordЅtrength_desc' => 'The minimum password strength is an integer value from 0 to 100. Setting it to 0 will turn off checking for the minimum password strength.',
+'settings_passwordР…trength_desc' => '',
 'settings_pear_log' => 'Pear package : Log',
 'settings_pear_webdav' => 'Pear package : HTTP_WebDAV_Server',
 'settings_perms' => 'Permissions',
@@ -956,7 +996,7 @@ URL: [url]',
 'settings_printDisclaimer' => 'Print Disclaimer',
 'settings_printDisclaimer_desc' => 'If enabled, the disclaimer message will be printed on the bottom of every page',
 'settings_quota' => 'User\'s quota',
-'settings_quota_desc' => 'The maximum number of bytes a user may use on disk. Set this to 0 for unlimited disk space. This value can be overridden for each uses in his profile.',
+'settings_quota_desc' => 'The maximum number of bytes a user may use on disk. Set this to 0 for unlimited disk space. This value can be overridden for each user in his profile.',
 'settings_restricted' => 'Restricted access',
 'settings_restricted_desc' => 'Only allow users to log in if they have an entry in the local database (irrespective of successful authentication with LDAP)',
 'settings_rootDir' => 'Root directory',
@@ -1020,6 +1060,7 @@ URL: [url]',
 'settings_workflowMode_desc' => 'The advanced workflow allows to specify your own release workflow for document versions.',
 'settings_workflowMode_valadvanced' => 'advanced',
 'settings_workflowMode_valtraditional' => 'traditional',
+'settings_workflowMode_valtraditional_only_approval' => 'traditional (without review)',
 'settings_zendframework' => 'Zend Framework',
 'set_expiry' => 'Set Expiration',
 'set_owner' => 'Set Owner',

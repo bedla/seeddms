@@ -106,6 +106,30 @@ if($version->triggerWorkflowTransition($user, $transition, $_POST["comment"])) {
 		foreach ($nl["groups"] as $grp) {
 			$notifier->toGroup($user, $grp, $subject, $message, $params);
 		}
+
+		if($settings->_enableNotificationWorkflow) {
+			$subject = "request_workflow_action_email_subject";
+			$message = "request_workflow_action_email_body";
+			$params = array();
+			$params['name'] = $document->getName();
+			$params['version'] = $version->getVersion();
+			$params['workflow'] = $workflow->getName();
+			$params['folder_path'] = $folder->getFolderPathPlain();
+			$params['current_state'] = $transition->getNextState()->getName();
+			$params['username'] = $user->getFullName();
+			$params['sitename'] = $settings->_siteName;
+			$params['http_root'] = $settings->_httpRoot;
+			$params['url'] = "http".((isset($_SERVER['HTTPS']) && (strcmp($_SERVER['HTTPS'],'off')!=0)) ? "s" : "")."://".$_SERVER['HTTP_HOST'].$settings->_httpRoot."out/out.ViewDocument.php?documentid=".$document->getID();
+
+			foreach($workflow->getNextTransitions($transition->getNextState()) as $ntransition) {
+				foreach($ntransition->getUsers() as $tuser) {
+					$notifier->toIndividual($user, $tuser->getUser(), $subject, $message, $params);
+				}
+				foreach($ntransition->getGroups() as $tuser) {
+					$notifier->toGroup($user, $tuser->getGroup(), $subject, $message, $params);
+				}
+			}
+		}
 	}
 }
 

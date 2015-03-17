@@ -59,6 +59,7 @@ class SeedDMS_View_Search extends SeedDMS_Bootstrap_Style {
 		$mode = $this->params['mode'];
 		$workflowmode = $this->params['workflowmode'];
 		$enablefullsearch = $this->params['enablefullsearch'];
+		$enableclipboard = $this->params['enableclipboard'];
 		$attributes = $this->params['attributes'];
 		$categories = $this->params['categories'];
 		$owner = $this->params['owner'];
@@ -515,12 +516,13 @@ class SeedDMS_View_Search extends SeedDMS_Bootstrap_Style {
 			 <span style="padding: 2px; color: #CCC;"><i class="icon-edit"></i></span>
 	<?php
 						}
+						if($enableclipboard) {
 	?>
 			 <a class="addtoclipboard" rel="<?php echo "D".$document->getID(); ?>" msg="<?php printMLText('splash_added_to_clipboard'); ?>" _href="../op/op.AddToClipboard.php?documentid=<?php echo $document->getID(); ?>&type=document&id=<?php echo $document->getID(); ?>&refferer=<?php echo urlencode($this->params['refferer']); ?>" title="<?php printMLText("add_to_clipboard");?>"><i class="icon-copy"></i></a>
-	<?php
+<?php
+						}
 						print "</div>";
 						print "</td>";
-
 						print "</tr>\n";
 					}
 				} elseif(get_class($entry) == $dms->getClassname('folder')) {
@@ -578,9 +580,11 @@ class SeedDMS_View_Search extends SeedDMS_Bootstrap_Style {
      <span style="padding: 2px; color: #CCC;"><i class="icon-edit"></i></span>
 <?php
 					}
+					if($enableclipboard) {
 ?>
      <a class="addtoclipboard" rel="<?php echo "F".$folder->getID(); ?>" msg="<?php printMLText('splash_added_to_clipboard'); ?>" _href="../op/op.AddToClipboard.php?folderid=<?php echo $folder->getID(); ?>&type=folder&id=<?php echo $folder->getID(); ?>&refferer=<?php echo urlencode($this->params['refferer']); ?>" title="<?php printMLText("add_to_clipboard");?>"><i class="icon-copy"></i></a>
 <?php
+					}
 					print "</div>";
 					print "</td>";
 					print "</tr>\n";

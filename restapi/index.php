@@ -42,6 +42,11 @@ if(USE_PHP_SESSION) {
 			else
 				exit;
 		}
+		if($userobj->isAdmin()) {
+			if($resArr["su"]) {
+				$userobj = $dms->getUser($resArr["su"]);
+			}
+		}
 		$dms->setUser($userobj);
 	}
 }
@@ -674,21 +679,29 @@ function doSearch() { /* {{{ */
 	$querystr = $app->request()->get('query');
 	$mode = $app->request()->get('mode');
 	if(!$limit = $app->request()->get('limit'))
-		$limit = 50;
-	$resArr = $dms->search($querystr, $limit);
+		$limit = 8;
+	$resArr = $dms->search($querystr);
 	$entries = array();
+	$count = 0;
 	if($resArr['folders']) {
 		foreach ($resArr['folders'] as $entry) {
 			if ($entry->getAccessMode($userobj) >= M_READ) {
 				$entries[] = $entry;
+				$count++;
 			}
+			if($count >= $limit)
+				break;
 		}
 	}
+	$count = 0;
 	if($resArr['docs']) {
 		foreach ($resArr['docs'] as $entry) {
 			if ($entry->getAccessMode($userobj) >= M_READ) {
 				$entries[] = $entry;
+				$count++;
 			}
+			if($count >= $limit)
+				break;
 		}
 	}
 

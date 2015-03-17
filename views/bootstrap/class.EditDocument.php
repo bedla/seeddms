@@ -49,7 +49,7 @@ class SeedDMS_View_EditDocument extends SeedDMS_Bootstrap_Style {
 function checkForm()
 {
 	msg = new Array();
-	if (document.form1.name.value == "") msg.push("<?php printMLText("js_no_name");?>)";
+	if (document.form1.name.value == "") msg.push("<?php printMLText("js_no_name");?>");
 <?php
 	if ($strictformcheck) {
 	?>

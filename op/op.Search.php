@@ -383,31 +383,40 @@ if(isset($_GET["fullsearch"]) && $_GET["fullsearch"]) {
 
 	// ---------------- Start searching -----------------------------------------
 	$startTime = getTime();
-	$resArr = $dms->search($query, $limit, ($pageNumber-1)*$limit, $mode, $searchin, $startFolder, $owner, $status, $creationdate ? $startdate : array(), $creationdate ? $stopdate : array(), array(), array(), $categories, $attributes, $resultmode, $expirationdate ? $expstartdate : array(), $expirationdate ? $expstopdate : array());
+	$resArr = $dms->search($query, 0, 0 /*$limit, ($pageNumber-1)*$limit*/, $mode, $searchin, $startFolder, $owner, $status, $creationdate ? $startdate : array(), $creationdate ? $stopdate : array(), array(), array(), $categories, $attributes, $resultmode, $expirationdate ? $expstartdate : array(), $expirationdate ? $expstopdate : array());
 	$searchTime = getTime() - $startTime;
 	$searchTime = round($searchTime, 2);
 
 	$entries = array();
+	$fcount = 0;
 	if($resArr['folders']) {
 		foreach ($resArr['folders'] as $entry) {
 			if ($entry->getAccessMode($user) >= M_READ) {
 				$entries[] = $entry;
+				$fcount++;
 			}
 		}
 	}
+	$dcount = 0;
 	if($resArr['docs']) {
 		foreach ($resArr['docs'] as $entry) {
 			if ($entry->getAccessMode($user) >= M_READ) {
 				$entries[] = $entry;
+				$dcount++;
 			}
 		}
 	}
+	$totalPages = count($entries)/$limit;
+	if(count($entries)%$limit)
+		$totalPages++;
+	if($limit > 0)
+		$entries = array_slice($entries, ($pageNumber-1)*$limit, $limit);
 // }}}
 }
 
 // -------------- Output results --------------------------------------------
 
-if(count($entries) == 1 && ($resArr['totalDocs'] + $resArr['totalFolders']) == 1) {
+if(count($entries) == 1) {
 	$entry = $entries[0];
 	if(get_class($entry) == 'SeedDMS_Core_Document') {
 		header('Location: ../out/out.ViewDocument.php?documentid='.$entry->getID());
@@ -418,10 +427,10 @@ if(count($entries) == 1 && ($resArr['totalDocs'] + $resArr['totalFolders']) == 1
 	}
 } else {
 	$tmp = explode('.', basename($_SERVER['SCRIPT_FILENAME']));
-	$view = UI::factory($theme, $tmp[1], array('dms'=>$dms, 'user'=>$user, 'query'=>$query, 'searchhits'=>$entries, 'totalpages'=>$resArr['totalPages'], 'pagenumber'=>$pageNumber, 'searchtime'=>$searchTime, 'urlparams'=>$_GET, 'cachedir'=>$settings->_cacheDir));
+	$view = UI::factory($theme, $tmp[1], array('dms'=>$dms, 'user'=>$user, 'query'=>$query, 'searchhits'=>$entries, 'totalpages'=>$totalPages, 'pagenumber'=>$pageNumber, 'searchtime'=>$searchTime, 'urlparams'=>$_GET, 'cachedir'=>$settings->_cacheDir));
 	if($view) {
-		$view->setParam('totaldocs', $resArr['totalDocs']);
-		$view->setParam('totalfolders', $resArr['totalFolders']);
+		$view->setParam('totaldocs', $dcount /*resArr['totalDocs']*/);
+		$view->setParam('totalfolders', $fcount /*resArr['totalFolders']*/);
 		$view->setParam('fullsearch', (isset($_GET["fullsearch"]) && $_GET["fullsearch"]) ? true : false);
 		$view->setParam('mode', isset($mode) ? $mode : '');
 		$view->setParam('searchin', isset($searchin) ? $searchin : array());

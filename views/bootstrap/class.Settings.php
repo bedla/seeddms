@@ -334,7 +334,7 @@ if(!is_writeable($settings->_configFilePath)) {
         <td><?php printMLText("settings_enablePasswordForgotten");?>:</td>
         <td><input name="enablePasswordForgotten" type="checkbox" <?php if ($settings->_enablePasswordForgotten) echo "checked" ?> /></td>
       </tr>
-      <tr title="<?php printMLText("settings_passwordЅtrength_desc");?>">
+      <tr title="<?php printMLText("settings_passwordStrength_desc");?>">
         <td><?php printMLText("settings_passwordStrength");?>:</td>
         <td><input type="text" name="passwordStrength" value="<?php echo $settings->_passwordStrength; ?>" size="2" /></td>
       </tr>

@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (692), pepijn (45), reinoutdijkstra@hotmail.com (270)
+//    Translators: Admin (693), pepijn (45), reinoutdijkstra@hotmail.com (270)
 
 $text = array(
 'accept' => 'Accept',
@@ -143,7 +143,7 @@ URL: [url]',
 'backup_remove' => 'Verwijder backup bestand',
 'backup_tools' => 'Backup gereedschap',
 'between' => 'tussen',
-'bg_BG' => '',
+'bg_BG' => 'Bulgaars',
 'browse' => 'Browse',
 'calendar' => 'Kalender',
 'calendar_week' => 'Weekkalender',
@@ -947,9 +947,7 @@ URL: [url]',
 'settings_passwordStrengthAlgorithm_desc' => 'Het algoritme gebruikt om de wachtwoord sterkte te berekenen. Het \'simpele\' algoritme controleert alleen op minimaal 8 karakters, een kleine letter, een nummer en een speciaal karakter. Als aan deze condities wordt voldaan is er een resultaat van 100 anders 0.',
 'settings_passwordStrengthAlgorithm_valadvanced' => 'uitgebreid',
 'settings_passwordStrengthAlgorithm_valsimple' => 'simpel',
-'settings_passwordStrength_desc' => '',
-'settings_passwordЅtrength_desc' => 'De sterkte van het wachtwoord is valide van 0 tot 100. Het op 0 zetten zal de controle voor de minimale wachtwoordsterkte uitschakelen.',
-'settings_passwordР…trength_desc' => '',
+'settings_passwordStrength_desc' => 'De sterkte van het wachtwoord is valide van 0 tot 100. Het op 0 zetten zal de controle voor de minimale wachtwoordsterkte uitschakelen.',
 'settings_pear_log' => 'Pear package : Log',
 'settings_pear_webdav' => 'Pear package : HTTP_WebDAV_Server',
 'settings_perms' => 'Machtigingen',

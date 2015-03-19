@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1939), dgrutsch (18)
+//    Translators: Admin (1948), dgrutsch (18)
 
 $text = array(
 'accept' => 'Übernehmen',
@@ -76,27 +76,27 @@ URL: [url]',
 'already_subscribed' => 'Bereits aboniert',
 'and' => 'und',
 'apply' => 'Anwenden',
-'approval_deletion_email' => 'Genehmigungsaufforderung gelöscht',
-'approval_deletion_email_body' => 'Genehmigungsaufforderung gelöscht
+'approval_deletion_email' => 'Freigabeaufforderung gelöscht',
+'approval_deletion_email_body' => 'Freigabeaufforderung gelöscht
 Dokument: [name]
 Version: [version]
 Elternordner: [folder_path]
 Benutzer: [username]
 URL: [url]',
-'approval_deletion_email_subject' => '[sitename]: [name] - Genehmigungsaufforderung gelöscht',
+'approval_deletion_email_subject' => '[sitename]: [name] - Freigabeaufforderung gelöscht',
 'approval_group' => 'Berechtigungsgruppe',
 'approval_log' => 'Freigabeprotokoll',
-'approval_request_email' => 'Aufforderung zur Genehmigung',
-'approval_request_email_body' => 'Aufforderung zur Genehmigung
+'approval_request_email' => 'Aufforderung zur Freigabe',
+'approval_request_email_body' => 'Aufforderung zur Freigabe
 Dokument: [name]
 Version: [version]
 Elternordner: [folder_path]
 Benutzer: [username]
 URL: [url]',
-'approval_request_email_subject' => '[sitename]: [name] - Aufforderung zur Genehmigung',
+'approval_request_email_subject' => '[sitename]: [name] - Aufforderung zur Freigabe',
 'approval_status' => 'Freigabestatus',
 'approval_submit_email' => '',
-'approval_submit_email_body' => 'Genehmigung erteilen
+'approval_submit_email_body' => 'Freigabe erteilen
 Dokument: [name]
 Version: [version]
 Elternordner: [folder_path]
@@ -104,7 +104,7 @@ Status: [status]
 Kommentar: [comment]
 Benutzer: [username]
 URL: [url]',
-'approval_submit_email_subject' => 'Genehmigung erteilen',
+'approval_submit_email_subject' => 'Freigabe erteilen',
 'approval_summary' => 'Übersicht Freigaben',
 'approval_update_failed' => 'Störung bei der Aktualisierung des Berechtigungsstatus. Aktualisierung gescheitert',
 'approvers' => 'Freigebender',
@@ -861,7 +861,7 @@ URL: [url]',
 'settings_dropFolderDir' => 'Verzeichnis für Ablageordner',
 'settings_dropFolderDir_desc' => 'Dieses Verzeichnis kann dazu benutzt werden Dokumente auf dem Server abzulegen und von dort zu importieren anstatt sie über den Browser hochzuladen. Das Verzeichnis muss ein Unterverzeichnis mit dem Login-Namen des angemeldeten Benutzers beinhalten.',
 'settings_Edition' => 'Funktions-Einstellungen',
-'settings_enableAdminRevApp' => 'Admin darf genehmigen/prüfen',
+'settings_enableAdminRevApp' => 'Admin darf freigeben/prüfen',
 'settings_enableAdminRevApp_desc' => 'Anwählen, um Administratoren in der Liste der Prüfer und Freigeber auszugeben',
 'settings_enableCalendar' => 'Kalender einschalten',
 'settings_enableCalendar_desc' => 'Kalender ein/ausschalten',
@@ -970,9 +970,7 @@ URL: [url]',
 'settings_passwordStrengthAlgorithm_desc' => 'Der Algorithmus zur Berechnung der Passwortstärke. Der \'einfache\' Algorithmus  überprüft lediglich auf mindestens einen Kleinbuchstaben, einen Großbuchstaben, eine Zahl, ein Sonderzeichen und eine Mindestlänge von 8.',
 'settings_passwordStrengthAlgorithm_valadvanced' => 'komplex',
 'settings_passwordStrengthAlgorithm_valsimple' => 'einfach',
-'settings_passwordStrength_desc' => '',
-'settings_passwordЅtrength_desc' => 'Die minimale Passwortstärke ist ein ganzzahliger werden zwischen 0 und 100. Ein Wert von 0 schaltet die Überprüfung auf starke Passwörter aus.',
-'settings_passwordР…trength_desc' => '',
+'settings_passwordStrength_desc' => 'Die minimale Passwortstärke ist ein ganzzahliger werden zwischen 0 und 100. Ein Wert von 0 schaltet die Überprüfung auf starke Passwörter aus.',
 'settings_pear_log' => 'Pear package : Log',
 'settings_pear_webdav' => 'Pear package : HTTP_WebDAV_Server',
 'settings_perms' => 'Berechtigungen',

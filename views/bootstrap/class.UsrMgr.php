@@ -132,7 +132,7 @@ class SeedDMS_View_UsrMgr extends SeedDMS_Bootstrap_Style {
 		</tr>
 		<tr>
 			<td><?php printMLText("home_folder")?>:</td>
-			<td><?php $this->printFolderChooser("form".$currUser->getId(), M_READ, -1, $dms->getFolder($currUser->getHomeFolder()), 'homefolder');?></td>
+			<td><?php $this->printFolderChooser("form".($currUser ? $currUser->getId() : '0'), M_READ, -1, $currUser ? $dms->getFolder($currUser->getHomeFolder()) : 0, 'homefolder');?></td>
 		</tr>
 		<tr>
 			<td><?php printMLText("quota");?>:</td>

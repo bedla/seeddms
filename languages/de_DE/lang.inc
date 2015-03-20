@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1953), dgrutsch (18)
+//    Translators: Admin (1955), dgrutsch (18)
 
 $text = array(
 'accept' => 'Übernehmen',
@@ -329,13 +329,13 @@ URL: [url]',
 'edit_comment' => 'Kommentar bearbeiten',
 'edit_default_keywords' => 'Schlüsselworte bearbeiten',
 'edit_document_access' => 'Zugriffsrechte bearbeiten',
-'edit_document_notify' => 'Beobachter',
+'edit_document_notify' => 'Beobachtung von Dokumenten',
 'edit_document_props' => 'Bearbeiten',
 'edit_event' => 'Ereignis editieren',
 'edit_existing_access' => 'Bestehende Berechtigungen bearbeiten',
 'edit_existing_notify' => 'Beobachter bearbeiten',
 'edit_folder_access' => 'Zugriffsrechte bearbeiten',
-'edit_folder_notify' => 'Ordner Beobachter bearbeiten',
+'edit_folder_notify' => 'Beobachtung von Ordnern',
 'edit_folder_props' => 'Bearbeiten',
 'edit_group' => 'Gruppe bearbeiten',
 'edit_user' => 'Benutzer bearbeiten',

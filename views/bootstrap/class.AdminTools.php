@@ -62,7 +62,7 @@ class SeedDMS_View_AdminTools extends SeedDMS_Bootstrap_Style {
 		<a href="../out/out.AttributeMgr.php" class="span3 btn btn-medium"><i class="icon-tags"></i><br /><?php echo getMLText("global_attributedefinitions")?></a>
 	</div>
 <?php
-	if($this->params['workflowmode'] != 'traditional') {
+	if($this->params['workflowmode'] == 'advanced') {
 ?>
 	<div class="row-fluid">
 		<a href="../out/out.WorkflowMgr.php" class="span3 btn btn-medium"><i class="icon-sitemap"></i><br /><?php echo getMLText("global_workflows"); ?></a>

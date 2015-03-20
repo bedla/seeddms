@@ -408,7 +408,7 @@ if(isset($_GET["fullsearch"]) && $_GET["fullsearch"]) {
 			}
 		}
 	}
-	$totalPages = count($entries)/$limit;
+	$totalPages = (int) (count($entries)/$limit);
 	if(count($entries)%$limit)
 		$totalPages++;
 	if($limit > 0)

@@ -108,13 +108,16 @@ if (($oldname = $document->getName()) != $name) {
 			$params['url'] = "http".((isset($_SERVER['HTTPS']) && (strcmp($_SERVER['HTTPS'],'off')!=0)) ? "s" : "")."://".$_SERVER['HTTP_HOST'].$settings->_httpRoot."out/out.ViewDocument.php?documentid=".$document->getID();
 			$params['sitename'] = $settings->_siteName;
 			$params['http_root'] = $settings->_httpRoot;
+
+			// if user is not owner send notification to owner
+			if ($user->getID() != $document->getOwner()->getID() &&
+				!SeedDMS_Core_DMS::inList($document->getOwner(), $notifyList['users'])) {
+				$notifyList['users'][] = $document->getOwner();
+			}
 			$notifier->toList($user, $notifyList["users"], $subject, $message, $params);
 			foreach ($notifyList["groups"] as $grp) {
 				$notifier->toGroup($user, $grp, $subject, $message, $params);
 			}
-			// if user is not owner send notification to owner
-			if ($user->getID() != $document->getOwner()->getID()) 
-				$notifier->toIndividual($user, $document->getOwner(), $subject, $message, $params);
 		}
 
 	}
@@ -159,14 +162,16 @@ if (($oldcomment = $document->getComment()) != $comment) {
 			$params['url'] = "http".((isset($_SERVER['HTTPS']) && (strcmp($_SERVER['HTTPS'],'off')!=0)) ? "s" : "")."://".$_SERVER['HTTP_HOST'].$settings->_httpRoot."out/out.ViewDocument.php?documentid=".$document->getID();
 			$params['sitename'] = $settings->_siteName;
 			$params['http_root'] = $settings->_httpRoot;
+
+			// if user is not owner send notification to owner
+			if ($user->getID() != $document->getOwner()->getID() &&
+				!SeedDMS_Core_DMS::inList($document->getOwner(), $notifyList['users'])) {
+				$notifyList['users'][] = $document->getOwner();
+			}
 			$notifier->toList($user, $notifyList["users"], $subject, $message, $params);
 			foreach ($notifyList["groups"] as $grp) {
 				$notifier->toGroup($user, $grp, $subject, $message, $params);
 			}
-			// if user is not owner send notification to owner
-			if ($user->getID() != $document->getOwner()->getID()) 
-				$notifier->toIndividual($user, $document->getOwner(), $subject, $message, $params);
-
 		}
 	}
 	else {
@@ -184,7 +189,7 @@ if ($_POST["expires"] != "false") {
 	}
 }
 
-//if ($expires) {
+if ($expires != $document->getExpires()) {
 	if($document->setExpires($expires)) {
 		if($notifier) {
 			$notifyList = $document->getNotifyList();
@@ -199,6 +204,12 @@ if ($_POST["expires"] != "false") {
 			$params['url'] = "http".((isset($_SERVER['HTTPS']) && (strcmp($_SERVER['HTTPS'],'off')!=0)) ? "s" : "")."://".$_SERVER['HTTP_HOST'].$settings->_httpRoot."out/out.ViewDocument.php?documentid=".$document->getID();
 			$params['sitename'] = $settings->_siteName;
 			$params['http_root'] = $settings->_httpRoot;
+
+			// if user is not owner send notification to owner
+			if ($user->getID() != $document->getOwner()->getID() &&
+				!SeedDMS_Core_DMS::inList($document->getOwner(), $notifyList['users'])) {
+				$notifyList['users'][] = $document->getOwner();
+			}
 			$notifier->toList($user, $notifyList["users"], $subject, $message, $params);
 			foreach ($notifyList["groups"] as $grp) {
 				$notifier->toGroup($user, $grp, $subject, $message, $params);
@@ -207,7 +218,7 @@ if ($_POST["expires"] != "false") {
 	} else {
 		UI::exitError(getMLText("document_title", array("documentname" => $document->getName())),getMLText("error_occured"));
 	}
-//}
+}
 
 if (($oldkeywords = $document->getKeywords()) != $keywords) {
 	if($document->setKeywords($keywords)) {

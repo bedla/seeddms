@@ -98,7 +98,7 @@ class SeedDMS_AccessOperation {
 		if(get_class($this->obj) == 'SeedDMS_Core_Document') {
 			$latestContent = $this->obj->getLatestContent();
 			$status = $latestContent->getStatus();
-			if ((($this->settings->_enableVersionModification && ($this->obj->getAccessMode($this->user) == M_ALL)) || $this->user->isAdmin()) && ($status["status"]==S_DRAFT_REV)) {
+			if ((($this->settings->_enableVersionModification && ($this->obj->getAccessMode($this->user) == M_ALL)) || $this->user->isAdmin()) && ($status["status"]==S_DRAFT_REV || $status["status"]==S_DRAFT_APP && $this->settings->_workflowMode == 'traditional_only_approval')) {
 				return true;
 			}
 		}

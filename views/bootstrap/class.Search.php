@@ -241,8 +241,10 @@ class SeedDMS_View_Search extends SeedDMS_Bootstrap_Style {
 <tr>
 <td><?php printMLText("status");?>:</td>
 <td>
+<?php if($workflowmode == 'traditional' || $workflowmode == 'traditional_only_approval') { ?>
 <?php if($workflowmode == 'traditional') { ?>
 <label class="checkbox" for='pendingReview'><input type="checkbox" id="pendingReview" name="pendingReview" value="1" <?php echo in_array(S_DRAFT_REV, $status) ? "checked" : ""; ?>><?php printOverallStatusText(S_DRAFT_REV);?></label>
+<?php } ?>
 <label class="checkbox" for='pendingApproval'><input type="checkbox" id="pendingApproval" name="pendingApproval" value="1" <?php echo in_array(S_DRAFT_APP, $status) ? "checked" : ""; ?>><?php printOverallStatusText(S_DRAFT_APP);?></label>
 <?php } else { ?>
 <label class="checkbox" for='inWorkflow'><input type="checkbox" id="inWorkflow" name="inWorkflow" value="1" <?php echo in_array(S_IN_WORKFLOW, $status) ? "checked" : ""; ?>><?php printOverallStatusText(S_IN_WORKFLOW);?></label>

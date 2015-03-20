@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1360)
+//    Translators: Admin (1360), s.pnt (26)
 
 $text = array(
 'accept' => 'Accetta',
@@ -76,9 +76,14 @@ URL: [url]',
 'already_subscribed' => 'L\'oggetto è già stato sottoscritto',
 'and' => 'e',
 'apply' => 'Applica',
-'approval_deletion_email' => 'Cancellata la richiesta di approvazione',
-'approval_deletion_email_body' => '',
-'approval_deletion_email_subject' => '',
+'approval_deletion_email' => 'Richiesta di approvazione cancellata',
+'approval_deletion_email_body' => 'Richiesta di approvazione cancellata.
+Documento: [name]
+Versione: [version]
+Cartella: [folder_path]
+Utente: [username]
+URL: [url]',
+'approval_deletion_email_subject' => '[sitename]: [name] - Richiesta di approvazione cancellata',
 'approval_group' => 'Gruppo di approvazione',
 'approval_log' => 'Registro delle approvazioni',
 'approval_request_email' => 'Richiesta di approvazione',
@@ -89,7 +94,7 @@ Cartella: [folder_path]
 Utente: [username]
 URL: [url]',
 'approval_request_email_subject' => '[sitename]: [name] - Richiesta di approvazione',
-'approval_status' => 'Stato approvazione',
+'approval_status' => 'Stato di approvazione',
 'approval_submit_email' => '',
 'approval_submit_email_body' => 'Documento approvato
 Documento: [name]
@@ -150,7 +155,7 @@ URL: [url]',
 'backup_remove' => 'Elimina file di backup',
 'backup_tools' => 'Strumenti di backup',
 'between' => 'tra',
-'bg_BG' => '',
+'bg_BG' => 'Bulgaro',
 'browse' => 'Scegli file',
 'calendar' => 'Calendario',
 'calendar_week' => 'Calendario Settimanale',
@@ -185,7 +190,7 @@ URL: [url]',
 'chart_sizeperuser_title' => 'Spazio su disco per utente',
 'choose_attrdef' => 'Seleziona l\'Attributo',
 'choose_category' => 'Seleziona',
-'choose_group' => 'Seleziona gruppo',
+'choose_group' => 'Seleziona il gruppo',
 'choose_target_category' => 'Seleziona la categoria',
 'choose_target_document' => 'Seleziona il documento',
 'choose_target_file' => 'Scegli il file',
@@ -203,7 +208,7 @@ URL: [url]',
 'confirm_create_fulltext_index' => 'Sì, desidero ricreare l\'indice fulltext!',
 'confirm_pwd' => 'Conferma la password',
 'confirm_rm_backup' => 'Vuoi davvero rimuovere il file "[arkname]"?<br>Attenzione: questa operazione non può essere annullata.',
-'confirm_rm_document' => 'Vuoi veramente eliminare il documento "[documentname]"?<br>Attenzione: questa operazione non può essere annullata',
+'confirm_rm_document' => 'Vuoi veramente eliminare il documento "[documentname]"?<br>Attenzione: questa operazione non può essere annullata.',
 'confirm_rm_dump' => 'Vuoi davvero rimuovere il file "[dumpname]"?<br>Attenzione: questa operazione non può essere annullata.',
 'confirm_rm_event' => 'Vuoi davvero rimuovere l\'evento "[name]"?<br>Attenzione: questa operazione non può essere annullata.',
 'confirm_rm_file' => 'Vuoi veramente eliminare il file "[name]" del documento "[documentname]"?<br>Attenzione: questa operazione non può essere annullata.',
@@ -439,7 +444,7 @@ URL: [url]',
 'include_documents' => 'Includi documenti',
 'include_subdirectories' => 'Includi sottocartelle',
 'index_converters' => 'Indice di conversione documenti',
-'index_folder' => 'Indice cartelle',
+'index_folder' => 'Indicizza cartella',
 'individuals' => 'Singoli',
 'inherited' => 'ereditato',
 'inherits_access_copy_msg' => 'Copia la lista degli accessi ereditati',
@@ -616,7 +621,7 @@ URL: [url]',
 'no_update_cause_locked' => 'Non è quindi possible aggiornare il documento. Prego contattare l\'utente che l\'ha bloccato.',
 'no_user_image' => 'Nessuna immagine trovata',
 'no_version_check' => 'Il controllo per una nuova versione di SeedDMS è fallito! Questo può essere causato da allow_url_fopen settato a 0 nella tua configurazione php.',
-'no_workflow_available' => '',
+'no_workflow_available' => 'Nessun flusso di lavoro disponibile',
 'objectcheck' => 'Controllo cartelle o documenti',
 'obsolete' => 'Obsoleto',
 'october' => 'Ottobre',
@@ -690,8 +695,15 @@ URL: [url]',
 'remove_marked_files' => 'Rimuovi i files contrassegnati',
 'repaired' => 'riparato',
 'repairing_objects' => 'Riparazione documenti e cartelle in corso...',
-'request_workflow_action_email_body' => '',
-'request_workflow_action_email_subject' => '',
+'request_workflow_action_email_body' => 'Il flusso di lavoro richiede che tu esegua un\'azione.
+Documento: [name]
+Versione: [version]
+Flusso di lavoro: [workflow]
+Stato attuale: [current_state]
+Cartella: [folder_path]
+Utente: [username]
+URL: [url]',
+'request_workflow_action_email_subject' => 'Richiesta di azione in un flusso di lavoro',
 'results_page' => 'Pagina dei risultati',
 'return_from_subworkflow' => 'Ritorno dal sotto-flusso di lavoro',
 'return_from_subworkflow_email_body' => 'Ritorno dal sotto-flusso di lavoro
@@ -708,13 +720,23 @@ URL: [url]',
 'reviewer_already_assigned' => 'è già assegnato come revisore',
 'reviewer_already_removed' => 'è già stato rimosso dal processo di revisione oppure ha già inserito una revisione.',
 'review_deletion_email' => 'Richiesta di revisione cancellata',
-'review_deletion_email_body' => '',
-'review_deletion_email_subject' => '',
+'review_deletion_email_body' => 'Richiesta di revisione cancellata.
+Documento: [name]
+Versione: [version]
+Cartella: [folder_path]
+Utente: [username]
+URL: [url]',
+'review_deletion_email_subject' => '[sitename]: [name] - Richiesta di revisione cancellata',
 'review_group' => 'Gruppo revisori',
 'review_log' => 'Rivedi log',
 'review_request_email' => 'Richiesta di revisione',
-'review_request_email_body' => '',
-'review_request_email_subject' => '',
+'review_request_email_body' => 'Richiesta di revisione
+Documento: [name]
+Versione: [version]
+Cartella: [folder_path]
+Utente: [username]
+URL: [url]',
+'review_request_email_subject' => '[sitename]: [name] - Richiesta di revisione',
 'review_status' => 'Stato revisioni:',
 'review_submit_email' => 'Sottoposta revisione',
 'review_submit_email_body' => 'Sottoposta revisione
@@ -873,8 +895,8 @@ URL: [url]',
 'settings_enableLargeFileUpload_desc' => 'Se selezionato, il caricamento (upload) dei files può essere effettuato anche attraverso un\'applet Java chiamata Jumploader evitando il limite di dimensioni file imposto dal browser; Jumploader permette anche il caricamento di diversi files contemporaneamente.',
 'settings_enableNotificationAppRev' => 'Abilita/disabilita notifica a revisore/approvatore',
 'settings_enableNotificationAppRev_desc' => 'Spuntare per inviare una notifica al revisore/approvatore nel momento in cui viene aggiunta una nuova versione del documento.',
-'settings_enableNotificationWorkflow' => '',
-'settings_enableNotificationWorkflow_desc' => '',
+'settings_enableNotificationWorkflow' => 'Invia notifiche ai partecipanti al flusso di lavoro',
+'settings_enableNotificationWorkflow_desc' => 'Se questa opzione è selezionata, gli utenti o i gruppi che sono coinvolti nella successiva transizione del flusso di lavoro riceveranno un avviso, anche se non hanno impostato notifiche riguardanti il documento.',
 'settings_enableOwnerNotification' => 'Abilita/disabilita notifica al proprietario',
 'settings_enableOwnerNotification_desc' => 'Spuntare per inviare una notifica al proprietario del documento nel momento in cui questo viene aggiunto.',
 'settings_enableOwnerRevApp' => 'Permetti la revisione/approvazione per il proprietario',
@@ -956,9 +978,7 @@ URL: [url]',
 'settings_passwordStrengthAlgorithm_desc' => 'Algoritmo utilizzato per valutare la sicurezza di una password. Quello \'semplice\' si limita a controllare che siano utilizzati otto o più caratteri di cui almeno uno minuscolo, uno maiuscolo, un numero ed un carattere speciale. Nel caso in cui tutte queste condizioni siano rispettate il risultato è 100, altrimenti 0.',
 'settings_passwordStrengthAlgorithm_valadvanced' => 'avanzato',
 'settings_passwordStrengthAlgorithm_valsimple' => 'semplice',
-'settings_passwordStrength_desc' => '',
-'settings_passwordЅtrength_desc' => 'La sicurezza minima di una password è un numero intero compreso tra 0 e 100. Impostare il valore 0 disabilita il controllo per il valore di sicurezza minimo della password.',
-'settings_passwordР…trength_desc' => '',
+'settings_passwordStrength_desc' => 'La sicurezza minima di una password è un numero intero compreso tra 0 e 100. Impostare il valore 0 disabilita il controllo per il valore di sicurezza minimo della password.',
 'settings_pear_log' => 'Pacchetto Pear: registro',
 'settings_pear_webdav' => 'Pacchetto Pear: HTTP_WebDAV_Server',
 'settings_perms' => 'Permessi',
@@ -966,8 +986,8 @@ URL: [url]',
 'settings_php_gd2' => 'Estensione PHP: php_gd2',
 'settings_php_mbstring' => 'Estensione PHP: php_mbstring',
 'settings_php_version' => 'Versione PHP',
-'settings_presetExpirationDate' => '',
-'settings_presetExpirationDate_desc' => '',
+'settings_presetExpirationDate' => 'Data di scadenza predefinita',
+'settings_presetExpirationDate_desc' => 'Tutti i nuovi documenti caricati avranno la data di scadenza impostata su questo valore. La data inserita può essere specificata nel formato accettato dalla funzione strtotime() di PHP, ad esempio +5 settimane.',
 'settings_previewWidthDetail' => 'Larghezza immagini di anteprima (dettagli)',
 'settings_previewWidthDetail_desc' => 'Larghezza delle immagini di anteprima mostrate nella pagina dei dettagli',
 'settings_previewWidthList' => 'Larghezza delle immagini di anteprima (lista)',
@@ -1039,7 +1059,7 @@ URL: [url]',
 'settings_workflowMode_desc' => 'Il flusso di lavoro \'avanzato\' permette di rilasciare un proprio flusso di lavoro per le versioni dei documenti',
 'settings_workflowMode_valadvanced' => 'Avanzato',
 'settings_workflowMode_valtraditional' => 'Tradizionale',
-'settings_workflowMode_valtraditional_only_approval' => '',
+'settings_workflowMode_valtraditional_only_approval' => 'tradizionale (senza revisione)',
 'settings_zendframework' => 'Framework Zend',
 'set_expiry' => 'Imposta scadenza',
 'set_owner' => 'Conferma proprietario',
@@ -1104,10 +1124,10 @@ URL: [url]',
 'sunday_abbr' => 'Dom',
 'sv_SE' => 'Svedese',
 'switched_to' => 'Passato a',
-'takeOverGrpApprover' => '',
-'takeOverGrpReviewer' => '',
-'takeOverIndApprover' => '',
-'takeOverIndReviewer' => '',
+'takeOverGrpApprover' => 'Riprendi il gruppo degli approvatori dall\'ultima versione.',
+'takeOverGrpReviewer' => 'Riprendi il gruppo dei revisori dall\'ultima versione.',
+'takeOverIndApprover' => 'Riprendi l\'approvatore dall\'ultima versione.',
+'takeOverIndReviewer' => 'Riprendi il revisore dall\'ultima versione.',
 'testmail_body' => 'Questo messaggio di posta elettronica è solo un test per verificare la configurazione del repository',
 'testmail_subject' => 'Messaggio di test',
 'theme' => 'Tema',

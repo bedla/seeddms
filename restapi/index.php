@@ -679,7 +679,7 @@ function doSearch() { /* {{{ */
 	$querystr = $app->request()->get('query');
 	$mode = $app->request()->get('mode');
 	if(!$limit = $app->request()->get('limit'))
-		$limit = 8;
+		$limit = 5;
 	$resArr = $dms->search($querystr);
 	$entries = array();
 	$count = 0;

@@ -598,8 +598,11 @@ class SeedDMS_View_ViewDocument extends SeedDMS_Bootstrap_Style {
 			$this->contentContainerEnd();
 ?>
 			<div class="row-fluid">
+<?php
+			if($workflowmode != 'traditional_only_approval') {
+?>
 				<div class="span6">
-				<legend><?php printMLText('approval_log'); ?></legend>
+				<legend><?php printMLText('review_log'); ?></legend>
 				<table class="table condensed">
 					<tr><th><?php printMLText('name'); ?></th><th><?php printMLText('last_update'); ?>/<?php printMLText('comment'); ?></th><th><?php printMLText('status'); ?></th></tr>
 <?php
@@ -649,10 +652,10 @@ class SeedDMS_View_ViewDocument extends SeedDMS_Bootstrap_Style {
 					</table>
 				</div>
 <?php
-					if($workflowmode != 'traditional_only_approval') {
+				}
 ?>
 				<div class="span6">
-				<legend><?php printMLText('review_log'); ?></legend>
+				<legend><?php printMLText('approval_log'); ?></legend>
 				<table class="table condensed">
 					<tr><th><?php printMLText('name'); ?></th><th><?php printMLText('last_update'); ?>/<?php printMLText('comment'); ?></th><th><?php printMLText('status'); ?></th></tr>
 <?php
@@ -702,7 +705,6 @@ class SeedDMS_View_ViewDocument extends SeedDMS_Bootstrap_Style {
 				</table>
 				</div>
 <?php
-				}
 			}
 ?>
 			</div>

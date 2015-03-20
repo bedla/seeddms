@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1939), dgrutsch (18)
+//    Translators: Admin (1955), dgrutsch (18)
 
 $text = array(
 'accept' => 'Übernehmen',
@@ -76,27 +76,27 @@ URL: [url]',
 'already_subscribed' => 'Bereits aboniert',
 'and' => 'und',
 'apply' => 'Anwenden',
-'approval_deletion_email' => 'Genehmigungsaufforderung gelöscht',
-'approval_deletion_email_body' => 'Genehmigungsaufforderung gelöscht
+'approval_deletion_email' => 'Freigabeaufforderung gelöscht',
+'approval_deletion_email_body' => 'Freigabeaufforderung gelöscht
 Dokument: [name]
 Version: [version]
 Elternordner: [folder_path]
 Benutzer: [username]
 URL: [url]',
-'approval_deletion_email_subject' => '[sitename]: [name] - Genehmigungsaufforderung gelöscht',
+'approval_deletion_email_subject' => '[sitename]: [name] - Freigabeaufforderung gelöscht',
 'approval_group' => 'Berechtigungsgruppe',
 'approval_log' => 'Freigabeprotokoll',
-'approval_request_email' => 'Aufforderung zur Genehmigung',
-'approval_request_email_body' => 'Aufforderung zur Genehmigung
+'approval_request_email' => 'Aufforderung zur Freigabe',
+'approval_request_email_body' => 'Aufforderung zur Freigabe
 Dokument: [name]
 Version: [version]
 Elternordner: [folder_path]
 Benutzer: [username]
 URL: [url]',
-'approval_request_email_subject' => '[sitename]: [name] - Aufforderung zur Genehmigung',
+'approval_request_email_subject' => '[sitename]: [name] - Aufforderung zur Freigabe',
 'approval_status' => 'Freigabestatus',
 'approval_submit_email' => '',
-'approval_submit_email_body' => 'Genehmigung erteilen
+'approval_submit_email_body' => 'Freigabe erteilen
 Dokument: [name]
 Version: [version]
 Elternordner: [folder_path]
@@ -104,7 +104,7 @@ Status: [status]
 Kommentar: [comment]
 Benutzer: [username]
 URL: [url]',
-'approval_submit_email_subject' => 'Genehmigung erteilen',
+'approval_submit_email_subject' => 'Freigabe erteilen',
 'approval_summary' => 'Übersicht Freigaben',
 'approval_update_failed' => 'Störung bei der Aktualisierung des Berechtigungsstatus. Aktualisierung gescheitert',
 'approvers' => 'Freigebender',
@@ -329,13 +329,13 @@ URL: [url]',
 'edit_comment' => 'Kommentar bearbeiten',
 'edit_default_keywords' => 'Schlüsselworte bearbeiten',
 'edit_document_access' => 'Zugriffsrechte bearbeiten',
-'edit_document_notify' => 'Benachrichtigungen',
+'edit_document_notify' => 'Beobachtung von Dokumenten',
 'edit_document_props' => 'Bearbeiten',
 'edit_event' => 'Ereignis editieren',
 'edit_existing_access' => 'Bestehende Berechtigungen bearbeiten',
-'edit_existing_notify' => 'Benachrichtigungen bearbeiten',
+'edit_existing_notify' => 'Beobachter bearbeiten',
 'edit_folder_access' => 'Zugriffsrechte bearbeiten',
-'edit_folder_notify' => 'Ordner Benachrichtigungen bearbeiten',
+'edit_folder_notify' => 'Beobachtung von Ordnern',
 'edit_folder_props' => 'Bearbeiten',
 'edit_group' => 'Gruppe bearbeiten',
 'edit_user' => 'Benutzer bearbeiten',
@@ -346,7 +346,7 @@ URL: [url]',
 'email_header' => 'Dies ist eine automatische Nachricht des DMS-Servers.',
 'email_not_given' => 'Bitte geben Sie eine gültige E-Mail-Adresse ein.',
 'empty_folder_list' => 'Keine Dokumente oder Ordner',
-'empty_notify_list' => 'Keine Benachrichtigungen',
+'empty_notify_list' => 'Keine Beobachter',
 'en_GB' => 'Englisch (GB)',
 'equal_transition_states' => 'Start- und Endstatus ѕind gleich',
 'error' => 'Fehler',
@@ -592,7 +592,7 @@ Elternordner: [folder_path]
 Benutzer: [username]
 URL: [url]',
 'notify_added_email_subject' => '[sitename]: [name] - Added to notification list',
-'notify_deleted_email' => 'Sie wurden von der Liste der Benachrichtigungen entfernt.',
+'notify_deleted_email' => 'Sie wurden von der Liste der Beobachter entfernt.',
 'notify_deleted_email_body' => 'Removed from notification list
 Name: [name]
 Elternordner: [folder_path]
@@ -861,7 +861,7 @@ URL: [url]',
 'settings_dropFolderDir' => 'Verzeichnis für Ablageordner',
 'settings_dropFolderDir_desc' => 'Dieses Verzeichnis kann dazu benutzt werden Dokumente auf dem Server abzulegen und von dort zu importieren anstatt sie über den Browser hochzuladen. Das Verzeichnis muss ein Unterverzeichnis mit dem Login-Namen des angemeldeten Benutzers beinhalten.',
 'settings_Edition' => 'Funktions-Einstellungen',
-'settings_enableAdminRevApp' => 'Admin darf genehmigen/prüfen',
+'settings_enableAdminRevApp' => 'Admin darf freigeben/prüfen',
 'settings_enableAdminRevApp_desc' => 'Anwählen, um Administratoren in der Liste der Prüfer und Freigeber auszugeben',
 'settings_enableCalendar' => 'Kalender einschalten',
 'settings_enableCalendar_desc' => 'Kalender ein/ausschalten',
@@ -970,9 +970,7 @@ URL: [url]',
 'settings_passwordStrengthAlgorithm_desc' => 'Der Algorithmus zur Berechnung der Passwortstärke. Der \'einfache\' Algorithmus  überprüft lediglich auf mindestens einen Kleinbuchstaben, einen Großbuchstaben, eine Zahl, ein Sonderzeichen und eine Mindestlänge von 8.',
 'settings_passwordStrengthAlgorithm_valadvanced' => 'komplex',
 'settings_passwordStrengthAlgorithm_valsimple' => 'einfach',
-'settings_passwordStrength_desc' => '',
-'settings_passwordЅtrength_desc' => 'Die minimale Passwortstärke ist ein ganzzahliger werden zwischen 0 und 100. Ein Wert von 0 schaltet die Überprüfung auf starke Passwörter aus.',
-'settings_passwordР…trength_desc' => '',
+'settings_passwordStrength_desc' => 'Die minimale Passwortstärke ist ein ganzzahliger werden zwischen 0 und 100. Ein Wert von 0 schaltet die Überprüfung auf starke Passwörter aus.',
 'settings_pear_log' => 'Pear package : Log',
 'settings_pear_webdav' => 'Pear package : HTTP_WebDAV_Server',
 'settings_perms' => 'Berechtigungen',

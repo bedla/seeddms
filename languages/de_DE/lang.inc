@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1948), dgrutsch (18)
+//    Translators: Admin (1953), dgrutsch (18)
 
 $text = array(
 'accept' => 'Übernehmen',
@@ -329,13 +329,13 @@ URL: [url]',
 'edit_comment' => 'Kommentar bearbeiten',
 'edit_default_keywords' => 'Schlüsselworte bearbeiten',
 'edit_document_access' => 'Zugriffsrechte bearbeiten',
-'edit_document_notify' => 'Benachrichtigungen',
+'edit_document_notify' => 'Beobachter',
 'edit_document_props' => 'Bearbeiten',
 'edit_event' => 'Ereignis editieren',
 'edit_existing_access' => 'Bestehende Berechtigungen bearbeiten',
-'edit_existing_notify' => 'Benachrichtigungen bearbeiten',
+'edit_existing_notify' => 'Beobachter bearbeiten',
 'edit_folder_access' => 'Zugriffsrechte bearbeiten',
-'edit_folder_notify' => 'Ordner Benachrichtigungen bearbeiten',
+'edit_folder_notify' => 'Ordner Beobachter bearbeiten',
 'edit_folder_props' => 'Bearbeiten',
 'edit_group' => 'Gruppe bearbeiten',
 'edit_user' => 'Benutzer bearbeiten',
@@ -346,7 +346,7 @@ URL: [url]',
 'email_header' => 'Dies ist eine automatische Nachricht des DMS-Servers.',
 'email_not_given' => 'Bitte geben Sie eine gültige E-Mail-Adresse ein.',
 'empty_folder_list' => 'Keine Dokumente oder Ordner',
-'empty_notify_list' => 'Keine Benachrichtigungen',
+'empty_notify_list' => 'Keine Beobachter',
 'en_GB' => 'Englisch (GB)',
 'equal_transition_states' => 'Start- und Endstatus ѕind gleich',
 'error' => 'Fehler',
@@ -592,7 +592,7 @@ Elternordner: [folder_path]
 Benutzer: [username]
 URL: [url]',
 'notify_added_email_subject' => '[sitename]: [name] - Added to notification list',
-'notify_deleted_email' => 'Sie wurden von der Liste der Benachrichtigungen entfernt.',
+'notify_deleted_email' => 'Sie wurden von der Liste der Beobachter entfernt.',
 'notify_deleted_email_body' => 'Removed from notification list
 Name: [name]
 Elternordner: [folder_path]

@@ -3,6 +3,8 @@
 --------------------------------------------------------------------------------
 - propperly take new workflow mode 'traditional without review' into
   account
+- fix bug in calculating pages for page browser
+- updated italian and german translation
 
 --------------------------------------------------------------------------------
                      Changes in version 4.3.15

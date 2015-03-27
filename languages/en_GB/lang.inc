@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1081), dgrutsch (3), netixw (14)
+//    Translators: Admin (1084), dgrutsch (3), netixw (14)
 
 $text = array(
 'accept' => 'Accept',
@@ -51,6 +51,7 @@ URL: [url]',
 'add_approval' => 'Add approval',
 'add_document' => 'Add document',
 'add_document_link' => 'Add link',
+'add_document_notify' => 'Assign notification',
 'add_doc_reviewer_approver_warning' => 'N.B. Documents are automatically marked as released if no reviewer or approver is assigned.',
 'add_doc_workflow_warning' => 'N.B. Documents are automatically marked as released if no workflow is assigned.',
 'add_event' => 'Add event',
@@ -809,8 +810,10 @@ URL: [url]',
 'select_category' => 'Click to select category',
 'select_groups' => 'Click to select groups',
 'select_grp_approvers' => 'Click to select group approver',
+'select_grp_notification' => 'Click to select a group notification',
 'select_grp_reviewers' => 'Click to select group reviewer',
 'select_ind_approvers' => 'Click to select individual approver',
+'select_ind_notification' => 'Click to select individual notification',
 'select_ind_reviewers' => 'Click to select individual reviewer',
 'select_one' => 'Select one',
 'select_users' => 'Click to select users',

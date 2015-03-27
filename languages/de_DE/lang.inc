@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1955), dgrutsch (18)
+//    Translators: Admin (1959), dgrutsch (18)
 
 $text = array(
 'accept' => 'Übernehmen',
@@ -51,6 +51,7 @@ URL: [url]',
 'add_approval' => 'Freigabe hinzufügen',
 'add_document' => 'Dokument anlegen',
 'add_document_link' => 'Verweis hinzufügen',
+'add_document_notify' => 'Beobachter zuweisen',
 'add_doc_reviewer_approver_warning' => 'Anmerkung: Dokumente werden automatisch geprüft und als freigegeben markiert, wenn kein Prüfer oder keine Freigabe zugewiesen wird.',
 'add_doc_workflow_warning' => 'Anmerkung: Dokumente werden automatisch freigegeben, wenn kein Workflow gewählt wird.',
 'add_event' => 'Ereignis hinzufügen',
@@ -802,8 +803,10 @@ URL: [url]',
 'select_category' => 'Klicken zur Auswahl einer Kategorie',
 'select_groups' => 'Klicken zur Auswahl einer Gruppe',
 'select_grp_approvers' => 'Klicken zur Auswahl einer Freigabegruppe',
+'select_grp_notification' => 'Klicken zur Auswahl einer Beobachtergruppe',
 'select_grp_reviewers' => 'Klicken zur Auswahl einer Prüfgruppe',
 'select_ind_approvers' => 'Klicken zur Auswahl eines Freigebers',
+'select_ind_notification' => 'Klicken zur Auswahl eines Beobachters',
 'select_ind_reviewers' => 'Klicken zur Auswahl eines Prüfers',
 'select_one' => 'Bitte wählen',
 'select_users' => 'Klicken zur Auswahl eines Benutzers',

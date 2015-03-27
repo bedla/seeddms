@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (678), kreml (455)
+//    Translators: Admin (679), kreml (455)
 
 $text = array(
 'accept' => 'Přijmout',
@@ -51,6 +51,7 @@ URL: [url]',
 'add_approval' => 'Poslat ke schválení',
 'add_document' => 'Přidat dokument',
 'add_document_link' => 'Přidat odkaz',
+'add_document_notify' => '',
 'add_doc_reviewer_approver_warning' => 'Pozn.: Dokumenty se automaticky označí jako vydané, když není přidělen žádný kontrolor nebo schvalovatel.',
 'add_doc_workflow_warning' => 'Pozn. Není-li zadán pracovní postup, jsou dokumenty automaticky označeny jako uvolněné.',
 'add_event' => 'Přidat akci',
@@ -150,7 +151,7 @@ URL: [url]',
 'backup_remove' => 'Odstranit soubor zálohy',
 'backup_tools' => 'Nástroje pro zálohování',
 'between' => 'mezi',
-'bg_BG' => '',
+'bg_BG' => 'Bulharsky',
 'browse' => 'Prohlížet',
 'calendar' => 'Kalendář',
 'calendar_week' => 'Kaledářní týden',
@@ -782,8 +783,10 @@ URL: [url]',
 'select_category' => 'Kliknutím vyberte kategorii',
 'select_groups' => 'Kliknutím vyberte skupiny',
 'select_grp_approvers' => 'Kliknutím vyberte skupinu schvalovatele',
+'select_grp_notification' => '',
 'select_grp_reviewers' => 'Kliknutím vyberte skupinu posuzovatele',
 'select_ind_approvers' => 'Kliknutím vyberte jednotlivého schvalovatele',
+'select_ind_notification' => '',
 'select_ind_reviewers' => 'Klepnutím vyberte jednotlivého posuzovatele',
 'select_one' => 'Vyberte jeden',
 'select_users' => 'Kliknutím vyberte uživatele',

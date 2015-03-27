@@ -1486,6 +1486,12 @@ class SeedDMS_Core_Document extends SeedDMS_Core_Object { /* {{{ */
 			return false;
 		}
 
+		$queryStr = "DELETE FROM `tblWorkflowLog` WHERE `document` = '". $this->getID() ."' AND `version` = '" . $version->_version."'";
+		if (!$db->getResult($queryStr)) {
+			$db->rollbackTransaction();
+			return false;
+		}
+
 		$db->commitTransaction();
 		return true;
 	} /* }}} */

@@ -299,6 +299,26 @@ for ($file_num=0;$file_num<count($_FILES["userfile"]["tmp_name"]);$file_num++){
 		if($settings->_enableOwnerNotification) {
 			$res = $document->addNotify($user->getID(), true);
 		}
+		/* Check if additional notification shall be added */
+		if($_POST['notification_users']) {
+			foreach($_POST['notification_users'] as $notuserid) {
+				$notuser = $dms->getUser($notuserid);
+				if($notuser) {
+					if($document->getAccessMode($user) >= M_READ)
+						$res = $document->addNotify($notuserid, true);
+				}
+			}
+		}
+		if($_POST['notification_groups']) {
+			foreach($_POST['notification_groups'] as $notgroupid) {
+				$notgroup = $dms->getGroup($notgroupid);
+				if($notgroup) {
+					if($document->getGroupAccessMode($notgroup) >= M_READ)
+						$res = $document->addNotify($notgroupid, false);
+				}
+			}
+		}
+
 		// Send notification to subscribers of folder.
 		if($notifier) {
 			$notifyList = $folder->getNotifyList();
@@ -335,6 +355,29 @@ for ($file_num=0;$file_num<count($_FILES["userfile"]["tmp_name"]);$file_num++){
 				$notifier->toGroup($user, $grp, $subject, $message, $params);
 			}
 
+			if($workflow && $settings->_enableNotificationWorkflow) {
+				$subject = "request_workflow_action_email_subject";
+				$message = "request_workflow_action_email_body";
+				$params = array();
+				$params['name'] = $document->getName();
+				$params['version'] = $reqversion;
+				$params['workflow'] = $workflow->getName();
+				$params['folder_path'] = $folder->getFolderPathPlain();
+				$params['current_state'] = $workflow->getInitState()->getName();
+				$params['username'] = $user->getFullName();
+				$params['sitename'] = $settings->_siteName;
+				$params['http_root'] = $settings->_httpRoot;
+				$params['url'] = "http".((isset($_SERVER['HTTPS']) && (strcmp($_SERVER['HTTPS'],'off')!=0)) ? "s" : "")."://".$_SERVER['HTTP_HOST'].$settings->_httpRoot."out/out.ViewDocument.php?documentid=".$document->getID();
+
+				foreach($workflow->getNextTransitions($workflow->getInitState()) as $ntransition) {
+					foreach($ntransition->getUsers() as $tuser) {
+						$notifier->toIndividual($user, $tuser->getUser(), $subject, $message, $params);
+					}
+					foreach($ntransition->getGroups() as $tuser) {
+						$notifier->toGroup($user, $tuser->getGroup(), $subject, $message, $params);
+					}
+				}
+			}
 		}
 	}
 	

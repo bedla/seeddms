@@ -136,79 +136,84 @@ $reviewers["i"] = array();
 $reviewers["g"] = array();
 $approvers["i"] = array();
 $approvers["g"] = array();
+$workflow = null;
 
-// Retrieve the list of individual reviewers from the form.
-if (isset($_POST["indReviewers"])) {
-	foreach ($_POST["indReviewers"] as $ind) {
-		$reviewers["i"][] = $ind;
-	}
-}
-// Retrieve the list of reviewer groups from the form.
-if (isset($_POST["grpReviewers"])) {
-	foreach ($_POST["grpReviewers"] as $grp) {
-		$reviewers["g"][] = $grp;
-	}
-}
-
-// Retrieve the list of individual approvers from the form.
-if (isset($_POST["indApprovers"])) {
-	foreach ($_POST["indApprovers"] as $ind) {
-		$approvers["i"][] = $ind;
-	}
-}
-// Retrieve the list of approver groups from the form.
-if (isset($_POST["grpApprovers"])) {
-	foreach ($_POST["grpApprovers"] as $grp) {
-		$approvers["g"][] = $grp;
-	}
-}
-
-// add mandatory reviewers/approvers
-$docAccess = $folder->getReadAccessList($settings->_enableAdminRevApp, $settings->_enableOwnerRevApp);
-$res=$user->getMandatoryReviewers();
-foreach ($res as $r){
-
-	if ($r['reviewerUserID']!=0){
-		foreach ($docAccess["users"] as $usr)
-			if ($usr->getID()==$r['reviewerUserID']){
-				$reviewers["i"][] = $r['reviewerUserID'];
-				break;
+if($settings->_workflowMode == 'traditional' || $settings->_workflowMode == 'traditional_only_approval') {
+	if($settings->_workflowMode == 'traditional') {
+		// Retrieve the list of individual reviewers from the form.
+		if (isset($_POST["indReviewers"])) {
+			foreach ($_POST["indReviewers"] as $ind) {
+				$reviewers["i"][] = $ind;
 			}
-	}
-	else if ($r['reviewerGroupID']!=0){
-		foreach ($docAccess["groups"] as $grp)
-			if ($grp->getID()==$r['reviewerGroupID']){
-				$reviewers["g"][] = $r['reviewerGroupID'];
-				break;
+		}
+		// Retrieve the list of reviewer groups from the form.
+		if (isset($_POST["grpReviewers"])) {
+			foreach ($_POST["grpReviewers"] as $grp) {
+				$reviewers["g"][] = $grp;
 			}
+		}
+	}
+
+	// Retrieve the list of individual approvers from the form.
+	if (isset($_POST["indApprovers"])) {
+		foreach ($_POST["indApprovers"] as $ind) {
+			$approvers["i"][] = $ind;
+		}
+	}
+	// Retrieve the list of approver groups from the form.
+	if (isset($_POST["grpApprovers"])) {
+		foreach ($_POST["grpApprovers"] as $grp) {
+			$approvers["g"][] = $grp;
+		}
+	}
+	// add mandatory reviewers/approvers
+	$docAccess = $folder->getReadAccessList($settings->_enableAdminRevApp, $settings->_enableOwnerRevApp);
+	if($settings->_workflowMode == 'traditional') {
+		$res=$user->getMandatoryReviewers();
+		foreach ($res as $r){
+
+			if ($r['reviewerUserID']!=0){
+				foreach ($docAccess["users"] as $usr)
+					if ($usr->getID()==$r['reviewerUserID']){
+						$reviewers["i"][] = $r['reviewerUserID'];
+						break;
+					}
+			}
+			else if ($r['reviewerGroupID']!=0){
+				foreach ($docAccess["groups"] as $grp)
+					if ($grp->getID()==$r['reviewerGroupID']){
+						$reviewers["g"][] = $r['reviewerGroupID'];
+						break;
+					}
+			}
+		}
+	}
+	$res=$user->getMandatoryApprovers();
+	foreach ($res as $r){
+
+		if ($r['approverUserID']!=0){
+			foreach ($docAccess["users"] as $usr)
+				if ($usr->getID()==$r['approverUserID']){
+					$approvers["i"][] = $r['approverUserID'];
+					break;
+				}
+		}
+		else if ($r['approverGroupID']!=0){
+			foreach ($docAccess["groups"] as $grp)
+				if ($grp->getID()==$r['approverGroupID']){
+					$approvers["g"][] = $r['approverGroupID'];
+					break;
+				}
+		}
+	}
+} elseif($settings->_workflowMode == 'advanced') {
+	if(!$workflow = $user->getMandatoryWorkflow()) {
+		if(isset($_POST["workflow"]))
+			$workflow = $dms->getWorkflow($_POST["workflow"]);
+		else
+			$workflow = null;
 	}
 }
-$res=$user->getMandatoryApprovers();
-foreach ($res as $r){
-
-	if ($r['approverUserID']!=0){
-		foreach ($docAccess["users"] as $usr)
-			if ($usr->getID()==$r['approverUserID']){
-				$approvers["i"][] = $r['approverUserID'];
-				break;
-			}
-	}
-	else if ($r['approverGroupID']!=0){
-		foreach ($docAccess["groups"] as $grp)
-			if ($grp->getID()==$r['approverGroupID']){
-				$approvers["g"][] = $r['approverGroupID'];
-				break;
-			}
-	}
-}
-
-if(!$workflow = $user->getMandatoryWorkflow()) {
-	if(isset($_POST["workflow"]))
-		$workflow = $dms->getWorkflow($_POST["workflow"]);
-	else
-		$workflow = null;
-}
-
 
 if($settings->_dropFolderDir) {
 	if(isset($_POST["dropfolderfileform1"]) && $_POST["dropfolderfileform1"]) {

@@ -12,11 +12,11 @@
   <email>uwe@steinmann.cx</email>
   <active>yes</active>
  </lead>
- <date>2015-03-20</date>
+ <date>2015-03-27</date>
  <time>08:02:04</time>
  <version>
-  <release>4.3.16</release>
-  <api>4.3.16</api>
+  <release>4.3.17</release>
+  <api>4.3.17</api>
  </version>
  <stability>
   <release>stable</release>
@@ -24,7 +24,7 @@
  </stability>
  <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
  <notes>
-no changes
+clean workflow log when a document version was deleted
  </notes>
  <contents>
   <dir baseinstalldir="SeedDMS" name="/">
@@ -797,6 +797,22 @@ new release
    <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
    <notes>
 users returned by SeedDMS_Core_DMS::getAllUsers() have language and theme set again
+   </notes>
+  </release>
+  <release>
+   <date>2015-03-20</date>
+   <time>08:02:04</time>
+   <version>
+    <release>4.3.16</release>
+    <api>4.3.16</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://opensource.org/licenses/gpl-license">GPL License</license>
+   <notes>
+no changes
    </notes>
   </release>
  </changelog>

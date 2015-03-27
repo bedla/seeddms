@@ -1,4 +1,13 @@
 --------------------------------------------------------------------------------
+                     Changes in version 4.3.17
+--------------------------------------------------------------------------------
+- when adding a document, notifications can be specified
+- send mail to those users and groups next in the workflow after adding
+  a document or a new version (previously mails were only send when a
+  transition was triggered)
+- clean workflow log when deleting a document version.
+
+--------------------------------------------------------------------------------
                      Changes in version 4.3.16
 --------------------------------------------------------------------------------
 - propperly take new workflow mode 'traditional without review' into

@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (934), angel (123), francisco (2), jaimem (14)
+//    Translators: Admin (935), angel (123), francisco (2), jaimem (14)
 
 $text = array(
 'accept' => 'Aceptar',
@@ -51,6 +51,7 @@ URL: [url]',
 'add_approval' => 'Enviar aprobación',
 'add_document' => 'Añadir documento',
 'add_document_link' => 'Añadir vínculo',
+'add_document_notify' => '',
 'add_doc_reviewer_approver_warning' => 'Documentos N.B. se marcan automáticamente como publicados si no hay revisores o aprobadores asignados.',
 'add_doc_workflow_warning' => 'Documentos N.B. se marcan automáticamente como publicados si no hay flujo de trabajo asignado.',
 'add_event' => 'Añadir evento',
@@ -150,7 +151,7 @@ URL: [url]',
 'backup_remove' => 'Eliminar fichero de copia de seguridad',
 'backup_tools' => 'Herramientas de copia de seguridad',
 'between' => 'entre',
-'bg_BG' => '',
+'bg_BG' => 'Búlgaro',
 'browse' => 'Listar',
 'calendar' => 'Calendario',
 'calendar_week' => 'Calendario semanal',
@@ -788,8 +789,10 @@ URL: [url]',
 'select_category' => 'Haga Click para seleccionar categoría',
 'select_groups' => 'Haga Click para seleccionar grupos',
 'select_grp_approvers' => 'Haga Click para seleccionar grupo de aprobadores',
+'select_grp_notification' => '',
 'select_grp_reviewers' => 'Haga Click para seleccionar grupo de revisores',
 'select_ind_approvers' => 'Haga Click para seleccionar aprobador individual',
+'select_ind_notification' => '',
 'select_ind_reviewers' => 'Haga Click para seleccionar revisor individual',
 'select_one' => 'Seleccionar uno',
 'select_users' => 'Haga Click para seleccionar usuarios',

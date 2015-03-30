@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (875), flaviove (627), lfcristofoli (352)
+//    Translators: Admin (877), flaviove (627), lfcristofoli (352)
 
 $text = array(
 'accept' => 'Aceitar',
@@ -51,6 +51,7 @@ URL: [url]',
 'add_approval' => '',
 'add_document' => 'Novo documento',
 'add_document_link' => 'Adicionar link',
+'add_document_notify' => '',
 'add_doc_reviewer_approver_warning' => 'N.B. Documents are automatically marked as released if no reviewer or approver is assigned.',
 'add_doc_workflow_warning' => 'N.B. Os documentos são automaticamente marcados como liberados se nenhum fluxo de trabalho é atribuído.',
 'add_event' => 'Add event',
@@ -150,7 +151,7 @@ URL: [url]',
 'backup_remove' => 'Remove backup file',
 'backup_tools' => 'Ferramentas de backup',
 'between' => 'entre',
-'bg_BG' => '',
+'bg_BG' => 'Bulgaro',
 'browse' => 'Procurar',
 'calendar' => 'Calendario',
 'calendar_week' => 'Calendário semanal',
@@ -785,8 +786,10 @@ URL: [url]',
 'select_category' => 'Clique para selecionar a categoria',
 'select_groups' => 'Clique para selecionar os grupos',
 'select_grp_approvers' => 'Clique para selecionar o grupo aprovador',
+'select_grp_notification' => '',
 'select_grp_reviewers' => 'Clique para selecionar o grupo revisor',
 'select_ind_approvers' => 'Clique para selecionar aprovador indivídual',
+'select_ind_notification' => '',
 'select_ind_reviewers' => 'Clique para selecionar revisor individual',
 'select_one' => 'Selecione um',
 'select_users' => 'Clique para selecionar os usuários',
@@ -1124,7 +1127,7 @@ User: [username]
 URL: [url]',
 'transition_triggered_email_subject' => '[sitename]: [name] - Transição de fluxo de trabalho desencadeado',
 'trigger_workflow' => 'Fluxo de trabalho',
-'tr_TR' => '',
+'tr_TR' => 'Turco',
 'tuesday' => 'Tuesday',
 'tuesday_abbr' => 'Tu',
 'type_to_search' => 'Tipo de pesquisa',

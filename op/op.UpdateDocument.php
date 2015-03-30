@@ -103,77 +103,93 @@ if ($_FILES['userfile']['error'] == 0) {
 	// Get the list of reviewers and approvers for this document.
 	$reviewers = array();
 	$approvers = array();
-
-	// Retrieve the list of individual reviewers from the form.
 	$reviewers["i"] = array();
-	if (isset($_POST["indReviewers"])) {
-		foreach ($_POST["indReviewers"] as $ind) {
-			$reviewers["i"][] = $ind;
-		}
-	}
-	// Retrieve the list of reviewer groups from the form.
 	$reviewers["g"] = array();
-	if (isset($_POST["grpReviewers"])) {
-		foreach ($_POST["grpReviewers"] as $grp) {
-			$reviewers["g"][] = $grp;
-		}
-	}
-
-	// Retrieve the list of individual approvers from the form.
 	$approvers["i"] = array();
-	if (isset($_POST["indApprovers"])) {
-		foreach ($_POST["indApprovers"] as $ind) {
-			$approvers["i"][] = $ind;
-		}
-	}
-	// Retrieve the list of approver groups from the form.
 	$approvers["g"] = array();
-	if (isset($_POST["grpApprovers"])) {
-		foreach ($_POST["grpApprovers"] as $grp) {
-			$approvers["g"][] = $grp;
+	$workflow = null;
+
+	if($settings->_workflowMode == 'traditional' || $settings->_workflowMode == 'traditional_only_approval') {
+		if($settings->_workflowMode == 'traditional') {
+			// Retrieve the list of individual reviewers from the form.
+			$reviewers["i"] = array();
+			if (isset($_POST["indReviewers"])) {
+				foreach ($_POST["indReviewers"] as $ind) {
+					$reviewers["i"][] = $ind;
+				}
+			}
+			// Retrieve the list of reviewer groups from the form.
+			$reviewers["g"] = array();
+			if (isset($_POST["grpReviewers"])) {
+				foreach ($_POST["grpReviewers"] as $grp) {
+					$reviewers["g"][] = $grp;
+				}
+			}
+		}
+
+		// Retrieve the list of individual approvers from the form.
+		$approvers["i"] = array();
+		if (isset($_POST["indApprovers"])) {
+			foreach ($_POST["indApprovers"] as $ind) {
+				$approvers["i"][] = $ind;
+			}
+		}
+		// Retrieve the list of approver groups from the form.
+		$approvers["g"] = array();
+		if (isset($_POST["grpApprovers"])) {
+			foreach ($_POST["grpApprovers"] as $grp) {
+				$approvers["g"][] = $grp;
+			}
+		}
+
+		// add mandatory reviewers/approvers
+		$docAccess = $folder->getReadAccessList($settings->_enableAdminRevApp, $settings->_enableOwnerRevApp);
+		if($settings->_workflowMode == 'traditional') {
+			$res=$user->getMandatoryReviewers();
+			foreach ($res as $r){
+
+				if ($r['reviewerUserID']!=0){
+					foreach ($docAccess["users"] as $usr)
+						if ($usr->getID()==$r['reviewerUserID']){
+							$reviewers["i"][] = $r['reviewerUserID'];
+							break;
+						}
+				}
+				else if ($r['reviewerGroupID']!=0){
+					foreach ($docAccess["groups"] as $grp)
+						if ($grp->getID()==$r['reviewerGroupID']){
+							$reviewers["g"][] = $r['reviewerGroupID'];
+							break;
+						}
+				}
+			}
+		}
+		$res=$user->getMandatoryApprovers();
+		foreach ($res as $r){
+
+			if ($r['approverUserID']!=0){
+				foreach ($docAccess["users"] as $usr)
+					if ($usr->getID()==$r['approverUserID']){
+						$approvers["i"][] = $r['approverUserID'];
+						break;
+					}
+			}
+			else if ($r['approverGroupID']!=0){
+				foreach ($docAccess["groups"] as $grp)
+					if ($grp->getID()==$r['approverGroupID']){
+						$approvers["g"][] = $r['approverGroupID'];
+						break;
+					}
+			}
+		}
+	} elseif($settings->_workflowMode == 'advanced') {
+		if(!$workflow = $user->getMandatoryWorkflow()) {
+			if(isset($_POST["workflow"]))
+				$workflow = $dms->getWorkflow($_POST["workflow"]);
+			else
+				$workflow = null;
 		}
 	}
-
-	// add mandatory reviewers/approvers
-	$docAccess = $folder->getReadAccessList($settings->_enableAdminRevApp, $settings->_enableOwnerRevApp);
-	$res=$user->getMandatoryReviewers();
-	foreach ($res as $r){
-
-		if ($r['reviewerUserID']!=0){
-			foreach ($docAccess["users"] as $usr)
-				if ($usr->getID()==$r['reviewerUserID']){
-					$reviewers["i"][] = $r['reviewerUserID'];
-					break;
-				}
-		}
-		else if ($r['reviewerGroupID']!=0){
-			foreach ($docAccess["groups"] as $grp)
-				if ($grp->getID()==$r['reviewerGroupID']){
-					$reviewers["g"][] = $r['reviewerGroupID'];
-					break;
-				}
-		}
-	}
-	$res=$user->getMandatoryApprovers();
-	foreach ($res as $r){
-
-		if ($r['approverUserID']!=0){
-			foreach ($docAccess["users"] as $usr)
-				if ($usr->getID()==$r['approverUserID']){
-					$approvers["i"][] = $r['approverUserID'];
-					break;
-				}
-		}
-		else if ($r['approverGroupID']!=0){
-			foreach ($docAccess["groups"] as $grp)
-				if ($grp->getID()==$r['approverGroupID']){
-					$approvers["g"][] = $r['approverGroupID'];
-					break;
-				}
-		}
-	}
-
-	$workflow = $user->getMandatoryWorkflow();
 
 	if(isset($_POST["attributes"]) && $_POST["attributes"]) {
 		$attributes = $_POST["attributes"];
@@ -208,25 +224,7 @@ if ($_FILES['userfile']['error'] == 0) {
 		if ($notifier){
 			$notifyList = $document->getNotifyList();
 			$folder = $document->getFolder();
-/*
-			$subject = "###SITENAME###: ".$document->getName()." - ".getMLText("document_updated_email");
-			$message = getMLText("document_updated_email")."\r\n";
-			$message .= 
-				getMLText("document").": ".$document->getName()."\r\n".
-				getMLText("folder").": ".$folder->getFolderPathPlain()."\r\n".
-				getMLText("comment").": ".$document->getComment()."\r\n".
-				"URL: ###URL_PREFIX###out/out.ViewDocument.php?documentid=".$document->getID()."\r\n";
 
-
-			$notifier->toList($user, $document->_notifyList["users"], $subject, $message);
-			foreach ($document->_notifyList["groups"] as $grp) {
-				$notifier->toGroup($user, $grp, $subject, $message);
-			}
-
-			// if user is not owner send notification to owner
-			if ($user->getID()!= $document->getOwner()->getID())
-				$notifier->toIndividual($user, $document->getOwner(), $subject, $message);
-*/
 			$subject = "document_updated_email_subject";
 			$message = "document_updated_email_body";
 			$params = array();
@@ -246,6 +244,29 @@ if ($_FILES['userfile']['error'] == 0) {
 			if ($user->getID() != $document->getOwner()->getID()) 
 				$notifier->toIndividual($user, $document->getOwner(), $subject, $message, $params);
 
+			if($workflow && $settings->_enableNotificationWorkflow) {
+				$subject = "request_workflow_action_email_subject";
+				$message = "request_workflow_action_email_body";
+				$params = array();
+				$params['name'] = $document->getName();
+				$params['version'] = $contentResult->getContent()->getVersion();
+				$params['workflow'] = $workflow->getName();
+				$params['folder_path'] = $folder->getFolderPathPlain();
+				$params['current_state'] = $workflow->getInitState()->getName();
+				$params['username'] = $user->getFullName();
+				$params['sitename'] = $settings->_siteName;
+				$params['http_root'] = $settings->_httpRoot;
+				$params['url'] = "http".((isset($_SERVER['HTTPS']) && (strcmp($_SERVER['HTTPS'],'off')!=0)) ? "s" : "")."://".$_SERVER['HTTP_HOST'].$settings->_httpRoot."out/out.ViewDocument.php?documentid=".$document->getID();
+
+				foreach($workflow->getNextTransitions($workflow->getInitState()) as $ntransition) {
+					foreach($ntransition->getUsers() as $tuser) {
+						$notifier->toIndividual($user, $tuser->getUser(), $subject, $message, $params);
+					}
+					foreach($ntransition->getGroups() as $tuser) {
+						$notifier->toGroup($user, $tuser->getGroup(), $subject, $message, $params);
+					}
+				}
+			}
 		}
 
 		$expires = false;
@@ -263,21 +284,8 @@ if ($_FILES['userfile']['error'] == 0) {
 				if($notifier) {
 					$notifyList = $document->getNotifyList();
 					$folder = $document->getFolder();
-					// Send notification to subscribers.
-/*
-					$subject = "###SITENAME###: ".$document->getName()." - ".getMLText("expiry_changed_email");
-					$message = getMLText("expiry_changed_email")."\r\n";
-					$message .= 
-						getMLText("document").": ".$document->getName()."\r\n".
-						getMLText("folder").": ".$folder->getFolderPathPlain()."\r\n".
-						getMLText("comment").": ".$document->getComment()."\r\n".
-						"URL: ###URL_PREFIX###out/out.ViewDocument.php?documentid=".$document->getID()."\r\n";
 
-					$notifier->toList($user, $document->_notifyList["users"], $subject, $message);
-					foreach ($document->_notifyList["groups"] as $grp) {
-						$notifier->toGroup($user, $grp, $subject, $message);
-					}
-*/
+					// Send notification to subscribers.
 					$subject = "expiry_changed_email_subject";
 					$message = "expiry_changed_email_body";
 					$params = array();

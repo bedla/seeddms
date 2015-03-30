@@ -138,79 +138,84 @@ $reviewers["i"] = array();
 $reviewers["g"] = array();
 $approvers["i"] = array();
 $approvers["g"] = array();
+$workflow = null;
 
-// Retrieve the list of individual reviewers from the form.
-if (isset($_POST["indReviewers"])) {
-	foreach ($_POST["indReviewers"] as $ind) {
-		$reviewers["i"][] = $ind;
-	}
-}
-// Retrieve the list of reviewer groups from the form.
-if (isset($_POST["grpReviewers"])) {
-	foreach ($_POST["grpReviewers"] as $grp) {
-		$reviewers["g"][] = $grp;
-	}
-}
-
-// Retrieve the list of individual approvers from the form.
-if (isset($_POST["indApprovers"])) {
-	foreach ($_POST["indApprovers"] as $ind) {
-		$approvers["i"][] = $ind;
-	}
-}
-// Retrieve the list of approver groups from the form.
-if (isset($_POST["grpApprovers"])) {
-	foreach ($_POST["grpApprovers"] as $grp) {
-		$approvers["g"][] = $grp;
-	}
-}
-
-// add mandatory reviewers/approvers
-$docAccess = $folder->getReadAccessList($settings->_enableAdminRevApp, $settings->_enableOwnerRevApp);
-$res=$user->getMandatoryReviewers();
-foreach ($res as $r){
-
-	if ($r['reviewerUserID']!=0){
-		foreach ($docAccess["users"] as $usr)
-			if ($usr->getID()==$r['reviewerUserID']){
-				$reviewers["i"][] = $r['reviewerUserID'];
-				break;
+if($settings->_workflowMode == 'traditional' || $settings->_workflowMode == 'traditional_only_approval') {
+	if($settings->_workflowMode == 'traditional') {
+		// Retrieve the list of individual reviewers from the form.
+		if (isset($_POST["indReviewers"])) {
+			foreach ($_POST["indReviewers"] as $ind) {
+				$reviewers["i"][] = $ind;
 			}
-	}
-	else if ($r['reviewerGroupID']!=0){
-		foreach ($docAccess["groups"] as $grp)
-			if ($grp->getID()==$r['reviewerGroupID']){
-				$reviewers["g"][] = $r['reviewerGroupID'];
-				break;
+		}
+		// Retrieve the list of reviewer groups from the form.
+		if (isset($_POST["grpReviewers"])) {
+			foreach ($_POST["grpReviewers"] as $grp) {
+				$reviewers["g"][] = $grp;
 			}
+		}
+	}
+
+	// Retrieve the list of individual approvers from the form.
+	if (isset($_POST["indApprovers"])) {
+		foreach ($_POST["indApprovers"] as $ind) {
+			$approvers["i"][] = $ind;
+		}
+	}
+	// Retrieve the list of approver groups from the form.
+	if (isset($_POST["grpApprovers"])) {
+		foreach ($_POST["grpApprovers"] as $grp) {
+			$approvers["g"][] = $grp;
+		}
+	}
+	// add mandatory reviewers/approvers
+	$docAccess = $folder->getReadAccessList($settings->_enableAdminRevApp, $settings->_enableOwnerRevApp);
+	if($settings->_workflowMode == 'traditional') {
+		$res=$user->getMandatoryReviewers();
+		foreach ($res as $r){
+
+			if ($r['reviewerUserID']!=0){
+				foreach ($docAccess["users"] as $usr)
+					if ($usr->getID()==$r['reviewerUserID']){
+						$reviewers["i"][] = $r['reviewerUserID'];
+						break;
+					}
+			}
+			else if ($r['reviewerGroupID']!=0){
+				foreach ($docAccess["groups"] as $grp)
+					if ($grp->getID()==$r['reviewerGroupID']){
+						$reviewers["g"][] = $r['reviewerGroupID'];
+						break;
+					}
+			}
+		}
+	}
+	$res=$user->getMandatoryApprovers();
+	foreach ($res as $r){
+
+		if ($r['approverUserID']!=0){
+			foreach ($docAccess["users"] as $usr)
+				if ($usr->getID()==$r['approverUserID']){
+					$approvers["i"][] = $r['approverUserID'];
+					break;
+				}
+		}
+		else if ($r['approverGroupID']!=0){
+			foreach ($docAccess["groups"] as $grp)
+				if ($grp->getID()==$r['approverGroupID']){
+					$approvers["g"][] = $r['approverGroupID'];
+					break;
+				}
+		}
+	}
+} elseif($settings->_workflowMode == 'advanced') {
+	if(!$workflow = $user->getMandatoryWorkflow()) {
+		if(isset($_POST["workflow"]))
+			$workflow = $dms->getWorkflow($_POST["workflow"]);
+		else
+			$workflow = null;
 	}
 }
-$res=$user->getMandatoryApprovers();
-foreach ($res as $r){
-
-	if ($r['approverUserID']!=0){
-		foreach ($docAccess["users"] as $usr)
-			if ($usr->getID()==$r['approverUserID']){
-				$approvers["i"][] = $r['approverUserID'];
-				break;
-			}
-	}
-	else if ($r['approverGroupID']!=0){
-		foreach ($docAccess["groups"] as $grp)
-			if ($grp->getID()==$r['approverGroupID']){
-				$approvers["g"][] = $r['approverGroupID'];
-				break;
-			}
-	}
-}
-
-if(!$workflow = $user->getMandatoryWorkflow()) {
-	if(isset($_POST["workflow"]))
-		$workflow = $dms->getWorkflow($_POST["workflow"]);
-	else
-		$workflow = null;
-}
-
 
 if($settings->_dropFolderDir) {
 	if(isset($_POST["dropfolderfileform1"]) && $_POST["dropfolderfileform1"]) {
@@ -309,6 +314,26 @@ for ($file_num=0;$file_num<count($_FILES["userfile"]["tmp_name"]);$file_num++){
 		if($settings->_enableOwnerNotification) {
 			$res = $document->addNotify($user->getID(), true);
 		}
+		/* Check if additional notification shall be added */
+		if($_POST['notification_users']) {
+			foreach($_POST['notification_users'] as $notuserid) {
+				$notuser = $dms->getUser($notuserid);
+				if($notuser) {
+					if($document->getAccessMode($user) >= M_READ)
+						$res = $document->addNotify($notuserid, true);
+				}
+			}
+		}
+		if($_POST['notification_groups']) {
+			foreach($_POST['notification_groups'] as $notgroupid) {
+				$notgroup = $dms->getGroup($notgroupid);
+				if($notgroup) {
+					if($document->getGroupAccessMode($notgroup) >= M_READ)
+						$res = $document->addNotify($notgroupid, false);
+				}
+			}
+		}
+
 		// Send notification to subscribers of folder.
 		if($notifier) {
 			$notifyList = $folder->getNotifyList();
@@ -345,6 +370,29 @@ for ($file_num=0;$file_num<count($_FILES["userfile"]["tmp_name"]);$file_num++){
 				$notifier->toGroup($user, $grp, $subject, $message, $params);
 			}
 
+			if($workflow && $settings->_enableNotificationWorkflow) {
+				$subject = "request_workflow_action_email_subject";
+				$message = "request_workflow_action_email_body";
+				$params = array();
+				$params['name'] = $document->getName();
+				$params['version'] = $reqversion;
+				$params['workflow'] = $workflow->getName();
+				$params['folder_path'] = $folder->getFolderPathPlain();
+				$params['current_state'] = $workflow->getInitState()->getName();
+				$params['username'] = $user->getFullName();
+				$params['sitename'] = $settings->_siteName;
+				$params['http_root'] = $settings->_httpRoot;
+				$params['url'] = "http".((isset($_SERVER['HTTPS']) && (strcmp($_SERVER['HTTPS'],'off')!=0)) ? "s" : "")."://".$_SERVER['HTTP_HOST'].$settings->_httpRoot."out/out.ViewDocument.php?documentid=".$document->getID();
+
+				foreach($workflow->getNextTransitions($workflow->getInitState()) as $ntransition) {
+					foreach($ntransition->getUsers() as $tuser) {
+						$notifier->toIndividual($user, $tuser->getUser(), $subject, $message, $params);
+					}
+					foreach($ntransition->getGroups() as $tuser) {
+						$notifier->toGroup($user, $tuser->getGroup(), $subject, $message, $params);
+					}
+				}
+			}
 		}
 	}
 	

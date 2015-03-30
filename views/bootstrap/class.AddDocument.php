@@ -43,6 +43,7 @@ class SeedDMS_View_AddDocument extends SeedDMS_Bootstrap_Style {
 		$dropfolderdir = $this->params['dropfolderdir'];
 		$workflowmode = $this->params['workflowmode'];
 		$presetexpiration = $this->params['presetexpiration'];
+		$sortusersinlist = $this->params['sortusersinlist'];
 		$folderid = $folder->getId();
 
 		$this->htmlStartPage(getMLText("folder_title", array("foldername" => htmlspecialchars($folder->getName()))));
@@ -489,10 +490,48 @@ $(document).ready(function() {
         <td colspan="2">
 			<div class="alert"><?php printMLText("add_doc_reviewer_approver_warning")?></div>
         </td>
-		  </tr>	
+			</tr>	
 <?php
 		}
 ?>
+		  <tr>	
+        <td>
+		<?php $this->contentSubHeading(getMLText("add_document_notify")); ?>
+        </td>
+			</tr>	
+
+		  <tr>	
+        <td>
+			<div class="cbSelectTitle"><?php printMLText("individuals");?>:</div>
+        </td>
+        <td>
+				<select class="chzn-select span9" name="notification_users[]" multiple="multiple" data-placeholder="<?php printMLText('select_ind_notification'); ?>">
+<?php
+						$allUsers = $dms->getAllUsers($sortusersinlist);
+						foreach ($allUsers as $userObj) {
+							if (!$userObj->isGuest() && $folder->getAccessMode($userObj) >= M_READ)
+								print "<option value=\"".$userObj->getID()."\">" . htmlspecialchars($userObj->getLogin() . " - " . $userObj->getFullName()) . "\n";
+						}
+?>
+				</select>
+				</td>
+			</tr>
+		  <tr>	
+        <td>
+			<div class="cbSelectTitle"><?php printMLText("groups");?>:</div>
+        </td>
+        <td>
+				<select class="chzn-select span9" name="notification_groups[]" multiple="multiple" data-placeholder="<?php printMLText('select_grp_notification'); ?>">
+<?php
+						$allGroups = $dms->getAllGroups();
+						foreach ($allGroups as $groupObj) {
+							if ($folder->getGroupAccessMode($groupObj) >= M_READ)
+								print "<option value=\"".$groupObj->getID()."\">" . htmlspecialchars($groupObj->getName()) . "\n";
+						}
+?>
+				</select>
+				</td>
+			</tr>
 		</table>
 
 			<p><input type="submit" class="btn" value="<?php printMLText("add_document");?>"></p>

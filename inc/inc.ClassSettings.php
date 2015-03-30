@@ -530,9 +530,11 @@ class Settings { /* {{{ */
 		$extensions = $xml->xpath('/configuration/extensions/extension');
 		$this->_extensions = array();
 		foreach($extensions as $extension) {
-			$extname = strval($extension->attributes()['name']);
+			$tmp = $extension->attributes();
+			$extname = strval($tmp['name']);
 			foreach($extension->children() as $parameter) {
-				$this->_extensions[$extname][strval($parameter->attributes()['name'])] = strval($parameter);
+				$tmp2 = $parameter->attributes();
+				$this->_extensions[$extname][strval($tmp2['name'])] = strval($parameter);
 			}
 		}
 

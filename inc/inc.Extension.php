@@ -19,6 +19,7 @@ $extconffile = $extMgr->getExtensionsConfFile();
 if(!file_exists($extconffile)) {
 	$extMgr->createExtensionConf();
 }
+$EXT_CONF = array();
 include($extconffile);
 
 foreach($EXT_CONF as $extname=>$extconf) {

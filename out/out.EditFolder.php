@@ -40,7 +40,7 @@ if ($folder->getAccessMode($user) < M_READWRITE) {
 $attrdefs = $dms->getAllAttributeDefinitions(array(SeedDMS_Core_AttributeDefinition::objtype_folder, SeedDMS_Core_AttributeDefinition::objtype_all));
 
 $tmp = explode('.', basename($_SERVER['SCRIPT_FILENAME']));
-$view = UI::factory($theme, $tmp[1], array('dms'=>$dms, 'user'=>$user, 'folder'=>$folder, 'attrdefs'=>$attrdefs, 'strictformcheck'=>$settings->_strictFormCheck, 'rootfolderid'=>$settings->_rootFolderID));
+$view = UI::factory($theme, $tmp[1], array('dms'=>$dms, 'user'=>$user, 'folder'=>$folder, 'attrdefs'=>$attrdefs, 'strictformcheck'=>$settings->_strictFormCheck, 'rootfolderid'=>$settings->_rootFolderID, 'orderby'=>$settings->_sortFoldersDefault));
 if($view) {
 	$view->show();
 	exit;

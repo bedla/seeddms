@@ -36,6 +36,7 @@ class SeedDMS_View_AddSubFolder extends SeedDMS_Bootstrap_Style {
 		$user = $this->params['user'];
 		$folder = $this->params['folder'];
 		$strictformcheck = $this->params['strictformcheck'];
+		$orderby = $this->params['orderby'];
 
 		$this->htmlStartPage(getMLText("folder_title", array("foldername" => htmlspecialchars($folder->getName()))));
 		$this->globalNavigation($folder);
@@ -87,7 +88,7 @@ function checkForm()
 		</tr>
 		<tr>
 			<td class="inputDescription"><?php printMLText("sequence");?>:</td>
-			<td><?php $this->printSequenceChooser($folder->getSubFolders('s'));?></td>
+			<td><?php $this->printSequenceChooser($folder->getSubFolders('s')); if($orderby != 's') echo "<br />".getMLText('order_by_sequence_off');?></td>
 		</tr>
 <?php
 	$attrdefs = $dms->getAllAttributeDefinitions(array(SeedDMS_Core_AttributeDefinition::objtype_folder, SeedDMS_Core_AttributeDefinition::objtype_all));

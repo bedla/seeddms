@@ -38,6 +38,7 @@ class SeedDMS_View_EditFolder extends SeedDMS_Bootstrap_Style {
 		$attrdefs = $this->params['attrdefs'];
 		$rootfolderid = $this->params['rootfolderid'];
 		$strictformcheck = $this->params['strictformcheck'];
+		$orderby = $this->params['orderby'];
 
 		$this->htmlStartPage(getMLText("folder_title", array("foldername" => htmlspecialchars($folder->getName()))));
 		$this->globalNavigation($folder);
@@ -96,6 +97,7 @@ function checkForm()
 			print "<td>" . getMLText("sequence") . ":</td>";
 			print "<td>";
 			$this->printSequenceChooser($parent->getSubFolders('s'), $folder->getID());
+			if($orderby != 's') echo "<br />".getMLText('order_by_sequence_off'); 
 			print "</td></tr>\n";
 		}
 

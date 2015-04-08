@@ -38,6 +38,7 @@ class SeedDMS_View_EditDocument extends SeedDMS_Bootstrap_Style {
 		$document = $this->params['document'];
 		$attrdefs = $this->params['attrdefs'];
 		$strictformcheck = $this->params['strictformcheck'];
+		$orderby = $this->params['orderby'];
 
 		$this->htmlStartPage(getMLText("document_title", array("documentname" => htmlspecialchars($document->getName()))));
 		$this->globalNavigation($folder);
@@ -137,6 +138,7 @@ function checkForm()
 			print "<td class=\"inputDescription\">" . getMLText("sequence") . ":</td>";
 			print "<td>";
 			$this->printSequenceChooser($folder->getDocuments('s'), $document->getID());
+			if($orderby != 's') echo "<br />".getMLText('order_by_sequence_off'); 
 			print "</td></tr>";
 		}
 		if($attrdefs) {

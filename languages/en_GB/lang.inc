@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1084), dgrutsch (3), netixw (14)
+//    Translators: Admin (1093), dgrutsch (3), netixw (14)
 
 $text = array(
 'accept' => 'Accept',
@@ -130,6 +130,12 @@ URL: [url]',
 'attrdef_objtype' => 'Object type',
 'attrdef_regex' => 'Regular expression',
 'attrdef_type' => 'Type',
+'attrdef_type_boolean' => 'Boolean',
+'attrdef_type_email' => 'Email',
+'attrdef_type_float' => 'Float',
+'attrdef_type_int' => 'Integer',
+'attrdef_type_string' => 'String',
+'attrdef_type_url' => 'URL',
 'attrdef_valueset' => 'Set of values',
 'attributes' => 'Attributes',
 'attribute_changed_email_body' => 'Attribute changed
@@ -627,6 +633,7 @@ URL: [url]',
 'october' => 'October',
 'old' => 'Old',
 'only_jpg_user_images' => 'Only .jpg-images may be used as user-images',
+'order_by_sequence_off' => 'Ordering by sequence is turned of in the settings. If you want this parameter to have effect, you will have to turn it back on.',
 'original_filename' => 'Original filename',
 'owner' => 'Owner',
 'ownership_changed_email' => 'Owner changed',
@@ -810,7 +817,7 @@ URL: [url]',
 'select_category' => 'Click to select category',
 'select_groups' => 'Click to select groups',
 'select_grp_approvers' => 'Click to select group approver',
-'select_grp_notification' => 'Click to select a group notification',
+'select_grp_notification' => 'Click to select group notification',
 'select_grp_reviewers' => 'Click to select group reviewer',
 'select_ind_approvers' => 'Click to select individual approver',
 'select_ind_notification' => 'Click to select individual notification',

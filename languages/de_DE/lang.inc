@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1959), dgrutsch (18)
+//    Translators: Admin (1967), dgrutsch (18)
 
 $text = array(
 'accept' => 'Übernehmen',
@@ -130,6 +130,12 @@ URL: [url]',
 'attrdef_objtype' => 'Objekttyp',
 'attrdef_regex' => 'Regulärer Ausdruck',
 'attrdef_type' => 'Typ',
+'attrdef_type_boolean' => 'Boolean',
+'attrdef_type_email' => 'E-Mail',
+'attrdef_type_float' => 'Dezimalzahl',
+'attrdef_type_int' => 'Ganzahlig',
+'attrdef_type_string' => 'Zeichenkette',
+'attrdef_type_url' => 'URL',
 'attrdef_valueset' => 'Werteauswahl',
 'attributes' => 'Attribute',
 'attribute_changed_email_body' => 'Attribut geändert
@@ -627,6 +633,7 @@ URL: [url]',
 'october' => 'Oktober',
 'old' => 'Alt',
 'only_jpg_user_images' => 'Es sind nur JPG-Bilder erlaubt',
+'order_by_sequence_off' => 'Die Sortierung nach Folge ist in den Einstellungen ausgeschaltet. Wenn dieser Parameter wirksam sein soll, muss sie wieder eingeschaltet werden.',
 'original_filename' => 'Original filename',
 'owner' => 'Besitzer',
 'ownership_changed_email' => 'Besitzer geändert',
@@ -1158,7 +1165,7 @@ URL: [url]',
 'unknown_owner' => 'unbekannte Besitzeridentifikation',
 'unknown_user' => 'unbekannte Benutzeridentifikation',
 'unlinked_content' => 'Dokumenteninhalt ohne Dokument',
-'unlinked_documents' => 'Lose Dokumenten',
+'unlinked_documents' => 'Nicht verknüpfte Dokumente',
 'unlinked_folders' => 'Lose Ordner',
 'unlinking_objects' => 'Lösche verwaiste Objekte',
 'unlock_cause_access_mode_all' => 'Sie verfügen jedoch über unbeschränken Zugriff auf dieses Dokument.<br>Daher wird die Sperrung beim Update automatisch aufgehoben',

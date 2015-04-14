@@ -44,6 +44,7 @@ class SeedDMS_View_AddDocument extends SeedDMS_Bootstrap_Style {
 		$workflowmode = $this->params['workflowmode'];
 		$presetexpiration = $this->params['presetexpiration'];
 		$sortusersinlist = $this->params['sortusersinlist'];
+		$orderby = $this->params['orderby'];
 		$folderid = $folder->getId();
 
 		$this->htmlStartPage(getMLText("folder_title", array("foldername" => htmlspecialchars($folder->getName()))));
@@ -142,7 +143,7 @@ $(document).ready(function() {
 		</tr>
 		<tr>
 			<td><?php printMLText("sequence");?>:</td>
-			<td><?php $this->printSequenceChooser($folder->getDocuments('s'));?></td>
+			<td><?php $this->printSequenceChooser($folder->getDocuments('s')); if($orderby != 's') echo "<br />".getMLText('order_by_sequence_off'); ?></td>
 		</tr>
 <?php
 			$attrdefs = $dms->getAllAttributeDefinitions(array(SeedDMS_Core_AttributeDefinition::objtype_document, SeedDMS_Core_AttributeDefinition::objtype_all));

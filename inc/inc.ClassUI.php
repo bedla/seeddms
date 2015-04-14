@@ -62,6 +62,13 @@ class UI extends UI_Default {
 				break;
 			}
 			$filename = '';
+			if(isset($extconf['views'][$class])) {
+				$filename = '../ext/'.$extname.'/views/'.$theme."/".$extconf['views'][$class]['file'];
+				if(file_exists($filename)) {
+					$classname = $extconf['views'][$class]['name'];
+					break;
+				}
+			}
 		}
 		if(!$filename)
 			$filename = $settings->_rootDir."views/".$theme."/class.".$class.".php";

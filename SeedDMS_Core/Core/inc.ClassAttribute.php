@@ -58,6 +58,13 @@ class SeedDMS_Core_Attribute { /* {{{ */
 	protected $_value;
 
 	/**
+	 * @var integer validation error
+	 *
+	 * @access protected
+	 */
+	protected $_validation_error;
+
+	/**
 	 * @var object SeedDMS_Core_DMS reference to the dms instance this attribute belongs to
 	 *
 	 * @access protected
@@ -77,6 +84,7 @@ class SeedDMS_Core_Attribute { /* {{{ */
 		$this->_obj = $obj;
 		$this->_attrdef = $attrdef;
 		$this->_value = $value;
+		$this->_validation_error = 0;
 		$this->_dms = null;
 	} /* }}} */
 
@@ -164,6 +172,83 @@ class SeedDMS_Core_Attribute { /* {{{ */
 	} /* }}} */
 
 	/**
+	 * Validate attribute value
+	 *
+	 * This function checks if the attribute values fits the attribute
+	 * definition.
+	 * If the validation fails the validation error will be set which
+	 * can be requested by SeedDMS_Core_Attribute::getValidationError()
+	 *
+	 * @return boolena true if validation succeds, otherwise false
+	 */
+	function validate() { /* {{{ */
+		$attrdef = $this->_attrdef();
+		if($attrdef->getMultipleValues()) {
+			$values = explode($this->_value[0], substr($this->_value, 1));
+		} else {
+			$values = array($this->_value);
+		}
+		if($attrdef->getMinValues() > count($values)) {
+			$this->_validation_error = 1;
+			return false;
+		}
+		if($attrdef->getMaxValues() && $attrdef->getMaxValues() < count($values)) {
+			$this->_validation_error = 2;
+			return false;
+		}
+
+		switch($attrdef->getType) {
+		case type_int:
+			$success = true;
+			foreach($values as $value) {
+				$success &= preg_match('/^[0-9]*$/', $value);
+			}
+			break;
+		case type_float:
+			$success = true;
+			foreach($values as $value) {
+				$success &= is_numeric($value);
+			}
+			break;
+		case type_string:
+			$success = true;
+			if($attrdef->getRegex()) {
+				$success &= preg_match($attrdef->getRegex(), $value);
+			}
+			break;
+		case type_boolean:
+			$success = true;
+			foreach($values as $value) {
+				$success &= preg_match('/^[01]$/', $value);
+			}
+			break;
+		case type_email:
+			$success = true;
+			foreach($values as $value) {
+			}
+			break;
+		case type_url:
+			$success = true;
+			foreach($values as $value) {
+				$success &= preg_match('/^http(s)?:\/\/[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(\/.*)?$/i', $value);
+			}
+			break;
+		}
+		if(!$success)
+			$this->_validation_error = 3;
+
+		return $success;
+
+	} /* }}} */
+
+	/**
+	 * Get validation error from last validation
+	 *
+	 * @return integer error code
+	 */
+	function getValidationError() { return $this->_validation_error; }
+
+	/**
 	 * Get definition of attribute
 	 *
 	 * @return object attribute definition
@@ -214,7 +299,7 @@ class SeedDMS_Core_AttributeDefinition { /* {{{ */
 
 	/**
 	 * @var string object type of attribute definition. This can be one of
-	 * type_int, type_float, type_string, or type_boolean.
+	 * type_int, type_float, type_string, type_boolean, type_url, or type_email.
 	 *
 	 * @access protected
 	 */
@@ -277,6 +362,8 @@ class SeedDMS_Core_AttributeDefinition { /* {{{ */
 	const type_float = '2';
 	const type_string = '3';
 	const type_boolean = '4';
+	const type_url = '5';
+	const type_email = '6';
 
 	/*
 	 * The object type for which a attribute may be used
@@ -382,7 +469,8 @@ class SeedDMS_Core_AttributeDefinition { /* {{{ */
 	/**
 	 * Get type of attribute definition
 	 * 
-	 * This can be one of type_int, type_float, type_string, type_boolean.
+	 * This can be one of type_int, type_float, type_string, type_boolean,
+	 * type_url, type_email.
 	 *
 	 * @return integer type
 	 */
@@ -391,7 +479,8 @@ class SeedDMS_Core_AttributeDefinition { /* {{{ */
 	/**
 	 * Set type of attribute definition
 	 * 
-	 * This can be one of type_int, type_float, type_string, type_boolean.
+	 * This can be one of type_int, type_float, type_string, type_boolean,
+	 * type_url, type_email.
 	 *
 	 * @param integer $type type
 	 */

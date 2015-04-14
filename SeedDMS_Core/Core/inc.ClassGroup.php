@@ -50,6 +50,52 @@ class SeedDMS_Core_Group {
 		$this->_dms = null;
 	} /* }}} */
 
+	public static function getInstance($id, $dms, $by='') { /* {{{ */
+		$db = $dms->getDB();
+
+		switch($by) {
+		case 'name':
+			$queryStr = "SELECT * FROM `tblGroups` WHERE `name` = ".$this->db->qstr($name);
+			break;
+		default:
+			$queryStr = "SELECT * FROM `tblGroups` WHERE id = " . (int) $id;
+		}
+
+		$resArr = $db->getResultArray($queryStr);
+		if (is_bool($resArr) && $resArr == false)
+			return false;
+		else if (count($resArr) != 1) //wenn, dann wohl eher 0 als > 1 ;-)
+			return false;
+
+		$resArr = $resArr[0];
+
+		$group = new self($resArr["id"], $resArr["name"], $resArr["comment"]);
+		$group->setDMS($dms);
+		return $group;
+	} /* }}} */
+
+	public static function getAllInstances($orderby, $dms) { /* {{{ */
+		$db = $dms->getDB();
+
+		switch($orderby) {
+		default:
+			$queryStr = "SELECT * FROM tblGroups ORDER BY name";
+		}
+		$resArr = $db->getResultArray($queryStr);
+
+		if (is_bool($resArr) && $resArr == false)
+			return false;
+
+		$groups = array();
+		for ($i = 0; $i < count($resArr); $i++) {
+			$group = new self($resArr[$i]["id"], $resArr[$i]["name"], $resArr[$i]["comment"]);
+			$group->setDMS($dms);
+			$groups[$i] = $group;
+		}
+
+		return $groups;
+	} /* }}} */
+
 	function setDMS($dms) { /* {{{ */
 		$this->_dms = $dms;
 	} /* }}} */

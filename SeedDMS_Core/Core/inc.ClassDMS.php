@@ -321,7 +321,9 @@ class SeedDMS_Core_DMS {
 	 * Set class name of instantiated objects
 	 *
 	 * This method sets the class name of those objects being instatiated
-	 * by the dms.
+	 * by the dms. It is mainly used to create a new class (possible
+	 * inherited from one of the available classes) implementing new
+	 * features. The method should be called in the postInitDMS hook.
 	 *
 	 * @param string placeholder (can be one of 'folder', 'document',
 	 * 'documentcontent', 'user', 'group'
@@ -1192,20 +1194,8 @@ class SeedDMS_Core_DMS {
 	 * @return object instance of {@link SeedDMS_Core_User} or false
 	 */
 	function getUser($id) { /* {{{ */
-		if (!is_numeric($id))
-			return false;
-
-		$queryStr = "SELECT * FROM tblUsers WHERE id = " . (int) $id;
-		$resArr = $this->db->getResultArray($queryStr);
-
-		if (is_bool($resArr) && $resArr == false) return false;
-		if (count($resArr) != 1) return false;
-
-		$resArr = $resArr[0];
-
-		$user = new SeedDMS_Core_User($resArr["id"], $resArr["login"], $resArr["pwd"], $resArr["fullName"], $resArr["email"], $resArr["language"], $resArr["theme"], $resArr["comment"], $resArr["role"], $resArr["hidden"], $resArr["disabled"], $resArr["pwdExpiration"], $resArr["loginfailures"], $resArr["quota"], $resArr["homefolder"]);
-		$user->setDMS($this);
-		return $user;
+		$classname = $this->classnames['user'];
+		return $classname::getInstance($id, $this);
 	} /* }}} */
 
 	/**
@@ -1220,19 +1210,8 @@ class SeedDMS_Core_DMS {
 	 * @return object instance of {@link SeedDMS_Core_User} or false
 	 */
 	function getUserByLogin($login, $email='') { /* {{{ */
-		$queryStr = "SELECT * FROM tblUsers WHERE login = ".$this->db->qstr($login);
-		if($email)
-			$queryStr .= " AND email=".$this->db->qstr($email);
-		$resArr = $this->db->getResultArray($queryStr);
-
-		if (is_bool($resArr) && $resArr == false) return false;
-		if (count($resArr) != 1) return false;
-
-		$resArr = $resArr[0];
-
-		$user = new SeedDMS_Core_User($resArr["id"], $resArr["login"], $resArr["pwd"], $resArr["fullName"], $resArr["email"], $resArr["language"], $resArr["theme"], $resArr["comment"], $resArr["role"], $resArr["hidden"], $resArr["disabled"], $resArr["pwdExpiration"], $resArr["loginfailures"], $resArr["quota"], $resArr["homefolder"]);
-		$user->setDMS($this);
-		return $user;
+		$classname = $this->classnames['user'];
+		return $classname::getInstance($login, $this, 'name', $email);
 	} /* }}} */
 
 	/**
@@ -1245,17 +1224,8 @@ class SeedDMS_Core_DMS {
 	 * @return object instance of {@link SeedDMS_Core_User} or false
 	 */
 	function getUserByEmail($email) { /* {{{ */
-		$queryStr = "SELECT * FROM tblUsers WHERE email = ".$this->db->qstr($email);
-		$resArr = $this->db->getResultArray($queryStr);
-
-		if (is_bool($resArr) && $resArr == false) return false;
-		if (count($resArr) != 1) return false;
-
-		$resArr = $resArr[0];
-
-		$user = new SeedDMS_Core_User($resArr["id"], $resArr["login"], $resArr["pwd"], $resArr["fullName"], $resArr["email"], $resArr["language"], $resArr["theme"], $resArr["comment"], $resArr["role"], $resArr["hidden"], $resArr["disabled"], $resArr["pwdExpiration"], $resArr["loginfailures"], $resArr["quota"], $resArr["homefolder"]);
-		$user->setDMS($this);
-		return $user;
+		$classname = $this->classnames['user'];
+		return $classname::getInstance($email, $this, 'email');
 	} /* }}} */
 
 	/**
@@ -1264,24 +1234,8 @@ class SeedDMS_Core_DMS {
 	 * @return array of instances of {@link SeedDMS_Core_User} or false
 	 */
 	function getAllUsers($orderby = '') { /* {{{ */
-		if($orderby == 'fullname')
-			$queryStr = "SELECT * FROM tblUsers ORDER BY fullname";
-		else
-			$queryStr = "SELECT * FROM tblUsers ORDER BY login";
-		$resArr = $this->db->getResultArray($queryStr);
-
-		if (is_bool($resArr) && $resArr == false)
-			return false;
-
-		$users = array();
-
-		for ($i = 0; $i < count($resArr); $i++) {
-			$user = new SeedDMS_Core_User($resArr[$i]["id"], $resArr[$i]["login"], $resArr[$i]["pwd"], $resArr[$i]["fullName"], $resArr[$i]["email"], (isset($resArr[$i]["language"])?$resArr[$i]["language"]:NULL), (isset($resArr[$i]["theme"])?$resArr[$i]["theme"]:NULL), $resArr[$i]["comment"], $resArr[$i]["role"], $resArr[$i]["hidden"], $resArr[$i]["disabled"], $resArr[$i]["pwdExpiration"], $resArr[$i]["loginfailures"], $resArr[$i]["quota"], $resArr[$i]["homefolder"]);
-			$user->setDMS($this);
-			$users[$i] = $user;
-		}
-
-		return $users;
+		$classname = $this->classnames['user'];
+		return $classname::getAllInstances($orderby, $this);
 	} /* }}} */
 
 	/**
@@ -1322,22 +1276,8 @@ class SeedDMS_Core_DMS {
 	 * @return object/boolean group or false if no group was found
 	 */
 	function getGroup($id) { /* {{{ */
-		if (!is_numeric($id))
-			return false;
-
-		$queryStr = "SELECT * FROM tblGroups WHERE id = " . (int) $id;
-		$resArr = $this->db->getResultArray($queryStr);
-
-		if (is_bool($resArr) && $resArr == false)
-			return false;
-		else if (count($resArr) != 1) //wenn, dann wohl eher 0 als > 1 ;-)
-			return false;
-
-		$resArr = $resArr[0];
-
-		$group = new SeedDMS_Core_Group($resArr["id"], $resArr["name"], $resArr["comment"]);
-		$group->setDMS($this);
-		return $group;
+		$classname = $this->classnames['group'];
+		return $classname::getInstance($id, $this, '');
 	} /* }}} */
 
 	/**
@@ -1347,19 +1287,8 @@ class SeedDMS_Core_DMS {
 	 * @return object/boolean group or false if no group was found
 	 */
 	function getGroupByName($name) { /* {{{ */
-		$queryStr = "SELECT `tblGroups`.* FROM `tblGroups` WHERE `tblGroups`.`name` = ".$this->db->qstr($name);
-		$resArr = $this->db->getResultArray($queryStr);
-
-		if (is_bool($resArr) && $resArr == false)
-			return false;
-		else if (count($resArr) != 1) //wenn, dann wohl eher 0 als > 1 ;-)
-			return false;
-
-		$resArr = $resArr[0];
-
-		$group = new SeedDMS_Core_Group($resArr["id"], $resArr["name"], $resArr["comment"]);
-		$group->setDMS($this);
-		return $group;
+		$classname = $this->classnames['group'];
+		return $classname::getInstance($name, $this, 'name');
 	} /* }}} */
 
 	/**
@@ -1368,22 +1297,8 @@ class SeedDMS_Core_DMS {
 	 * @return array array of instances of {@link SeedDMS_Core_Group}
 	 */
 	function getAllGroups() { /* {{{ */
-		$queryStr = "SELECT * FROM tblGroups ORDER BY name";
-		$resArr = $this->db->getResultArray($queryStr);
-
-		if (is_bool($resArr) && $resArr == false)
-			return false;
-
-		$groups = array();
-
-		for ($i = 0; $i < count($resArr); $i++) {
-
-			$group = new SeedDMS_Core_Group($resArr[$i]["id"], $resArr[$i]["name"], $resArr[$i]["comment"]);
-			$group->setDMS($this);
-			$groups[$i] = $group;
-		}
-
-		return $groups;
+		$classname = $this->classnames['group'];
+		return $classname::getAllInstances('name', $this);
 	} /* }}} */
 
 	/**

@@ -155,6 +155,56 @@ class SeedDMS_Core_User {
 		$this->_dms = null;
 	}
 
+	public static function getInstance($id, $dms, $by='', $email='') { /* {{{ */
+		$db = $dms->getDB();
+
+		switch($by) {
+		case 'name':
+			$queryStr = "SELECT * FROM tblUsers WHERE login = ".$this->db->qstr($login);
+			if($email)
+				$queryStr .= " AND email=".$this->db->qstr($email);
+			break;
+		case 'email':
+			$queryStr = "SELECT * FROM tblUsers WHERE email = ".$this->db->qstr($email);
+			break;
+		default:
+			$queryStr = "SELECT * FROM tblUsers WHERE id = " . (int) $id;
+		}
+		$resArr = $db->getResultArray($queryStr);
+
+		if (is_bool($resArr) && $resArr == false) return false;
+		if (count($resArr) != 1) return false;
+
+		$resArr = $resArr[0];
+
+		$user = new self($resArr["id"], $resArr["login"], $resArr["pwd"], $resArr["fullName"], $resArr["email"], $resArr["language"], $resArr["theme"], $resArr["comment"], $resArr["role"], $resArr["hidden"], $resArr["disabled"], $resArr["pwdExpiration"], $resArr["loginfailures"], $resArr["quota"], $resArr["homefolder"]);
+		$user->setDMS($dms);
+		return $user;
+	} /* }}} */
+
+	public static function getAllInstances($orderby, $dms) { /* {{{ */
+		$db = $dms->getDB();
+
+		if($orderby == 'fullname')
+			$queryStr = "SELECT * FROM tblUsers ORDER BY fullname";
+		else
+			$queryStr = "SELECT * FROM tblUsers ORDER BY login";
+		$resArr = $db->getResultArray($queryStr);
+
+		if (is_bool($resArr) && $resArr == false)
+			return false;
+
+		$users = array();
+
+		for ($i = 0; $i < count($resArr); $i++) {
+			$user = new self($resArr[$i]["id"], $resArr[$i]["login"], $resArr[$i]["pwd"], $resArr[$i]["fullName"], $resArr[$i]["email"], (isset($resArr[$i]["language"])?$resArr[$i]["language"]:NULL), (isset($resArr[$i]["theme"])?$resArr[$i]["theme"]:NULL), $resArr[$i]["comment"], $resArr[$i]["role"], $resArr[$i]["hidden"], $resArr[$i]["disabled"], $resArr[$i]["pwdExpiration"], $resArr[$i]["loginfailures"], $resArr[$i]["quota"], $resArr[$i]["homefolder"]);
+			$user->setDMS($dms);
+			$users[$i] = $user;
+		}
+
+		return $users;
+} /* }}} */
+
 	function setDMS($dms) {
 		$this->_dms = $dms;
 	}

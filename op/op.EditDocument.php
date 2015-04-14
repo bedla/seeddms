@@ -270,7 +270,6 @@ if($attributes) {
 					UI::exitError(getMLText("document_title", array("documentname" => $document->getName())),getMLText("attr_min_values", array("attrname"=>$attrdef->getName())));
 				}
 				if($attrdef->getMaxValues() && $attrdef->getMaxValues() < count($attribute)) {
-					print_r($attrdef);
 					UI::exitError(getMLText("document_title", array("documentname" => $document->getName())),getMLText("attr_max_values", array("attrname"=>$attrdef->getName())));
 				}
 			}

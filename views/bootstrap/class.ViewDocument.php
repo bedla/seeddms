@@ -31,7 +31,7 @@ require_once("class.Bootstrap.php");
  */
 class SeedDMS_View_ViewDocument extends SeedDMS_Bootstrap_Style {
 
-	function getAccessModeText($defMode) { /* {{{ */
+	protected function getAccessModeText($defMode) { /* {{{ */
 		switch($defMode) {
 			case M_NONE:
 				return getMLText("access_mode_none");
@@ -48,7 +48,7 @@ class SeedDMS_View_ViewDocument extends SeedDMS_Bootstrap_Style {
 		}
 	} /* }}} */
 
-	function printAccessList($obj) { /* {{{ */
+	protected function printAccessList($obj) { /* {{{ */
 		$accessList = $obj->getAccessList();
 		if (count($accessList["users"]) == 0 && count($accessList["groups"]) == 0)
 			return;
@@ -69,6 +69,22 @@ class SeedDMS_View_ViewDocument extends SeedDMS_Bootstrap_Style {
 			if ($i+1 < count($accessList["users"]))
 				print "<br />";
 		}
+	} /* }}} */
+
+	/**
+	 * Output a single attribute in the document info section
+	 *
+	 * @param object $attribute attribute
+	 */
+	protected function printAttribute($attribute) { /* {{{ */
+		$attrdef = $attribute->getAttributeDefinition();
+?>
+		    <tr>
+					<td><?php echo htmlspecialchars($attrdef->getName()); ?>:</td>
+					<td><?php echo htmlspecialchars(implode(', ', $attribute->getValueAsArray())); ?></td>
+		    </tr>
+<?php
+	
 	} /* }}} */
 
 	function show() { /* {{{ */
@@ -95,11 +111,16 @@ class SeedDMS_View_ViewDocument extends SeedDMS_Bootstrap_Style {
 
 		if ($document->isLocked()) {
 			$lockingUser = $document->getLockingUser();
+			$txt = $this->callHook('documentIsLocked', $document, $lockingUser);
+			if(is_string($txt))
+				echo $txt;
+			else {
 ?>
 		<div class="alert alert-warning">
 			<?php printMLText("lock_message", array("email" => $lockingUser->getEmail(), "username" => htmlspecialchars($lockingUser->getFullName())));?>
 		</div>
 <?php
+			}
 		}
 
 		/* Retrieve attacheѕ files */
@@ -140,6 +161,10 @@ class SeedDMS_View_ViewDocument extends SeedDMS_Bootstrap_Style {
 <?php
 		$this->contentHeading(getMLText("document_infos"));
 		$this->contentContainerStart();
+		$txt = $this->callHook('documentInfos', $document);
+		if(is_string($txt))
+			echo $txt;
+		else {
 ?>
 		<table class="table-condensed">
 <?php
@@ -238,18 +263,13 @@ class SeedDMS_View_ViewDocument extends SeedDMS_Bootstrap_Style {
 		$attributes = $document->getAttributes();
 		if($attributes) {
 			foreach($attributes as $attribute) {
-				$attrdef = $attribute->getAttributeDefinition();
-?>
-		    <tr>
-					<td><?php echo htmlspecialchars($attrdef->getName()); ?>:</td>
-					<td><?php echo htmlspecialchars(implode(', ', $attribute->getValueAsArray())); ?></td>
-		    </tr>
-<?php
+				$this->printAttribute($attribute);
 			}
 		}
 ?>
 		</table>
 <?php
+		}
 		$this->contentContainerEnd();
 ?>
 </div>

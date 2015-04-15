@@ -1018,7 +1018,7 @@ function folderSelected<?php echo $form ?>(id, name) {
 <?php
 	} /* }}} */
 
-	function printAttributeEditField($attrdef, $objvalue, $fieldname='attributes') { /* {{{ */
+	function printAttributeEditField($attrdef, $attribute, $fieldname='attributes') { /* {{{ */
 		if($valueset = $attrdef->getValueSetAsArray()) {
 			echo "<select name=\"".$fieldname."[".$attrdef->getId()."]";
 			if($attrdef->getMultipleValues()) {
@@ -1030,6 +1030,7 @@ function folderSelected<?php echo $form ?>(id, name) {
 			if(!$attrdef->getMultipleValues()) {
 				echo "<option value=\"\"></option>";
 			}
+			$objvalue = $attribute ? $attribute->getValueAsArray() : array();
 			foreach($valueset as $value) {
 				if($value) {
 					echo "<option value=\"".htmlspecialchars($value)."\"";
@@ -1042,7 +1043,7 @@ function folderSelected<?php echo $form ?>(id, name) {
 			}
 			echo "</select>";
 		} else {
-			echo "<input type=\"text\" name=\"".$fieldname."[".$attrdef->getId()."]\" value=\"".htmlspecialchars($objvalue)."\" />";
+			echo "<input type=\"text\" name=\"".$fieldname."[".$attrdef->getId()."]\" value=\"".($attribute ? htmlspecialchars($attribute->getValue()) : '')."\" />";
 		}
 	} /* }}} */
 

@@ -29,9 +29,16 @@ class SeedDMS_Controller_Common {
 	 */
 	protected $error;
 
+	/**
+	 * @var string $errormsg error message of last run
+	 * @access protected
+	 */
+	protected $errormsg;
+
 	function __construct($params) {
 		$this->params = $params;
 		$this->error = 0;
+		$this->errormsg = '';
 	}
 
 	function setParams($params) {
@@ -86,6 +93,15 @@ class SeedDMS_Controller_Common {
 	 */
 	public function getErrorNo() { /* {{{ */
 		return $this->error;
+	} /* }}} */
+
+	/**
+	 * Get error message of last run
+	 *
+	 * @return string error message
+	 */
+	public function getErrorMsg() { /* {{{ */
+		return $this->errormsg;
 	} /* }}} */
 
 	/**

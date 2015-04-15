@@ -122,9 +122,10 @@ class UI extends UI_Default {
 	} /* }}} */
 
 	static function exitError($pagetitle, $error) {
-		global $theme;
+		global $theme, $dms;
 		$tmp = 'ErrorDlg';
 		$view = UI::factory($theme, $tmp);
+		$view->setParam('dms', $dms);
 		$view->exitError($pagetitle, $error);
 	}
 }

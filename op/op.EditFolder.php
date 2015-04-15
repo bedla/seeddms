@@ -69,25 +69,13 @@ $oldcomment = $folder->getComment();
 $oldattributes = $folder->getAttributes();
 
 $controller->setParam('folder', $folder);
-$controller->setParam('index', $index);
 $controller->setParam('name', $name);
 $controller->setParam('comment', $comment);
 $controller->setParam('sequence', $sequence);
 $controller->setParam('attributes', $attributes);
 if(!$controller->run()) {
-	switch($controller->getErrorNo()) {
-		case 1:
-			UI::exitError(getMLText("folder_title", array("foldername" => $folder->getName())),getMLText("attr_no_regex_match"));
-			break;
-		case 2:
-			UI::exitError(getMLText("folder_title", array("foldername" => $folder->getName())),getMLText("attr_min_values", array("attrname"=>$attrdef->getName())));
-			break;
-		case 3:
-			UI::exitError(getMLText("folder_title", array("foldername" => $folder->getName())),getMLText("attr_max_values", array("attrname"=>$attrdef->getName())));
-			break;
-		default:
-			UI::exitError(getMLText("folder_title", array("foldername" => $folder->getName())),getMLText("error_occured"));	
-			break;
+	if($controller->getErrorNo()) {
+		UI::exitError(getMLText("folder_title", array("foldername" => $folder->getName())), $controller->getErrorMsg());
 	}
 }
 

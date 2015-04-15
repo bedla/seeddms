@@ -108,6 +108,25 @@ class SeedDMS_Core_Object { /* {{{ */
 	 * @return array|string value of attritbute or false. The value is an array
 	 * if the attribute is defined as multi value
 	 */
+	function getAttribute($attrdef) { /* {{{ */
+		if (!$this->_attributes) {
+			$this->getAttributes();
+		}
+
+		if (isset($this->_attributes[$attrdef->getId()])) {
+			return $this->_attributes[$attrdef->getId()];
+		} else {
+			return false;
+		}
+
+	} /* }}} */
+
+	/**
+	 * Returns an attribute value of the object for the given attribute definition
+	 *
+	 * @return array|string value of attritbute or false. The value is an array
+	 * if the attribute is defined as multi value
+	 */
 	function getAttributeValue($attrdef) { /* {{{ */
 		if (!$this->_attributes) {
 			$this->getAttributes();
@@ -121,6 +140,50 @@ class SeedDMS_Core_Object { /* {{{ */
 			} else {
 				return $value;
 			}
+		} else
+			return false;
+
+	} /* }}} */
+
+	/**
+	 * Returns an attribute value of the object for the given attribute definition
+	 *
+	 * This is a short cut for getAttribute($attrdef)->getValueAsArray() but
+	 * first checks if the object has an attribute for the given attribute
+	 * definition.
+	 *
+	 * @return array value of attritbute or false. The value is always an array
+	 * even if the attribute is not defined as multi value
+	 */
+	function getAttributeValueAsArray($attrdef) { /* {{{ */
+		if (!$this->_attributes) {
+			$this->getAttributes();
+		}
+
+		if (isset($this->_attributes[$attrdef->getId()])) {
+			return $this->_attributes[$attrdef->getId()]->getValueAsArray();
+		} else
+			return false;
+
+	} /* }}} */
+
+	/**
+	 * Returns an attribute value of the object for the given attribute definition
+	 *
+	 * This is a short cut for getAttribute($attrdef)->getValueAsString() but
+	 * first checks if the object has an attribute for the given attribute
+	 * definition.
+	 *
+	 * @return string value of attritbute or false. The value is always a string
+	 * even if the attribute is defined as multi value
+	 */
+	function getAttributeValueAsString($attrdef) { /* {{{ */
+		if (!$this->_attributes) {
+			$this->getAttributes();
+		}
+
+		if (isset($this->_attributes[$attrdef->getId()])) {
+			return $this->_attributes[$attrdef->getId()]->getValue();
 		} else
 			return false;
 

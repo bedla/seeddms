@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1093), dgrutsch (3), netixw (14)
+//    Translators: Admin (1097), dgrutsch (3), netixw (14)
 
 $text = array(
 'accept' => 'Accept',
@@ -148,9 +148,11 @@ URL: [url]',
 'attribute_changed_email_subject' => '[sitename]: [name] - Attribute changed',
 'attribute_count' => 'Number of uses',
 'attribute_value' => 'Value of attribute',
+'attr_malformed_email' => 'The attribute value \'[value]\' of attribute \'[attrname]\' is not a valid URL.',
+'attr_malformed_url' => 'The attribute value \'[value]\' of attribute \'[attrname]\' is not a valid URL.',
 'attr_max_values' => 'The maximum number of required values for attributes [attrname] is exceeded.',
 'attr_min_values' => 'The minimum number of required values for attributes [attrname] is not reached.',
-'attr_no_regex_match' => 'The attribute value does not match the regular expression',
+'attr_no_regex_match' => 'The attribute value \'[value]\' for attribute \'[attrname]\' does not match the regular expression \'[regex]\'',
 'at_least_n_users_of_group' => 'At least [number_of_users] users of [group]',
 'august' => 'August',
 'authentication' => 'Authentication',

@@ -31,7 +31,6 @@ class SeedDMS_Controller_EditFolder extends SeedDMS_Controller_Common {
 		$comment = $this->params['comment'];
 		$sequence = $this->params['sequence'];
 		$attributes = $this->params['attributes'];
-		$index = $this->params['index'];
 
 		/* Get the document id and name before removing the document */
 		$foldername = $folder->getName();
@@ -55,6 +54,30 @@ class SeedDMS_Controller_EditFolder extends SeedDMS_Controller_Common {
 				foreach($attributes as $attrdefid=>$attribute) {
 					$attrdef = $dms->getAttributeDefinition($attrdefid);
 					if($attribute) {
+						if(!$attrdef->validate($attribute)) {
+							$this->error = $attrdef->getValidationError();
+							switch($attrdef->getValidationError()) {
+							case 5:
+								$this->errormsg = getMLText("attr_malformed_email", array("attrname"=>$attrdef->getName(), "value"=>$attribute));
+								break;
+							case 4:
+								$this->errormsg = getMLText("attr_malformed_url", array("attrname"=>$attrdef->getName(), "value"=>$attribute));
+								break;
+							case 3:
+								$this->errormsg = getMLText("attr_no_regex_match", array("attrname"=>$attrdef->getName(), "value"=>$attribute, "regex"=>$attrdef->getRegex()));
+								break;
+							case 2:
+								$this->errormsg = getMLText("attr_max_values", array("attrname"=>$attrdef->getName()));
+								break;
+							case 1:
+								$this->errormsg = getMLText("attr_min_values", array("attrname"=>$attrdef->getName()));
+								break;
+							default:
+								$this->errormsg = getMLText("error_occured");
+							}
+							return false;
+						}
+							/*
 						if($attrdef->getRegex()) {
 							if(!preg_match($attrdef->getRegex(), $attribute)) {
 								$this->error = 1;
@@ -71,6 +94,7 @@ class SeedDMS_Controller_EditFolder extends SeedDMS_Controller_Common {
 								return false;
 							}
 						}
+							 */
 						if(!isset($oldattributes[$attrdefid]) || $attribute != $oldattributes[$attrdefid]->getValue()) {
 							if(!$folder->setAttributeValue($dms->getAttributeDefinition($attrdefid), $attribute))
 								return false;

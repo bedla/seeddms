@@ -142,19 +142,19 @@ class SeedDMS_Core_Attribute { /* {{{ */
 		$db = $this->_dms->getDB();
 
 		switch(get_class($this->_obj)) {
-			case "SeedDMS_Core_Document":
+			case $this->_dms->getClassname('document'):
 				if(trim($value) === '')
 					$queryStr = "DELETE FROM tblDocumentAttributes WHERE `document` = " . $this->_obj->getID() . " AND `attrdef` = " . $this->_attrdef->getId();
 				else
 					$queryStr = "UPDATE tblDocumentAttributes SET value = ".$db->qstr($value)." WHERE `document` = " . $this->_obj->getID() .	" AND `attrdef` = " . $this->_attrdef->getId();
 				break;
-			case "SeedDMS_Core_DocumentContent":
+			case $this->_dms->getClassname('documentcontent'):
 				if(trim($value) === '')
 					$queryStr = "DELETE FROM tblDocumentContentAttributes WHERE `content` = " . $this->_obj->getID() . " AND `attrdef` = " . $this->_attrdef->getId();
 				else
 					$queryStr = "UPDATE tblDocumentContentAttributes SET value = ".$db->qstr($value)." WHERE `content` = " . $this->_obj->getID() .	" AND `attrdef` = " . $this->_attrdef->getId();
 				break;
-			case "SeedDMS_Core_Folder":
+			case $this->_dms->getClassname('folder'):
 				if(trim($value) === '')
 					$queryStr = "DELETE FROM tblFolderAttributes WHERE `folder` = " . $this->_obj->getID() .	" AND `attrdef` = " . $this->_attrdef->getId();
 				else
@@ -179,66 +179,13 @@ class SeedDMS_Core_Attribute { /* {{{ */
 	 * If the validation fails the validation error will be set which
 	 * can be requested by SeedDMS_Core_Attribute::getValidationError()
 	 *
-	 * @return boolena true if validation succeds, otherwise false
+	 * @return boolean true if validation succeds, otherwise false
 	 */
 	function validate() { /* {{{ */
 		$attrdef = $this->_attrdef();
-		if($attrdef->getMultipleValues()) {
-			$values = explode($this->_value[0], substr($this->_value, 1));
-		} else {
-			$values = array($this->_value);
-		}
-		if($attrdef->getMinValues() > count($values)) {
-			$this->_validation_error = 1;
-			return false;
-		}
-		if($attrdef->getMaxValues() && $attrdef->getMaxValues() < count($values)) {
-			$this->_validation_error = 2;
-			return false;
-		}
-
-		switch($attrdef->getType) {
-		case type_int:
-			$success = true;
-			foreach($values as $value) {
-				$success &= preg_match('/^[0-9]*$/', $value);
-			}
-			break;
-		case type_float:
-			$success = true;
-			foreach($values as $value) {
-				$success &= is_numeric($value);
-			}
-			break;
-		case type_string:
-			$success = true;
-			if($attrdef->getRegex()) {
-				$success &= preg_match($attrdef->getRegex(), $value);
-			}
-			break;
-		case type_boolean:
-			$success = true;
-			foreach($values as $value) {
-				$success &= preg_match('/^[01]$/', $value);
-			}
-			break;
-		case type_email:
-			$success = true;
-			foreach($values as $value) {
-			}
-			break;
-		case type_url:
-			$success = true;
-			foreach($values as $value) {
-				$success &= preg_match('/^http(s)?:\/\/[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(\/.*)?$/i', $value);
-			}
-			break;
-		}
-		if(!$success)
-			$this->_validation_error = 3;
-
-		return $success;
-
+		$result = $attrdef->validate($this->_value);
+		$this->_validation_error = $attrdef->getValidationError();
+		return $result;
 	} /* }}} */
 
 	/**
@@ -349,6 +296,13 @@ class SeedDMS_Core_AttributeDefinition { /* {{{ */
 	protected $_regex;
 
 	/**
+	 * @var integer validation error
+	 *
+	 * @access protected
+	 */
+	protected $_validation_error;
+
+	/**
 	 * @var object SeedDMS_Core_DMS reference to the dms instance this attribute definition belongs to
 	 *
 	 * @access protected
@@ -399,6 +353,7 @@ class SeedDMS_Core_AttributeDefinition { /* {{{ */
 		$this->_separator = '';
 		$this->_regex = $regex;
 		$this->_dms = null;
+		$this->_validation_error = 0;
 	} /* }}} */
 
 	/**
@@ -820,6 +775,104 @@ class SeedDMS_Core_AttributeDefinition { /* {{{ */
 
 		return $result;
 	} /* }}} */
+
+	/**
+	 * Validate value against attribute definition
+	 *
+	 * This function checks if the given value fits the attribute
+	 * definition.
+	 * If the validation fails the validation error will be set which
+	 * can be requested by SeedDMS_Core_Attribute::getValidationError()
+	 *
+	 * @param string|array $attrvalue attribute value
+	 * @return boolean true if validation succeds, otherwise false
+	 */
+	function validate($attrvalue) { /* {{{ */
+		if($this->getMultipleValues()) {
+			if(is_string($attrvalue))
+				$values = explode($attrvalue[0], substr($attrvalue, 1));
+			else
+				$values = $attrvalue;
+		} else {
+			$values = array($attrvalue);
+		}
+
+		$this->_validation_error = 0;
+		if($this->getMinValues() > count($values)) {
+			$this->_validation_error = 1;
+			return false;
+		}
+		if($this->getMaxValues() && $this->getMaxValues() < count($values)) {
+			$this->_validation_error = 2;
+			return false;
+		}
+
+		switch((string) $this->getType()) {
+		case self::type_int:
+			$success = true;
+			foreach($values as $value) {
+				$success &= preg_match('/^[0-9]*$/', $value) ? true : false;
+			}
+			break;
+		case self::type_float:
+			$success = true;
+			foreach($values as $value) {
+				$success &= is_numeric($value);
+			}
+			break;
+		case self::type_string:
+			$success = true;
+			if(trim($this->getRegex()) != '') {
+				foreach($values as $value) {
+					$success &= preg_match($this->getRegex(), $value) ? true : false;
+				}
+			}
+			if(!$success)
+				$this->_validation_error = 3;
+			break;
+		case self::type_boolean:
+			$success = true;
+			foreach($values as $value) {
+				$success &= preg_match('/^[01]$/', $value);
+			}
+			break;
+		case self::type_email:
+			$success = true;
+			foreach($values as $value) {
+			}
+			if(!$success)
+				$this->_validation_error = 5;
+			break;
+		case self::type_url:
+			$success = true;
+			foreach($values as $value) {
+				$success &= preg_match('/^http(s)?:\/\/[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(\/.*)?$/i', $value);
+			}
+			if(!$success)
+				$this->_validation_error = 4;
+			break;
+		}
+
+		/* Check if value is in value set */
+		if($valueset = $this->getValueSetAsArray()) {
+			foreach($values as $value) {
+				if(!in_array($value, $valueset)) {
+					$success = false;
+					$this->_validation_error = 10;
+				}
+			}
+		}
+
+		return $success;
+
+	} /* }}} */
+
+	/**
+	 * Get validation error from last validation
+	 *
+	 * @return integer error code
+	 */
+	function getValidationError() { return $this->_validation_error; }
 
 } /* }}} */
 ?>

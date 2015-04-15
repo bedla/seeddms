@@ -81,7 +81,30 @@ class SeedDMS_View_ViewDocument extends SeedDMS_Bootstrap_Style {
 ?>
 		    <tr>
 					<td><?php echo htmlspecialchars($attrdef->getName()); ?>:</td>
-					<td><?php echo htmlspecialchars(implode(', ', $attribute->getValueAsArray())); ?></td>
+					<td>
+<?php
+		switch($attrdef->getType()) {
+		case SeedDMS_Core_AttributeDefinition::type_url:
+			$attrs = $attribute->getValueAsArray();
+			$tmp = array();
+			foreach($attrs as $attr) {
+				$tmp[] = '<a href="'.htmlspecialchars($attr).'">'.htmlspecialchars($attr).'</a>';
+			}
+			echo implode('<br />', $tmp);
+			break;
+		case SeedDMS_Core_AttributeDefinition::type_email:
+			$attrs = $attribute->getValueAsArray();
+			$tmp = array();
+			foreach($attrs as $attr) {
+				$tmp[] = '<a mailto="'.htmlspecialchars($attr).'">'.htmlspecialchars($attr).'</a>';
+			}
+			echo implode('<br />', $tmp);
+			break;
+		default:
+			echo htmlspecialchars(implode(', ', $attribute->getValueAsArray()));
+		}
+?>
+					</td>
 		    </tr>
 <?php
 	

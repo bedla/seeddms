@@ -58,7 +58,7 @@ class SeedDMS_View_EditAttributes extends SeedDMS_Bootstrap_Style {
 ?>
 <tr>
 	<td><?php echo htmlspecialchars($attrdef->getName()); ?></td>
-	<td><?php $this->printAttributeEditField($attrdef, $version->getAttributeValue($attrdef)) ?></td>
+	<td><?php $this->printAttributeEditField($attrdef, $version->getAttribute($attrdef)) ?></td>
 </tr>
 <?php
 				}

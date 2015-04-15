@@ -146,7 +146,7 @@ function checkForm()
 ?>
 		<tr>
 			<td><?php echo htmlspecialchars($attrdef->getName()); ?>:</td>
-			<td><?php $this->printAttributeEditField($attrdef, $document->getAttributeValue($attrdef)) ?></td>
+			<td><?php $this->printAttributeEditField($attrdef, $document->getAttribute($attrdef)) ?></td>
 		</tr>
 <?php
 			}

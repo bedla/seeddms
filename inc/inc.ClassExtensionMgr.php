@@ -57,17 +57,21 @@ class SeedDMS_Extension_Mgr {
 	 */
 	function createExtensionConf() { /* {{{ */
 		$extensions = self::getExtensions();
-		$fp = fopen($this->cachedir."/extensions.php", "w");
-		if($extensions) {
-			foreach($extensions as $_ext) {
-				if(file_exists($this->extdir . "/" . $_ext . "/conf.php")) {
-					$content = file_get_contents($this->extdir . "/" . $_ext . "/conf.php");
-					fwrite($fp, $content);
+		$fp = fopen(self::getExtensionsConfFile(), "w");
+		if($fp) {
+			if($extensions) {
+				foreach($extensions as $_ext) {
+					if(file_exists($this->extdir . "/" . $_ext . "/conf.php")) {
+						$content = file_get_contents($this->extdir . "/" . $_ext . "/conf.php");
+						fwrite($fp, $content);
+					}
 				}
 			}
+			fclose($fp);
+			return true;
+		} else {
+			return false;
 		}
-		fclose($fp);
-		//include($this->cachedir."/extensions.php");
 	} /* }}} */
 
 	function getExtensions() { /* {{{ */

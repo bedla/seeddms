@@ -1043,7 +1043,10 @@ function folderSelected<?php echo $form ?>(id, name) {
 			}
 			echo "</select>";
 		} else {
-			echo "<input type=\"text\" name=\"".$fieldname."[".$attrdef->getId()."]\" value=\"".($attribute ? htmlspecialchars($attribute->getValue()) : '')."\" />";
+			if($attribute && strlen($attribute->getValue()) > 30)
+				echo "<textarea name=\"".$fieldname."[".$attrdef->getId()."]\">".htmlspecialchars($attribute->getValue())."</textarea>";
+			else
+				echo "<input type=\"text\" name=\"".$fieldname."[".$attrdef->getId()."]\" value=\"".($attribute ? htmlspecialchars($attribute->getValue()) : '')."\" />";
 		}
 	} /* }}} */
 

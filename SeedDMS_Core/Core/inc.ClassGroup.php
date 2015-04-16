@@ -50,12 +50,22 @@ class SeedDMS_Core_Group {
 		$this->_dms = null;
 	} /* }}} */
 
+	/**
+	 * Create an instance of a group object
+	 *
+	 * @param string|integer $id Id, name of group, depending
+	 * on the 3rd parameter.
+	 * @param object $dms instance of dms
+	 * @param string $by search by group name if set to 'name'. 
+	 * Search by Id of group if left empty.
+	 * @return object instance of class SeedDMS_Core_Group
+	 */
 	public static function getInstance($id, $dms, $by='') { /* {{{ */
 		$db = $dms->getDB();
 
 		switch($by) {
 		case 'name':
-			$queryStr = "SELECT * FROM `tblGroups` WHERE `name` = ".$this->db->qstr($name);
+			$queryStr = "SELECT * FROM `tblGroups` WHERE `name` = ".$db->qstr($id);
 			break;
 		default:
 			$queryStr = "SELECT * FROM `tblGroups` WHERE id = " . (int) $id;

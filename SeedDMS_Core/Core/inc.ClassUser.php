@@ -155,17 +155,29 @@ class SeedDMS_Core_User {
 		$this->_dms = null;
 	}
 
+	/**
+	 * Create an instance of a user object
+	 *
+	 * @param string|integer $id Id, login name, or email of user, depending
+	 * on the 3rd parameter.
+	 * @param object $dms instance of dms
+	 * @param string $by search by [name|email]. If 'name' is passed, the method
+	 * will check for the 4th paramater and also filter by email. If this
+	 * parameter is left empty, the user will be search by its Id.
+	 * @param string $email optional email address if searching for name
+	 * @return object instance of class SeedDMS_Core_User
+	 */
 	public static function getInstance($id, $dms, $by='', $email='') { /* {{{ */
 		$db = $dms->getDB();
 
 		switch($by) {
 		case 'name':
-			$queryStr = "SELECT * FROM tblUsers WHERE login = ".$this->db->qstr($login);
+			$queryStr = "SELECT * FROM tblUsers WHERE login = ".$db->qstr($id);
 			if($email)
-				$queryStr .= " AND email=".$this->db->qstr($email);
+				$queryStr .= " AND email=".$db->qstr($email);
 			break;
 		case 'email':
-			$queryStr = "SELECT * FROM tblUsers WHERE email = ".$this->db->qstr($email);
+			$queryStr = "SELECT * FROM tblUsers WHERE email = ".$db->qstr($id);
 			break;
 		default:
 			$queryStr = "SELECT * FROM tblUsers WHERE id = " . (int) $id;

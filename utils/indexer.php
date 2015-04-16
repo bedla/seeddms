@@ -58,7 +58,7 @@ function tree($folder, $indent='') {
 	foreach($documents as $document) {
 		echo $indent."  ".$document->getId().":".$document->getName()."\n";
 		if(!($hits = $index->find('document_id:'.$document->getId()))) {
-			$index->addDocument(new SeedDMS_Lucene_IndexedDocument($dms, $document, $settings->_converters ? $settings->_converters : null));
+			$index->addDocument(new SeedDMS_Lucene_IndexedDocument($dms, $document, isset($settings->converters['fulltext']) ? $settings->converters['fulltext'] : null));
 		} else {
 			$hit = $hits[0];
 			$created = (int) $hit->getDocument()->getFieldValue('created');

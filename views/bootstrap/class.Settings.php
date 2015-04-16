@@ -71,7 +71,7 @@ if(!is_writeable($settings->_configFilePath)) {
 	</ul>
 
 	<div class="tab-content">
-	  <div class="tab-pane active" id="site">
+	  <div class="tab-pane <?php if(!$currenttab || $currenttab == 'site') echo 'active'; ?>" id="site">
 <?php		$this->contentContainerStart(); ?>
     <table class="table-condensed">
       <!--
@@ -254,7 +254,7 @@ if(!is_writeable($settings->_configFilePath)) {
 <?php		$this->contentContainerEnd(); ?>
   </div>
 
-	  <div class="tab-pane" id="system">
+	  <div class="tab-pane <?php if($currenttab == 'system') echo 'active'; ?>" id="system">
 <?php		$this->contentContainerStart(); ?>
     <table class="table-condensed">
      <!--
@@ -424,7 +424,7 @@ if(!is_writeable($settings->_configFilePath)) {
 <?php		$this->contentContainerEnd(); ?>
   </div>
 
-	  <div class="tab-pane" id="advanced">
+	  <div class="tab-pane <?php if($currenttab == 'advanced') echo 'active'; ?>" id="advanced">
 <?php		$this->contentContainerStart(); ?>
     <table class="table-condensed">
       <!--

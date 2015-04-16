@@ -572,7 +572,7 @@ switch($command) {
 						$index = SeedDMS_Lucene_Indexer::open($settings->_luceneDir);
 						if($index) {
 							SeedDMS_Lucene_Indexer::init($settings->_stopWordsFile);
-							$index->addDocument(new SeedDMS_Lucene_IndexedDocument($dms, $document, isset($settings->_convcmd) ? $settings->_convcmd : null, true));
+							$index->addDocument(new SeedDMS_Lucene_IndexedDocument($dms, $document, isset($settings->converters['fulltext']) ? $settings->converters['fulltext'] : null, true));
 						}
 					}
 

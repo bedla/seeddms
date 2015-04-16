@@ -586,7 +586,7 @@ if(!is_writeable($settings->_configFilePath)) {
 <?php		$this->contentContainerEnd(); ?>
   </div>
 
-	  <div class="tab-pane" id="extensions">
+	  <div class="tab-pane <?php if($currenttab == 'extensions') echo 'active'; ?>" id="extensions">
 <?php		$this->contentContainerStart(); ?>
     <table class="table-condensed">
       <!--

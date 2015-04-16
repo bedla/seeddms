@@ -6,6 +6,7 @@
   a document or a new version (previously mails were only send when a
   transition was triggered)
 - clean workflow log when deleting a document version.
+- programms for indexing are actually used (Bug #137)
 
 --------------------------------------------------------------------------------
                      Changes in version 4.3.16

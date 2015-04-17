@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1085), tmichelfelder (106)
+//    Translators: Admin (1086), tmichelfelder (106)
 
 $text = array(
 'accept' => 'Godkänn',
@@ -93,7 +93,7 @@ URL: [url]',
 'approval_status' => 'Status för godkännande',
 'approval_submit_email' => '',
 'approval_submit_email_body' => '',
-'approval_submit_email_subject' => 'Skicka godkännande',
+'approval_submit_email_subject' => '[sitename]: [name] - Skicka godkännande',
 'approval_summary' => 'Sammanfattning av godkännande',
 'approval_update_failed' => 'Fel vid uppdatering av godkännande-status. Status uppdaterades inte.',
 'approvers' => 'Godkänna',
@@ -185,6 +185,12 @@ URL: [url]',
 'chart_docsperuser_title' => 'Dokumenter per användare',
 'chart_selection' => 'Välj diagram',
 'chart_sizeperuser_title' => 'Diskutrymme per användare',
+'checkedout_file_has_different_version' => '',
+'checkedout_file_has_disappeared' => '',
+'checkedout_file_is_unchanged' => '',
+'checkin_document' => '',
+'checkout_document' => '',
+'checkout_is_disabled' => '',
 'choose_attrdef' => 'Välj attributdefinition',
 'choose_category' => 'Välj',
 'choose_group' => 'Välj grupp',
@@ -247,6 +253,7 @@ URL: [url]',
 'documents_to_approve' => 'Dokument som du behöver godkänna',
 'documents_to_review' => 'Dokument som du behöver granska',
 'documents_user_requiring_attention' => 'Dokument som du behöver granska/godkänna',
+'document_already_checkedout' => '',
 'document_already_locked' => 'Detta dokument är redan låst',
 'document_comment_changed_email' => 'Kommentar ändrat',
 'document_comment_changed_email_body' => 'Kommentar ändrat
@@ -278,6 +285,7 @@ Ny katalog: [new_folder_path]
 Användare: [username]
 URL: [url]',
 'document_moved_email_subject' => '[sitename]: [name] - Dokument har flyttats',
+'document_not_checkedout' => '',
 'document_renamed_email' => 'Dokument har bytt namn',
 'document_renamed_email_body' => 'Dokument har bytt namn
 Dokument: [name]
@@ -813,6 +821,8 @@ URL: [url]',
 'settings_calendarDefaultView' => 'Standardvy kalender',
 'settings_calendarDefaultView_desc' => 'Standardvy kalender',
 'settings_cannot_disable' => 'Filen ENABLE_INSTALL_TOOL kunde inte tas bort',
+'settings_checkOutDir' => '',
+'settings_checkOutDir_desc' => '',
 'settings_contentDir' => 'Mapp för innehållet',
 'settings_contentDir_desc' => 'Mappen där alla uppladdade filer kommer att sparas. (Det bästa är att välja en mapp som inte är tillgänglig från webbservern)',
 'settings_contentOffsetDir' => 'Innehåll offset-mapp',
@@ -1054,6 +1064,7 @@ URL: [url]',
 'splash_add_user' => 'Ny användare tillagt',
 'splash_cleared_clipboard' => 'Urklipp rensat',
 'splash_document_added' => '',
+'splash_document_checkedout' => '',
 'splash_document_edited' => 'Dokument sparad',
 'splash_document_locked' => 'Dokument låst',
 'splash_document_unlocked' => 'Dokument upplåst',

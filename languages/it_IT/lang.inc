@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1360), s.pnt (26)
+//    Translators: Admin (1361), s.pnt (26)
 
 $text = array(
 'accept' => 'Accetta',
@@ -105,7 +105,7 @@ Stato: [status]
 Commenti: [comment]
 Utente: [username]
 URL: [url]',
-'approval_submit_email_subject' => 'Approvazione sottoposta',
+'approval_submit_email_subject' => '[sitename]: [name] - Approvazione sottoposta',
 'approval_summary' => 'Dettaglio approvazioni',
 'approval_update_failed' => 'Errore nel modificare lo stato di approvazione. Aggiornamento fallito.',
 'approvers' => 'Approvatori',
@@ -197,6 +197,12 @@ URL: [url]',
 'chart_docsperuser_title' => 'Documenti per utente',
 'chart_selection' => 'Seleziona grafico',
 'chart_sizeperuser_title' => 'Spazio su disco per utente',
+'checkedout_file_has_different_version' => '',
+'checkedout_file_has_disappeared' => '',
+'checkedout_file_is_unchanged' => '',
+'checkin_document' => '',
+'checkout_document' => '',
+'checkout_is_disabled' => '',
 'choose_attrdef' => 'Seleziona l\'Attributo',
 'choose_category' => 'Seleziona',
 'choose_group' => 'Seleziona il gruppo',
@@ -259,6 +265,7 @@ URL: [url]',
 'documents_to_approve' => 'Documenti in attesa della tua approvazione',
 'documents_to_review' => 'Documenti in attesa della tua revisione',
 'documents_user_requiring_attention' => 'Tuoi documenti in attesa di revisione o approvazione',
+'document_already_checkedout' => '',
 'document_already_locked' => 'Questo documento è già bloccato',
 'document_comment_changed_email' => 'Commento modificato',
 'document_comment_changed_email_body' => 'Commento modificato
@@ -290,6 +297,7 @@ Nuova cartella: [new_folder_path]
 Utente: [username]
 URL: [url]',
 'document_moved_email_subject' => '[sitename]: [name] - Documento spostato',
+'document_not_checkedout' => '',
 'document_renamed_email' => 'Documento rinominato',
 'document_renamed_email_body' => 'Documento rinominato
 Documento: [name]
@@ -850,6 +858,8 @@ URL: [url]',
 'settings_calendarDefaultView' => 'Vista di default del calendario',
 'settings_calendarDefaultView_desc' => 'Vista di default del calendario',
 'settings_cannot_disable' => 'Il file ENABLE_INSTALL_TOOL non può essere cancellato',
+'settings_checkOutDir' => '',
+'settings_checkOutDir_desc' => '',
 'settings_contentDir' => 'Cartella contenitore',
 'settings_contentDir_desc' => 'Cartella in cui vengono conservati i files caricati, si consiglia di scegliere una cartella sul web-server che non sia direttamente accessibile.',
 'settings_contentOffsetDir' => 'Cartella Offset',
@@ -1091,6 +1101,7 @@ URL: [url]',
 'splash_add_user' => 'Utente aggiunto',
 'splash_cleared_clipboard' => 'Appunti cancellati',
 'splash_document_added' => 'Documento aggiunto',
+'splash_document_checkedout' => '',
 'splash_document_edited' => 'Documento modificato',
 'splash_document_locked' => 'Documento bloccato',
 'splash_document_unlocked' => 'Documento sbloccato',

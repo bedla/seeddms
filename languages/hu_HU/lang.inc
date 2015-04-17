@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (547), ribaz (1019)
+//    Translators: Admin (548), ribaz (1019)
 
 $text = array(
 'accept' => 'Elfogad',
@@ -100,7 +100,7 @@ Szülő mappa: [folder_path]
 Megjegyzés: [comment]
 Felhasználó: [username]
 URL: [url]',
-'approval_submit_email_subject' => 'Beküldött jóváhagyás',
+'approval_submit_email_subject' => '[sitename]: [name] - Beküldött jóváhagyás',
 'approval_summary' => 'Jóváhagyási összesítő',
 'approval_update_failed' => 'Hiba történt a jóváhagyási állapot frissítése során. Frissítés sikertelen.',
 'approvers' => 'Jóváhagyók',
@@ -192,6 +192,12 @@ URL: [url]',
 'chart_docsperuser_title' => 'Dokumentumok felhasználónként',
 'chart_selection' => 'Diagram választása',
 'chart_sizeperuser_title' => 'Lemezterület felhasználónként',
+'checkedout_file_has_different_version' => '',
+'checkedout_file_has_disappeared' => '',
+'checkedout_file_is_unchanged' => '',
+'checkin_document' => '',
+'checkout_document' => '',
+'checkout_is_disabled' => '',
 'choose_attrdef' => 'Kérem válasszon jellemző meghatározást',
 'choose_category' => 'Kérjük válasszon',
 'choose_group' => 'Válasszon csoportot',
@@ -254,6 +260,7 @@ URL: [url]',
 'documents_to_approve' => 'Jóváhagyására váró dokumentumok',
 'documents_to_review' => 'Felülvizsgálatára váró dokumentumok',
 'documents_user_requiring_attention' => 'Az Ön tulajdonában álló dokumentumok, amelyekre figyelmet kell fordítani',
+'document_already_checkedout' => '',
 'document_already_locked' => 'Ez a dokumentum már zárolt',
 'document_comment_changed_email' => 'Megjegyzés módosult',
 'document_comment_changed_email_body' => 'Megjegyzés módosult
@@ -285,6 +292,7 @@ Régi mappa: [old_folder_path]
 Felhasználó: [username]
 URL: [url]',
 'document_moved_email_subject' => '[sitename]: [name] - Dokumentum átmozgatva',
+'document_not_checkedout' => '',
 'document_renamed_email' => 'Dokumentum átnevezve',
 'document_renamed_email_body' => 'Dokumentum átnevezve
 Dokumentum: [name]
@@ -827,6 +835,8 @@ URL: [url]',
 'settings_calendarDefaultView' => 'Naptár alapértelmezett nézet',
 'settings_calendarDefaultView_desc' => 'Naptár alapértelmezett nézet',
 'settings_cannot_disable' => 'ENABLE_INSTALL_TOOL állomány nem került törlésre',
+'settings_checkOutDir' => '',
+'settings_checkOutDir_desc' => '',
 'settings_contentDir' => 'Tartalom könyvtár',
 'settings_contentDir_desc' => 'Feltöltött állományok tárolási helye (olyan könyvtárat érdemes választani, amelyhez nem lehet a webszerveren keresztül hozzáférni)',
 'settings_contentOffsetDir' => 'Tartalom eltérési könyvtár',
@@ -1068,6 +1078,7 @@ URL: [url]',
 'splash_add_user' => 'Új felhasználó hozzáadva',
 'splash_cleared_clipboard' => 'Vágólap törölve',
 'splash_document_added' => '',
+'splash_document_checkedout' => '',
 'splash_document_edited' => 'Dokumentum elmentve',
 'splash_document_locked' => 'Dokumentum zárolva',
 'splash_document_unlocked' => 'Dokumentum zárolás feloldva',

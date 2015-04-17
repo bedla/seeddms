@@ -397,9 +397,31 @@ class SeedDMS_Core_Document extends SeedDMS_Core_Object { /* {{{ */
 	function setOwner($newOwner) { /* {{{ */
 		$db = $this->_dms->getDB();
 
+		$oldOwner = self::getOwner();
+
+		$db->startTransaction();
 		$queryStr = "UPDATE tblDocuments set owner = " . $newOwner->getID() . " WHERE id = " . $this->_id;
-		if (!$db->getResult($queryStr))
+		if (!$db->getResult($queryStr)) {
+			$db->rollbackTransaction();
 			return false;
+		}
+
+		/* FIXME: Update also all locks and checkouts done by the previous owner */
+		/*
+		$queryStr = "UPDATE tblDocumentLocks set userID = " . $newOwner->getID() . " WHERE document = " . $this->_id . " AND userID = " . $oldOwner->getID();
+		if (!$db->getResult($queryStr)) {
+			$db->rollbackTransaction();
+			return false;
+		}
+
+		$queryStr = "UPDATE tblDocumentCheckOuts set userID = " . $newOwner->getID() . " WHERE document = " . $this->_id . " AND userID = " . $oldOwner->getID();
+		if (!$db->getResult($queryStr)) {
+			$db->rollbackTransaction();
+			return false;
+		}
+		 */
+
+		$db->commitTransaction();
 
 		$this->_ownerID = $newOwner->getID();
 		$this->_owner = $newOwner;

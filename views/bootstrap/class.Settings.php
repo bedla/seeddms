@@ -290,6 +290,10 @@ if(!is_writeable($settings->_configFilePath)) {
         <td><?php printMLText("settings_dropFolderDir");?>:</td>
         <td><input type="text" name="dropFolderDir" value="<?php echo $settings->_dropFolderDir ?>" size="100" /></td>
       </tr>
+      <tr title="<?php printMLText("settings_checkOutDir_desc");?>">
+        <td><?php printMLText("settings_checkOutDir");?>:</td>
+        <td><input type="text" name="checkOutDir" value="<?php echo $settings->_checkOutDir ?>" size="100" /></td>
+      </tr>
       <tr title="<?php printMLText("settings_logFileEnable_desc");?>">
         <td><?php printMLText("settings_logFileEnable");?>:</td>
         <td><input name="logFileEnable" type="checkbox" <?php if ($settings->_logFileEnable) echo "checked" ?> /></td>

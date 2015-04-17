@@ -447,6 +447,13 @@ $(document).ready(function () {
 			if (!$document->isLocked()) {
 				echo "<li id=\"first\"><a href=\"../out/out.UpdateDocument". $docid ."\">".getMLText("update_document")."</a></li>";
 				echo "<li><a href=\"../op/op.LockDocument". $docid ."\">".getMLText("lock_document")."</a></li>";
+				if($document->isCheckedOut())
+					echo "<li><a href=\"../out/out.CheckInDocument". $docid ."\">".getMLText("checkin_document")."</a></li>";
+				else {
+					if($this->params['checkoutdir']) {
+						echo "<li><a href=\"../op/op.CheckOutDocument". $docid ."\">".getMLText("checkout_document")."</a></li>";
+					}
+				}
 				echo "<li><a href=\"../out/out.EditDocument". $docid ."\">".getMLText("edit_document_props")."</a></li>";
 				echo "<li><a href=\"../out/out.MoveDocument". $docid ."\">".getMLText("move_document")."</a></li>";
 			}
@@ -455,6 +462,13 @@ $(document).ready(function () {
 				if (($lockingUser->getID() == $this->params['user']->getID()) || ($document->getAccessMode($this->params['user']) == M_ALL)) {
 					echo "<li id=\"first\"><a href=\"../out/out.UpdateDocument". $docid ."\">".getMLText("update_document")."</a></li>";
 					echo "<li><a href=\"../op/op.UnlockDocument". $docid ."\">".getMLText("unlock_document")."</a></li>";
+					if($document->isCheckedOut())
+						echo "<li><a href=\"../out/out.CheckInDocument". $docid ."\">".getMLText("checkin_document")."</a></li>";
+					else {
+						if($this->params['checkoutdir']) {
+							echo "<li><a href=\"../op/op.CheckOutDocument". $docid ."\">".getMLText("checkout_document")."</a></li>";
+						}
+					}
 					echo "<li><a href=\"../out/out.EditDocument". $docid ."\">".getMLText("edit_document_props")."</a></li>";
 					echo "<li><a href=\"../out/out.MoveDocument". $docid ."\">".getMLText("move_document")."</a></li>";
 				}

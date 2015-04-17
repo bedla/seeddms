@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1097), dgrutsch (3), netixw (14)
+//    Translators: Admin (1109), dgrutsch (3), netixw (14)
 
 $text = array(
 'accept' => 'Accept',
@@ -105,7 +105,7 @@ Status: [status]
 Comment: [comment]
 User: [username]
 URL: [url]',
-'approval_submit_email_subject' => 'Submitted approval',
+'approval_submit_email_subject' => '[sitename]: [name] - Submitted approval',
 'approval_summary' => 'Approval Summary',
 'approval_update_failed' => 'Error updating approval status. Update failed.',
 'approvers' => 'Approvers',
@@ -197,6 +197,12 @@ URL: [url]',
 'chart_docsperuser_title' => 'Documents per user',
 'chart_selection' => 'Select chart',
 'chart_sizeperuser_title' => 'Diskspace per user',
+'checkedout_file_has_different_version' => 'The checked out version is not identical to the current version. Check in will not update the document.',
+'checkedout_file_has_disappeared' => 'The file of the checked out document has disappeared. Check in will not create a new version.',
+'checkedout_file_is_unchanged' => 'The file of the checked out document is still unchanged. Check in will not create a new version.',
+'checkin_document' => 'Check In',
+'checkout_document' => 'Check out',
+'checkout_is_disabled' => 'Check out of documents is disabled in the configuration.',
 'choose_attrdef' => 'Please choose attribute definition',
 'choose_category' => 'Please choose',
 'choose_group' => 'Choose group',
@@ -259,6 +265,7 @@ URL: [url]',
 'documents_to_approve' => 'Documents awaiting your approval',
 'documents_to_review' => 'Documents awaiting your review',
 'documents_user_requiring_attention' => 'Documents owned by you that require attention',
+'document_already_checkedout' => 'This document is already checked out',
 'document_already_locked' => 'This document is aleady locked',
 'document_comment_changed_email' => 'Comment changed',
 'document_comment_changed_email_body' => 'Comment changed
@@ -290,6 +297,7 @@ New folder: [new_folder_path]
 User: [username]
 URL: [url]',
 'document_moved_email_subject' => '[sitename]: [name] - Document moved',
+'document_not_checkedout' => 'Document is not checked out.',
 'document_renamed_email' => 'Document renamed',
 'document_renamed_email_body' => 'Document name changed
 Document: [name]
@@ -849,6 +857,8 @@ URL: [url]',
 'settings_calendarDefaultView' => 'Calendar Default View',
 'settings_calendarDefaultView_desc' => 'Calendar default view',
 'settings_cannot_disable' => 'File ENABLE_INSTALL_TOOL could not deleted',
+'settings_checkOutDir' => 'Directory for checked out documents',
+'settings_checkOutDir_desc' => 'This is the directory where the latest content of a document is copied if the document is checked out. If you make this directory accessible for users, they can edit the file and check it back in when finished.',
 'settings_contentDir' => 'Content directory',
 'settings_contentDir_desc' => 'Where the uploaded files are stored (best to choose a directory that is not accessible through your web-server)',
 'settings_contentOffsetDir' => 'Content Offset Directory',
@@ -1090,6 +1100,7 @@ URL: [url]',
 'splash_add_user' => 'New user added',
 'splash_cleared_clipboard' => 'Clipboard cleared',
 'splash_document_added' => 'Document added',
+'splash_document_checkedout' => 'Document checked out',
 'splash_document_edited' => 'Document saved',
 'splash_document_locked' => 'Document locked',
 'splash_document_unlocked' => 'Document unlocked',

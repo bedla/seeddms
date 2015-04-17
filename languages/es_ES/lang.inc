@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (935), angel (123), francisco (2), jaimem (14)
+//    Translators: Admin (936), angel (123), francisco (2), jaimem (14)
 
 $text = array(
 'accept' => 'Aceptar',
@@ -100,7 +100,7 @@ Estado: [status]
 Comentarios: [comment]
 Usuario: [username]
 URL: [url]',
-'approval_submit_email_subject' => 'Aprobación enviada',
+'approval_submit_email_subject' => '[sitename]: [name] - Aprobación enviada',
 'approval_summary' => 'Resumen de aprobación',
 'approval_update_failed' => 'Error actualizando el estado de aprobación. Actualización fallida.',
 'approvers' => 'Aprobadores',
@@ -192,6 +192,12 @@ URL: [url]',
 'chart_docsperuser_title' => 'Documentos por usuario',
 'chart_selection' => 'Seleccione un gráfico',
 'chart_sizeperuser_title' => 'Espacio de almacenamiento por usuario',
+'checkedout_file_has_different_version' => '',
+'checkedout_file_has_disappeared' => '',
+'checkedout_file_is_unchanged' => '',
+'checkin_document' => '',
+'checkout_document' => '',
+'checkout_is_disabled' => '',
 'choose_attrdef' => 'Por favor, seleccione definición de atributo',
 'choose_category' => 'Seleccione categoría',
 'choose_group' => 'Seleccione grupo',
@@ -254,6 +260,7 @@ URL: [url]',
 'documents_to_approve' => 'Documentos en espera de aprobación de usuarios',
 'documents_to_review' => 'Documentos en espera de revisión de usuarios',
 'documents_user_requiring_attention' => 'Documentos de su propiedad que requieren atención',
+'document_already_checkedout' => '',
 'document_already_locked' => 'Este documento ya está bloqueado',
 'document_comment_changed_email' => 'Comentario modificado',
 'document_comment_changed_email_body' => 'Comentario modificado
@@ -285,6 +292,7 @@ Nueva carpeta: [new_folder_path]
 Usuario: [username]
 URL: [url]',
 'document_moved_email_subject' => '[sitename]: [name] - Documento movido',
+'document_not_checkedout' => '',
 'document_renamed_email' => 'Documento renombrado',
 'document_renamed_email_body' => 'Documento renombrado
 Documento: [name]
@@ -828,6 +836,8 @@ URL: [url]',
 'settings_calendarDefaultView' => 'Vista por defecto de calendario',
 'settings_calendarDefaultView_desc' => 'Vista por defecto descripción de calendario',
 'settings_cannot_disable' => 'No es posible eliminar el archivo ENABLE_INSTALL_TOOL',
+'settings_checkOutDir' => '',
+'settings_checkOutDir_desc' => '',
 'settings_contentDir' => 'Carpeta de contenidos',
 'settings_contentDir_desc' => 'Donde se almacenan los archivos subidos (es preferible seleccionar una carpeta que no sea accesible a través del servidor web)',
 'settings_contentOffsetDir' => 'Carpeta de contenidos de desplazamiento',
@@ -1069,6 +1079,7 @@ URL: [url]',
 'splash_add_user' => 'Nuevo usuario agregado',
 'splash_cleared_clipboard' => 'Portapapeles limpiado',
 'splash_document_added' => '',
+'splash_document_checkedout' => '',
 'splash_document_edited' => 'Documento guardado',
 'splash_document_locked' => 'Documento bloqueado',
 'splash_document_unlocked' => 'Documento desbloqueado',

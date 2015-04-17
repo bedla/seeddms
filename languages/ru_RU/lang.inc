@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1249)
+//    Translators: Admin (1250)
 
 $text = array(
 'accept' => 'Принять',
@@ -93,7 +93,7 @@ URL: [url]',
 'approval_status' => 'Статус утверждения',
 'approval_submit_email' => '',
 'approval_submit_email_body' => '',
-'approval_submit_email_subject' => 'Утверждено',
+'approval_submit_email_subject' => '[sitename]: [name] - Утверждено',
 'approval_summary' => 'Сводка по утверждению',
 'approval_update_failed' => 'Произошла ошибка при изменении статуса утверждения',
 'approvers' => 'Утверждающие',
@@ -185,6 +185,12 @@ URL: [url]',
 'chart_docsperuser_title' => 'Документы на пользователя',
 'chart_selection' => '',
 'chart_sizeperuser_title' => '',
+'checkedout_file_has_different_version' => '',
+'checkedout_file_has_disappeared' => '',
+'checkedout_file_is_unchanged' => '',
+'checkin_document' => '',
+'checkout_document' => '',
+'checkout_is_disabled' => '',
 'choose_attrdef' => 'Выберите атрибут',
 'choose_category' => 'Выберите категорию',
 'choose_group' => 'Выберите группу',
@@ -247,6 +253,7 @@ URL: [url]',
 'documents_to_approve' => 'Документы, ожидающие вашего утверждения',
 'documents_to_review' => 'Документы, ожидающие вашей рецензии',
 'documents_user_requiring_attention' => 'Ваши документы, требующие внимания',
+'document_already_checkedout' => '',
 'document_already_locked' => 'Документ уже заблокирован',
 'document_comment_changed_email' => 'Изменён комментарий',
 'document_comment_changed_email_body' => 'Изменён комментарий
@@ -278,6 +285,7 @@ URL: [url]',
 Пользователь: [username]
 URL: [url]',
 'document_moved_email_subject' => '[sitename]: перемещён документ «[name]»',
+'document_not_checkedout' => '',
 'document_renamed_email' => 'Документ переименован',
 'document_renamed_email_body' => 'Переименован документ
 Документ: [name]
@@ -818,6 +826,8 @@ URL: [url]',
 'settings_calendarDefaultView' => 'Вид календаря по умолчанию',
 'settings_calendarDefaultView_desc' => 'Вид календаря по умолчанию.',
 'settings_cannot_disable' => 'Невозможно удалить ENABLE_INSTALL_TOOL',
+'settings_checkOutDir' => '',
+'settings_checkOutDir_desc' => '',
 'settings_contentDir' => 'Каталог содержимого',
 'settings_contentDir_desc' => 'Куда сохраняются загруженные файлы (лучше выбрать каталог недоступный веб-серверу).',
 'settings_contentOffsetDir' => 'Базовый начальный каталог',
@@ -1059,6 +1069,7 @@ URL: [url]',
 'splash_add_user' => 'Добавлен новый пользователь',
 'splash_cleared_clipboard' => 'Буфер обмена очищен',
 'splash_document_added' => '',
+'splash_document_checkedout' => '',
 'splash_document_edited' => 'Документ сохранён',
 'splash_document_locked' => 'Документ заблокирован',
 'splash_document_unlocked' => 'Документ разблокирован',

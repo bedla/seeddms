@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (457)
+//    Translators: Admin (458)
 
 $text = array(
 'accept' => 'Prijať',
@@ -84,7 +84,7 @@ $text = array(
 'approval_status' => 'Stav schválenia',
 'approval_submit_email' => '',
 'approval_submit_email_body' => '',
-'approval_submit_email_subject' => 'Poslane schvalenie',
+'approval_submit_email_subject' => '[sitename]: [name] - Poslane schvalenie',
 'approval_summary' => 'Zhrnutie schválenia',
 'approval_update_failed' => 'Chyba pri aktualizácii stavu schválenia. Aktualizácia zlyhala.',
 'approvers' => 'Schvaľovatelia',
@@ -170,6 +170,12 @@ $text = array(
 'chart_docsperuser_title' => '',
 'chart_selection' => '',
 'chart_sizeperuser_title' => '',
+'checkedout_file_has_different_version' => '',
+'checkedout_file_has_disappeared' => '',
+'checkedout_file_is_unchanged' => '',
+'checkin_document' => '',
+'checkout_document' => '',
+'checkout_is_disabled' => '',
 'choose_attrdef' => '',
 'choose_category' => '--Vyberte prosím--',
 'choose_group' => '--Vyberte skupinu--',
@@ -232,6 +238,7 @@ $text = array(
 'documents_to_approve' => 'Dokumenty čakajúce na schválenie používateľa',
 'documents_to_review' => 'Dokumenty čakajúce na kontrolu používateľa',
 'documents_user_requiring_attention' => 'Dokumenty, ktoré používateľ vlastní a vyžadujú pozornosť',
+'document_already_checkedout' => '',
 'document_already_locked' => 'Tento dokument je už zamknutý',
 'document_comment_changed_email' => '',
 'document_comment_changed_email_body' => '',
@@ -249,6 +256,7 @@ $text = array(
 'document_moved_email' => 'Dokument presunuty',
 'document_moved_email_body' => '',
 'document_moved_email_subject' => '',
+'document_not_checkedout' => '',
 'document_renamed_email' => 'Dokument premenovany',
 'document_renamed_email_body' => '',
 'document_renamed_email_subject' => '',
@@ -678,6 +686,8 @@ $text = array(
 'settings_calendarDefaultView' => '',
 'settings_calendarDefaultView_desc' => '',
 'settings_cannot_disable' => '',
+'settings_checkOutDir' => '',
+'settings_checkOutDir_desc' => '',
 'settings_contentDir' => '',
 'settings_contentDir_desc' => '',
 'settings_contentOffsetDir' => '',
@@ -919,6 +929,7 @@ $text = array(
 'splash_add_user' => '',
 'splash_cleared_clipboard' => '',
 'splash_document_added' => '',
+'splash_document_checkedout' => '',
 'splash_document_edited' => '',
 'splash_document_locked' => 'Dokument uzamknutý',
 'splash_document_unlocked' => 'Dokument odomknutý',

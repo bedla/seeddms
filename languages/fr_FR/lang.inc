@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (963), jeromerobert (50), lonnnew (9)
+//    Translators: Admin (964), jeromerobert (50), lonnnew (9)
 
 $text = array(
 'accept' => 'Accepter',
@@ -100,7 +100,7 @@ Statut : [status]
 Commentaire : [comment]
 Utilisateur : [username]
 URL : [url]',
-'approval_submit_email_subject' => 'Approbation soumise',
+'approval_submit_email_subject' => '[sitename]: [name] - Approbation soumise',
 'approval_summary' => 'Sommaire d\'approbation',
 'approval_update_failed' => 'Erreur de la mise à jour du statut d\'approbation. Echec de la mise à jour.',
 'approvers' => 'Approbateurs',
@@ -192,6 +192,12 @@ URL: [url]',
 'chart_docsperuser_title' => 'Documents par utilisateur',
 'chart_selection' => 'Sélectionnez un graphique',
 'chart_sizeperuser_title' => 'Volume par utilisateur',
+'checkedout_file_has_different_version' => '',
+'checkedout_file_has_disappeared' => '',
+'checkedout_file_is_unchanged' => '',
+'checkin_document' => '',
+'checkout_document' => '',
+'checkout_is_disabled' => '',
 'choose_attrdef' => 'Choisissez une définition d\'attribut',
 'choose_category' => 'SVP choisir',
 'choose_group' => 'Choisir un groupe',
@@ -254,6 +260,7 @@ URL: [url]',
 'documents_to_approve' => 'Documents en attente d\'approbation',
 'documents_to_review' => 'Documents en attente de correction',
 'documents_user_requiring_attention' => 'Documents à surveiller',
+'document_already_checkedout' => '',
 'document_already_locked' => 'Ce document est déjà verrouillé',
 'document_comment_changed_email' => 'Commentaire modifié',
 'document_comment_changed_email_body' => 'Commentaire modifié
@@ -285,6 +292,7 @@ Nouveau dossier: [new_folder_path]
 Utilisateur: [username]
 URL: [url]',
 'document_moved_email_subject' => '[sitename]: [name] - Document déplacé',
+'document_not_checkedout' => '',
 'document_renamed_email' => 'Document renommé',
 'document_renamed_email_body' => 'Document renommé
 Document: [name]
@@ -804,6 +812,8 @@ URL: [url]',
 'settings_calendarDefaultView' => 'Vue par défaut de l\'agenda',
 'settings_calendarDefaultView_desc' => 'Vue par défaut de l\'agenda',
 'settings_cannot_disable' => 'Le fichier ENABLE_INSTALL_TOOL ne peut pas être supprimé',
+'settings_checkOutDir' => '',
+'settings_checkOutDir_desc' => '',
 'settings_contentDir' => 'Contenu du répertoire',
 'settings_contentDir_desc' => 'Endroit ou les fichiers téléchargés sont stockés (il est préférable de choisir un répertoire qui n\'est pas accessible par votre serveur web)',
 'settings_contentOffsetDir' => 'Content Offset Directory',
@@ -1045,6 +1055,7 @@ URL: [url]',
 'splash_add_user' => 'Nouvel utilisateur ajouté',
 'splash_cleared_clipboard' => 'Presse-papier vidé',
 'splash_document_added' => 'Document ajouté',
+'splash_document_checkedout' => '',
 'splash_document_edited' => 'Document sauvegardé',
 'splash_document_locked' => 'Document vérouillé',
 'splash_document_unlocked' => 'Document déverrouillé',

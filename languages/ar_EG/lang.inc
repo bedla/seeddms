@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1243)
+//    Translators: Admin (1244)
 
 $text = array(
 'accept' => 'وافق',
@@ -93,7 +93,7 @@ URL: [url]',
 'approval_status' => 'حالة الموافقة',
 'approval_submit_email' => '',
 'approval_submit_email_body' => '',
-'approval_submit_email_subject' => 'تم ارسال الموافقة',
+'approval_submit_email_subject' => '[sitename]: [name] - تم ارسال الموافقة',
 'approval_summary' => 'ملخص الموافقة',
 'approval_update_failed' => 'خطأ في تحديث حالة الموافقة. فشل التحديث.',
 'approvers' => 'الموافقون',
@@ -185,6 +185,12 @@ URL: [url]',
 'chart_docsperuser_title' => '',
 'chart_selection' => '',
 'chart_sizeperuser_title' => '',
+'checkedout_file_has_different_version' => '',
+'checkedout_file_has_disappeared' => '',
+'checkedout_file_is_unchanged' => '',
+'checkin_document' => '',
+'checkout_document' => '',
+'checkout_is_disabled' => '',
 'choose_attrdef' => 'من فضلك اختر تعريف السمة',
 'choose_category' => 'من فضلك اختر',
 'choose_group' => 'اختر المجموعة',
@@ -247,6 +253,7 @@ URL: [url]',
 'documents_to_approve' => 'مستندات في انتظار الموافقة',
 'documents_to_review' => 'مستندات في انتظار المراجعة',
 'documents_user_requiring_attention' => 'مستندات ملكك تستلزم انتباهك',
+'document_already_checkedout' => '',
 'document_already_locked' => 'هذا المستند محمي ضد التعديل',
 'document_comment_changed_email' => 'تم تعديل التعليق',
 'document_comment_changed_email_body' => 'تم تعديل التعليق
@@ -278,6 +285,7 @@ Parent folder: [folder_path]
 المستخدم: [username]
 URL: [url]',
 'document_moved_email_subject' => '[sitename]: [name] - تم تحريك المستند',
+'document_not_checkedout' => '',
 'document_renamed_email' => 'تم اعادة تسمية المستند',
 'document_renamed_email_body' => 'تم اعادة تسمية المستند
 المستند: [name]
@@ -813,6 +821,8 @@ URL: [url]',
 'settings_calendarDefaultView' => 'العرض الافتراضي للتقويم',
 'settings_calendarDefaultView_desc' => 'العرض الافتراضي للتقويم',
 'settings_cannot_disable' => '',
+'settings_checkOutDir' => '',
+'settings_checkOutDir_desc' => '',
 'settings_contentDir' => 'مجلد المحتوى',
 'settings_contentDir_desc' => '',
 'settings_contentOffsetDir' => '',
@@ -1054,6 +1064,7 @@ URL: [url]',
 'splash_add_user' => '',
 'splash_cleared_clipboard' => '',
 'splash_document_added' => '',
+'splash_document_checkedout' => '',
 'splash_document_edited' => '',
 'splash_document_locked' => 'تم قفل المستند',
 'splash_document_unlocked' => 'تم الغاء قفل المستند',

@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (706), netixw (84), romi (93), uGn (112)
+//    Translators: Admin (707), netixw (84), romi (93), uGn (112)
 
 $text = array(
 'accept' => 'Akceptuj',
@@ -93,7 +93,7 @@ URL: [url]',
 'approval_status' => 'Status akceptacji',
 'approval_submit_email' => '',
 'approval_submit_email_body' => '',
-'approval_submit_email_subject' => 'Prośba o akceptację',
+'approval_submit_email_subject' => '[sitename]: [name] - Prośba o akceptację',
 'approval_summary' => 'Podsumowanie akceptacji',
 'approval_update_failed' => 'Błąd aktualizacji statusu akceptacji. Aktualizacja nie powiodła się.',
 'approvers' => 'Osoby akceptujące',
@@ -185,6 +185,12 @@ URL: [url]',
 'chart_docsperuser_title' => 'Dokumenty na użytkownika',
 'chart_selection' => 'Wybierz wykres',
 'chart_sizeperuser_title' => 'Zajętość dysku na użytkownika',
+'checkedout_file_has_different_version' => '',
+'checkedout_file_has_disappeared' => '',
+'checkedout_file_is_unchanged' => '',
+'checkin_document' => '',
+'checkout_document' => '',
+'checkout_is_disabled' => '',
 'choose_attrdef' => 'Proszę wybrać definicję atrybutu',
 'choose_category' => 'Proszę wybrać',
 'choose_group' => 'Wybierz grupę',
@@ -247,6 +253,7 @@ URL: [url]',
 'documents_to_approve' => 'Dokumenty oczekujące na Twoje zatwierdzenie',
 'documents_to_review' => 'Dokumenty oczekujące na Twoją recenzję',
 'documents_user_requiring_attention' => 'Dokumenty należące do Ciebie, które wymagają uwagi',
+'document_already_checkedout' => '',
 'document_already_locked' => 'Ten dokument jest już zablokowany',
 'document_comment_changed_email' => 'Zmiana komentarza',
 'document_comment_changed_email_body' => 'Zmodyfikowano komentarz
@@ -278,6 +285,7 @@ Nowy folder: [new_folder_path]
 Użytkownik: [username]
 URL: [url]',
 'document_moved_email_subject' => '[sitename]: [name] - Przeniesienie dokumentu',
+'document_not_checkedout' => '',
 'document_renamed_email' => 'Nazwa dokumenty zmieniona',
 'document_renamed_email_body' => 'Nazwa dokumentu uległa zmianie
 Dokument: [name]
@@ -807,6 +815,8 @@ URL: [url]',
 'settings_calendarDefaultView' => 'Domyślny widok kalendarza',
 'settings_calendarDefaultView_desc' => 'Domyślny widok kalendarza',
 'settings_cannot_disable' => 'Plik ENABLE_INSTALL_TOOL nie może zostać usunięty',
+'settings_checkOutDir' => '',
+'settings_checkOutDir_desc' => '',
 'settings_contentDir' => 'Katalog treści',
 'settings_contentDir_desc' => 'Miejsce, gdzie będą przechowywane wczytane pliki (najlepien wybrać katalog, który nie jest dostępny dla serwera http)',
 'settings_contentOffsetDir' => 'Offset katalogu treści',
@@ -1048,6 +1058,7 @@ URL: [url]',
 'splash_add_user' => 'Dodano nowego użytkownika',
 'splash_cleared_clipboard' => 'Wyczyszczono schowek',
 'splash_document_added' => '',
+'splash_document_checkedout' => '',
 'splash_document_edited' => 'Dokument został zapisany',
 'splash_document_locked' => 'Dokument zablokowany',
 'splash_document_unlocked' => 'Odblokowano dokument',

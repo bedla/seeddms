@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (693), pepijn (45), reinoutdijkstra@hotmail.com (270)
+//    Translators: Admin (694), pepijn (45), reinoutdijkstra@hotmail.com (270)
 
 $text = array(
 'accept' => 'Accept',
@@ -93,7 +93,7 @@ URL: [url]',
 'approval_status' => 'Goedkeuring Status',
 'approval_submit_email' => '',
 'approval_submit_email_body' => '',
-'approval_submit_email_subject' => 'Uitgevoerde [Goedkeuring]',
+'approval_submit_email_subject' => '[sitename]: [name] - Uitgevoerde [Goedkeuring]',
 'approval_summary' => 'Goedkeuring Samenvatting',
 'approval_update_failed' => 'Fout bij bijwerken Goedkeuring status. Bijwerken mislukt.',
 'approvers' => 'Autoriseerders',
@@ -185,6 +185,12 @@ URL: [url]',
 'chart_docsperuser_title' => 'Documenten per gebruiker',
 'chart_selection' => 'Kies grafiek',
 'chart_sizeperuser_title' => 'Schijfruimte per gebruiker',
+'checkedout_file_has_different_version' => '',
+'checkedout_file_has_disappeared' => '',
+'checkedout_file_is_unchanged' => '',
+'checkin_document' => '',
+'checkout_document' => '',
+'checkout_is_disabled' => '',
 'choose_attrdef' => 'Selecteer een kenmerk definitie',
 'choose_category' => 'Selecteer a.u.b.',
 'choose_group' => 'Selecteer Groep',
@@ -247,6 +253,7 @@ URL: [url]',
 'documents_to_approve' => 'Documenten die wachten op uw goedkeuring',
 'documents_to_review' => 'Documenten die wachten op uw controle',
 'documents_user_requiring_attention' => 'Eigen documenten die (nog) aandacht behoeven',
+'document_already_checkedout' => '',
 'document_already_locked' => 'Dit document is al geblokkeerd',
 'document_comment_changed_email' => 'Commentaar gewijzigd',
 'document_comment_changed_email_body' => 'Commentaar gewijzigd
@@ -278,6 +285,7 @@ Nieuwe map: [new_folder_path]
 Gebruiker: [username]
 URL: [url]',
 'document_moved_email_subject' => '[sitename]: [name] - Document verplaatst',
+'document_not_checkedout' => '',
 'document_renamed_email' => 'Document hernoemd',
 'document_renamed_email_body' => 'Document hernoemd
 Document: [name]
@@ -819,6 +827,8 @@ URL: [url]',
 'settings_calendarDefaultView' => 'Kalender Standaard overzicht',
 'settings_calendarDefaultView_desc' => 'Kalender standaard overzicht',
 'settings_cannot_disable' => 'Bestand ENABLE_INSTALL_TOOL kon niet verwijderd worden',
+'settings_checkOutDir' => '',
+'settings_checkOutDir_desc' => '',
 'settings_contentDir' => 'Inhoud map',
 'settings_contentDir_desc' => 'Waar de verzonden bestande opgeslagen worden (Kan het beste een map zijn die niet benaderbaar is voor de webserver.)',
 'settings_contentOffsetDir' => 'Inhouds Basis Map',
@@ -1060,6 +1070,7 @@ URL: [url]',
 'splash_add_user' => 'Nieuwe gebruiker toegevoegd',
 'splash_cleared_clipboard' => 'Klembord leeg gemaakt',
 'splash_document_added' => '',
+'splash_document_checkedout' => '',
 'splash_document_edited' => 'Document opgeslagen',
 'splash_document_locked' => 'Document vergrendeld',
 'splash_document_unlocked' => 'Document ontgrendeld',

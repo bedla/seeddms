@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (679), kreml (455)
+//    Translators: Admin (680), kreml (455)
 
 $text = array(
 'accept' => 'Přijmout',
@@ -100,7 +100,7 @@ Stav: [status]
 Komentář: [comment]
 Uživatel: [username]
 URL: [url]',
-'approval_submit_email_subject' => 'Předložit ke schválení',
+'approval_submit_email_subject' => '[sitename]: [name] - Předložit ke schválení',
 'approval_summary' => 'Souhrn schválení',
 'approval_update_failed' => 'Chyba při aktualizaci stavu schválení. Aktualizace selhala.',
 'approvers' => 'Schvalovatelé',
@@ -192,6 +192,12 @@ URL: [url]',
 'chart_docsperuser_title' => 'Dokumenty dle uživatele',
 'chart_selection' => 'Vyberte graf',
 'chart_sizeperuser_title' => 'Diskový prostor dle uživatele',
+'checkedout_file_has_different_version' => '',
+'checkedout_file_has_disappeared' => '',
+'checkedout_file_is_unchanged' => '',
+'checkin_document' => '',
+'checkout_document' => '',
+'checkout_is_disabled' => '',
 'choose_attrdef' => 'Zvolte definici atributů',
 'choose_category' => '--Vyberte prosím--',
 'choose_group' => '--Vyberte skupinu--',
@@ -254,6 +260,7 @@ URL: [url]',
 'documents_to_approve' => 'Dokumenty čekající na schválení uživatele',
 'documents_to_review' => 'Dokumenty čekající na kontrolu uživatele',
 'documents_user_requiring_attention' => 'Dokumenty, které uživatel vlastní a vyžadují pozornost',
+'document_already_checkedout' => '',
 'document_already_locked' => 'Tento dokument je už zamčený',
 'document_comment_changed_email' => 'Změna komentáře',
 'document_comment_changed_email_body' => 'Změna komentáře
@@ -285,6 +292,7 @@ Nová složka: [new_folder_path]
 Uživatel: [username]
 URL: [url]',
 'document_moved_email_subject' => '[sitename]: [name] - Dokument přesunut',
+'document_not_checkedout' => '',
 'document_renamed_email' => 'Dokument přejmenován',
 'document_renamed_email_body' => 'Dokument přejmenován
 Dokument: [name]
@@ -822,6 +830,8 @@ URL: [url]',
 'settings_calendarDefaultView' => 'Výchozí zobrazení kalendáře',
 'settings_calendarDefaultView_desc' => 'Výchozí zobrazení kalendáře',
 'settings_cannot_disable' => 'Soubor ENABLE_INSTALL_TOOL nejde vymazat',
+'settings_checkOutDir' => '',
+'settings_checkOutDir_desc' => '',
 'settings_contentDir' => 'Obsah adresáře',
 'settings_contentDir_desc' => 'Místo, kde jsou nahrané soubory uloženy (nejlepší zvolit adresář, který není přístupný přes váš web-server)',
 'settings_contentOffsetDir' => '',
@@ -1063,6 +1073,7 @@ URL: [url]',
 'splash_add_user' => 'Přidán nový uživatel',
 'splash_cleared_clipboard' => 'Schránka vymazána',
 'splash_document_added' => 'Dokument přidán',
+'splash_document_checkedout' => '',
 'splash_document_edited' => 'Dokument uložen',
 'splash_document_locked' => 'Dokument zamčen',
 'splash_document_unlocked' => 'Dokument odemčen',

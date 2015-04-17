@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (877), flaviove (627), lfcristofoli (352)
+//    Translators: Admin (878), flaviove (627), lfcristofoli (352)
 
 $text = array(
 'accept' => 'Aceitar',
@@ -100,7 +100,7 @@ Estado: [status]
 Comentário: [comment]
 Usuário: [username]
 URL: [url]',
-'approval_submit_email_subject' => 'Aprovação submetida',
+'approval_submit_email_subject' => '[sitename]: [name] - Aprovação submetida',
 'approval_summary' => 'Approval Summary',
 'approval_update_failed' => 'Error updating approval status. Update failed.',
 'approvers' => 'Approvers',
@@ -192,6 +192,12 @@ URL: [url]',
 'chart_docsperuser_title' => 'Documentos por usuário',
 'chart_selection' => 'Selecione gráfico',
 'chart_sizeperuser_title' => 'Espaço em disco por usuário',
+'checkedout_file_has_different_version' => '',
+'checkedout_file_has_disappeared' => '',
+'checkedout_file_is_unchanged' => '',
+'checkin_document' => '',
+'checkout_document' => '',
+'checkout_is_disabled' => '',
 'choose_attrdef' => 'Por favor escolha a definição de atributo',
 'choose_category' => '--Por favor escolha--',
 'choose_group' => '--Escolher grupo--',
@@ -254,6 +260,7 @@ URL: [url]',
 'documents_to_approve' => 'Documents Awaiting User\'s Approval',
 'documents_to_review' => 'Documents Awaiting User\'s Review',
 'documents_user_requiring_attention' => 'Documents Owned by User That Require Attention',
+'document_already_checkedout' => '',
 'document_already_locked' => 'Este documento já está travado',
 'document_comment_changed_email' => 'Comentário modificado',
 'document_comment_changed_email_body' => 'Comentário modificado
@@ -285,6 +292,7 @@ Nova pasta: [new_folder_path]
 Usuário: [username]
 URL: [url]',
 'document_moved_email_subject' => '[sitename]: [name] - Documento movido',
+'document_not_checkedout' => '',
 'document_renamed_email' => 'Documento renomeado',
 'document_renamed_email_body' => 'Documento renomeado
 Documento: [name]
@@ -825,6 +833,8 @@ URL: [url]',
 'settings_calendarDefaultView' => 'Visualização Calendário Padrão',
 'settings_calendarDefaultView_desc' => 'Visualização calendário padrão',
 'settings_cannot_disable' => 'Arquivo ENABLE_INSTALL_TOOL não pode ser eliminado',
+'settings_checkOutDir' => '',
+'settings_checkOutDir_desc' => '',
 'settings_contentDir' => 'Diretório de conteúdo',
 'settings_contentDir_desc' => 'Onde arquivos enviados são armazenados (melhor escolher um diretório que não é acessível através de seu web-server)',
 'settings_contentOffsetDir' => 'Pasta de Compensação de Conteúdo',
@@ -1066,6 +1076,7 @@ URL: [url]',
 'splash_add_user' => 'Novo usuário adicionado',
 'splash_cleared_clipboard' => 'Área de transferência limpada',
 'splash_document_added' => 'Documento inserido',
+'splash_document_checkedout' => '',
 'splash_document_edited' => 'Documento salvo',
 'splash_document_locked' => 'Documento bloqueado',
 'splash_document_unlocked' => 'Documento desbloqueado',

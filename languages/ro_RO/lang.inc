@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1002), balan (6)
+//    Translators: Admin (1003), balan (6)
 
 $text = array(
 'accept' => 'Accept',
@@ -100,7 +100,7 @@ Status: [status]
 Comentariu: [comment]
 Utilizator: [username]
 URL: [url]',
-'approval_submit_email_subject' => 'Aprobare trimisă',
+'approval_submit_email_subject' => '[sitename]: [name] - Aprobare trimisă',
 'approval_summary' => 'Sumar aprobare',
 'approval_update_failed' => 'Eroare actualizare status aprobare. Actualizarea nu a reușit.',
 'approvers' => 'Aprobatori',
@@ -192,6 +192,12 @@ URL: [url]',
 'chart_docsperuser_title' => 'Documente per utilizator',
 'chart_selection' => 'Selectați grafic',
 'chart_sizeperuser_title' => 'Spațiu pe disc per utilizator',
+'checkedout_file_has_different_version' => '',
+'checkedout_file_has_disappeared' => '',
+'checkedout_file_is_unchanged' => '',
+'checkin_document' => '',
+'checkout_document' => '',
+'checkout_is_disabled' => '',
 'choose_attrdef' => 'Vă rugăm să alegeți definiția atributului',
 'choose_category' => 'Vă rugăm să alegeți',
 'choose_group' => 'Alege grup',
@@ -254,6 +260,7 @@ URL: [url]',
 'documents_to_approve' => 'Documente care așteaptă aprobarea dumneavoastră',
 'documents_to_review' => 'Documente care așteaptă revizuirea dumneavoastră',
 'documents_user_requiring_attention' => 'Documente deținute de tine care necesită atenție',
+'document_already_checkedout' => '',
 'document_already_locked' => 'Acest document este deja blocat',
 'document_comment_changed_email' => 'Comentariu schimbat',
 'document_comment_changed_email_body' => 'Comentariu schimbat
@@ -285,6 +292,7 @@ Folder nou: [new_folder_path]
 Utilizator: [username]
 URL: [url]',
 'document_moved_email_subject' => '[sitename]: [name] - Document mutat',
+'document_not_checkedout' => '',
 'document_renamed_email' => 'Document redenumit',
 'document_renamed_email_body' => 'Nume document schimbat
 Document: [name]
@@ -828,6 +836,8 @@ URL: [url]',
 'settings_calendarDefaultView' => 'Vizualizare implicită Calendar',
 'settings_calendarDefaultView_desc' => 'Vizualizare implicită Calendar',
 'settings_cannot_disable' => 'Fișierul ENABLE_INSTALL_TOOL nu a putut fi șters',
+'settings_checkOutDir' => '',
+'settings_checkOutDir_desc' => '',
 'settings_contentDir' => 'Director conținut',
 'settings_contentDir_desc' => 'Unde sunt stocate  fișierele încărcate (este recomandat sa alegeti un director care nu este accesibil prin intermediul web-server-ului dumneavoastră)',
 'settings_contentOffsetDir' => 'Conținut Director Offset',
@@ -1069,6 +1079,7 @@ URL: [url]',
 'splash_add_user' => 'Utilizator nou adăugat',
 'splash_cleared_clipboard' => 'Clipboard golit',
 'splash_document_added' => 'Document adăugat',
+'splash_document_checkedout' => '',
 'splash_document_edited' => 'Document salvat',
 'splash_document_locked' => 'Document blocat',
 'splash_document_unlocked' => 'Document deblocat',

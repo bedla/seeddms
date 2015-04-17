@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1971), dgrutsch (18)
+//    Translators: Admin (1983), dgrutsch (18)
 
 $text = array(
 'accept' => 'Übernehmen',
@@ -105,7 +105,7 @@ Status: [status]
 Kommentar: [comment]
 Benutzer: [username]
 URL: [url]',
-'approval_submit_email_subject' => 'Freigabe erteilen',
+'approval_submit_email_subject' => '[sitename]: [name] - Freigabe erteilen',
 'approval_summary' => 'Übersicht Freigaben',
 'approval_update_failed' => 'Störung bei der Aktualisierung des Berechtigungsstatus. Aktualisierung gescheitert',
 'approvers' => 'Freigebender',
@@ -197,6 +197,12 @@ URL: [url]',
 'chart_docsperuser_title' => 'Dokumente pro Benutzer',
 'chart_selection' => 'Diagrammauswahl',
 'chart_sizeperuser_title' => 'Speicherplatz pro Benutzer',
+'checkedout_file_has_different_version' => 'Die ausgecheckte Version ist nicht identisch mit der aktuellen Version. Das Einchecken wird das Dokument nicht aktualisieren.',
+'checkedout_file_has_disappeared' => 'Die Datei des ausgecheckten Dokuments ist nicht mehr vorhanden. Das Einchecken wird keine neue Version erzeugen.',
+'checkedout_file_is_unchanged' => 'Die Datei des ausgecheckten Dokuments ist noch unverändert. Das Einchecken wird keine neue Version anlegen.',
+'checkin_document' => 'Einchecken',
+'checkout_document' => 'Auschecken',
+'checkout_is_disabled' => 'Auschecken von Dokumenten ist in der Konfiguration ausgeschaltet.',
 'choose_attrdef' => '--Attributdefinition wählen--',
 'choose_category' => '--Kategorie wählen--',
 'choose_group' => '--Gruppe wählen--',
@@ -259,6 +265,7 @@ URL: [url]',
 'documents_to_approve' => 'Freigabe erforderlich',
 'documents_to_review' => 'Prüfung erforderlich',
 'documents_user_requiring_attention' => 'Diese Dokumente sollte ich mal nachsehen',
+'document_already_checkedout' => 'Dieses Dokument ist bereits ausgecheckt',
 'document_already_locked' => 'Dieses Dokument ist bereits gesperrt',
 'document_comment_changed_email' => 'Kommentar geändert',
 'document_comment_changed_email_body' => 'Kommentar geändert
@@ -290,6 +297,7 @@ Neuer Ordner: [new_folder_path]
 Benutzer: [username]
 URL: [url]',
 'document_moved_email_subject' => '[sitename]: [name] - Dokument verschoben',
+'document_not_checkedout' => 'Dokument ist nicht ausgecheckt.',
 'document_renamed_email' => 'Dokument umbenannt',
 'document_renamed_email_body' => 'Dokument umbenannt
 Dokument: [name]
@@ -842,6 +850,8 @@ URL: [url]',
 'settings_calendarDefaultView' => 'Kalender Standardansicht',
 'settings_calendarDefaultView_desc' => 'Voreingestellte Ansicht des Kalenders',
 'settings_cannot_disable' => 'Datei ENABLE_INSTALL_TOOL konnte nicht gelöscht werden.',
+'settings_checkOutDir' => 'Verzeichnis für ausgecheckte Dokumente',
+'settings_checkOutDir_desc' => 'Dies ist das Verzeichnis, in das Dokumenteninhalte bei einem Check out kopiert werden. Wenn dieses Verzeichnis für die Benutzer erreichbar ist, können die Dateien editiert und dann wieder eingecheckt werden.',
 'settings_contentDir' => 'Content-Verzeichnis',
 'settings_contentDir_desc' => 'Verzeichnis, in dem die Dokumente gespeichert werden. Sie sollten ein Verzeichnis wählen, das nicht durch den Web-Server erreichbar ist.',
 'settings_contentOffsetDir' => 'Content Offset Directory',
@@ -1083,6 +1093,7 @@ URL: [url]',
 'splash_add_user' => 'Neuen Benutzer hinzugefügt',
 'splash_cleared_clipboard' => 'Zwischenablage geleert',
 'splash_document_added' => 'Dokument hinzugefügt',
+'splash_document_checkedout' => 'Dokument ausgecheckt',
 'splash_document_edited' => 'Dokument gespeichert',
 'splash_document_locked' => 'Dokument gesperrt',
 'splash_document_unlocked' => 'Dokumentensperre aufgehoben',

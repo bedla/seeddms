@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1002), aydin (83)
+//    Translators: Admin (1003), aydin (83)
 
 $text = array(
 'accept' => 'Kabul',
@@ -99,7 +99,7 @@ Durum: [status]
 Açıklama: [comment]
 Kullanıcı: [username]
 URL: [url]',
-'approval_submit_email_subject' => 'Onay isteği gönder',
+'approval_submit_email_subject' => '[sitename]: [name] - Onay isteği gönder',
 'approval_summary' => 'Onay Özeti',
 'approval_update_failed' => 'Onay durumu güncellenirken hata oluştu. Güncelleme başarısız.',
 'approvers' => 'Onaylayan',
@@ -191,6 +191,12 @@ URL: [url]',
 'chart_docsperuser_title' => 'Kullanıcıya göre dokümanlar',
 'chart_selection' => 'Grafik seç',
 'chart_sizeperuser_title' => 'Kullanıcıya göre disk kullanımı',
+'checkedout_file_has_different_version' => '',
+'checkedout_file_has_disappeared' => '',
+'checkedout_file_is_unchanged' => '',
+'checkin_document' => '',
+'checkout_document' => '',
+'checkout_is_disabled' => '',
 'choose_attrdef' => 'Lütfen nitelik tanımını seçiniz',
 'choose_category' => 'Lütfen seçiniz',
 'choose_group' => 'Grup seçiniz',
@@ -253,6 +259,7 @@ URL: [url]',
 'documents_to_approve' => 'Onayınızı bekleyen dokümanlar',
 'documents_to_review' => 'Kontrol etmenizi bekleyen dokümanlar',
 'documents_user_requiring_attention' => 'Dikkatinizi gerektiren size ait dokümanlar',
+'document_already_checkedout' => '',
 'document_already_locked' => 'Bu doküman zaten kilitli',
 'document_comment_changed_email' => 'Açıklama değişti',
 'document_comment_changed_email_body' => 'Açıklama değişti
@@ -284,6 +291,7 @@ Klasörün yeni yeri: [new_folder_path]
 Kullanıcı: [username]
 URL: [url]',
 'document_moved_email_subject' => '[sitename]: [name] - Doküman taşındı',
+'document_not_checkedout' => '',
 'document_renamed_email' => 'Dokümanın adı değiştirildi',
 'document_renamed_email_body' => 'Dokümanın adı değiştirildi
 Doküman: [name]
@@ -829,6 +837,8 @@ URL: [url]',
 'settings_calendarDefaultView' => 'Varsayılan Takvim Görünümü',
 'settings_calendarDefaultView_desc' => 'Varsayılan takvim görünümü',
 'settings_cannot_disable' => 'ENABLE_INSTALL_TOOL dosyası silinemedi',
+'settings_checkOutDir' => '',
+'settings_checkOutDir_desc' => '',
 'settings_contentDir' => 'İçerik dizini',
 'settings_contentDir_desc' => 'Yüklenecek dosyaların depolanacağı yer (web üzerinden erişilemeyen bir yer tercih etmeniz önerilir.)',
 'settings_contentOffsetDir' => 'İçerik Ofset Klasörü',
@@ -1070,6 +1080,7 @@ URL: [url]',
 'splash_add_user' => 'Yeni kullanıcı eklendi',
 'splash_cleared_clipboard' => 'Pano temizlendi',
 'splash_document_added' => 'Doküman eklendi',
+'splash_document_checkedout' => '',
 'splash_document_edited' => 'Doküman kaydedildi',
 'splash_document_locked' => 'Doküman kilitlendi',
 'splash_document_unlocked' => 'Doküman kiliti açıldı',

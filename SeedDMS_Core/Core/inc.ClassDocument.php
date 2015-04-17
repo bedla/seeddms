@@ -645,6 +645,209 @@ class SeedDMS_Core_Document extends SeedDMS_Core_Object { /* {{{ */
 		return $this->_lockingUser;
 	} /* }}} */
 
+	/**
+	 * Check if document is checked out
+	 *
+	 * @return boolean true if checked out otherwise false
+	 */
+	function isCheckedOut() { /* {{{ */
+		$db = $this->_dms->getDB();
+
+		$queryStr = "SELECT * FROM tblDocumentCheckOuts WHERE document = " . (int) $this->_id;
+		$resArr = $db->getResultArray($queryStr);
+		if ((is_bool($resArr) && $resArr==false) || (count($resArr)==0)) {
+			// Could not find a check out for the selected document.
+			return false;
+		} else {
+			// A check out has been identified for this document.
+			return true;
+		}
+	} /* }}} */
+
+	/**
+	 * Get checkout info for document
+	 *
+	 * @return boolean true if locked otherwise false
+	 */
+	function getCheckOutInfo() { /* {{{ */
+		$db = $this->_dms->getDB();
+
+		$queryStr = "SELECT * FROM tblDocumentCheckOuts WHERE document = " . (int) $this->_id;
+		$resArr = $db->getResultArray($queryStr);
+		if ((is_bool($resArr) && $resArr==false) || (count($resArr)==0)) {
+			// Could not find a check out for the selected document.
+			return false;
+		} else {
+			// A check out has been identified for this document.
+			return $resArr[0];
+		}
+	} /* }}} */
+
+
+	/**
+	 * Check out document
+	 *
+	 * Creates a check out record for the document and copies the latest
+	 * version of the document into the given checkout dir.
+	 *
+	 * @param object $user object of user doing the checkout
+	 * @param string $checkoutdir directory where the file will be placed
+	 * @return object object of class SeedDMS_Core_DocumentCheckOut
+	 */
+	function checkOut($user, $checkoutdir) { /* {{{ */
+		$db = $this->_dms->getDB();
+
+		if(self::isCheckedOut())
+			return false;
+
+		/* Check if checkout dir is writable */
+		if(!file_exists($checkoutdir)) {
+			return false;
+		}
+
+		$db->startTransaction();
+
+		$lc = self::getLatestContent();
+
+		$filename = $checkoutdir."/".$lc->getOriginalFileName();
+		$queryStr = "INSERT INTO tblDocumentCheckOuts (document, version, userID, date, filename) VALUES (".$this->_id.", ".$lc->getVersion().", ".$user->getID().", CURRENT_TIMESTAMP, ".$db->qstr($filename).")";
+		if (!$db->getResult($queryStr))
+			return false;
+
+		/* Try to copy the file */
+		$err = SeedDMS_Core_File::copyFile($this->_dms->contentDir . $this->getDir() . $lc->getFileName(), $filename);
+		if (!$err) {
+			$db->rollbackTransaction();
+			return false;
+		}
+
+		$db->commitTransaction();
+		return true;
+	} /* }}} */
+
+	/**
+	 * Check in document
+	 *
+	 * Τhis function is similar to SeedDMS_Core_Document::addContent()
+	 * but reads the content from the file was previously checked out.
+	 * Internal this method calls
+	 * SeedDMS_Core_Document::addContent() but takes over the original
+	 * filename, filetype and mimetype from the checked out version.
+	 * No matter in which state the current checked out file is, the
+	 * document will be checked back in afterwards.
+	 *
+	 * @param string $comment
+	 * @param object $user
+	 * @param array $reviewers
+	 * @param array $approvers
+	 * @param integer $version
+	 * @param array $attributes
+	 * @param object $workflow
+	 * @return boolean|object false in case of error, true if no error occurs but
+	 * the document remains unchanged (because the checked out file has not
+	 * changed or it has disappeared and couldnt't be checked in), or
+	 * an instance of class SeedDMS_Core_AddContentResultSet if the document
+	 * was updated.
+	 */
+	function checkIn($comment, $user, $reviewers=array(), $approvers=array(), $version=0, $attributes=array(), $workflow=null) { /* {{{ */
+		$db = $this->_dms->getDB();
+
+		$info = self::getCheckOutInfo();
+		$lc = self::getLatestContent();
+
+		/* If file doesn't exist anymore, then just remove the record from the db */
+		if(!file_exists($info['filename'])) {
+			$queryStr = "DELETE FROM tblDocumentCheckOuts WHERE document = ".$this->_id;
+			$db->getResult($queryStr);
+			return true;
+		}
+
+		/* Check if version of checked out file is equal to current version */
+		if($lc->getVersion() != $info['version']) {
+			return true;
+		}
+
+		if($user->getID() != $info['userID']) {
+			return true;
+		}
+
+		$content = true;
+		/* Do not create a new version if the file was unchanged */
+		$checksum = SeedDMS_Core_File::checksum($info['filename']);
+		if($checksum != $lc->getChecksum()) {
+			$content = $this->addContent($comment, $user, $info['filename'], $lc->getOriginalFileName(), $lc->getFileType(), $lc->getMimeType(), $reviewers, $approvers, $version, $attributes, $workflow);
+			if($content && !$this->_dms->forceRename)
+				SeedDMS_Core_File::removeFile($info['filename']);
+		}
+
+		$queryStr = "DELETE FROM tblDocumentCheckOuts WHERE document = ".$this->_id;
+		$db->getResult($queryStr);
+
+		return $content;
+
+	} /* }}} */
+
+	/**
+	 * Cancel check out of document
+	 *
+	 * This function will cancel a check out in progress by removing
+	 * the check out record from the database and removing the file
+	 * from the check out folder.
+	 *
+	 * @return boolean true if cancelation was successful
+	 */
+	function cancelCheckOut() { /* {{{ */
+		$db = $this->_dms->getDB();
+
+		$info = self::getCheckOutInfo();
+		if($info) {
+			SeedDMS_Core_File::removeFile($info['filename']);
+
+			$queryStr = "DELETE FROM tblDocumentCheckOuts WHERE document = ".$this->_id;
+			$db->getResult($queryStr);
+		}
+
+		return true;
+
+	} /* }}} */
+
+	/**
+	 * Return the check out status of the document
+	 *
+	 * This method returns the checkout status of a previosly checked out
+	 * document.
+	 *
+	 * @return int 1=The checked out file doesn't exists anymore,
+	 * 2=The checked out version doesn't exists anymore
+	 * 3=The checked out file has not been modified yet
+	 * 4=new check out record in database found
+	 * 0=The checked out file is modified and check in will create a new version
+	 */
+	function checkOutStatus() { /* {{{ */
+		$info = self::getCheckOutInfo();
+		if(!$info)
+			return 4;
+
+		$lc = self::getLatestContent();
+
+		/* If file doesn't exist anymore, then just remove the record from the db */
+		if(!file_exists($info['filename'])) {
+			return 1;
+		}
+
+		/* Check if version of checked out file is equal to current version */
+		if($lc->getVersion() != $info['version']) {
+			return 2;
+		}
+
+		$checksum = SeedDMS_Core_File::checksum($info['filename']);
+		if($checksum == $lc->getChecksum()) {
+			return 3;
+		}
+
+		return 0;
+	} /* }}} */
+
 	function getSequence() { return $this->_sequence; }
 
 	function setSequence($seq) { /* {{{ */
@@ -1841,6 +2044,11 @@ class SeedDMS_Core_Document extends SeedDMS_Core_Object { /* {{{ */
 			return false;
 		}
 		$queryStr = "DELETE FROM tblDocumentLocks WHERE document = " . $this->_id;
+		if (!$db->getResult($queryStr)) {
+			$db->rollbackTransaction();
+			return false;
+		}
+		$queryStr = "DELETE FROM tblDocumentCheckOuts WHERE document = " . $this->_id;
 		if (!$db->getResult($queryStr)) {
 			$db->rollbackTransaction();
 			return false;

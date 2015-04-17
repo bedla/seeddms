@@ -98,6 +98,7 @@ class UI extends UI_Default {
 			$view->setParam('enableclipboard', $settings->_enableClipboard);
 			$view->setParam('workflowmode', $settings->_workflowMode);
 			$view->setParam('partitionsize', $settings->_partitionSize);
+			$view->setParam('checkoutdir', $settings->_checkOutDir);
 			$view->setParam('showmissingtranslations', $settings->_showMissingTranslations);
 			return $view;
 		}

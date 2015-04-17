@@ -287,6 +287,21 @@ CREATE TABLE `tblDocumentLocks` (
 -- --------------------------------------------------------
 
 -- 
+-- Table structure for table `tblDocumentCheckOuts`
+-- 
+
+CREATE TABLE `tblDocumentCheckOuts` (
+  `document` INTEGER REFERENCES `tblDocuments` (`id`) ON DELETE CASCADE,
+  `userID` INTEGER NOT NULL default '0' REFERENCES `tblUsers` (`id`)
+  `version` INTEGER unsigned NOT NULL default '0',
+  `date` TEXT NOT NULL default '0000-00-00 00:00:00',
+  `filename` varchar(255) NOT NULL default '',
+  UNIQUE (`document`)
+) ;
+
+-- --------------------------------------------------------
+
+-- 
 -- Table structure for table `tblDocumentReviewLog`
 -- 
 

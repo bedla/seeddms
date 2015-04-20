@@ -383,6 +383,40 @@ CREATE TABLE `tblDocumentReviewLog` (
 -- --------------------------------------------------------
 
 -- 
+-- Table structure for table `tblDocumentRecipients`
+-- 
+
+CREATE TABLE `tblDocumentRecipients` (
+  `receiptID` int(11) NOT NULL auto_increment,
+  `documentID` int(11) NOT NULL default '0',
+  `version` smallint(5) unsigned NOT NULL default '0',
+  `type` tinyint(4) NOT NULL default '0',
+  `required` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`receiptID`),
+  UNIQUE KEY `documentID` (`documentID`,`version`,`type`,`required`),
+  CONSTRAINT `tblDocumentRecipients_document` FOREIGN KEY (`documentID`) REFERENCES `tblDocuments` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `tblDocumentReceiptLog`
+-- 
+
+CREATE TABLE `tblDocumentReceiptLog` (
+  `receiptLogID` int(11) NOT NULL auto_increment,
+  `receiptID` int(11) NOT NULL default '0',
+  `status` tinyint(4) NOT NULL default '0',
+  `comment` text NOT NULL,
+  `date` datetime NOT NULL default '0000-00-00 00:00:00',
+  `userID` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`receiptLogID`),
+  CONSTRAINT `tblDocumentReceiptLog_recipient` FOREIGN KEY (`receiptID`) REFERENCES `tblDocumentRecipients` (`receiptID`) ON DELETE CASCADE,
+  CONSTRAINT `tblDocumentReceiptLog_user` FOREIGN KEY (`userID`) REFERENCES `tblUsers` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+-- 
 -- Table structure for table `tblDocumentStatus`
 -- 
 

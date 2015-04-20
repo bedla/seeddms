@@ -427,6 +427,9 @@ class SeedDMS_View_ViewDocument extends SeedDMS_Bootstrap_Style {
 		if($accessop->mayOverwriteStatus()) {
 			print "<li><a href='../out/out.OverrideContentStatus.php?documentid=".$documentid."&version=".$latestContent->getVersion()."'><i class=\"icon-align-justify\"></i>".getMLText("change_status")."</a></li>";
 		}
+		if($accessop->maySetRecipients()) {
+			print "<li><a href='../out/out.SetRecipients.php?documentid=".$documentid."&version=".$latestContent->getVersion()."'><i class=\"icon-edit\"></i>".getMLText("change_recipients")."</a></li>";
+		}
 		if($workflowmode == 'traditional' || $workflowmode == 'traditional_only_approval') {
 			// Allow changing reviewers/approvals only if not reviewed
 			if($accessop->maySetReviewersApprovers()) {

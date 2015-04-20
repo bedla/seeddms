@@ -460,7 +460,7 @@ foreach ($pGrpApp as $p) {
 						UI::exitError(getMLText("document_title", array("documentname" => $document->getName())),getMLText("access_denied"));
 						break;
 					case -3:
-						UI::exitError(getMLText("document_title", array("documentname" => $document->getName())),getMLText("reviewer_already_assigned"));
+						UI::exitError(getMLText("document_title", array("documentname" => $document->getName())),getMLText("approver_already_assigned"));
 						break;
 					case -4:
 						// email error
@@ -517,7 +517,7 @@ if (count($approvalIndex["g"]) > 0) {
 						UI::exitError(getMLText("document_title", array("documentname" => $document->getName())),getMLText("access_denied"));
 						break;
 					case -3:
-						UI::exitError(getMLText("document_title", array("documentname" => $document->getName())),getMLText("reviewer_already_removed"));
+						UI::exitError(getMLText("document_title", array("documentname" => $document->getName())),getMLText("approver_already_removed"));
 						break;
 					case -4:
 						// email error

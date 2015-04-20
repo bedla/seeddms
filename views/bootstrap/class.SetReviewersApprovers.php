@@ -51,7 +51,7 @@ class SeedDMS_View_SetReviewersApprovers extends SeedDMS_Bootstrap_Style {
 		$this->contentHeading(getMLText("change_assignments"));
 
 		// Retrieve a list of all users and groups that have review / approve privileges.
-		$docAccess = $folder->getReadAccessList($enableadminrevapp, $enableownerrevapp);
+		$docAccess = $document->getReadAccessList($enableadminrevapp, $enableownerrevapp);
 
 		// Retrieve list of currently assigned reviewers and approvers, along with
 		// their latest status.

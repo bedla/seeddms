@@ -377,5 +377,38 @@ class SeedDMS_Core_Group {
 
 		return $status;
 	} /* }}} */
+
+	function getReceiptStatus($documentID=null, $version=null) { /* {{{ */
+		$db = $this->_dms->getDB();
+
+		$status = array();
+
+		// See if the group is assigned as a recipient.
+		$queryStr = "SELECT `tblDocumentRecipients`.*, `tblDocumentReceiptLog`.`status`, ".
+			"`tblDocumentReceiptLog`.`comment`, `tblDocumentReceiptLog`.`date`, ".
+			"`tblDocumentReceiptLog`.`userID` ".
+			"FROM `tblDocumentRecipients` ".
+			"LEFT JOIN `tblDocumentReceiptLog` USING (`receiptID`) ".
+			"WHERE `tblDocumentRecipients`.`type`='1' ".
+			($documentID==null ? "" : "AND `tblDocumentRecipients`.`documentID` = '". (int) $documentID ."' ").
+			($version==null ? "" : "AND `tblDocumentRecipients`.`version` = '". (int) $version ."' ").
+			"AND `tblDocumentRecipients`.`required`='". $this->_id ."' ";
+		$resArr = $db->getResultArray($queryStr);
+		if (is_bool($resArr) && $resArr == false)
+			return false;
+		if (count($resArr)>0) {
+			foreach ($resArr as $res) {
+				if(isset($status["status"][$res['documentID']])) {
+					if($status["status"][$res['documentID']]['date'] < $res['date']) {
+						$status["status"][$res['documentID']] = $res;
+					}
+				} else {
+					$status["status"][$res['documentID']] = $res;
+				}
+			}
+		}
+		return $status;
+	} /* }}} */
+
 }
 ?>

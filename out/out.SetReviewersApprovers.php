@@ -48,9 +48,14 @@ if (!is_object($content)) {
 	UI::exitError(getMLText("document_title", array("documentname" => htmlspecialchars($document->getName()))),getMLText("invalid_version"));
 }
 
-// control for document state
+if(!$this->settings->_enableVersionModification) {
+	UI::exitError(getMLText("document_title", array("documentname" => htmlspecialchars($document->getName()))),getMLText("no_version_modification"));
+}
+
+// control for document state. Must correspond to check in
+// SeedDMS_AccessOperation::maySetReviewersApprovers()
 $overallStatus = $content->getStatus();
-if ($overallStatus["status"]==S_REJECTED || $overallStatus["status"]==S_OBSOLETE ) {
+if ($overallStatus["status"]!=S_DRAFT_REV && $overallStatus["status"]!=S_DRAFT_APP) {
 	UI::exitError(getMLText("document_title", array("documentname" => htmlspecialchars($document->getName()))),getMLText("cannot_assign_invalid_state"));
 }
 

@@ -106,6 +106,26 @@ class SeedDMS_AccessOperation {
 	} /* }}} */
 
 	/**
+	 * Check if recipients may be edited
+	 *
+	 * This check can only be done for documents. Setting the document
+	 * recipients is only allowed if version modification is turned on
+	 * in the settings.  The
+	 * admin may even set reviewers/approvers if is disallowed in the
+	 * settings.
+	 */
+	function maySetRecipients() { /* {{{ */
+		if(get_class($this->obj) == 'SeedDMS_Core_Document') {
+			$latestContent = $this->obj->getLatestContent();
+			$status = $latestContent->getStatus();
+			if ((($this->settings->_enableVersionModification && ($this->obj->getAccessMode($this->user) == M_ALL)) || $this->user->isAdmin())) {
+				return true;
+			}
+		}
+		return false;
+	} /* }}} */
+
+	/**
 	 * Check if workflow may be edited
 	 *
 	 * This check can only be done for documents. Overwriting the document

@@ -488,6 +488,14 @@ if(!is_writeable($settings->_configFilePath)) {
 					</select>
 				</td>
       </tr>
+      <tr title="<?php printMLText("settings_enableAcknowledgeWorkflow_desc");?>">
+        <td><?php printMLText("settings_enableAcknowledgeWorkflow");?>:</td>
+        <td><input name="enableAcknowledgeWorkflow" type="checkbox" <?php if ($settings->_enableAcknowledgeWorkflow) echo "checked" ?> /></td>
+      </tr>
+      <tr title="<?php printMLText("settings_enableRevisionWorkflow_desc");?>">
+        <td><?php printMLText("settings_enableRevisionWorkflow");?>:</td>
+        <td><input name="enableRevisionWorkflow" type="checkbox" <?php if ($settings->_enableRevisionWorkflow) echo "checked" ?> /></td>
+      </tr>
       <tr title="<?php printMLText("settings_versioningFileName_desc");?>">
         <td><?php printMLText("settings_versioningFileName");?>:</td>
         <td><input type="text" name="versioningFileName" value="<?php echo $settings->_versioningFileName ?>" /></td>

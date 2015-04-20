@@ -1120,12 +1120,12 @@ class SeedDMS_Core_User {
 			"`tblDocumentReceiptLog`.`comment`, `tblDocumentReceiptLog`.`date`, ".
 			"`tblDocumentReceiptLog`.`userID` ".
 			"FROM `tblDocumentRecipients` ".
-			"LEFT JOIN `tblDocumentReceiptLog` USING (`recipientID`) ".
+			"LEFT JOIN `tblDocumentReceiptLog` USING (`receiptID`) ".
 			"WHERE `tblDocumentRecipients`.`type`='0' ".
 			($documentID==null ? "" : "AND `tblDocumentRecipients`.`documentID` = '". (int) $documentID ."' ").
 			($version==null ? "" : "AND `tblDocumentRecipients`.`version` = '". (int) $version ."' ").
 			"AND `tblDocumentRecipients`.`required`='". $this->_id ."' ".
-			"ORDER BY `tblDocumentReceiptLog`.`reviewLogID` DESC";
+			"ORDER BY `tblDocumentReceiptLog`.`receiptLogID` DESC";
 		$resArr = $db->getResultArray($queryStr);
 		if (is_bool($resArr) && $resArr === false)
 			return false;
@@ -1147,13 +1147,13 @@ class SeedDMS_Core_User {
 			"`tblDocumentReceiptLog`.`comment`, `tblDocumentReceiptLog`.`date`, ".
 			"`tblDocumentReceiptLog`.`userID` ".
 			"FROM `tblDocumentRecipients` ".
-			"LEFT JOIN `tblDocumentReceiptLog` USING (`reviewID`) ".
+			"LEFT JOIN `tblDocumentReceiptLog` USING (`receiptID`) ".
 			"LEFT JOIN `tblGroupMembers` ON `tblGroupMembers`.`groupID` = `tblDocumentRecipients`.`required` ".
 			"WHERE `tblDocumentRecipients`.`type`='1' ".
 			($documentID==null ? "" : "AND `tblDocumentRecipients`.`documentID` = '". (int) $documentID ."' ").
 			($version==null ? "" : "AND `tblDocumentRecipients`.`version` = '". (int) $version ."' ").
 			"AND `tblGroupMembers`.`userID`='". $this->_id ."' ".
-			"ORDER BY `tblDocumentReceiptLog`.`reviewLogID` DESC";
+			"ORDER BY `tblDocumentReceiptLog`.`receiptLogID` DESC";
 		$resArr = $db->getResultArray($queryStr);
 		if (is_bool($resArr) && $resArr === false)
 			return false;

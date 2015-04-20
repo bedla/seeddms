@@ -2588,7 +2588,7 @@ class SeedDMS_Core_DocumentContent extends SeedDMS_Core_Object { /* {{{ */
 			$reviewID = $db->getInsertID();
 		}
 		else {
-			$reviewID = isset($indstatus["reviewID"]) ? $ $indstatus["reviewID"] : NULL;
+			$reviewID = isset($indstatus["reviewID"]) ? $indstatus["reviewID"] : NULL;
 		}
 
 		$queryStr = "INSERT INTO `tblDocumentReviewLog` (`reviewID`, `status`, `comment`, `date`, `userID`) ".

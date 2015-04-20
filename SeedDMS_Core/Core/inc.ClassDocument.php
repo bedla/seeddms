@@ -2811,7 +2811,7 @@ class SeedDMS_Core_DocumentContent extends SeedDMS_Core_Object { /* {{{ */
 	 *
 	 * @return array list of receipts
 	 */
-	function getReceiptStatus() { /* {{{ */
+	function getReceiptStatus($limit=1) { /* {{{ */
 		$db = $this->_document->_dms->getDB();
 
 		if (!is_numeric($limit)) return false;
@@ -2828,19 +2828,21 @@ class SeedDMS_Core_DocumentContent extends SeedDMS_Core_Object { /* {{{ */
 			$recs = $db->getResultArray($queryStr);
 			if (is_bool($recs) && !$recs)
 				return false;
-			$this->_reviewStatus = array();
+			$this->_receiptStatus = array();
 			if($recs) {
 				foreach($recs as $rec) {
 					$queryStr=
 						"SELECT `tblDocumentRecipients`.*, `tblDocumentReceiptLog`.`receiptLogID`, ".
+						"`tblDocumentReceiptLog`.`status`, ".
+						"`tblDocumentReceiptLog`.`comment`, ".
 						"`tblDocumentReceiptLog`.`date`, ".
 						"`tblDocumentReceiptLog`.`userID`, `tblUsers`.`fullName`, `tblGroups`.`name` AS `groupName` ".
-						"FROM `tblDocumentReviewers` ".
-						"LEFT JOIN `tblDocumentReceiptLog` USING (`reviewID`) ".
-						"LEFT JOIN `tblUsers` on `tblUsers`.`id` = `tblDocumentRecipients`.`required`".
-						"LEFT JOIN `tblGroups` on `tblGroups`.`id` = `tblDocumentRecipients`.`required`".
-						"WHERE `tblDocumentRecipients`.`reviewID` = '". $rec['reviewID'] ."' ".
-						"ORDER BY `tblDocumentReceiptLog`.`receiptLogID` DESC";
+						"FROM `tblDocumentRecipients` ".
+						"LEFT JOIN `tblDocumentReceiptLog` USING (`receiptID`) ".
+						"LEFT JOIN `tblUsers` on `tblUsers`.`id` = `tblDocumentRecipients`.`required` ".
+						"LEFT JOIN `tblGroups` on `tblGroups`.`id` = `tblDocumentRecipients`.`required` ".
+						"WHERE `tblDocumentRecipients`.`receiptID` = '". $rec['receiptID'] ."' ".
+						"ORDER BY `tblDocumentReceiptLog`.`receiptLogID` DESC LIMIT ".(int) $limit;
 
 					$res = $db->getResultArray($queryStr);
 					if (is_bool($res) && !$res) {
@@ -2904,7 +2906,7 @@ class SeedDMS_Core_DocumentContent extends SeedDMS_Core_Object { /* {{{ */
 			$reviewID = $db->getInsertID();
 		}
 		else {
-			$reviewID = isset($indstatus["reviewID"]) ? $ $indstatus["reviewID"] : NULL;
+			$reviewID = isset($indstatus["reviewID"]) ? $indstatus["reviewID"] : NULL;
 		}
 
 		$queryStr = "INSERT INTO `tblDocumentReviewLog` (`reviewID`, `status`, `comment`, `date`, `userID`) ".
@@ -3313,7 +3315,7 @@ class SeedDMS_Core_DocumentContent extends SeedDMS_Core_Object { /* {{{ */
 		}
 
 		// Check to see if the user has already been added to the receipt list.
-		$receiptStatus = $user->getReviewStatus($this->_document->getID(), $this->_version);
+		$receiptStatus = $user->getReceiptStatus($this->_document->getID(), $this->_version);
 		if (is_bool($receiptStatus) && !$receiptStatus) {
 			return -1;
 		}
@@ -3337,7 +3339,7 @@ class SeedDMS_Core_DocumentContent extends SeedDMS_Core_Object { /* {{{ */
 			$receiptID = $db->getInsertID();
 		}
 		else {
-			$receiptID = isset($indstatus["receiptID"]) ? $ $indstatus["receiptID"] : NULL;
+			$receiptID = isset($indstatus["receiptID"]) ? $indstatus["receiptID"] : NULL;
 		}
 
 		$queryStr = "INSERT INTO `tblDocumentReceiptLog` (`receiptID`, `status`, `comment`, `date`, `userID`) ".
@@ -3379,13 +3381,17 @@ class SeedDMS_Core_DocumentContent extends SeedDMS_Core_Object { /* {{{ */
 		if (is_bool($receiptStatus) && !$receiptStatus) {
 			return -1;
 		}
-		if (count($receiptStatus) > 0 && $receiptStatus[0]["status"]!=-2) {
-			// Group is already on the list of recipients; return an error.
-			return -3;
+		$status = false;
+		if (count($receiptStatus["status"]) > 0) {
+			$status = array_pop($receiptStatus["status"]);
+			if($status["status"]!=-2) {
+				// User is already on the list of recipients; return an error.
+				return -3;
+			}
 		}
 
 		// Add the group into the recipients database.
-		if (!isset($receiptStatus[0]["status"]) || (isset($receiptStatus[0]["status"]) && $receiptStatus[0]["status"]!=-2)) {
+		if (!$status || ($status && $status["status"]!=-2)) {
 			$queryStr = "INSERT INTO `tblDocumentRecipients` (`documentID`, `version`, `type`, `required`) ".
 				"VALUES ('". $this->_document->getID() ."', '". $this->_version ."', '1', '". $groupID ."')";
 			$res = $db->getResult($queryStr);
@@ -3395,7 +3401,7 @@ class SeedDMS_Core_DocumentContent extends SeedDMS_Core_Object { /* {{{ */
 			$receiptID = $db->getInsertID();
 		}
 		else {
-			$receiptID = isset($receiptStatus[0]["receiptID"])?$receiptStatus[0]["receiptID"]:NULL;
+			$receiptID = isset($status["receiptID"]) ? $status["receiptID"] : NULL;
 		}
 
 		$queryStr = "INSERT INTO `tblDocumentReceiptLog` (`receiptID`, `status`, `comment`, `date`, `userID`) ".
@@ -3404,9 +3410,6 @@ class SeedDMS_Core_DocumentContent extends SeedDMS_Core_Object { /* {{{ */
 		if (is_bool($res) && !$res) {
 			return -1;
 		}
-
-		// Add reviewer to event notification table.
-		//$this->_document->addNotify($groupID, false);
 
 		return 0;
 	} /* }}} */
@@ -3686,19 +3689,20 @@ class SeedDMS_Core_DocumentContent extends SeedDMS_Core_Object { /* {{{ */
 		if (is_bool($receiptStatus) && !$receiptStatus) {
 			return -1;
 		}
-		if (count($receiptStatus)==0) {
+		if (count($receiptStatus["status"])==0) {
 			// User is not assigned to receipt this document. No action required.
 			// Return an error.
 			return -3;
 		}
-		if ($receiptStatus[0]["status"]!=0) {
+		$status = array_pop($receiptStatus["status"]);
+		if ($tatus["status"]!=0) {
 			// User has already submitted a receipt or has already been deleted;
 			// return an error.
 			return -3;
 		}
 
 		$queryStr = "INSERT INTO `tblDocumentReceiptLog` (`receiptID`, `status`, `comment`, `date`, `userID`) ".
-			"VALUES ('". $receiptStatus[0]["receiptID"] ."', '-2', '', CURRENT_TIMESTAMP, '". $requestUser->getID() ."')";
+			"VALUES ('". $status["receiptID"] ."', '-2', '', CURRENT_TIMESTAMP, '". $requestUser->getID() ."')";
 		$res = $db->getResult($queryStr);
 		if (is_bool($res) && !$res) {
 			return -1;

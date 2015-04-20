@@ -885,7 +885,7 @@ class SeedDMS_Core_User {
 	 * Get a list of reviews
 	 * This function returns a list of all reviews seperated by individual
 	 * and group reviews. If the document id
-	 * is passed, then only this document will be checked for approvals. The
+	 * is passed, then only this document will be checked for reviews. The
 	 * same is true for the version of a document which limits the list
 	 * further.
 	 *
@@ -1073,6 +1073,89 @@ class SeedDMS_Core_User {
 			"ORDER BY `tblDocumentApproveLog`.`approveLogID` DESC";
 		$resArr = $db->getResultArray($queryStr);
 		if (is_bool($resArr) && $resArr == false)
+			return false;
+		if (count($resArr)>0) {
+			foreach ($resArr as $res) {
+				if(isset($status["grpstatus"][$res['documentID']])) {
+					if($status["grpstatus"][$res['documentID']]['date'] < $res['date']) {
+						$status["grpstatus"][$res['documentID']] = $res;
+					}
+				} else {
+					$status["grpstatus"][$res['documentID']] = $res;
+				}
+			}
+		}
+		return $status;
+	} /* }}} */
+
+	/**
+	 * Get a list of receipts
+	 * This function returns a list of all receipts seperated by individual
+	 * and group receipts. If the document id
+	 * is passed, then only this document will be checked for receipts. The
+	 * same is true for the version of a document which limits the list
+	 * further.
+	 *
+	 * For a detaile description of the result array see
+	 * {link SeedDMS_Core_User::getApprovalStatus} which does the same for
+	 * approvals.
+	 *
+	 * @param int $documentID optional document id for which to retrieve the
+	 *        receipt
+	 * @param int $version optional version of the document
+	 * @return array list of all receipts
+	 */
+	function getReceiptStatus($documentID=null, $version=null) { /* {{{ */
+		$db = $this->_dms->getDB();
+
+/*
+		if (!$db->createTemporaryTable("ttreviewid")) {
+			return false;
+		}
+*/
+		$status = array("indstatus"=>array(), "grpstatus"=>array());
+
+		// See if the user is assigned as an individual recipient.
+		$queryStr = "SELECT `tblDocumentRecipients`.*, `tblDocumentReceiptLog`.`status`, ".
+			"`tblDocumentReceiptLog`.`comment`, `tblDocumentReceiptLog`.`date`, ".
+			"`tblDocumentReceiptLog`.`userID` ".
+			"FROM `tblDocumentRecipients` ".
+			"LEFT JOIN `tblDocumentReceiptLog` USING (`recipientID`) ".
+			"WHERE `tblDocumentRecipients`.`type`='0' ".
+			($documentID==null ? "" : "AND `tblDocumentRecipients`.`documentID` = '". (int) $documentID ."' ").
+			($version==null ? "" : "AND `tblDocumentRecipients`.`version` = '". (int) $version ."' ").
+			"AND `tblDocumentRecipients`.`required`='". $this->_id ."' ".
+			"ORDER BY `tblDocumentReceiptLog`.`reviewLogID` DESC";
+		$resArr = $db->getResultArray($queryStr);
+		if (is_bool($resArr) && $resArr === false)
+			return false;
+		if (count($resArr)>0) {
+			foreach ($resArr as $res) {
+				if(isset($status["indstatus"][$res['documentID']])) {
+					if($status["indstatus"][$res['documentID']]['date'] < $res['date']) {
+						$status["indstatus"][$res['documentID']] = $res;
+					}
+				} else {
+					$status["indstatus"][$res['documentID']] = $res;
+				}
+			}
+		}
+
+		// See if the user is the member of a group that has been assigned to
+		// receipt the document version.
+		$queryStr = "SELECT `tblDocumentRecipients`.*, `tblDocumentReceiptLog`.`status`, ".
+			"`tblDocumentReceiptLog`.`comment`, `tblDocumentReceiptLog`.`date`, ".
+			"`tblDocumentReceiptLog`.`userID` ".
+			"FROM `tblDocumentRecipients` ".
+			"LEFT JOIN `tblDocumentReceiptLog` USING (`reviewID`) ".
+			"LEFT JOIN `tblGroupMembers` ON `tblGroupMembers`.`groupID` = `tblDocumentRecipients`.`required` ".
+			"WHERE `tblDocumentRecipients`.`type`='1' ".
+			($documentID==null ? "" : "AND `tblDocumentRecipients`.`documentID` = '". (int) $documentID ."' ").
+			($version==null ? "" : "AND `tblDocumentRecipients`.`version` = '". (int) $version ."' ").
+			"AND `tblGroupMembers`.`userID`='". $this->_id ."' ".
+			"ORDER BY `tblDocumentReceiptLog`.`reviewLogID` DESC";
+		$resArr = $db->getResultArray($queryStr);
+		if (is_bool($resArr) && $resArr === false)
 			return false;
 		if (count($resArr)>0) {
 			foreach ($resArr as $res) {

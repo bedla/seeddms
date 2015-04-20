@@ -2805,6 +2805,55 @@ class SeedDMS_Core_DocumentContent extends SeedDMS_Core_Object { /* {{{ */
 		return $this->_approvalStatus;
 	} /* }}} */
 
+	/**
+	 * Get the current receipt status of the document content
+	 * The receipt status is a list of receipts
+	 *
+	 * @return array list of receipts
+	 */
+	function getReceiptStatus() { /* {{{ */
+		$db = $this->_document->_dms->getDB();
+
+		if (!is_numeric($limit)) return false;
+
+		// Retrieve the current status of each assigned reviewer for the content
+		// represented by this object.
+		// FIXME: caching was turned off to make list of review log in ViewDocument
+		// possible
+		if (1 || !isset($this->_receiptStatus)) {
+			/* First get a list of all receipts for this document content */
+			$queryStr=
+				"SELECT receiptID FROM tblDocumentRecipients WHERE `version`='".$this->_version
+				."' AND `documentID` = '". $this->_document->getID() ."' ";
+			$recs = $db->getResultArray($queryStr);
+			if (is_bool($recs) && !$recs)
+				return false;
+			$this->_reviewStatus = array();
+			if($recs) {
+				foreach($recs as $rec) {
+					$queryStr=
+						"SELECT `tblDocumentRecipients`.*, `tblDocumentReceiptLog`.`receiptLogID`, ".
+						"`tblDocumentReceiptLog`.`date`, ".
+						"`tblDocumentReceiptLog`.`userID`, `tblUsers`.`fullName`, `tblGroups`.`name` AS `groupName` ".
+						"FROM `tblDocumentReviewers` ".
+						"LEFT JOIN `tblDocumentReceiptLog` USING (`reviewID`) ".
+						"LEFT JOIN `tblUsers` on `tblUsers`.`id` = `tblDocumentRecipients`.`required`".
+						"LEFT JOIN `tblGroups` on `tblGroups`.`id` = `tblDocumentRecipients`.`required`".
+						"WHERE `tblDocumentRecipients`.`reviewID` = '". $rec['reviewID'] ."' ".
+						"ORDER BY `tblDocumentReceiptLog`.`receiptLogID` DESC";
+
+					$res = $db->getResultArray($queryStr);
+					if (is_bool($res) && !$res) {
+						unset($this->_receiptStatus);
+						return false;
+					}
+					$this->_receiptStatus = array_merge($this->_receiptStatus, $res);
+				}
+			}
+		}
+		return $this->_receiptStatus;
+	} /* }}} */
+
 	function addIndReviewer($user, $requestUser, $listadmin=false) { /* {{{ */
 		$db = $this->_document->_dms->getDB();
 
@@ -3253,6 +3302,222 @@ class SeedDMS_Core_DocumentContent extends SeedDMS_Core_Object { /* {{{ */
 			return 0;
  } /* }}} */
 
+	function addIndRecipient($user, $requestUser, $listadmin=false) { /* {{{ */
+		$db = $this->_document->_dms->getDB();
+
+		$userID = $user->getID();
+
+		// Get the list of users and groups with read access to this document.
+		if($this->_document->getAccessMode($user) < M_READ) {
+			return -2;
+		}
+
+		// Check to see if the user has already been added to the receipt list.
+		$receiptStatus = $user->getReviewStatus($this->_document->getID(), $this->_version);
+		if (is_bool($receiptStatus) && !$receiptStatus) {
+			return -1;
+		}
+		$indstatus = false;
+		if (count($receiptStatus["indstatus"]) > 0) {
+			$indstatus = array_pop($receiptStatus["indstatus"]);
+			if($indstatus["status"]!=-2) {
+				// User is already on the list of recipients; return an error.
+				return -3;
+			}
+		}
+
+		// Add the user into the recipients database.
+		if (!$indstatus || ($indstatus && $indstatus["status"]!=-2)) {
+			$queryStr = "INSERT INTO `tblDocumentRecipients` (`documentID`, `version`, `type`, `required`) ".
+				"VALUES ('". $this->_document->getID() ."', '". $this->_version ."', '0', '". $userID ."')";
+			$res = $db->getResult($queryStr);
+			if (is_bool($res) && !$res) {
+				return -1;
+			}
+			$receiptID = $db->getInsertID();
+		}
+		else {
+			$receiptID = isset($indstatus["receiptID"]) ? $ $indstatus["receiptID"] : NULL;
+		}
+
+		$queryStr = "INSERT INTO `tblDocumentReceiptLog` (`receiptID`, `status`, `comment`, `date`, `userID`) ".
+			"VALUES ('". $receiptID ."', '0', '', CURRENT_TIMESTAMP, '". $requestUser->getID() ."')";
+		$res = $db->getResult($queryStr);
+		if (is_bool($res) && !$res) {
+			return -1;
+		}
+
+		// Add recipient to event notification table.
+		//$this->_document->addNotify($userID, true);
+
+		return 0;
+	} /* }}} */
+
+	function addGrpRecipient($group, $requestUser) { /* {{{ */
+		$db = $this->_document->_dms->getDB();
+
+		$groupID = $group->getID();
+
+		// Get the list of users and groups with read access to this document.
+		if (!isset($this->_readAccessList)) {
+			// TODO: error checking.
+			$this->_readAccessList = $this->_document->getReadAccessList();
+		}
+		$approved = false;
+		foreach ($this->_readAccessList["groups"] as $appGroup) {
+			if ($groupID == $appGroup->getID()) {
+				$approved = true;
+				break;
+			}
+		}
+		if (!$approved) {
+			return -2;
+		}
+
+		// Check to see if the group has already been added to the review list.
+		$receiptStatus = $group->getReceiptStatus($this->_document->getID(), $this->_version);
+		if (is_bool($receiptStatus) && !$receiptStatus) {
+			return -1;
+		}
+		if (count($receiptStatus) > 0 && $receiptStatus[0]["status"]!=-2) {
+			// Group is already on the list of recipients; return an error.
+			return -3;
+		}
+
+		// Add the group into the recipients database.
+		if (!isset($receiptStatus[0]["status"]) || (isset($receiptStatus[0]["status"]) && $receiptStatus[0]["status"]!=-2)) {
+			$queryStr = "INSERT INTO `tblDocumentRecipients` (`documentID`, `version`, `type`, `required`) ".
+				"VALUES ('". $this->_document->getID() ."', '". $this->_version ."', '1', '". $groupID ."')";
+			$res = $db->getResult($queryStr);
+			if (is_bool($res) && !$res) {
+				return -1;
+			}
+			$receiptID = $db->getInsertID();
+		}
+		else {
+			$receiptID = isset($receiptStatus[0]["receiptID"])?$receiptStatus[0]["receiptID"]:NULL;
+		}
+
+		$queryStr = "INSERT INTO `tblDocumentReceiptLog` (`receiptID`, `status`, `comment`, `date`, `userID`) ".
+			"VALUES ('". $receiptID ."', '0', '', CURRENT_TIMESTAMP, '". $requestUser->getID() ."')";
+		$res = $db->getResult($queryStr);
+		if (is_bool($res) && !$res) {
+			return -1;
+		}
+
+		// Add reviewer to event notification table.
+		//$this->_document->addNotify($groupID, false);
+
+		return 0;
+	} /* }}} */
+
+	/**
+	 * Add a receipt to the document content
+	 *
+	 * This method will add an entry to the table tblDocumentReceiptLog.
+	 * It will first check if the user is ment to receipt the document version.
+	 * It not the return value is -3.
+	 * Next it will check if the users has been removed from the list of
+	 * recipients. In that case -4 will be returned.
+	 * If the given receipt has been set by the user before, it cannot
+	 * be set again and 0 will be returned. Іf the review could be succesfully
+	 * added, the review log id will be returned.
+	 *
+	 * @see SeedDMS_Core_DocumentContent::setApprovalByInd()
+	 * @param object $user user doing the receipt
+	 * @param object $requestUser user asking for the receipt, this is mostly
+	 * @param integer $status the status of the receipt, possible values are
+	 *        0=unprocessed (maybe used to reset a status)
+	 *        1=received,
+	 *       -2=user is deleted (use {link
+	 *       SeedDMS_Core_DocumentContent::delIndRecipient} instead)
+	 * the user currently logged in.
+	 * @return integer new receipt log id
+	 */
+	function setReceiptByInd($user, $requestUser, $status, $comment) { /* {{{ */
+		$db = $this->_document->_dms->getDB();
+
+		// Check to see if the user can be removed from the review list.
+		$receiptStatus = $user->getReceiptStatus($this->_document->getID(), $this->_version);
+		if (is_bool($receiptStatus) && !$receiptStatus) {
+			return -1;
+		}
+		if (count($receiptStatus["indstatus"])==0) {
+			// User is not assigned to receipt this document. No action required.
+			// Return an error.
+			return -3;
+		}
+		$indstatus = array_pop($receiptStatus["indstatus"]);
+		if ($indstatus["status"]==-2) {
+			// User has been deleted from recipients
+			return -4;
+		}
+		// Check if the status is really different from the current status
+		if ($indstatus["status"] == $status)
+			return 0;
+
+		$queryStr = "INSERT INTO `tblDocumentReceiptLog` (`receiptID`, `status`,
+  	  `comment`, `date`, `userID`) ".
+			"VALUES ('". $indstatus["receiptID"] ."', '".
+			(int) $status ."', ".$db->qstr($comment).", CURRENT_TIMESTAMP, '".
+			$requestUser->getID() ."')";
+		$res=$db->getResult($queryStr);
+		if (is_bool($res) && !$res)
+			return -1;
+		else {
+			$receiptLogID = $db->getInsertID();
+			return $receiptLogID;
+		}
+ } /* }}} */
+
+	/**
+	 * Add a receipt to the document content
+	 *
+	 * This method is similar to
+	 * {@see SeedDMS_Core_DocumentContent::setReceiptByInd()} but adds a receipt
+	 * for a group instead of a user.
+	 *
+	 * @param object $group group doing the receipt
+	 * @param object $requestUser user asking for the receipt, this is mostly
+	 * the user currently logged in.
+	 * @return integer new receipt log id
+	 */
+	function setReceiptByGrp($group, $requestUser, $status, $comment) { /* {{{ */
+		$db = $this->_document->_dms->getDB();
+
+		// Check to see if the user can be removed from the recipient list.
+		$receiptStatus = $group->getReceiptStatus($this->_document->getID(), $this->_version);
+		if (is_bool($receiptStatus) && !$receiptStatus) {
+			return -1;
+		}
+		if (count($receiptStatus)==0) {
+			// User is not assigned to receipt this document. No action required.
+			// Return an error.
+			return -3;
+		}
+		if ($receiptStatus[0]["status"]==-2) {
+			// Group has been deleted from recipients
+			return -4;
+		}
+
+		// Check if the status is really different from the current status
+		if ($receiptStatus[0]["status"] == $status)
+			return 0;
+
+		$queryStr = "INSERT INTO `tblDocumentReceiptLog` (`recipientsID`, `status`,
+  	  `comment`, `date`, `userID`) ".
+			"VALUES ('". $receiptStatus[0]["recipientsID"] ."', '".
+			(int) $status ."', ".$db->qstr($comment).", CURRENT_TIMESTAMP, '".
+			$requestUser->getID() ."')";
+		$res=$db->getResult($queryStr);
+		if (is_bool($res) && !$res)
+			return -1;
+		else {
+			$receiptLogID = $db->getInsertID();
+			return $receiptLogID;
+		}
+ } /* }}} */
+
 	function delIndReviewer($user, $requestUser) { /* {{{ */
 		$db = $this->_document->_dms->getDB();
 
@@ -3371,6 +3636,69 @@ class SeedDMS_Core_DocumentContent extends SeedDMS_Core_Object { /* {{{ */
 
 		$queryStr = "INSERT INTO `tblDocumentApproveLog` (`approveID`, `status`, `comment`, `date`, `userID`) ".
 			"VALUES ('". $approvalStatus[0]["approveID"] ."', '-2', '', CURRENT_TIMESTAMP, '". $requestUser->getID() ."')";
+		$res = $db->getResult($queryStr);
+		if (is_bool($res) && !$res) {
+			return -1;
+		}
+
+		return 0;
+	} /* }}} */
+
+	function delIndRecipient($user, $requestUser) { /* {{{ */
+		$db = $this->_document->_dms->getDB();
+
+		$userID = $user->getID();
+
+		// Check to see if the user can be removed from the recipient list.
+		$receiptStatus = $user->getReceiptStatus($this->_document->getID(), $this->_version);
+		if (is_bool($receiptStatus) && !$receiptStatus) {
+			return -1;
+		}
+		if (count($receiptStatus["indstatus"])==0) {
+			// User is not assigned to receipt this document. No action required.
+			// Return an error.
+			return -3;
+		}
+		$indstatus = array_pop($receiptStatus["indstatus"]);
+		if ($indstatus["status"]!=0) {
+			// User has already submitted a receipt or has already been deleted;
+			// return an error.
+			return -3;
+		}
+
+		$queryStr = "INSERT INTO `tblDocumentReceiptLog` (`receiptID`, `status`, `comment`, `date`, `userID`) ".
+			"VALUES ('". $indstatus["receiptID"] ."', '-2', '', CURRENT_TIMESTAMP, '". $requestUser->getID() ."')";
+		$res = $db->getResult($queryStr);
+		if (is_bool($res) && !$res) {
+			return -1;
+		}
+
+		return 0;
+	} /* }}} */
+
+	function delGrpRecipient($group, $requestUser) { /* {{{ */
+		$db = $this->_document->_dms->getDB();
+
+		$groupID = $group->getID();
+
+		// Check to see if the user can be removed from the recipient list.
+		$receiptStatus = $group->getReceiptStatus($this->_document->getID(), $this->_version);
+		if (is_bool($receiptStatus) && !$receiptStatus) {
+			return -1;
+		}
+		if (count($receiptStatus)==0) {
+			// User is not assigned to receipt this document. No action required.
+			// Return an error.
+			return -3;
+		}
+		if ($receiptStatus[0]["status"]!=0) {
+			// User has already submitted a receipt or has already been deleted;
+			// return an error.
+			return -3;
+		}
+
+		$queryStr = "INSERT INTO `tblDocumentReceiptLog` (`receiptID`, `status`, `comment`, `date`, `userID`) ".
+			"VALUES ('". $receiptStatus[0]["receiptID"] ."', '-2', '', CURRENT_TIMESTAMP, '". $requestUser->getID() ."')";
 		$res = $db->getResult($queryStr);
 		if (is_bool($res) && !$res) {
 			return -1;

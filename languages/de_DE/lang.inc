@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1993), dgrutsch (18)
+//    Translators: Admin (1994), dgrutsch (18)
 
 $text = array(
 'accept' => 'Übernehmen',
@@ -829,10 +829,14 @@ URL: [url]',
 'select_groups' => 'Klicken zur Auswahl einer Gruppe',
 'select_grp_approvers' => 'Klicken zur Auswahl einer Freigabegruppe',
 'select_grp_notification' => 'Klicken zur Auswahl einer Beobachtergruppe',
+'select_grp_recipients' => '',
 'select_grp_reviewers' => 'Klicken zur Auswahl einer Prüfgruppe',
+'select_grp_revisers' => '',
 'select_ind_approvers' => 'Klicken zur Auswahl eines Freigebers',
 'select_ind_notification' => 'Klicken zur Auswahl eines Beobachters',
+'select_ind_recipients' => 'Click to select individual recipients',
 'select_ind_reviewers' => 'Klicken zur Auswahl eines Prüfers',
+'select_ind_revisers' => '',
 'select_one' => 'Bitte wählen',
 'select_users' => 'Klicken zur Auswahl eines Benutzers',
 'select_workflow' => 'Workflow auswählen',

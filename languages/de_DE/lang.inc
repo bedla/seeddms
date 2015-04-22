@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1991), dgrutsch (18)
+//    Translators: Admin (1993), dgrutsch (18)
 
 $text = array(
 'accept' => 'Übernehmen',
@@ -1198,7 +1198,9 @@ URL: [url]',
 'update_fulltext_index' => 'Aktualisiere Volltextindex',
 'update_info' => 'Informationen zur Aktualisierung',
 'update_locked_msg' => 'Dieses Dokument wurde gesperrt<p>Die Sperrung wurde von <a href="mailto:[email]">[username]</a> eingerichtet.<br>',
+'update_recipients' => 'Liste der Empfänger aktualisieren',
 'update_reviewers' => 'Liste der Prüfer aktualisieren',
+'update_reviser' => 'Liste der Wiederholungsprüfer ändern',
 'uploaded_by' => 'Hochgeladen durch',
 'uploading_failed' => 'Das Hochladen einer Datei ist fehlgeschlagen. Bitte überprüfen Sie die maximale Dateigröße für Uploads.',
 'uploading_maxsize' => 'Die Datei überschreitet die maximale Dateigröße für Uploads.',

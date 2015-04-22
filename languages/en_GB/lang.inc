@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1123), dgrutsch (3), netixw (14)
+//    Translators: Admin (1124), dgrutsch (3), netixw (14)
 
 $text = array(
 'accept' => 'Accept',
@@ -1205,7 +1205,9 @@ URL: [url]',
 'update_fulltext_index' => 'Update fulltext index',
 'update_info' => 'Update Information',
 'update_locked_msg' => 'This document is locked.',
+'update_recipients' => '',
 'update_reviewers' => 'Update List of Reviewers',
+'update_reviser' => 'Update list of resubmitters',
 'uploaded_by' => 'Uploaded by',
 'uploading_failed' => 'Uploading one of your files failed. Please check your maximum upload file size.',
 'uploading_maxsize' => 'The uploaded file exceeds the maximum upload file size.',

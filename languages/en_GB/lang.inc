@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1124), dgrutsch (3), netixw (14)
+//    Translators: Admin (1127), dgrutsch (3), netixw (14)
 
 $text = array(
 'accept' => 'Accept',
@@ -836,10 +836,14 @@ URL: [url]',
 'select_groups' => 'Click to select groups',
 'select_grp_approvers' => 'Click to select group approver',
 'select_grp_notification' => 'Click to select group notification',
+'select_grp_recipients' => 'Click to select group of recipients',
 'select_grp_reviewers' => 'Click to select group reviewer',
+'select_grp_revisers' => 'Click to select group of resubmitters',
 'select_ind_approvers' => 'Click to select individual approver',
 'select_ind_notification' => 'Click to select individual notification',
+'select_ind_recipients' => '',
 'select_ind_reviewers' => 'Click to select individual reviewer',
+'select_ind_revisers' => 'Click to select individual resubmitters',
 'select_one' => 'Select one',
 'select_users' => 'Click to select users',
 'select_workflow' => 'Select workflow',

@@ -770,8 +770,9 @@ class SeedDMS_Core_User {
 				return false;
 
 			$this->_groups = array();
+			$classname = $this->_dms->getClassname('group');
 			foreach ($resArr as $row) {
-				$group = new SeedDMS_Core_Group($row["id"], $row["name"], $row["comment"]);
+				$group = new $classname($row["id"], $row["name"], $row["comment"]);
 				$group->setDMS($this->_dms);
 				array_push($this->_groups, $group);
 			}
@@ -866,8 +867,9 @@ class SeedDMS_Core_User {
 			return false;
 
 		$documents = array();
+		$classname = $this->_dms->getClassname('document');
 		foreach ($resArr as $row) {
-			$document = new SeedDMS_Core_Document($row["id"], $row["name"], $row["comment"], $row["date"], $row["expires"], $row["owner"], $row["folder"], $row["inheritAccess"], $row["defaultAccess"], $row["lockUser"], $row["keywords"], $row["sequence"]);
+			$document = new $classname($row["id"], $row["name"], $row["comment"], $row["date"], $row["expires"], $row["owner"], $row["folder"], $row["inheritAccess"], $row["defaultAccess"], $row["lockUser"], $row["keywords"], $row["sequence"]);
 			$document->setDMS($this->_dms);
 			$documents[] = $document;
 		}
@@ -876,8 +878,6 @@ class SeedDMS_Core_User {
 
 	/**
 	 * Returns all documents locked by a given user
-	 * FIXME: Not full implemented. Do not use, because it still requires the
-	 * temporary tables!
 	 *
 	 * @param object $user
 	 * @return array list of documents
@@ -895,8 +895,37 @@ class SeedDMS_Core_User {
 			return false;
 
 		$documents = array();
+		$classname = $this->_dms->getClassname('document');
 		foreach ($resArr as $row) {
-			$document = new SeedDMS_Core_Document($row["id"], $row["name"], $row["comment"], $row["date"], $row["expires"], $row["owner"], $row["folder"], $row["inheritAccess"], $row["defaultAccess"], $row["lockUser"], $row["keywords"], $row["sequence"]);
+			$document = new $classname($row["id"], $row["name"], $row["comment"], $row["date"], $row["expires"], $row["owner"], $row["folder"], $row["inheritAccess"], $row["defaultAccess"], $row["lockUser"], $row["keywords"], $row["sequence"]);
+			$document->setDMS($this->_dms);
+			$documents[] = $document;
+		}
+		return $documents;
+	} /* }}} */
+
+	/**
+	 * Returns all documents check out by a given user
+	 *
+	 * @param object $user
+	 * @return array list of documents
+	 */
+	function getDocumentsCheckOut() { /* {{{ */
+		$db = $this->_dms->getDB();
+
+		$queryStr = "SELECT `tblDocuments`.* ".
+			"FROM `tblDocumentCheckOuts` LEFT JOIN `tblDocuments` ON `tblDocuments`.`id` = `tblDocumentCheckOuts`.`document` ".
+			"WHERE `tblDocumentCheckOuts`.`userID` = '".$this->_id."' ".
+			"ORDER BY `id` ASC";
+
+		$resArr = $db->getResultArray($queryStr);
+		if (is_bool($resArr) && !$resArr)
+			return false;
+
+		$documents = array();
+		$classname = $this->_dms->getClassname('document');
+		foreach ($resArr as $row) {
+			$document = new $classname($row["id"], $row["name"], $row["comment"], $row["date"], $row["expires"], $row["owner"], $row["folder"], $row["inheritAccess"], $row["defaultAccess"], $row["lockUser"], $row["keywords"], $row["sequence"]);
 			$document->setDMS($this->_dms);
 			$documents[] = $document;
 		}

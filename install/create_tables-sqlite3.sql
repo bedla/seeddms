@@ -386,6 +386,7 @@ CREATE TABLE `tblDocumentRevisers` (
   `version` INTEGER unsigned NOT NULL default '0',
   `type` INTEGER NOT NULL default '0',
   `required` INTEGER NOT NULL default '0',
+  `startdate` TEXT default NULL,
   UNIQUE (`documentID`,`version`,`type`,`required`)
 ) ;
 

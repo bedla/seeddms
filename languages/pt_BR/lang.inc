@@ -104,6 +104,8 @@ URL: [url]',
 'approval_summary' => 'Approval Summary',
 'approval_update_failed' => 'Error updating approval status. Update failed.',
 'approvers' => 'Approvers',
+'approver_already_assigned' => '',
+'approver_already_removed' => '',
 'april' => 'April',
 'archive_creation' => 'Archive creation',
 'archive_creation_warning' => 'With this operation you can create achive containing the files of entire DMS folders. After the creation the archive will be saved in the data folder of your server.<br>WARNING: an archive created as human readable will be unusable as server backup.',
@@ -182,6 +184,8 @@ URL: [url]',
 'change_assignments' => 'Change Assignments',
 'change_password' => 'Modificar senha',
 'change_password_message' => 'Sua senha foi modificada.',
+'change_recipients' => '',
+'change_revisers' => '',
 'change_status' => 'Mudar status',
 'charts' => 'Gráficos',
 'chart_docsaccumulated_title' => 'Número de documentos',
@@ -694,7 +698,9 @@ Documento: [document]
 Usuário: [username]
 URL: [url]',
 'removed_file_email_subject' => '[sitename]: [document] - Anexo removido',
+'removed_recipient' => '',
 'removed_reviewer' => 'has been removed from the list of reviewers.',
+'removed_reviser' => '',
 'removed_workflow_email_body' => 'Removido do fluxo de trabalho de documentos version
 Document: [name]
 Versão: [version]
@@ -743,6 +749,8 @@ URL: [url]',
 'review_submit_email_subject' => '[sitename]: [name] - Revisão submetida',
 'review_summary' => 'Review Summary',
 'review_update_failed' => 'Error updating review status. Update failed.',
+'reviser_already_assigned' => '',
+'reviser_already_removed' => '',
 'rewind_workflow' => 'Fluxo de trabalho revisto',
 'rewind_workflow_email_body' => 'Fluxo de processo foi revisto
 Documento: [name]

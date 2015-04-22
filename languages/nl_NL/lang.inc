@@ -97,6 +97,8 @@ URL: [url]',
 'approval_summary' => 'Goedkeuring Samenvatting',
 'approval_update_failed' => 'Fout bij bijwerken Goedkeuring status. Bijwerken mislukt.',
 'approvers' => 'Autoriseerders',
+'approver_already_assigned' => '',
+'approver_already_removed' => '',
 'april' => 'april',
 'archive_creation' => 'Archief aanmaken',
 'archive_creation_warning' => 'Met deze handeling maakt U een Archief aan van alle bestanden in het DMS. Na het aanmaken van het Archief, wordt deze opgeslagen in de data-map van uw server.<br>Waarschuwing: een leesbaar Archief kan niet worden gebruikt voor server back-up doeleinde.',
@@ -175,6 +177,8 @@ URL: [url]',
 'change_assignments' => 'Wijzig taken/toewijzingen',
 'change_password' => 'Wijzig wachtwoord',
 'change_password_message' => 'Wachtwoord is gewijzigd.',
+'change_recipients' => '',
+'change_revisers' => '',
 'change_status' => 'Wijzig Status',
 'charts' => 'Grafieken',
 'chart_docsaccumulated_title' => 'Aantal documenten',
@@ -689,7 +693,9 @@ Document: [document]
 Gebruiker: [username]
 URL: [url]',
 'removed_file_email_subject' => '[sitename]: [document] - Bijlage verwijderd',
+'removed_recipient' => '',
 'removed_reviewer' => 'is verwijderd uit de lijst van [Controleurs].',
+'removed_reviser' => '',
 'removed_workflow_email_body' => 'Workflow verwijderd van document versiedocument: [name]
 Versie: [version]
 Workflow: [workflow]
@@ -737,6 +743,8 @@ URL: [url',
 'review_submit_email_subject' => '[sitename]: [name] - Beoordeling toegevoegd',
 'review_summary' => '[Controle] Samenvatting',
 'review_update_failed' => 'Foutmelding: fout bij bijwerken [Controle] Status. Bijwerken mislukt.',
+'reviser_already_assigned' => '',
+'reviser_already_removed' => '',
 'rewind_workflow' => 'Terugzetten workflow',
 'rewind_workflow_email_body' => 'Workflow is teruggezet
 Document: [name]

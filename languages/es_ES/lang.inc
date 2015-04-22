@@ -104,6 +104,8 @@ URL: [url]',
 'approval_summary' => 'Resumen de aprobación',
 'approval_update_failed' => 'Error actualizando el estado de aprobación. Actualización fallida.',
 'approvers' => 'Aprobadores',
+'approver_already_assigned' => '',
+'approver_already_removed' => '',
 'april' => 'Abril',
 'archive_creation' => 'Creación de archivo',
 'archive_creation_warning' => 'Con esta operación usted puede crear un archivo que contenga los ficheros de las carpetas del DMS completo. Después de crearlo el archivo se guardará en la carpeta de datos de su servidor.<br>CUIDADO: un fichero creado como legible por humanos no podrá usarse como copia de seguridad del servidor.',
@@ -182,6 +184,8 @@ URL: [url]',
 'change_assignments' => 'cambiar asignaciones',
 'change_password' => 'cambiar contraseña',
 'change_password_message' => 'Su contraseña se ha modificado.',
+'change_recipients' => '',
+'change_revisers' => '',
 'change_status' => 'cambiar estado',
 'charts' => 'Gráficos',
 'chart_docsaccumulated_title' => 'Cantidad de documentos',
@@ -696,7 +700,9 @@ Documento: [document]
 Usuario: [username]
 URL: [url]',
 'removed_file_email_subject' => '[sitename]: [document] - Eliminar adjunto',
+'removed_recipient' => '',
 'removed_reviewer' => 'Ha sido eliminado de la lista de revisores.',
+'removed_reviser' => '',
 'removed_workflow_email_body' => 'Eliminar flujo de trabajo de la versión del documento
 Documento: [name]
 Versión: [version]
@@ -746,6 +752,8 @@ URL: [url]',
 'review_submit_email_subject' => '[sitename]: [name] - Revisión enviada',
 'review_summary' => 'Resumen de revisión',
 'review_update_failed' => 'Error actualizando el estado de la revisión. La actualización ha fallado.',
+'reviser_already_assigned' => '',
+'reviser_already_removed' => '',
 'rewind_workflow' => 'Retroceso del flujo de trabajo',
 'rewind_workflow_email_body' => 'Flujo de trabajo fue retrocedido
 Documento: [name]

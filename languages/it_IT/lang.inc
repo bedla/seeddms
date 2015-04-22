@@ -109,6 +109,8 @@ URL: [url]',
 'approval_summary' => 'Dettaglio approvazioni',
 'approval_update_failed' => 'Errore nel modificare lo stato di approvazione. Aggiornamento fallito.',
 'approvers' => 'Approvatori',
+'approver_already_assigned' => '',
+'approver_already_removed' => '',
 'april' => 'Aprile',
 'archive_creation' => 'Creazione archivi',
 'archive_creation_warning' => 'Con questa operazione è possibile creare archivi contenenti i file di intere cartelle del DMS. Dopo la creazione l\'archivio viene salvato nella cartella dati del server.<br>Attenzione: un archivio creato per uso esterno non è utilizzabile come backup del server.',
@@ -187,6 +189,8 @@ URL: [url]',
 'change_assignments' => 'Modifica le Assegnazioni',
 'change_password' => 'Cambia la password',
 'change_password_message' => 'La password è stata cambiata',
+'change_recipients' => '',
+'change_revisers' => '',
 'change_status' => 'Modifica lo Stato',
 'charts' => 'Grafici',
 'chart_docsaccumulated_title' => 'Numero di documenti',
@@ -701,7 +705,9 @@ Documento: [document]
 Utente: [username]
 URL: [url]',
 'removed_file_email_subject' => '[sitename]: [document] - Allegato rimosso',
+'removed_recipient' => '',
 'removed_reviewer' => 'é stato rimosso dalla lista dei revisori.',
+'removed_reviser' => '',
 'removed_workflow_email_body' => 'Flusso di lavoro rimosso dalla versione del documento
 Documento: [name]
 Versione: [version]
@@ -768,6 +774,8 @@ URL: [url]',
 'review_submit_email_subject' => '[sitename]: [name] - Sottoposta revisione',
 'review_summary' => 'Dettaglio revisioni',
 'review_update_failed' => 'Errore nella variazione dello stato di revisione. Aggiornamento fallito.',
+'reviser_already_assigned' => '',
+'reviser_already_removed' => '',
 'rewind_workflow' => 'Inverti il flusso di lavoro',
 'rewind_workflow_email_body' => 'Il flusso di lavoro è stato invertito
 Document: [name]

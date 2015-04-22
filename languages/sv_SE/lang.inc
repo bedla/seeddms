@@ -97,6 +97,8 @@ URL: [url]',
 'approval_summary' => 'Sammanfattning av godkännande',
 'approval_update_failed' => 'Fel vid uppdatering av godkännande-status. Status uppdaterades inte.',
 'approvers' => 'Godkänna',
+'approver_already_assigned' => '',
+'approver_already_removed' => '',
 'april' => 'april',
 'archive_creation' => 'Skapa arkiv',
 'archive_creation_warning' => 'Med denna funktion kan du skapa ett arkiv som innehåller filer från hela DMS-kataloger. När arkivet har skapats, kommer det att sparas i data-mappen på din server.<br>OBS! Skapas ett arkiv som är läsbart för användare, kan det inte användas för att återställa systemet.',
@@ -175,6 +177,8 @@ URL: [url]',
 'change_assignments' => 'Ändra uppdrag',
 'change_password' => 'Ändra lösenord',
 'change_password_message' => 'Ditt lösenord har ändrats.',
+'change_recipients' => '',
+'change_revisers' => '',
 'change_status' => 'Ändra status',
 'charts' => 'Diagram',
 'chart_docsaccumulated_title' => 'Antal dokument',
@@ -681,7 +685,9 @@ Dokument: [document]
 Användare: [username]
 URL: [url]',
 'removed_file_email_subject' => '[sitename]: [document] - Borttagen bilaga',
+'removed_recipient' => '',
 'removed_reviewer' => 'har tagits bort från listan med personer som ska granska dokumentet.',
+'removed_reviser' => '',
 'removed_workflow_email_body' => 'Arbetsflöde borttagen från dokument version
 Dokument: [name]
 Version: [version]
@@ -731,6 +737,8 @@ URL: [url]',
 'review_submit_email_subject' => '[sitename]: [name] - Skickat granskning',
 'review_summary' => 'Sammanfattning av granskningen',
 'review_update_failed' => 'Fel vid uppdatering av granskningsstatus. Kunde inte uppdatera.',
+'reviser_already_assigned' => '',
+'reviser_already_removed' => '',
 'rewind_workflow' => 'Återställ arbetsflödet',
 'rewind_workflow_email_body' => 'Återställ arbetsflödet
 Dokument: [name]

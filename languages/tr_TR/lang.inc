@@ -103,6 +103,8 @@ URL: [url]',
 'approval_summary' => 'Onay Özeti',
 'approval_update_failed' => 'Onay durumu güncellenirken hata oluştu. Güncelleme başarısız.',
 'approvers' => 'Onaylayan',
+'approver_already_assigned' => '',
+'approver_already_removed' => '',
 'april' => 'Nisan',
 'archive_creation' => 'Arşiv oluşturma',
 'archive_creation_warning' => 'Bu işlemle tüm DYS içeriğindeki dosyaların arşivini oluşturabilirsiniz. Arşiv oluşturulduktan sonra sunucudaki data klasörüne kaydedilecektir.<br>DİKKAT: Okunabilir olarak oluşturulan arşiv, sunucu yedeği olarak kullanılamaz.',
@@ -181,6 +183,8 @@ URL: [url]',
 'change_assignments' => 'Atamaları Değiştir',
 'change_password' => 'Parola degiştir',
 'change_password_message' => 'Parolanız değişti.',
+'change_recipients' => '',
+'change_revisers' => '',
 'change_status' => 'Değişme Durumu',
 'charts' => 'Grafikler',
 'chart_docsaccumulated_title' => 'Doküman sayısı',
@@ -697,7 +701,9 @@ Doküman: [document]
 Kullanıcı: [username]
 URL: [url]',
 'removed_file_email_subject' => '[sitename]: [document] - Ek silindi',
+'removed_recipient' => '',
 'removed_reviewer' => 'kontrol edenler listesinden çıkarıldı',
+'removed_reviser' => '',
 'removed_workflow_email_body' => 'Doküman versiyonundan iş akışı silindi
 Doküman: [name]
 Versiyon: [version]
@@ -747,6 +753,8 @@ URL: [url]',
 'review_submit_email_subject' => '[sitename]: [name] - Kontrol gönderildi',
 'review_summary' => 'Kontrol Özeti',
 'review_update_failed' => 'Kontrol güncelleme durumu hatalı. Güncelleme başarısız.',
+'reviser_already_assigned' => '',
+'reviser_already_removed' => '',
 'rewind_workflow' => 'İş akışını geri al',
 'rewind_workflow_email_body' => 'İş akışı geri alındı
 Doküman: [name]

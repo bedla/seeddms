@@ -33,7 +33,7 @@ if(!trim($settings->_encryptionKey))
 	$settings->_encryptionKey = md5(uniqid());
 
 $tmp = explode('.', basename($_SERVER['SCRIPT_FILENAME']));
-$view = UI::factory($theme, $tmp[1], array('dms'=>$dms, 'user'=>$user, 'settings'=>$settings, 'currenttab'=>(isset($_GET['currenttab']) ? $_GET['currenttab'] : '')));
+$view = UI::factory($theme, $tmp[1], array('dms'=>$dms, 'user'=>$user, 'settings'=>$settings, 'currenttab'=>(isset($_REQUEST['currenttab']) ? $_REQUEST['currenttab'] : '')));
 if($view) {
 	$view->show();
 	exit;

@@ -310,6 +310,28 @@ class SeedDMS_Core_Group {
 			}
 		}
 
+		$receiptStatus = $this->getReceiptStatus();
+		foreach ($receiptStatus as $r) {
+			$queryStr = "INSERT INTO `tblDocumentReceiptLog` (`receiptID`, `status`, `comment`, `date`, `userID`) ".
+				"VALUES ('". $r["receiptID"] ."', '-2', 'Recipients group removed from process', CURRENT_TIMESTAMP, '". $user->getID() ."')";
+			$res=$db->getResult($queryStr);
+			if(!$res) {
+				$db->rollbackTransaction();
+				return false;
+			}
+		}
+
+		$revisionStatus = $this->getRevisionStatus();
+		foreach ($revisionStatus as $r) {
+			$queryStr = "INSERT INTO `tblDocumentRevisionLog` (`revisionID`, `status`, `comment`, `date`, `userID`) ".
+				"VALUES ('". $r["revisionID"] ."', '-2', 'Revisers group removed from process', CURRENT_TIMESTAMP, '". $user->getID() ."')";
+			$res=$db->getResult($queryStr);
+			if(!$res) {
+				$db->rollbackTransaction();
+				return false;
+			}
+		}
+
 		$db->commitTransaction();
 
 		return true;
@@ -393,6 +415,38 @@ class SeedDMS_Core_Group {
 			($documentID==null ? "" : "AND `tblDocumentRecipients`.`documentID` = '". (int) $documentID ."' ").
 			($version==null ? "" : "AND `tblDocumentRecipients`.`version` = '". (int) $version ."' ").
 			"AND `tblDocumentRecipients`.`required`='". $this->_id ."' ";
+		$resArr = $db->getResultArray($queryStr);
+		if (is_bool($resArr) && $resArr == false)
+			return false;
+		if (count($resArr)>0) {
+			foreach ($resArr as $res) {
+				if(isset($status["status"][$res['documentID']])) {
+					if($status["status"][$res['documentID']]['date'] < $res['date']) {
+						$status["status"][$res['documentID']] = $res;
+					}
+				} else {
+					$status["status"][$res['documentID']] = $res;
+				}
+			}
+		}
+		return $status;
+	} /* }}} */
+
+	function getRevisionStatus($documentID=null, $version=null) { /* {{{ */
+		$db = $this->_dms->getDB();
+
+		$status = array();
+
+		// See if the group is assigned as a reviser.
+		$queryStr = "SELECT `tblDocumentRevisers`.*, `tblDocumentRevisionLog`.`status`, ".
+			"`tblDocumentRevisionLog`.`comment`, `tblDocumentRevisionLog`.`date`, ".
+			"`tblDocumentRevisionLog`.`userID` ".
+			"FROM `tblDocumentRevisers` ".
+			"LEFT JOIN `tblDocumentRevisionLog` USING (`revisionID`) ".
+			"WHERE `tblDocumentRevisers`.`type`='1' ".
+			($documentID==null ? "" : "AND `tblDocumentRevisers`.`documentID` = '". (int) $documentID ."' ").
+			($version==null ? "" : "AND `tblDocumentRevisers`.`version` = '". (int) $version ."' ").
+			"AND `tblDocumentRevisers`.`required`='". $this->_id ."' ";
 		$resArr = $db->getResultArray($queryStr);
 		if (is_bool($resArr) && $resArr == false)
 			return false;

@@ -686,6 +686,28 @@ class SeedDMS_Core_User {
 			}
 		}
 
+		$receiptStatus = $this->getReceiptStatus();
+		foreach ($receiptStatus["indstatus"] as $ri) {
+			$queryStr = "INSERT INTO `tblDocumentReceiptLog` (`receiptID`, `status`, `comment`, `date`, `userID`) ".
+				"VALUES ('". $ri["receiptID"] ."', '-2', 'Recipient removed from process', CURRENT_TIMESTAMP, '". $user->getID() ."')";
+			$res=$db->getResult($queryStr);
+			if(!$res) {
+				$db->rollbackTransaction();
+				return false;
+			}
+		}
+
+		$revisionStatus = $this->getRevisionStatus();
+		foreach ($revisionStatus["indstatus"] as $ri) {
+			$queryStr = "INSERT INTO `tblDocumentRevisionLog` (`revisionID`, `status`, `comment`, `date`, `userID`) ".
+				"VALUES ('". $ri["revisionID"] ."', '-2', 'Reviser removed from process', CURRENT_TIMESTAMP, '". $user->getID() ."')";
+			$res=$db->getResult($queryStr);
+			if(!$res) {
+				$db->rollbackTransaction();
+				return false;
+			}
+		}
+
 		$db->commitTransaction();
 		return true;
 	} /* }}} */
@@ -901,11 +923,6 @@ class SeedDMS_Core_User {
 	function getReviewStatus($documentID=null, $version=null) { /* {{{ */
 		$db = $this->_dms->getDB();
 
-/*
-		if (!$db->createTemporaryTable("ttreviewid")) {
-			return false;
-		}
-*/
 		$status = array("indstatus"=>array(), "grpstatus"=>array());
 
 		// See if the user is assigned as an individual reviewer.
@@ -995,27 +1012,7 @@ class SeedDMS_Core_User {
 	function getApprovalStatus($documentID=null, $version=null) { /* {{{ */
 		$db = $this->_dms->getDB();
 
-/*
-		if (!$db->createTemporaryTable("ttapproveid")) {
-			return false;
-		}
-*/
 		$status = array("indstatus"=>array(), "grpstatus"=>array());
-
-		// See if the user is assigned as an individual approver.
-		/*
-		$queryStr = "SELECT `tblDocumentApprovers`.*, `tblDocumentApproveLog`.`status`, ".
-			"`tblDocumentApproveLog`.`comment`, `tblDocumentApproveLog`.`date`, ".
-			"`tblDocumentApproveLog`.`userID` ".
-			"FROM `tblDocumentApprovers` ".
-			"LEFT JOIN `tblDocumentApproveLog` USING (`approveID`) ".
-			"LEFT JOIN `ttapproveid` on `ttapproveid`.`maxLogID` = `tblDocumentApproveLog`.`approveLogID` ".
-			"WHERE `ttapproveid`.`maxLogID`=`tblDocumentApproveLog`.`approveLogID` ".
-			($documentID==null ? "" : "AND `tblDocumentApprovers`.`documentID` = '". $documentID ."' ").
-			($version==null ? "" : "AND `tblDocumentApprovers`.`version` = '". $version ."' ").
-			"AND `tblDocumentApprovers`.`type`='0' ".
-			"AND `tblDocumentApprovers`.`required`='". $this->_id ."' ";
-*/
 		$queryStr =
    "SELECT `tblDocumentApprovers`.*, `tblDocumentApproveLog`.`status`, ".
 			"`tblDocumentApproveLog`.`comment`, `tblDocumentApproveLog`.`date`, ".
@@ -1045,20 +1042,6 @@ class SeedDMS_Core_User {
 
 		// See if the user is the member of a group that has been assigned to
 		// approve the document version.
-		/*
-		$queryStr = "SELECT `tblDocumentApprovers`.*, `tblDocumentApproveLog`.`status`, ".
-			"`tblDocumentApproveLog`.`comment`, `tblDocumentApproveLog`.`date`, ".
-			"`tblDocumentApproveLog`.`userID` ".
-			"FROM `tblDocumentApprovers` ".
-			"LEFT JOIN `tblDocumentApproveLog` USING (`approveID`) ".
-			"LEFT JOIN `tblGroupMembers` ON `tblGroupMembers`.`groupID` = `tblDocumentApprovers`.`required` ".
-			"LEFT JOIN `ttapproveid` on `ttapproveid`.`maxLogID` = `tblDocumentApproveLog`.`approveLogID` ".
-			"WHERE `ttapproveid`.`maxLogID`=`tblDocumentApproveLog`.`approveLogID` ".
-			($documentID==null ? "" : "AND `tblDocumentApprovers`.`documentID` = '". $documentID ."' ").
-			($version==null ? "" : "AND `tblDocumentApprovers`.`version` = '". $version ."' ").
-			"AND `tblDocumentApprovers`.`type`='1' ".
-			"AND `tblGroupMembers`.`userID`='". $this->_id ."'";
-			*/
 		$queryStr =
 			"SELECT `tblDocumentApprovers`.*, `tblDocumentApproveLog`.`status`, ".
 			"`tblDocumentApproveLog`.`comment`, `tblDocumentApproveLog`.`date`, ".
@@ -1108,11 +1091,6 @@ class SeedDMS_Core_User {
 	function getReceiptStatus($documentID=null, $version=null) { /* {{{ */
 		$db = $this->_dms->getDB();
 
-/*
-		if (!$db->createTemporaryTable("ttreviewid")) {
-			return false;
-		}
-*/
 		$status = array("indstatus"=>array(), "grpstatus"=>array());
 
 		// See if the user is assigned as an individual recipient.
@@ -1154,6 +1132,84 @@ class SeedDMS_Core_User {
 			($version==null ? "" : "AND `tblDocumentRecipients`.`version` = '". (int) $version ."' ").
 			"AND `tblGroupMembers`.`userID`='". $this->_id ."' ".
 			"ORDER BY `tblDocumentReceiptLog`.`receiptLogID` DESC";
+		$resArr = $db->getResultArray($queryStr);
+		if (is_bool($resArr) && $resArr === false)
+			return false;
+		if (count($resArr)>0) {
+			foreach ($resArr as $res) {
+				if(isset($status["grpstatus"][$res['documentID']])) {
+					if($status["grpstatus"][$res['documentID']]['date'] < $res['date']) {
+						$status["grpstatus"][$res['documentID']] = $res;
+					}
+				} else {
+					$status["grpstatus"][$res['documentID']] = $res;
+				}
+			}
+		}
+		return $status;
+	} /* }}} */
+
+	/**
+	 * Get a list of revisions
+	 * This function returns a list of all revisions seperated by individual
+	 * and group revisions. If the document id
+	 * is passed, then only this document will be checked for revisions. The
+	 * same is true for the version of a document which limits the list
+	 * further.
+	 *
+	 * For a detaile description of the result array see
+	 * {link SeedDMS_Core_User::getApprovalStatus} which does the same for
+	 * approvals.
+	 *
+	 * @param int $documentID optional document id for which to retrieve the
+	 *        revisions
+	 * @param int $version optional version of the document
+	 * @return array list of all revisions
+	 */
+	function getRevisionStatus($documentID=null, $version=null) { /* {{{ */
+		$db = $this->_dms->getDB();
+
+		$status = array("indstatus"=>array(), "grpstatus"=>array());
+
+		// See if the user is assigned as an individual reviser.
+		$queryStr = "SELECT `tblDocumentRevisers`.*, `tblDocumentRevisionLog`.`status`, ".
+			"`tblDocumentRevisionLog`.`comment`, `tblDocumentRevisionLog`.`date`, ".
+			"`tblDocumentRevisionLog`.`userID` ".
+			"FROM `tblDocumentRevisers` ".
+			"LEFT JOIN `tblDocumentRevisionLog` USING (`revisionID`) ".
+			"WHERE `tblDocumentRevisers`.`type`='0' ".
+			($documentID==null ? "" : "AND `tblDocumentRevisers`.`documentID` = '". (int) $documentID ."' ").
+			($version==null ? "" : "AND `tblDocumentRevisers`.`version` = '". (int) $version ."' ").
+			"AND `tblDocumentRevisers`.`required`='". $this->_id ."' ".
+			"ORDER BY `tblDocumentRevisionLog`.`revisionLogID` DESC";
+		$resArr = $db->getResultArray($queryStr);
+		if (is_bool($resArr) && $resArr === false)
+			return false;
+		if (count($resArr)>0) {
+			foreach ($resArr as $res) {
+				if(isset($status["indstatus"][$res['documentID']])) {
+					if($status["indstatus"][$res['documentID']]['date'] < $res['date']) {
+						$status["indstatus"][$res['documentID']] = $res;
+					}
+				} else {
+					$status["indstatus"][$res['documentID']] = $res;
+				}
+			}
+		}
+
+		// See if the user is the member of a group that has been assigned to
+		// revision the document version.
+		$queryStr = "SELECT `tblDocumentRevisers`.*, `tblDocumentRevisionLog`.`status`, ".
+			"`tblDocumentRevisionLog`.`comment`, `tblDocumentRevisionLog`.`date`, ".
+			"`tblDocumentRevisionLog`.`userID` ".
+			"FROM `tblDocumentRevisers` ".
+			"LEFT JOIN `tblDocumentRevisionLog` USING (`revisionID`) ".
+			"LEFT JOIN `tblGroupMembers` ON `tblGroupMembers`.`groupID` = `tblDocumentRevisers`.`required` ".
+			"WHERE `tblDocumentRevisers`.`type`='1' ".
+			($documentID==null ? "" : "AND `tblDocumentRevisers`.`documentID` = '". (int) $documentID ."' ").
+			($version==null ? "" : "AND `tblDocumentRevisers`.`version` = '". (int) $version ."' ").
+			"AND `tblGroupMembers`.`userID`='". $this->_id ."' ".
+			"ORDER BY `tblDocumentRevisionLog`.`revisionLogID` DESC";
 		$resArr = $db->getResultArray($queryStr);
 		if (is_bool($resArr) && $resArr === false)
 			return false;

@@ -526,6 +526,7 @@ $(document).ready(function () {
 		} else {
 			echo "<li><a href=\"../out/out.WorkflowSummary.php\">".getMLText("workflow_summary")."</a></li>\n";
 		}
+		echo "<li><a href=\"../out/out.ReceiptSummary.php\">".getMLText("receipt_summary")."</a></li>\n";
 		echo "</ul>\n";
 		echo "</div>\n";
 		return;

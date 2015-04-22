@@ -362,6 +362,36 @@ CREATE TABLE `tblDocumentRecipients` (
 -- --------------------------------------------------------
 
 -- 
+-- Table structure for table `tblDocumentRevisionLog`
+-- 
+
+CREATE TABLE `tblDocumentRevisionLog` (
+  `revisionLogID` INTEGER PRIMARY KEY AUTOINCREMENT,
+  `revisionID` INTEGER NOT NULL default 0 REFERENCES `tblDocumentRevisers` (`revisionID`) ON DELETE CASCADE,
+  `status` INTEGER NOT NULL default 0,
+  `comment` TEXT NOT NULL,
+  `date` TEXT NOT NULL default '0000-00-00 00:00:00',
+  `userID` INTEGER NOT NULL default 0 REFERENCES `tblUsers` (`id`) ON DELETE CASCADE
+) ;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `tblDocumentRevisers`
+-- 
+
+CREATE TABLE `tblDocumentRevisers` (
+  `revisionID` INTEGER PRIMARY KEY AUTOINCREMENT,
+  `documentID` INTEGER NOT NULL default '0' REFERENCES `tblDocuments` (`id`) ON DELETE CASCADE,
+  `version` INTEGER unsigned NOT NULL default '0',
+  `type` INTEGER NOT NULL default '0',
+  `required` INTEGER NOT NULL default '0',
+  UNIQUE (`documentID`,`version`,`type`,`required`)
+) ;
+
+-- --------------------------------------------------------
+
+-- 
 -- Table structure for table `tblDocumentStatus`
 -- 
 

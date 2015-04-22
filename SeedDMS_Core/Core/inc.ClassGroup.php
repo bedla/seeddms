@@ -151,8 +151,9 @@ class SeedDMS_Core_Group {
 
 			$this->_users = array();
 
+			$classname = $this->_dms->getClassname('user');
 			foreach ($resArr as $row) {
-				$user = new SeedDMS_Core_User($row["id"], $row["login"], $row["pwd"], $row["fullName"], $row["email"], $row["language"], $row["theme"], $row["comment"], $row["role"], $row['hidden']);
+				$user = new $classname($row["id"], $row["login"], $row["pwd"], $row["fullName"], $row["email"], $row["language"], $row["theme"], $row["comment"], $row["role"], $row['hidden']);
 				array_push($this->_users, $user);
 			}
 		}
@@ -171,8 +172,9 @@ class SeedDMS_Core_Group {
 
 		$managers = array();
 
+		$classname = $this->_dms->getClassname('user');
 		foreach ($resArr as $row) {
-			$user = new SeedDMS_Core_User($row["id"], $row["login"], $row["pwd"], $row["fullName"], $row["email"], $row["language"], $row["theme"], $row["comment"], $row["role"], $row['hidden']);
+			$user = new $classname($row["id"], $row["login"], $row["pwd"], $row["fullName"], $row["email"], $row["language"], $row["theme"], $row["comment"], $row["role"], $row['hidden']);
 			array_push($managers, $user);
 		}
 		return $managers;

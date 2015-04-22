@@ -96,6 +96,7 @@ if ($action == "saveSettings")
   $settings->_extraPath = $_POST["extraPath"];
   $settings->_dropFolderDir = $_POST["dropFolderDir"];
   $settings->_checkOutDir = $_POST["checkOutDir"];
+  $settings->_createCheckOutDir = getBoolValue("createCheckOutDir");
   $settings->_logFileEnable = getBoolValue("logFileEnable");
   $settings->_logFileRotation = $_POST["logFileRotation"];
   $settings->_enableLargeFileUpload = getBoolValue("enableLargeFileUpload");

@@ -55,7 +55,7 @@ class SeedDMS_View_Settings extends SeedDMS_Bootstrap_Style {
 
   <form action="../op/op.Settings.php" method="post" enctype="multipart/form-data" name="form0" >
   <input type="hidden" name="action" value="saveSettings" />
-	<input type="hidden" id="currenttab" name="currenttab" value="<?php echo (isset($_POST['currenttab']) ? $_POST['currenttab'] : 'site' ); ?>" />
+	<input type="hidden" id="currenttab" name="currenttab" value="<?php echo $currenttab ? $currenttab : 'site'; ?>" />
 <?php
 if(!is_writeable($settings->_configFilePath)) {
 	print "<div class=\"alert alert-warning\">";
@@ -293,6 +293,10 @@ if(!is_writeable($settings->_configFilePath)) {
       <tr title="<?php printMLText("settings_checkOutDir_desc");?>">
         <td><?php printMLText("settings_checkOutDir");?>:</td>
         <td><input type="text" name="checkOutDir" value="<?php echo $settings->_checkOutDir ?>" size="100" /></td>
+      </tr>
+      <tr title="<?php printMLText("settings_createCheckOutDir_desc");?>">
+        <td><?php printMLText("settings_createCheckOutDir");?>:</td>
+        <td><input type="checkbox" name="createCheckOutDir" <?php if($settings->_createCheckOutDir) echo "checked" ?> /></td>
       </tr>
       <tr title="<?php printMLText("settings_logFileEnable_desc");?>">
         <td><?php printMLText("settings_logFileEnable");?>:</td>

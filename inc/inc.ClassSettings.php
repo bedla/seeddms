@@ -85,6 +85,8 @@ class Settings { /* {{{ */
 	var $_dropFolderDir = null;
 	// Where the checked out files are located
 	var $_checkOutDir = null;
+	// Create checkout dir if it doesn't exists
+	var $_createCheckOutDir = false;
 	// Where the stop word file is located
 	var $_stopWordsFile = null;
 	// enable/disable lucene fulltext search
@@ -375,6 +377,7 @@ class Settings { /* {{{ */
 		$this->_luceneDir = strval($tab["luceneDir"]);
 		$this->_dropFolderDir = strval($tab["dropFolderDir"]);
 		$this->_checkOutDir = strval($tab["checkOutDir"]);
+		$this->_createCheckOutDir = Settings::boolVal($tab["createCheckOutDir"]);
 		$this->_logFileEnable = Settings::boolVal($tab["logFileEnable"]);
 		$this->_logFileRotation = strval($tab["logFileRotation"]);
 		$this->_enableLargeFileUpload = Settings::boolVal($tab["enableLargeFileUpload"]);
@@ -660,6 +663,7 @@ class Settings { /* {{{ */
     $this->setXMLAttributValue($node, "luceneDir", $this->_luceneDir);
     $this->setXMLAttributValue($node, "dropFolderDir", $this->_dropFolderDir);
     $this->setXMLAttributValue($node, "checkOutDir", $this->_checkOutDir);
+    $this->setXMLAttributValue($node, "createCheckOutDir", $this->_createCheckOutDir);
     $this->setXMLAttributValue($node, "logFileEnable", $this->_logFileEnable);
     $this->setXMLAttributValue($node, "logFileRotation", $this->_logFileRotation);
     $this->setXMLAttributValue($node, "enableLargeFileUpload", $this->_enableLargeFileUpload);

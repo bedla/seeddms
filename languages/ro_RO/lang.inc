@@ -104,6 +104,8 @@ URL: [url]',
 'approval_summary' => 'Sumar aprobare',
 'approval_update_failed' => 'Eroare actualizare status aprobare. Actualizarea nu a reușit.',
 'approvers' => 'Aprobatori',
+'approver_already_assigned' => '',
+'approver_already_removed' => '',
 'april' => 'Aprilie',
 'archive_creation' => 'Creare arhiva',
 'archive_creation_warning' => 'Cu această operațiune puteți crea o arhiva care sa conțina fișierele din toate folderele DMS. După creare, arhiva va fi salvata în folderul de date din serverul dumneavoastră. <br> AVERTISMENT:. O arhivă creată ca lizibilă pentru om nu va putea fi utilizata ca server de backup.',
@@ -182,6 +184,8 @@ URL: [url]',
 'change_assignments' => 'Schimbă alocările',
 'change_password' => 'Schimbă parola',
 'change_password_message' => 'Parola dumneavoastra a fost schimbată.',
+'change_recipients' => '',
+'change_revisers' => '',
 'change_status' => 'Schimbă status',
 'charts' => 'Grafice',
 'chart_docsaccumulated_title' => 'Numărul de documente',
@@ -696,7 +700,9 @@ Document: [document]
 Utilizator: [username]
 URL: [url]',
 'removed_file_email_subject' => '[sitename]: [document] - Atașament eliminat',
+'removed_recipient' => '',
 'removed_reviewer' => 'a fost eliminat din lista de revizuitori.',
+'removed_reviser' => '',
 'removed_workflow_email_body' => 'Workflow eliminat din versiunea documentului
 Document: [name]
 Versiune: [version]
@@ -746,6 +752,8 @@ URL: [url]',
 'review_submit_email_subject' => '[sitename]: [name] - Revizuire trimisă',
 'review_summary' => 'Sumar revizuire',
 'review_update_failed' => 'Eroare actualizarea status revizuire. Actualizarea a eșuat.',
+'reviser_already_assigned' => '',
+'reviser_already_removed' => '',
 'rewind_workflow' => 'Derulare workflow',
 'rewind_workflow_email_body' => 'Workflow derulat
 Document: [name]

@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1109), dgrutsch (3), netixw (14)
+//    Translators: Admin (1123), dgrutsch (3), netixw (14)
 
 $text = array(
 'accept' => 'Accept',
@@ -109,6 +109,8 @@ URL: [url]',
 'approval_summary' => 'Approval Summary',
 'approval_update_failed' => 'Error updating approval status. Update failed.',
 'approvers' => 'Approvers',
+'approver_already_assigned' => 'User is already assigned as an approver.',
+'approver_already_removed' => 'Approver has already been removed from appproval process or  has already submitted an approval.',
 'april' => 'April',
 'archive_creation' => 'Archive creation',
 'archive_creation_warning' => 'With this operation you can create archive containing the files of entire DMS folders. After the creation the archive will be saved in the data folder of your server.<br>WARNING: an archive created as human readable will be unusable as server backup.',
@@ -187,6 +189,8 @@ URL: [url]',
 'change_assignments' => 'Change Assignments',
 'change_password' => 'Change password',
 'change_password_message' => 'Your password has been changed.',
+'change_recipients' => 'Change recipients',
+'change_revisers' => 'Change resubmission',
 'change_status' => 'Change Status',
 'charts' => 'Charts',
 'chart_docsaccumulated_title' => 'Number of documents',
@@ -198,8 +202,8 @@ URL: [url]',
 'chart_selection' => 'Select chart',
 'chart_sizeperuser_title' => 'Diskspace per user',
 'checkedout_file_has_different_version' => 'The checked out version is not identical to the current version. Check in will not update the document.',
-'checkedout_file_has_disappeared' => 'The file of the checked out document has disappeared. Check in will not create a new version.',
-'checkedout_file_is_unchanged' => 'The file of the checked out document is still unchanged. Check in will not create a new version.',
+'checkedout_file_has_disappeared' => 'The file of the checked out document has disappeared. Check in will not create a new version, but clears the checkout status..',
+'checkedout_file_is_unchanged' => 'The file of the checked out document is still unchanged. Check in will not create a new version but clears the checkout status.',
 'checkin_document' => 'Check In',
 'checkout_document' => 'Check out',
 'checkout_is_disabled' => 'Check out of documents is disabled in the configuration.',
@@ -700,7 +704,9 @@ Document: [document]
 User: [username]
 URL: [url]',
 'removed_file_email_subject' => '[sitename]: [document] - Removed attachment',
+'removed_recipient' => 'has been removed from the list of recipients.',
 'removed_reviewer' => 'has been removed from the list of reviewers.',
+'removed_reviser' => 'has been removed from the list of resubmitter.',
 'removed_workflow_email_body' => 'Removed workflow from document version
 Document: [name]
 Version: [version]
@@ -734,8 +740,8 @@ URL: [url]',
 'return_from_subworkflow_email_subject' => '[sitename]: [name] - Return from subworkflow',
 'reverse_links' => 'Documents, which have a link to the current document',
 'reviewers' => 'Reviewers',
-'reviewer_already_assigned' => 'is already assigned as a reviewer',
-'reviewer_already_removed' => 'has already been removed from review process or has already submitted a review',
+'reviewer_already_assigned' => 'User is already assigned as a reviewer',
+'reviewer_already_removed' => 'Reviewer has already been removed from review process or has already submitted a review',
 'review_deletion_email' => 'Review request deleted',
 'review_deletion_email_body' => 'Review request deleted
 Dokument: [name]
@@ -767,6 +773,8 @@ URL: [url]',
 'review_submit_email_subject' => '[sitename]: [name] - Submitted review',
 'review_summary' => 'Review Summary',
 'review_update_failed' => 'Error updating review status. Update failed.',
+'reviser_already_assigned' => 'User is already assigned as an resubmitter.',
+'reviser_already_removed' => 'Resubmitter has already been removed from revision process or has already revised the document.',
 'rewind_workflow' => 'Rewind workflow',
 'rewind_workflow_email_body' => 'Workflow was rewinded
 Document: [name]

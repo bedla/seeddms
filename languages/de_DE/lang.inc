@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (1983), dgrutsch (18)
+//    Translators: Admin (1991), dgrutsch (18)
 
 $text = array(
 'accept' => 'Übernehmen',
@@ -109,6 +109,8 @@ URL: [url]',
 'approval_summary' => 'Übersicht Freigaben',
 'approval_update_failed' => 'Störung bei der Aktualisierung des Berechtigungsstatus. Aktualisierung gescheitert',
 'approvers' => 'Freigebender',
+'approver_already_assigned' => 'Freigeber bereits zugewiesen',
+'approver_already_removed' => 'Freigeber wurde bereits aus dem Freigabevorgang         entfernt oder hat die Freigabe bereits abgeschlossen',
 'april' => 'April',
 'archive_creation' => 'Archiv erzeugen',
 'archive_creation_warning' => 'Mit dieser Operation können Sie ein Archiv mit allen Dokumenten des DMS erzeugen. Nach der Erstellung wird das Archiv im Datenordner Ihres Servers gespeichert.<br />Warnung: ein menschenlesbares Archiv ist als Server-Backup unbrauchbar.',
@@ -187,6 +189,8 @@ URL: [url]',
 'change_assignments' => 'Zuweisungen ändern',
 'change_password' => 'Passwort ändern',
 'change_password_message' => 'Ihr Passwort wurde geändert.',
+'change_recipients' => 'Empfänger ändern',
+'change_revisers' => 'Wiedervorlage ändern',
 'change_status' => 'Status ändern',
 'charts' => 'Diagramme',
 'chart_docsaccumulated_title' => 'Anzahl Dokumente',
@@ -198,8 +202,8 @@ URL: [url]',
 'chart_selection' => 'Diagrammauswahl',
 'chart_sizeperuser_title' => 'Speicherplatz pro Benutzer',
 'checkedout_file_has_different_version' => 'Die ausgecheckte Version ist nicht identisch mit der aktuellen Version. Das Einchecken wird das Dokument nicht aktualisieren.',
-'checkedout_file_has_disappeared' => 'Die Datei des ausgecheckten Dokuments ist nicht mehr vorhanden. Das Einchecken wird keine neue Version erzeugen.',
-'checkedout_file_is_unchanged' => 'Die Datei des ausgecheckten Dokuments ist noch unverändert. Das Einchecken wird keine neue Version anlegen.',
+'checkedout_file_has_disappeared' => 'Die Datei des ausgecheckten Dokuments ist nicht mehr vorhanden. Das Einchecken wird keine neue Version erzeugen, setzt aber den Checkout-Status zurück..',
+'checkedout_file_is_unchanged' => 'Die Datei des ausgecheckten Dokuments ist noch unverändert. Das Einchecken wird keine neue Version anlegen, setzt aber den Checkout-Status zurück.',
 'checkin_document' => 'Einchecken',
 'checkout_document' => 'Auschecken',
 'checkout_is_disabled' => 'Auschecken von Dokumenten ist in der Konfiguration ausgeschaltet.',
@@ -700,7 +704,9 @@ Dokument: [document]
 Benutzer: [username]
 URL: [url]',
 'removed_file_email_subject' => '[sitename]: [document] - Anhang gelöscht',
+'removed_recipient' => 'ist von der Empfängerliste entfernt worden',
 'removed_reviewer' => 'ist von der Prüfer-Liste entfernt worden.',
+'removed_reviser' => 'ist von der Liste der Wiederholungsprüfer entfernt worden.',
 'removed_workflow_email_body' => 'Workflow von Dokumentenversion entfernt
 Dokument: [name]
 Version: [version]
@@ -760,6 +766,8 @@ URL: [url]',
 'review_submit_email_subject' => '[sitename]: [name] - Prüfung ausgeführt',
 'review_summary' => 'Übersicht Prüfungen',
 'review_update_failed' => 'Störung bei Aktualisierung des Prüfstatus. Aktualisierung gescheitert.',
+'reviser_already_assigned' => '',
+'reviser_already_removed' => '',
 'rewind_workflow' => 'Zurück zum Anfangszustand',
 'rewind_workflow_email_body' => 'Workflow wurde zurückgestellt
 Dokument: [name]

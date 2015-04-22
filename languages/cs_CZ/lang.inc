@@ -104,6 +104,8 @@ URL: [url]',
 'approval_summary' => 'Souhrn schválení',
 'approval_update_failed' => 'Chyba při aktualizaci stavu schválení. Aktualizace selhala.',
 'approvers' => 'Schvalovatelé',
+'approver_already_assigned' => '',
+'approver_already_removed' => '',
 'april' => 'Duben',
 'archive_creation' => 'Archivování',
 'archive_creation_warning' => 'Pomocí této operace můžete vytvořit archiv obsahující soubory z celé složky DMS. Po jeho vytvoøení bude archiv ulžen v datové složce serveru. POZOR: archiv bude vytvořen jako běžně čitelný, nelze jej použít jako záložní server.',
@@ -182,6 +184,8 @@ URL: [url]',
 'change_assignments' => 'Změnit přiřazení',
 'change_password' => 'Změnit heslo',
 'change_password_message' => 'Vaše heslo bylo změněno.',
+'change_recipients' => '',
+'change_revisers' => '',
 'change_status' => 'Změna stavu',
 'charts' => 'Grafy',
 'chart_docsaccumulated_title' => 'Počet dokumentů',
@@ -692,7 +696,9 @@ Dokument: [document]
 Uživatel: [username]
 URL: [url]',
 'removed_file_email_subject' => '[sitename]: [document] - Odstraněná příloha',
+'removed_recipient' => '',
 'removed_reviewer' => 'byl odstraněn ze seznamu kontrolorů.',
+'removed_reviser' => '',
 'removed_workflow_email_body' => 'Odstraněn pracovní postup z verze dokumentu: [name]
 Verze: [version]
 Praconí postup: [workflow]
@@ -740,6 +746,8 @@ URL: [url]',
 'review_submit_email_subject' => '[sitename]: [name] - Odesláno přezkoumání',
 'review_summary' => 'Souhrn kontroly',
 'review_update_failed' => 'Chyba při aktualizaci stavu kontroly. Aktualizace selhala.',
+'reviser_already_assigned' => '',
+'reviser_already_removed' => '',
 'rewind_workflow' => 'Nové spuštění pracovního postupu',
 'rewind_workflow_email_body' => 'Pracovní postup byl spuštěn znovu
 Dokument: [name]

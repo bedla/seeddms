@@ -104,6 +104,8 @@ URL: [url]',
 'approval_summary' => 'Jóváhagyási összesítő',
 'approval_update_failed' => 'Hiba történt a jóváhagyási állapot frissítése során. Frissítés sikertelen.',
 'approvers' => 'Jóváhagyók',
+'approver_already_assigned' => '',
+'approver_already_removed' => '',
 'april' => 'Április',
 'archive_creation' => 'Archívum létrehozása',
 'archive_creation_warning' => 'Ezzel a művelettel archívumot hozhat létre, amely tartalmazza az összes DMS mappában található állományokat. A létrehozás követően az archívum a kiszolgáló adat mappájába lesz mentve.<br>FIGYELEM: az archívum értelmezhető formában kerül tárolásra és nem használható kiszolgáló mentésként.',
@@ -182,6 +184,8 @@ URL: [url]',
 'change_assignments' => 'Hozzárendelések módosítása',
 'change_password' => 'Jelszó módosítása',
 'change_password_message' => 'Jelszava módosításra került.',
+'change_recipients' => '',
+'change_revisers' => '',
 'change_status' => 'Állapot módosítása',
 'charts' => 'Diagramok',
 'chart_docsaccumulated_title' => 'Dokumentumok száma',
@@ -696,7 +700,9 @@ Dokumentum: [document]
 Felhasználó: [username]
 URL: [url]',
 'removed_file_email_subject' => '[sitename]: [document] - Eltávolított melléklet',
+'removed_recipient' => '',
 'removed_reviewer' => 'eltávolításra került a felülvizsgálók listájáról.',
+'removed_reviser' => '',
 'removed_workflow_email_body' => 'Dokumentum változatból eltávolított munkafolyamat
 Dokumentum: [name]
 Verzió: [version]
@@ -746,6 +752,8 @@ URL: [url]',
 'review_submit_email_subject' => '[sitename]: [name] - Beküldött felülvizsgálat',
 'review_summary' => 'Felülvizsgálat összefoglaló',
 'review_update_failed' => 'Hiba a felülvizsgálat állapot frissítése során. Frissítés sikertelen.',
+'reviser_already_assigned' => '',
+'reviser_already_removed' => '',
 'rewind_workflow' => 'Munkafolyamat visszajátszás',
 'rewind_workflow_email_body' => 'Munkafolyamat visszajátszva
 Dokumentum: [name]

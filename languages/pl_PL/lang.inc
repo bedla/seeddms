@@ -97,6 +97,8 @@ URL: [url]',
 'approval_summary' => 'Podsumowanie akceptacji',
 'approval_update_failed' => 'Błąd aktualizacji statusu akceptacji. Aktualizacja nie powiodła się.',
 'approvers' => 'Osoby akceptujące',
+'approver_already_assigned' => '',
+'approver_already_removed' => '',
 'april' => 'Kwiecień',
 'archive_creation' => 'Tworzenie archiwum',
 'archive_creation_warning' => 'Ta operacja utworzy archiwum zawierające pliki z całego repozytorium. Po utworzeniu archiwum będzie zapisane w folderze na serwerze.<br>UWAGA: archiwum utworzone jako czytelne dla ludzi będzie bezużyteczne jako kopia serwera.',
@@ -175,6 +177,8 @@ URL: [url]',
 'change_assignments' => 'Zmiana przypisania',
 'change_password' => 'Zmiana hasła',
 'change_password_message' => 'Twoje hasło zostało zmienione.',
+'change_recipients' => '',
+'change_revisers' => '',
 'change_status' => 'Zmień status',
 'charts' => 'Wykresy',
 'chart_docsaccumulated_title' => 'Liczba dokumentów',
@@ -689,7 +693,9 @@ Dokument: [document]
 Użytkownik: [username]
 URL: [url]',
 'removed_file_email_subject' => '[sitename]: [document] - Usunięty załącznik',
+'removed_recipient' => '',
 'removed_reviewer' => 'został usunięty z listy recenzentów.',
+'removed_reviser' => '',
 'removed_workflow_email_body' => 'Usunięcie procesu z wersji dokumentu
 Dokument: [name]
 Wersja: [version]
@@ -725,6 +731,8 @@ URL: [url]',
 'review_submit_email_subject' => '[sitename]: [name] - Napisano recenzję',
 'review_summary' => 'Podsumowanie opiniowania',
 'review_update_failed' => 'Błąd podczas aktualizowania statusu recenzji. Aktualizacja nie powiodła się.',
+'reviser_already_assigned' => '',
+'reviser_already_removed' => '',
 'rewind_workflow' => 'Przewiń proces',
 'rewind_workflow_email_body' => 'Przewinięcie procesu
 Dokument: [name]

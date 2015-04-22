@@ -19,7 +19,7 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //
-//    Translators: Admin (680), kreml (455)
+//    Translators: Admin (681), kreml (455)
 
 $text = array(
 'accept' => 'Přijmout',
@@ -1178,7 +1178,9 @@ URL: [url]',
 'update_fulltext_index' => 'Aktualizovat fulltext index',
 'update_info' => 'Aktualizovat informace',
 'update_locked_msg' => 'Tento dokument je zamčený.',
+'update_recipients' => 'Update list of recipients',
 'update_reviewers' => 'Aktualizovat seznam kontrolorů',
+'update_reviser' => '',
 'uploaded_by' => 'Nahrál',
 'uploading_failed' => 'Nahrání selhalo. Prosím, kontaktujte správce.',
 'uploading_maxsize' => 'Nahrávaný soubor je větší než maximální velikost pro upload.',

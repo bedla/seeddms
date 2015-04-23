@@ -709,6 +709,26 @@ class SeedDMS_Core_DMS {
 			else if ($orderby=='s') $queryStr .= "ORDER BY `status`";
 			else $queryStr .= "ORDER BY `name`";
 			break;
+		case 'CheckedOutByMe': // Documents I have checked out
+			$user = $param1;
+
+			$qs = 'SELECT document FROM tblDocumentCheckOuts WHERE userID='.$user->getID();
+			$ra = $this->db->getResultArray($qs);
+			if (is_bool($ra) && !$ra) {
+				return false;
+			}
+			$docs = array();
+			foreach($ra as $d) {
+				$docs[] = $d['document'];
+			}
+			
+			if ($docs) {
+				$queryStr .= "AND `tblDocuments`.`id` IN (" . implode(',', $docs) . ") ".
+							"ORDER BY `statusDate` DESC";
+			} else {
+				$queryStr = '';
+			}
+			break;
 		}
 
 		if($queryStr) {

@@ -673,7 +673,8 @@ class SeedDMS_Core_Document extends SeedDMS_Core_Object { /* {{{ */
 	/**
 	 * Get checkout info for document
 	 *
-	 * @return boolean true if locked otherwise false
+	 * @return array/boolean record from table tblDocumentCheckOuts or false
+	 * in case of an error.
 	 */
 	function getCheckOutInfo() { /* {{{ */
 		$db = $this->_dms->getDB();

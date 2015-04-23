@@ -144,6 +144,9 @@ function checkForm()
 				break;
 			}
 		}
+		$checkoutinfo = $document->getCheckOutInfo();
+
+		if($checkoutstatus == 0) {
 
 		$latestContent = $document->getLatestContent();
 		$reviewStatus = $latestContent->getReviewStatus();
@@ -531,13 +534,20 @@ function checkForm()
 ?>
 		<tr>
 			<td></td>
-			<td><input type="submit" class="btn" value="<?php printMLText("update_document")?>"></td>
+			<td><input type="submit" class="btn" value="<?php printMLText("checkin_document")?>"></td>
 		</tr>
 	</table>
 </form>
 
 <?php
 		$this->contentContainerEnd();
+		} else {
+?>
+<form action="../op/op.CheckInDocument.php" method="post" name="form1" onsubmit="return checkForm();">
+	<input type="hidden" name="documentid" value="<?php print $document->getID(); ?>">
+	<input type="submit" class="btn" value="<?php printMLText("reset_checkout"); ?>">
+<?php
+		}
 		$this->htmlEndPage();
 	} /* }}} */
 }

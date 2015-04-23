@@ -53,7 +53,15 @@ if ($document->isCheckedOut()) {
 	UI::exitError(getMLText("document_title", array("documentname" => $document->getName())),getMLText("document_already_checkedout"));
 }
 
-if (!$document->checkOut($user, sprintf($settings->_checkOutDir.'/', preg_replace('/[^A-Za-z0-9_-]/', '', $user->getLogin())))) {
+$checkoutpath = sprintf($settings->_checkOutDir.'/', preg_replace('/[^A-Za-z0-9_-]/', '', $user->getLogin()));
+if(!file_exists($checkoutpath) && $settings->_createCheckOutDir) {
+	SeedDMS_Core_File::makeDir($checkoutpath);
+}
+if(!file_exists($checkoutpath)) {
+	UI::exitError(getMLText("document_title", array("documentname" => $document->getName())),getMLText("checkoutpath_does_not_exist"));
+}
+
+if (!$document->checkOut($user, $checkoutpath)) {
 	UI::exitError(getMLText("document_title", array("documentname" => $document->getName())),getMLText("error_occured"));
 }
 

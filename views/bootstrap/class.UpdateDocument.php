@@ -145,6 +145,12 @@ function checkForm()
 			$msg .= "<p>".sprintf(getMLText('link_alt_updatedocument'), "out.AddMultiDocument.php?folderid=".$folder->getID()."&showtree=".showtree())."</p>";
 		}
 		$this->warningMsg($msg);
+
+		if ($document->isCheckedOut()) {
+			$msg = getMLText('document_is_checked_out');
+			$this->warningMsg($msg);
+		}
+
 		$this->contentContainerStart();
 ?>
 

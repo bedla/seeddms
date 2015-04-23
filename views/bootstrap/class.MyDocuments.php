@@ -58,75 +58,29 @@ class SeedDMS_View_MyDocuments extends SeedDMS_Bootstrap_Style {
 			}
 
 			if($workflowmode == 'traditional' || $workflowmode == 'traditional_only_approval') {
+				
 				// Get document list for the current user.
 				$reviewStatus = $user->getReviewStatus();
 				$approvalStatus = $user->getApprovalStatus();
-				
-				// Create a comma separated list of all the documentIDs whose information is
-				// required.
-				$dList = array();
-				foreach ($reviewStatus["indstatus"] as $st) {
-					if (!in_array($st["documentID"], $dList)) {
-						$dList[] = $st["documentID"];
-					}
-				}
-				foreach ($reviewStatus["grpstatus"] as $st) {
-					if (!in_array($st["documentID"], $dList)) {
-						$dList[] = $st["documentID"];
-					}
-				}
-				foreach ($approvalStatus["indstatus"] as $st) {
-					if (!in_array($st["documentID"], $dList)) {
-						$dList[] = $st["documentID"];
-					}
-				}
-				foreach ($approvalStatus["grpstatus"] as $st) {
-					if (!in_array($st["documentID"], $dList)) {
-						$dList[] = $st["documentID"];
-					}
-				}
-				$docCSV = "";
-				foreach ($dList as $d) {
-					$docCSV .= (strlen($docCSV)==0 ? "" : ", ")."'".$d."'";
-				}
-				
-				if (strlen($docCSV)>0) {
-					// Get the document information.
-					$queryStr = "SELECT `tblDocuments`.*, `tblDocumentLocks`.`userID` as `lockUser`, ".
-						"`tblDocumentContent`.`version`, `tblDocumentStatus`.*, `tblDocumentStatusLog`.`status`, ".
-						"`tblDocumentStatusLog`.`comment` AS `statusComment`, `tblDocumentStatusLog`.`date` as `statusDate`, ".
-						"`tblDocumentStatusLog`.`userID`, `oTbl`.`fullName` AS `ownerName`, `sTbl`.`fullName` AS `statusName` ".
-						"FROM `tblDocumentContent` ".
-						"LEFT JOIN `tblDocuments` ON `tblDocuments`.`id` = `tblDocumentContent`.`document` ".
-						"LEFT JOIN `tblDocumentStatus` ON `tblDocumentStatus`.`documentID` = `tblDocumentContent`.`document` ".
-						"LEFT JOIN `tblDocumentStatusLog` ON `tblDocumentStatusLog`.`statusID` = `tblDocumentStatus`.`statusID` ".
-						"LEFT JOIN `ttstatid` ON `ttstatid`.`maxLogID` = `tblDocumentStatusLog`.`statusLogID` ".
-						"LEFT JOIN `ttcontentid` ON `ttcontentid`.`maxVersion` = `tblDocumentStatus`.`version` AND `ttcontentid`.`document` = `tblDocumentStatus`.`documentID` ".
-						"LEFT JOIN `tblDocumentLocks` ON `tblDocuments`.`id`=`tblDocumentLocks`.`document` ".
-						"LEFT JOIN `tblUsers` AS `oTbl` on `oTbl`.`id` = `tblDocuments`.`owner` ".
-						"LEFT JOIN `tblUsers` AS `sTbl` on `sTbl`.`id` = `tblDocumentStatusLog`.`userID` ".
-						"WHERE `ttstatid`.`maxLogID`=`tblDocumentStatusLog`.`statusLogID` ".
-						"AND `ttcontentid`.`maxVersion` = `tblDocumentContent`.`version` ".
-						"AND `tblDocumentStatusLog`.`status` IN (".S_DRAFT_REV.", ".S_DRAFT_APP.", ".S_EXPIRED.") ".
-						"AND `tblDocuments`.`id` IN (" . $docCSV . ") ".
-						"ORDER BY `statusDate` DESC";
 
-					$resArr = $db->getResultArray($queryStr);
-					if (is_bool($resArr) && !$resArr) {
-						$this->contentHeading(getMLText("warning"));
-						$this->contentContainer(getMLText("internal_error_exit"));
-						$this->htmlEndPage();
-						exit;
-					}
-					
-					// Create an array to hold all of these results, and index the array by
-					// document id. This makes it easier to retrieve document ID information
-					// later on and saves us having to repeatedly poll the database every time
-					// new document information is required.
+				$resArr = $dms->getDocumentList('AppRevByMe', $user);
+				if (is_bool($resArr) && !$resArr) {
+					$this->contentHeading(getMLText("warning"));
+					$this->contentContainer(getMLText("internal_error_exit"));
+					$this->htmlEndPage();
+					exit;
+				}
+				if($resArr) {
+					/* Create an array to hold all of these results, and index the array 
+					 * by document id. This makes it easier to retrieve document ID
+					 * information later on and saves us having to repeatedly poll the
+					 * database every time
+					 * new document information is required.
+					 */
 					$docIdx = array();
 					foreach ($resArr as $res) {
 						
-						// verify expiry
+						/* verify expiry */
 						if ( $res["expires"] && time()>$res["expires"]+24*60*60 ){
 							if  ( $res["status"]==S_DRAFT_APP || $res["status"]==S_DRAFT_REV ){
 								$res["status"]=S_EXPIRED;
@@ -136,7 +90,7 @@ class SeedDMS_View_MyDocuments extends SeedDMS_Bootstrap_Style {
 						$docIdx[$res["id"]][$res["version"]] = $res;
 					}
 
-					// List the documents where a review has been requested.
+					// List the documents for which a review has been requested.
 					if($workflowmode == 'traditional') {
 						$this->contentHeading(getMLText("documents_to_review"));
 						$this->contentContainerStart();
@@ -225,7 +179,7 @@ class SeedDMS_View_MyDocuments extends SeedDMS_Bootstrap_Style {
 						$this->contentContainerEnd();
 					}
 
-					// List the documents where an approval has been requested.
+					// List the documents for which an approval has been requested.
 					$this->contentHeading(getMLText("documents_to_approve"));
 					$this->contentContainerStart();
 					$printheader=true;
@@ -320,31 +274,13 @@ class SeedDMS_View_MyDocuments extends SeedDMS_Bootstrap_Style {
 					$this->contentContainerEnd();
 				}
 
-				// Get list of documents owned by current user that are pending review or
-				// pending approval.
-				$queryStr = "SELECT `tblDocuments`.*, `tblDocumentLocks`.`userID` as `lockUser`, ".
-					"`tblDocumentContent`.`version`, `tblDocumentStatus`.*, `tblDocumentStatusLog`.`status`, ".
-					"`tblDocumentStatusLog`.`comment` AS `statusComment`, `tblDocumentStatusLog`.`date` as `statusDate`, ".
-					"`tblDocumentStatusLog`.`userID`, `oTbl`.`fullName` AS `ownerName`, `sTbl`.`fullName` AS `statusName` ".
-					"FROM `tblDocumentContent` ".
-					"LEFT JOIN `tblDocuments` ON `tblDocuments`.`id` = `tblDocumentContent`.`document` ".
-					"LEFT JOIN `tblDocumentStatus` ON `tblDocumentStatus`.`documentID` = `tblDocumentContent`.`document` ".
-					"LEFT JOIN `tblDocumentStatusLog` ON `tblDocumentStatusLog`.`statusID` = `tblDocumentStatus`.`statusID` ".
-					"LEFT JOIN `ttstatid` ON `ttstatid`.`maxLogID` = `tblDocumentStatusLog`.`statusLogID` ".
-					"LEFT JOIN `ttcontentid` ON `ttcontentid`.`maxVersion` = `tblDocumentStatus`.`version` AND `ttcontentid`.`document` = `tblDocumentStatus`.`documentID` ".
-					"LEFT JOIN `tblDocumentLocks` ON `tblDocuments`.`id`=`tblDocumentLocks`.`document` ".
-					"LEFT JOIN `tblUsers` AS `oTbl` on `oTbl`.`id` = `tblDocuments`.`owner` ".
-					"LEFT JOIN `tblUsers` AS `sTbl` on `sTbl`.`id` = `tblDocumentStatusLog`.`userID` ".
-					"WHERE `ttstatid`.`maxLogID`=`tblDocumentStatusLog`.`statusLogID` ".
-					"AND `ttcontentid`.`maxVersion` = `tblDocumentContent`.`version` ".
-					"AND `tblDocuments`.`owner` = '".$user->getID()."' ".
-					"AND `tblDocumentStatusLog`.`status` IN (".S_DRAFT_REV.", ".S_DRAFT_APP.") ".
-					"ORDER BY `statusDate` DESC";
-
-				$resArr = $db->getResultArray($queryStr);
+				/* Get list of documents owned by current user that are
+				 * pending review or pending approval.
+				 */
+				$resArr = $dms->getDocumentList('AppRevOwner', $user);
 				if (is_bool($resArr) && !$resArr) {
 					$this->contentHeading(getMLText("warning"));
-					$this->contentContainer("Internal error. Unable to complete request. Exiting.");
+					$this->contentContainer(getMLText("internal_error_exit"));
 					$this->htmlEndPage();
 					exit;
 				}
@@ -398,29 +334,11 @@ class SeedDMS_View_MyDocuments extends SeedDMS_Bootstrap_Style {
 				$this->contentContainerEnd();
 			}
 			
-			// Get list of documents locked by current user 
-			$queryStr = "SELECT `tblDocuments`.*, `tblDocumentLocks`.`userID` as `lockUser`, ".
-				"`tblDocumentContent`.`version`, `tblDocumentStatus`.*, `tblDocumentStatusLog`.`status`, ".
-				"`tblDocumentStatusLog`.`comment` AS `statusComment`, `tblDocumentStatusLog`.`date` as `statusDate`, ".
-				"`tblDocumentStatusLog`.`userID`, `oTbl`.`fullName` AS `ownerName`, `sTbl`.`fullName` AS `statusName` ".
-				"FROM `tblDocumentContent` ".
-				"LEFT JOIN `tblDocuments` ON `tblDocuments`.`id` = `tblDocumentContent`.`document` ".
-				"LEFT JOIN `tblDocumentStatus` ON `tblDocumentStatus`.`documentID` = `tblDocumentContent`.`document` ".
-				"LEFT JOIN `tblDocumentStatusLog` ON `tblDocumentStatusLog`.`statusID` = `tblDocumentStatus`.`statusID` ".
-				"LEFT JOIN `ttstatid` ON `ttstatid`.`maxLogID` = `tblDocumentStatusLog`.`statusLogID` ".
-				"LEFT JOIN `ttcontentid` ON `ttcontentid`.`maxVersion` = `tblDocumentStatus`.`version` AND `ttcontentid`.`document` = `tblDocumentStatus`.`documentID` ".
-				"LEFT JOIN `tblDocumentLocks` ON `tblDocuments`.`id`=`tblDocumentLocks`.`document` ".
-				"LEFT JOIN `tblUsers` AS `oTbl` on `oTbl`.`id` = `tblDocuments`.`owner` ".
-				"LEFT JOIN `tblUsers` AS `sTbl` on `sTbl`.`id` = `tblDocumentStatusLog`.`userID` ".
-				"WHERE `ttstatid`.`maxLogID`=`tblDocumentStatusLog`.`statusLogID` ".
-				"AND `ttcontentid`.`maxVersion` = `tblDocumentContent`.`version` ".
-				"AND `tblDocumentLocks`.`userID` = '".$user->getID()."' ".
-				"ORDER BY `statusDate` DESC";
-
-			$resArr = $db->getResultArray($queryStr);
+			/* Get list of documents locked by current user */
+			$resArr = $dms->getDocumentList('LockedByMe', $user);
 			if (is_bool($resArr) && !$resArr) {
 				$this->contentHeading(getMLText("warning"));
-				$this->contentContainer("Internal error. Unable to complete request. Exiting.");
+				$this->contentContainer(getMLText("internal_error_exit"));
 				$this->htmlEndPage();
 				exit;
 			}
@@ -476,50 +394,15 @@ class SeedDMS_View_MyDocuments extends SeedDMS_Bootstrap_Style {
 		}
 		else {
 
-			// Get list of documents owned by current user
-			if (!$db->createTemporaryTable("ttstatid")) {
-				$this->contentHeading(getMLText("warning"));
-				$this->contentContainer(getMLText("internal_error_exit"));
-				$this->htmlEndPage();
-				exit;
-			}
-
-			if (!$db->createTemporaryTable("ttcontentid")) {
-				$this->contentHeading(getMLText("warning"));
-				$this->contentContainer(getMLText("internal_error_exit"));
-				$this->htmlEndPage();
-				exit;
-			}
-			$queryStr = "SELECT `tblDocuments`.*, `tblDocumentLocks`.`userID` as `lockUser`, ".
-				"`tblDocumentContent`.`version`, `tblDocumentStatus`.*, `tblDocumentStatusLog`.`status`, ".
-				"`tblDocumentStatusLog`.`comment` AS `statusComment`, `tblDocumentStatusLog`.`date` as `statusDate`, ".
-				"`tblDocumentStatusLog`.`userID`, `oTbl`.`fullName` AS `ownerName`, `sTbl`.`fullName` AS `statusName` ".
-				"FROM `tblDocumentContent` ".
-				"LEFT JOIN `tblDocuments` ON `tblDocuments`.`id` = `tblDocumentContent`.`document` ".
-				"LEFT JOIN `tblDocumentStatus` ON `tblDocumentStatus`.`documentID` = `tblDocumentContent`.`document` ".
-				"LEFT JOIN `tblDocumentStatusLog` ON `tblDocumentStatusLog`.`statusID` = `tblDocumentStatus`.`statusID` ".
-				"LEFT JOIN `ttstatid` ON `ttstatid`.`maxLogID` = `tblDocumentStatusLog`.`statusLogID` ".
-				"LEFT JOIN `ttcontentid` ON `ttcontentid`.`maxVersion` = `tblDocumentStatus`.`version` AND `ttcontentid`.`document` = `tblDocumentStatus`.`documentID` ".
-				"LEFT JOIN `tblDocumentLocks` ON `tblDocuments`.`id`=`tblDocumentLocks`.`document` ".
-				"LEFT JOIN `tblUsers` AS `oTbl` on `oTbl`.`id` = `tblDocuments`.`owner` ".
-				"LEFT JOIN `tblUsers` AS `sTbl` on `sTbl`.`id` = `tblDocumentStatusLog`.`userID` ".
-				"WHERE `ttstatid`.`maxLogID`=`tblDocumentStatusLog`.`statusLogID` ".
-				"AND `ttcontentid`.`maxVersion` = `tblDocumentContent`.`version` ".
-				"AND `tblDocuments`.`owner` = '".$user->getID()."' ";
-				
-			if ($orderby=='e') $queryStr .= "ORDER BY `expires`";
-			else if ($orderby=='u') $queryStr .= "ORDER BY `statusDate`";
-			else if ($orderby=='s') $queryStr .= "ORDER BY `status`";
-			else $queryStr .= "ORDER BY `name`";
-
-			$resArr = $db->getResultArray($queryStr);
+			/* Get list of documents owned by current user */
+			$resArr = $dms->getDocumentList('MyDocs', $user, $orderby);
 			if (is_bool($resArr) && !$resArr) {
 				$this->contentHeading(getMLText("warning"));
 				$this->contentContainer(getMLText("internal_error_exit"));
 				$this->htmlEndPage();
 				exit;
 			}
-			
+
 			$this->contentHeading(getMLText("all_documents"));
 			$this->contentContainerStart();
 

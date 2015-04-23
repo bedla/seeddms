@@ -783,15 +783,22 @@ class SeedDMS_Core_Document extends SeedDMS_Core_Object { /* {{{ */
 		$checksum = SeedDMS_Core_File::checksum($info['filename']);
 		if($checksum != $lc->getChecksum()) {
 			$content = $this->addContent($comment, $user, $info['filename'], $lc->getOriginalFileName(), $lc->getFileType(), $lc->getMimeType(), $reviewers, $approvers, $version, $attributes, $workflow);
-			if($content && !$this->_dms->forceRename)
-				SeedDMS_Core_File::removeFile($info['filename']);
+			if($content) {
+				if(!$this->_dms->forceRename) {
+					SeedDMS_Core_File::removeFile($info['filename']);
+				}
+				$queryStr = "DELETE FROM tblDocumentCheckOuts WHERE document = ".$this->_id;
+				$db->getResult($queryStr);
+				return $content;
+			} else {
+				return false;
+			}
+		} else {
+			SeedDMS_Core_File::removeFile($info['filename']);
+			$queryStr = "DELETE FROM tblDocumentCheckOuts WHERE document = ".$this->_id;
+			$db->getResult($queryStr);
+			return true;
 		}
-
-		$queryStr = "DELETE FROM tblDocumentCheckOuts WHERE document = ".$this->_id;
-		$db->getResult($queryStr);
-
-		return $content;
-
 	} /* }}} */
 
 	/**

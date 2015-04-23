@@ -514,8 +514,6 @@ class SeedDMS_Core_DMS {
 
 	/**
 	 * Returns all documents locked by a given user
-	 * FIXME: Not full implemented. Do not use, because it still requires the
-	 * temporary tables!
 	 *
 	 * @param object $user
 	 * @return array list of documents
@@ -580,6 +578,149 @@ class SeedDMS_Core_DMS {
 		$document = $this->getDocument($row['document']);
 		$version = new $this->classnames['documentcontent']($row['id'], $document, $row['version'], $row['comment'], $row['date'], $row['createdBy'], $row['dir'], $row['orgFileName'], $row['fileType'], $row['mimeType'], $row['fileSize'], $row['checksum']);
 		return $version;
+	} /* }}} */
+
+	/**
+	 * Returns all documents with a predefined search criteria
+	 *
+	 * The records return have the following elements
+	 *
+	 * From Table tblDocuments
+	 * [id] => id of document
+	 * [name] => name of document
+	 * [comment] => comment of document
+	 * [date] => timestamp of creation date of document
+	 * [expires] => timestamp of expiration date of document
+	 * [owner] => user id of owner
+	 * [folder] => id of parent folder
+	 * [folderList] => column separated list of folder ids, e.g. :1:41:
+	 * [inheritAccess] => 1 if access is inherited
+	 * [defaultAccess] => default access mode
+	 * [locked] => always -1 (TODO: is this field still used?)
+	 * [keywords] => keywords of document
+	 * [sequence] => sequence of document
+	 *
+	 * From Table tblDocumentLocks
+	 * [lockUser] => id of user locking the document
+	 *
+	 * From Table tblDocumentStatusLog
+	 * [version] => latest version of document
+	 * [statusID] => id of latest status log
+	 * [documentID] => id of document
+	 * [status] => current status of document
+	 * [statusComment] => comment of current status
+	 * [statusDate] => datetime when the status was entered, e.g. 2014-04-17 21:35:51
+	 * [userID] => id of user who has initiated the status change
+	 *
+	 * From Table tblUsers
+	 * [ownerName] => name of owner of document
+	 * [statusName] => name of user who has initiated the status change
+	 *
+	 * @param string $listtype type of document list, can be 'AppRevByMe',
+	 * 'AppRevOwner', 'LockedByMe', 'MyDocs'
+	 * @param object $param1 user
+	 * @param string $param2 sort list if listtype='MyDocs'
+	 * @return array list of documents
+	 */
+	function getDocumentList($listtype, $param1=null, $param2='') { /* {{{ */
+		/* The following query will get all documents and lots of additional
+		 * information. It requires the two temporary tables ttcontentid and
+		 * ttstatid.
+		 */
+		if (!$this->db->createTemporaryTable("ttstatid") || !$this->db->createTemporaryTable("ttcontentid")) {
+			return false;
+		}
+		$queryStr = "SELECT `tblDocuments`.*, `tblDocumentLocks`.`userID` as `lockUser`, ".
+			"`tblDocumentContent`.`version`, `tblDocumentStatus`.*, `tblDocumentStatusLog`.`status`, ".
+			"`tblDocumentStatusLog`.`comment` AS `statusComment`, `tblDocumentStatusLog`.`date` as `statusDate`, ".
+			"`tblDocumentStatusLog`.`userID`, `oTbl`.`fullName` AS `ownerName`, `sTbl`.`fullName` AS `statusName` ".
+			"FROM `tblDocumentContent` ".
+			"LEFT JOIN `tblDocuments` ON `tblDocuments`.`id` = `tblDocumentContent`.`document` ".
+			"LEFT JOIN `tblDocumentStatus` ON `tblDocumentStatus`.`documentID` = `tblDocumentContent`.`document` ".
+			"LEFT JOIN `tblDocumentStatusLog` ON `tblDocumentStatusLog`.`statusID` = `tblDocumentStatus`.`statusID` ".
+			"LEFT JOIN `ttstatid` ON `ttstatid`.`maxLogID` = `tblDocumentStatusLog`.`statusLogID` ".
+			"LEFT JOIN `ttcontentid` ON `ttcontentid`.`maxVersion` = `tblDocumentStatus`.`version` AND `ttcontentid`.`document` = `tblDocumentStatus`.`documentID` ".
+			"LEFT JOIN `tblDocumentLocks` ON `tblDocuments`.`id`=`tblDocumentLocks`.`document` ".
+			"LEFT JOIN `tblUsers` AS `oTbl` on `oTbl`.`id` = `tblDocuments`.`owner` ".
+			"LEFT JOIN `tblUsers` AS `sTbl` on `sTbl`.`id` = `tblDocumentStatusLog`.`userID` ".
+			"WHERE `ttstatid`.`maxLogID`=`tblDocumentStatusLog`.`statusLogID` ".
+			"AND `ttcontentid`.`maxVersion` = `tblDocumentContent`.`version` ";
+
+		switch($listtype) {
+		case 'AppRevByMe': // Documents I have to review/approve
+			$user = $param1;
+			// Get document list for the current user.
+			$reviewStatus = $user->getReviewStatus();
+			$approvalStatus = $user->getApprovalStatus();
+			
+			// Create a comma separated list of all the documentIDs whose information is
+			// required.
+			$dList = array();
+			foreach ($reviewStatus["indstatus"] as $st) {
+				if (!in_array($st["documentID"], $dList)) {
+					$dList[] = $st["documentID"];
+				}
+			}
+			foreach ($reviewStatus["grpstatus"] as $st) {
+				if (!in_array($st["documentID"], $dList)) {
+					$dList[] = $st["documentID"];
+				}
+			}
+			foreach ($approvalStatus["indstatus"] as $st) {
+				if (!in_array($st["documentID"], $dList)) {
+					$dList[] = $st["documentID"];
+				}
+			}
+			foreach ($approvalStatus["grpstatus"] as $st) {
+				if (!in_array($st["documentID"], $dList)) {
+					$dList[] = $st["documentID"];
+				}
+			}
+			$docCSV = "";
+			foreach ($dList as $d) {
+				$docCSV .= (strlen($docCSV)==0 ? "" : ", ")."'".$d."'";
+			}
+			
+			if (strlen($docCSV)>0) {
+				$queryStr .= "AND `tblDocumentStatusLog`.`status` IN (".S_DRAFT_REV.", ".S_DRAFT_APP.", ".S_EXPIRED.") ".
+							"AND `tblDocuments`.`id` IN (" . $docCSV . ") ".
+							"ORDER BY `statusDate` DESC";
+			} else {
+				$queryStr = '';
+			}
+			break;
+		case 'AppRevOwner': // Documents waiting for review/approval I'm owning
+			$user = $param1;
+			$queryStr .= "AND `tblDocuments`.`owner` = '".$user->getID()."' ".
+				"AND `tblDocumentStatusLog`.`status` IN (".S_DRAFT_REV.", ".S_DRAFT_APP.") ".
+				"ORDER BY `statusDate` DESC";
+			break;
+		case 'LockedByMe': // Documents locked by me
+			$user = $param1;
+			$queryStr .= "AND `tblDocumentLocks`.`userID` = '".$user->getID()."' ".
+				"ORDER BY `statusDate` DESC";
+			break;
+		case 'MyDocs': // Documents owned by me
+			$user = $param1;
+			$orderby = $param2;
+			$queryStr .=	"AND `tblDocuments`.`owner` = '".$user->getID()."' ";
+			if ($orderby=='e') $queryStr .= "ORDER BY `expires`";
+			else if ($orderby=='u') $queryStr .= "ORDER BY `statusDate`";
+			else if ($orderby=='s') $queryStr .= "ORDER BY `status`";
+			else $queryStr .= "ORDER BY `name`";
+			break;
+		}
+
+		if($queryStr) {
+			$resArr = $this->db->getResultArray($queryStr);
+			if (is_bool($resArr) && !$resArr) {
+				return false;
+			}
+		} else {
+			return array();
+		}
+
+		return $resArr;
 	} /* }}} */
 
 	function makeTimeStamp($hour, $min, $sec, $year, $month, $day) { /* {{{ */

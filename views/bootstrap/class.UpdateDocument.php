@@ -242,14 +242,18 @@ function checkForm()
 <?php
 				$tmp = array();
 				foreach($reviewStatus as $r) {
-					$mandatory=false;
-					if($r['type'] == 0 && $res) {
-						foreach ($res as $rr)
-							if ($rr['reviewerUserID']==$r['required']) {
-								$mandatory=true;
-							}
-						if(!$mandatory)
+					if($r['type'] == 0) {
+					 	if($res) {
+							$mandatory=false;
+							foreach ($res as $rr)
+								if ($rr['reviewerUserID']==$r['required']) {
+									$mandatory=true;
+								}
+							if(!$mandatory)
+								$tmp[] = $r['required'];
+						} else {
 							$tmp[] = $r['required'];
+						}
 					}
 				}
 				if($tmp) {
@@ -291,24 +295,9 @@ function checkForm()
       <td>
 				<div class="cbSelectTitle"><?php printMLText("groups");?>:</div>
       </td>
-      <td>
+			<td>
         <select id="GrpReviewer" class="chzn-select span9" name="grpReviewers[]" multiple="multiple" data-placeholder="<?php printMLText('select_grp_reviewers'); ?>" data-no_results_text="<?php printMLText('unknown_group'); ?>">
 <?php
-				$tmp = array();
-				foreach($reviewStatus as $r) {
-					$mandatory=false;
-					if($r['type'] == 1 && $res) {
-						foreach ($res as $rr)
-							if ($rr['reviewerGroupID']==$r['required']) {
-								$mandatory=true;
-							}
-						if(!$mandatory)
-							$tmp[] = $r['required'];
-					}
-				}
-				if($tmp) {
-					$this->__takeOverButton("GrpReviewer", $tmp);
-				}
 				foreach ($docAccess["groups"] as $grp) {
 				
 					$mandatory=false;
@@ -320,6 +309,25 @@ function checkForm()
 ?>
 			</select>
 <?php
+				$tmp = array();
+				foreach($reviewStatus as $r) {
+					if($r['type'] == 1) {
+						if($res) {
+							$mandatory=false;
+							foreach ($res as $rr)
+								if ($rr['reviewerGroupID']==$r['required']) {
+									$mandatory=true;
+								}
+							if(!$mandatory)
+								$tmp[] = $r['required'];
+						} else {
+							$tmp[] = $r['required'];
+						}
+					}
+				}
+				if($tmp) {
+					$this->__takeOverButton("GrpReviewer", $tmp);
+				}
 				/* List all mandatory groups of reviewers */
 				if($res) {
 					$tmp = array();
@@ -381,14 +389,18 @@ function checkForm()
 <?php
 				$tmp = array();
 				foreach($approvalStatus as $r) {
-					$mandatory=false;
-					if($r['type'] == 0 && $res) {
-						foreach ($res as $rr)
-							if ($rr['approverUserID']==$r['required']) {
-								$mandatory=true;
-							}
-						if(!$mandatory)
+					if($r['type'] == 0) {
+						if($res) {
+							$mandatory=false;
+							foreach ($res as $rr)
+								if ($rr['approverUserID']==$r['required']) {
+									$mandatory=true;
+								}
+							if(!$mandatory)
+								$tmp[] = $r['required'];
+						} else {
 							$tmp[] = $r['required'];
+						}
 					}
 				}
 				if($tmp) {
@@ -447,14 +459,18 @@ function checkForm()
 <?php
 				$tmp = array();
 				foreach($approvalStatus as $r) {
-					$mandatory=false;
-					if($r['type'] == 1 && $res) {
-						foreach ($res as $rr)
-							if ($rr['approverGroupID']==$r['required']) {
-								$mandatory=true;
-							}
-						if(!$mandatory)
+					if($r['type'] == 1) {
+						if($res) {
+							$mandatory=false;
+							foreach ($res as $rr)
+								if ($rr['approverGroupID']==$r['required']) {
+									$mandatory=true;
+								}
+							if(!$mandatory)
+								$tmp[] = $r['required'];
+						} else {
 							$tmp[] = $r['required'];
+						}
 					}
 				}
 				if($tmp) {

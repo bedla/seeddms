@@ -50,13 +50,6 @@ class SeedDMS_View_MyDocuments extends SeedDMS_Bootstrap_Style {
 
 		if ($showInProcess){
 
-			if (!$db->createTemporaryTable("ttstatid") || !$db->createTemporaryTable("ttcontentid")) {
-				$this->contentHeading(getMLText("warning"));
-				$this->contentContainer(getMLText("internal_error_exit"));
-				$this->htmlEndPage();
-				exit;
-			}
-
 			if($workflowmode == 'traditional' || $workflowmode == 'traditional_only_approval') {
 				
 				// Get document list for the current user.

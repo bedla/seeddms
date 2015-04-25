@@ -1482,7 +1482,7 @@ $('#delete-folder-btn-".$folderid."').popover({
 	 * @param object $previewer
 	 * @param boolean $skipcont set to true if embrasing tr shall be skipped
 	 */
-	function documentListRow($document, $previewer, $skipcont=false) { /* {{{ */
+	function documentListRow($document, $previewer, $skipcont=false, $version=0) { /* {{{ */
 		$dms = $this->params['dms'];
 		$user = $this->params['user'];
 		$showtree = $this->params['showtree'];
@@ -1500,7 +1500,12 @@ $('#delete-folder-btn-".$folderid."').popover({
 		if(!$skipcont)
 			$content .= "<tr id=\"table-row-document-".$docID."\">";
 
-		if($latestContent = $document->getLatestContent()) {
+		if($version)
+			$latestContent = $document->getContentByVersion($version);
+		else
+			$latestContent = $document->getLatestContent();
+
+		if($latestContent) {
 			$previewer->createPreview($latestContent);
 			$version = $latestContent->getVersion();
 			$status = $latestContent->getStatus();

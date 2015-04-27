@@ -202,12 +202,21 @@ function checkForm()
 	$attrdefs = $dms->getAllAttributeDefinitions(array(SeedDMS_Core_AttributeDefinition::objtype_documentcontent, SeedDMS_Core_AttributeDefinition::objtype_all));
 	if($attrdefs) {
 		foreach($attrdefs as $attrdef) {
+			$arr = $this->callHook('editDocumentContentAttribute', null, $attrdef);
+			if(is_array($arr)) {
+				echo $txt;
+				echo "<tr>";
+				echo "<td>".$arr[0].":</td>";
+				echo "<td>".$arr[1]."</td>";
+				echo "</tr>";
+			} else {
 ?>
     <tr>
 	    <td><?php echo htmlspecialchars($attrdef->getName()); ?>:</td>
 	    <td><?php $this->printAttributeEditField($attrdef, '') ?></td>
     </tr>
 <?php
+			}
 		}
 	}
 	if($workflowmode == 'traditional' || $workflowmode == 'traditional_only_approval') {

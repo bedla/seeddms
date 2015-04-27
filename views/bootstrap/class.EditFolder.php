@@ -98,12 +98,21 @@ function checkForm() {
 
 		if($attrdefs) {
 			foreach($attrdefs as $attrdef) {
+				$arr = $this->callHook('folderEditAttribute', $folder, $attrdef);
+				if(is_array($arr)) {
+					echo $txt;
+					echo "<tr>";
+					echo "<td>".$arr[0]."</td>";
+					echo "<td>".$arr[1]."</td>";
+					echo "</tr>";
+				} else {
 ?>
 <tr>
 	<td><?php echo htmlspecialchars($attrdef->getName()); ?></td>
 	<td><?php $this->printAttributeEditField($attrdef, $folder->getAttribute($attrdef)) ?></td>
 </tr>
 <?php
+				}
 			}
 		}
 ?>

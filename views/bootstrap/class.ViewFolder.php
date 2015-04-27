@@ -199,13 +199,22 @@ class SeedDMS_View_ViewFolder extends SeedDMS_Bootstrap_Style {
 			$attributes = $folder->getAttributes();
 			if($attributes) {
 				foreach($attributes as $attribute) {
-					$attrdef = $attribute->getAttributeDefinition();
+					$arr = $this->callHook('showFolderAttribute', $folder, $attribute);
+					if(is_array($arr)) {
+						echo $txt;
+						echo "<tr>";
+						echo "<td>".$arr[0].":</td>";
+						echo "<td>".$arr[1].":</td>";
+						echo "</tr>";
+					} else {
+						$attrdef = $attribute->getAttributeDefinition();
 			?>
 					<tr>
 					<td><?php echo htmlspecialchars($attrdef->getName()); ?>:</td>
 					<td><?php echo htmlspecialchars(implode(', ', $attribute->getValueAsArray())); ?></td>
 					</tr>
-			<?php
+<?php
+					}
 				}
 			}
 			echo "</table>\n";

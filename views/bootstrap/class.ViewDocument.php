@@ -286,7 +286,16 @@ class SeedDMS_View_ViewDocument extends SeedDMS_Bootstrap_Style {
 		$attributes = $document->getAttributes();
 		if($attributes) {
 			foreach($attributes as $attribute) {
-				$this->printAttribute($attribute);
+				$arr = $this->callHook('showDocumentAttribute', $document, $attribute);
+				if(is_array($arr)) {
+					echo $txt;
+					echo "<tr>";
+					echo "<td>".$arr[0].":</td>";
+					echo "<td>".$arr[1]."</td>";
+					echo "</tr>";
+				} else {
+					$this->printAttribute($attribute);
+				}
 			}
 		}
 ?>
@@ -393,8 +402,13 @@ class SeedDMS_View_ViewDocument extends SeedDMS_Bootstrap_Style {
 		$attributes = $latestContent->getAttributes();
 		if($attributes) {
 			foreach($attributes as $attribute) {
-				$attrdef = $attribute->getAttributeDefinition();
-				print "<li>".htmlspecialchars($attrdef->getName()).": ".htmlspecialchars(implode(', ', $attribute->getValueAsArray()))."</li>\n";
+				$arr = $this->callHook('showDocumentContentAttribute', $latestcontent, $attribute);
+				if(is_array($arr)) {
+					print "<li>".$arr[0].": ".$arr[1]."</li>\n";
+				} else {
+					$attrdef = $attribute->getAttributeDefinition();
+					print "<li>".htmlspecialchars($attrdef->getName()).": ".htmlspecialchars(implode(', ', $attribute->getValueAsArray()))."</li>\n";
+				}
 			}
 		}
 		print "</ul>\n";
@@ -998,8 +1012,13 @@ class SeedDMS_View_ViewDocument extends SeedDMS_Bootstrap_Style {
 				$attributes = $version->getAttributes();
 				if($attributes) {
 					foreach($attributes as $attribute) {
-						$attrdef = $attribute->getAttributeDefinition();
-						print "<li>".htmlspecialchars($attrdef->getName()).": ".htmlspecialchars(implode(', ', $attribute->getValueAsArray()))."</li>\n";
+						$arr = $this->callHook('showDocumentContentAttribute', $version, $attribute);
+						if(is_array($arr)) {
+							print "<li>".$arr[0].": ".$arr[1]."</li>\n";
+						} else {
+							$attrdef = $attribute->getAttributeDefinition();
+							print "<li>".htmlspecialchars($attrdef->getName()).": ".htmlspecialchars(implode(', ', $attribute->getValueAsArray()))."</li>\n";
+						}
 					}
 				}
 				print "</ul>\n";

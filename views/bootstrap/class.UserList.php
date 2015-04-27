@@ -76,8 +76,11 @@ class SeedDMS_View_UserList extends SeedDMS_Bootstrap_Style {
 			echo "<td>";
 			echo SeedDMS_Core_File::format_filesize($currUser->getUsedDiskSpace());
 			if($quota) {
-				if($user->getQuota() > $currUser->getUsedDiskSpace()) {
-					$used = (int) ($currUser->getUsedDiskSpace()/$currUser->getQuota()*100.0+0.5);
+				$qt = $currUser->getQuota();
+				if($qt == 0)
+					$qt = $quota;
+				if($qt > $currUser->getUsedDiskSpace()) {
+					$used = (int) ($currUser->getUsedDiskSpace()/$qt*100.0+0.5);
 					$free = 100-$used;
 				} else {
 					$free = 0;

@@ -91,4 +91,9 @@ require_once('Core/inc.AccessUtils.php');
  */
 require_once('Core/inc.FileUtils.php');
 
+/**
+ * @uses SeedDMS_Transmittal
+ */
+require_once('Core/inc.ClassTransmittal.php');
+
 ?>

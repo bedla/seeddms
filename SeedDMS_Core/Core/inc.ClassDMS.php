@@ -293,6 +293,8 @@ class SeedDMS_Core_DMS {
 		$this->classnames['documentcontent'] = 'SeedDMS_Core_DocumentContent';
 		$this->classnames['user'] = 'SeedDMS_Core_User';
 		$this->classnames['group'] = 'SeedDMS_Core_Group';
+		$this->classnames['transmittal'] = 'SeedDMS_Core_Transmittal';
+		$this->classnames['transmittalitem'] = 'SeedDMS_Core_TransmittalItem';
 		$this->version = '@package_version@';
 		if($this->version[0] == '@')
 			$this->version = '4.3.17';
@@ -1480,6 +1482,60 @@ class SeedDMS_Core_DMS {
 			return false;
 
 		return $this->getGroup($this->db->getInsertID());
+	} /* }}} */
+
+	/**
+	 * Get a transmittal by its id
+	 *
+	 * @param integer $id id of transmittal
+	 * @return object/boolean transmittal or false if no group was found
+	 */
+	function getTransmittal($id) { /* {{{ */
+		$classname = $this->classnames['transmittal'];
+		return $classname::getInstance($id, $this, '');
+	} /* }}} */
+
+	/**
+	 * Get a transmittal by its name
+	 *
+	 * @param string $name name of transmittal
+	 * @return object/boolean transmittal or false if no group was found
+	 */
+	function getTransmittalByName($name) { /* {{{ */
+		$classname = $this->classnames['transmittal'];
+		return $classname::getInstance($name, $this, 'name');
+	} /* }}} */
+
+	/**
+	 * Return list of all transmittals
+	 *
+	 * @return array of instances of {@link SeedDMS_Core_Transmittal} or false
+	 */
+	function getAllTransmittals($user=null, $orderby = '') { /* {{{ */
+		$classname = $this->classnames['transmittal'];
+		return $classname::getAllInstances($user, $orderby, $this);
+	} /* }}} */
+
+	/**
+	 * Create a new transmittal
+	 *
+	 * @param string $name name of group
+	 * @param string $comment comment of group
+	 * @param object $user user this transmittal belongs to
+	 * @return object/boolean instance of {@link SeedDMS_Core_Transmittal} or
+	 *         false in case of an error.
+	 */
+	function addTransmittal($name, $comment, $user) { /* {{{ */
+		if (is_object($this->getTransmittalByName($name))) {
+			return false;
+		}
+
+		$queryStr = "INSERT INTO tblTransmittals (name, comment, userID) VALUES (".$this->db->qstr($name).", ".$this->db->qstr($comment).", ".$user->getID().")";
+		echo $queryStr;
+		if (!$this->db->getResult($queryStr))
+			return false;
+
+		return $this->getTransmittal($this->db->getInsertID());
 	} /* }}} */
 
 	function getKeywordCategory($id) { /* {{{ */

@@ -8,6 +8,8 @@
 - clean workflow log when deleting a document version.
 - programms for indexing are actually used (Bug #137)
 - fix take over of reviewers/approvers from previos version
+- fix calculation of quota in user list
+- do not show hidden users in select box of search form
 
 --------------------------------------------------------------------------------
                      Changes in version 4.3.16

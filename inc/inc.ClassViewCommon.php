@@ -81,17 +81,23 @@ class SeedDMS_View_Common {
 							$tmpret = $hookObj->$hook($this);
 							if(is_string($tmpret))
 								$ret .= $tmpret;
+							else
+								$ret = $tmpret;
 							break;
 						case 2:
 							$tmpret = $hookObj->$hook($this, func_get_arg(1));
 							if(is_string($tmpret))
 								$ret .= $tmpret;
+							else
+								$ret = $tmpret;
 							break;
 						case 3:
 						default:
 							$tmpret = $hookObj->$hook($this, func_get_arg(1), func_get_arg(2));
 							if(is_string($tmpret))
 								$ret .= $tmpret;
+							else
+								$ret = $tmpret;
 					}
 				}
 			}

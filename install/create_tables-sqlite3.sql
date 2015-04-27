@@ -676,6 +676,36 @@ CREATE TABLE tblWorkflowMandatoryWorkflow (
 -- --------------------------------------------------------
 
 -- 
+-- Table structure for transmittal
+-- 
+
+CREATE TABLE tblTransmittals (
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
+  `name` text NOT NULL,
+  `comment` text NOT NULL,
+  `userID` INTEGER NOT NULL default '0' REFERENCES `tblUsers` (`id`) ON DELETE CASCADE,
+  `date` TEXT NOT NULL default '0000-00-00 00:00:00',
+  `public` INTEGER NOT NULL default '0'
+);
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for transmittal item
+-- 
+
+CREATE TABLE `tblTransmittalItems` (
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
+	`transmittal` INTEGER NOT NULL DEFAULT '0' REFERENCES `tblTransmittals` (`id`) ON DELETE CASCADE,
+  `document` INTEGER default NULL REFERENCES `tblDocuments` (`id`) ON DELETE CASCADE,
+  `version` INTEGER unsigned NOT NULL default '0',
+  `date` TEXT NOT NULL default '0000-00-00 00:00:00',
+  UNIQUE (document, version)
+);
+
+-- --------------------------------------------------------
+
+-- 
 -- Table structure for version
 -- 
 

@@ -780,6 +780,41 @@ CREATE TABLE tblWorkflowMandatoryWorkflow (
 -- --------------------------------------------------------
 
 -- 
+-- Table structure for transmittal
+-- 
+
+CREATE TABLE `tblTransmittals` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` text NOT NULL,
+  `comment` text NOT NULL,
+  `userID` int(11) NOT NULL default '0',
+  `date` datetime,
+  `public` tinyint(1) NOT NULL default '0',
+  PRIMARY KEY  (`id`),
+  CONSTRAINT `tblTransmittals_user` FOREIGN KEY (`userID`) REFERENCES `tblUsers` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for transmittal item
+-- 
+
+CREATE TABLE `tblTransmittalItems` (
+  `id` int(11) NOT NULL auto_increment,
+	`transmittal` int(11) NOT NULL DEFAULT '0',
+  `document` int(11) default NULL,
+  `version` smallint(5) unsigned NOT NULL default '0',
+  `date` datetime,
+  PRIMARY KEY  (`id`),
+  UNIQUE (document, version),
+  CONSTRAINT `tblTransmittalItems_document` FOREIGN KEY (`document`) REFERENCES `tblDocuments` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `tblTransmittalItem_transmittal` FOREIGN KEY (`transmittal`) REFERENCES `tblTransmittals` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+-- 
 -- Table structure for version
 -- 
 

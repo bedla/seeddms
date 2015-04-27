@@ -133,9 +133,9 @@ class SeedDMS_View_Search extends SeedDMS_Bootstrap_Style {
 <option value="-1"></option>
 <?php
 		foreach ($allUsers as $userObj) {
-			if ($userObj->isGuest())
+			if ($userObj->isGuest() || ($userObj->isHidden() && $userObj->getID() != $user->getID() && !$user->isAdmin()))
 				continue;
-			print "<option value=\"".$userObj->getID()."\" ".(($owner && $userObj->getID() == $owner->getID()) ? "selected" : "").">" . htmlspecialchars($userObj->getLogin()." - ".$userObj->getFullName()) . "\n";
+			print "<option value=\"".$userObj->getID()."\" ".(($owner && $userObj->getID() == $owner->getID()) ? "selected" : "").">" . htmlspecialchars($userObj->getLogin()." - ".$userObj->getFullName()) . "</option>\n";
 		}
 ?>
 </select>
@@ -362,13 +362,13 @@ class SeedDMS_View_Search extends SeedDMS_Bootstrap_Style {
 <tr>
 <td><?php printMLText("owner");?>:</td>
 <td>
-<select class="chzn-select-deselect" name="ownerid">
+<select class="chzn-select-deselect" name="ownerid" data-placeholder="<?php printMLText('select_users'); ?>" data-no_results_text="<?php printMLText('unknown_owner'); ?>">
 <option value="-1"></option>
 <?php
 			foreach ($allUsers as $userObj) {
-				if ($userObj->isGuest())
+				if ($userObj->isGuest() || ($userObj->isHidden() && $userObj->getID() != $user->getID() && !$user->isAdmin()))
 					continue;
-				print "<option value=\"".$userObj->getID()."\" ".(($owner && $userObj->getID() == $owner->getID()) ? "selected" : "").">" . htmlspecialchars($userObj->getLogin()." - ".$userObj->getFullName()) . "\n";
+				print "<option value=\"".$userObj->getID()."\" ".(($owner && $userObj->getID() == $owner->getID()) ? "selected" : "").">" . htmlspecialchars($userObj->getLogin()." - ".$userObj->getFullName()) . "</option>\n";
 			}
 ?>
 </select>

@@ -28,7 +28,7 @@ class SeedDMS_Core_DatabaseAccess {
 	public $_debug;
 
 	/**
-	 * @var string name of database driver (mysql or sqlite3)
+	 * @var string name of database driver (mysql or sqlite)
 	 */
 	protected $_driver;
 

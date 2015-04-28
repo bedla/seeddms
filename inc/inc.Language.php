@@ -162,6 +162,35 @@ function getReviewStatusText($status, $date=0) { /* {{{ */
 	}
 } /* }}} */
 
+function printReceiptStatusText($status, $date=0) { /* {{{ */
+	print getReceiptStatusText($status, $date);
+} /* }}} */
+
+function getReceiptStatusText($status, $date=0) { /* {{{ */
+	if (is_null($status)) {
+		return getMLText("status_unknown");
+	}
+	else {
+		switch ($status) {
+			case -2:
+				return getMLText("status_recipient_removed");
+				break;
+			case -1:
+				return getMLText("status_recipient_rejected").($date !=0 ? " ".$date : "");
+				break;
+			case 0:
+				return getMLText("status_not_receipted");
+				break;
+			case 1:
+				return getMLText("status_receipted").($date !=0 ? " ".$date : "");
+				break;
+			default:
+				return getMLText("status_unknown");
+				break;
+		}
+	}
+} /* }}} */
+
 function printApprovalStatusText($status, $date=0) { /* {{{ */
 	if (is_null($status)) {
 		print getMLText("status_unknown");

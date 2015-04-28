@@ -177,6 +177,7 @@ class SeedDMS_View_ViewDocument extends SeedDMS_Bootstrap_Style {
 		$status = $latestContent->getStatus();
 		$reviewStatus = $latestContent->getReviewStatus();
 		$approvalStatus = $latestContent->getApprovalStatus();
+		$receiptStatus = $latestContent->getReceiptStatus();
 ?>
 
 <div class="row-fluid">
@@ -325,6 +326,11 @@ class SeedDMS_View_ViewDocument extends SeedDMS_Bootstrap_Style {
 		  <li><a data-target="#workflow" data-toggle="tab"><?php echo getMLText('workflow'); ?></a></li>
 <?php
 				}
+			}
+			if(is_array($receiptStatus) && count($receiptStatus)>0) {
+?>
+		  <li><a data-target="#recipients" data-toggle="tab"><?php echo getMLText('recipients'); ?></a></li>
+<?php
 			}
 ?>
 		  <li><a data-target="#attachments" data-toggle="tab"><?php printMLText('linked_files'); echo (count($files)) ? " (".count($files).")" : ""; ?></a></li>
@@ -955,6 +961,82 @@ class SeedDMS_View_ViewDocument extends SeedDMS_Bootstrap_Style {
 		  </div>
 <?php
 			}
+		}
+		if(is_array($receiptStatus) && count($receiptStatus)>0) {
+?>
+		  <div class="tab-pane" id="recipients">
+<?php
+			$this->contentContainerStart();
+			print "<table class=\"table-condensed\">\n";
+
+			print "<tr><td colspan=5>\n";
+			$this->contentSubHeading(getMLText("recipients"));
+			print "</tr>";
+
+			print "<tr>\n";
+			print "<td width='20%'><b>".getMLText("name")."</b></td>\n";
+			print "<td width='20%'><b>".getMLText("last_update")."</b></td>\n";
+			print "<td width='25%'><b>".getMLText("comment")."</b></td>";
+			print "<td width='15%'><b>".getMLText("status")."</b></td>\n";
+			print "<td width='20%'></td>\n";
+			print "</tr>\n";
+
+			foreach ($receiptStatus as $r) {
+				$required = null;
+				$is_recipient = false;
+				switch ($r["type"]) {
+					case 0: // Reviewer is an individual.
+						$required = $dms->getUser($r["required"]);
+						if (!is_object($required)) {
+							$reqName = getMLText("unknown_user")." '".$r["required"]."'";
+						}
+						else {
+							$reqName = htmlspecialchars($required->getFullName()." (".$required->getLogin().")");
+						}
+						if($r["required"] == $user->getId() && ($user->getId() != $owner->getId() || $enableownerrevapp == 1))
+							$is_recipient = true;
+						break;
+					case 1: // Reviewer is a group.
+						$required = $dms->getGroup($r["required"]);
+						if (!is_object($required)) {
+							$reqName = getMLText("unknown_group")." '".$r["required"]."'";
+						}
+						else {
+							$reqName = "<i>".htmlspecialchars($required->getName())."</i>";
+							if($required->isMember($user) && ($user->getId() != $owner->getId() || $enableownerrevapp == 1))
+								$is_recipient = true;
+						}
+						break;
+				}
+				print "<tr>\n";
+				print "<td>".$reqName."</td>\n";
+				print "<td><ul class=\"unstyled\"><li>".$r["date"]."</li>";
+				/* $updateUser is the user who has done the receipt */
+				$updateUser = $dms->getUser($r["userID"]);
+				print "<li>".(is_object($updateUser) ? htmlspecialchars($updateUser->getFullName()." (".$updateUser->getLogin().")") : "unknown user id '".$r["userID"]."'")."</li></ul></td>";
+				print "<td>".htmlspecialchars($r["comment"])."</td>\n";
+				print "<td>".getReceiptStatusText($r["status"])."</td>\n";
+				print "<td><ul class=\"unstyled\">";
+
+				if($accessop->mayReview()) {
+					if ($is_recipient && $r["status"]==0) {
+						print "<li><a href=\"../out/out.ReceiptDocument.php?documentid=".$documentid."&version=".$latestContent->getVersion()."&receiptid=".$r['receiptID']."\" class=\"btn btn-mini\">".getMLText("add_receipt")."</a></li>";
+					}else if (($updateUser==$user)&&(($r["status"]==1)||($r["status"]==-1))&&(!$document->hasExpired())){
+						print "<li><a href=\"../out/out.ReceiptDocument.php?documentid=".$documentid."&version=".$latestContent->getVersion()."&receiptid=".$r['receiptID']."\" class=\"btn btn-mini\">".getMLText("edit")."</a></li>";
+					}
+				}
+
+				print "</ul></td>\n";	
+				print "</td>\n</tr>\n";
+			}
+?>
+		</table>
+<?php
+
+			$this->contentContainerEnd();
+?>
+		  </div>
+<?php
 		}
 		if (count($versions)>1) {
 ?>

@@ -10,6 +10,7 @@
 - fix take over of reviewers/approvers from previos version
 - fix calculation of quota in user list
 - do not show hidden users in select box of search form
+- notifier can be set when new document is uploaded
 
 --------------------------------------------------------------------------------
                      Changes in version 4.3.16

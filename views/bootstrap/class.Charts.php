@@ -132,7 +132,7 @@ if(in_array($type, array('docspermonth'))) {
 	var data = [
 <?php
 	foreach($data as $rec) {
-		echo '['.$rec['key'].','.$rec['total'].'],'."\n";
+		echo '['.htmlspecialchars($rec['key']).','.$rec['total'].'],'."\n";
 	}
 ?>
 	];
@@ -169,7 +169,7 @@ if(in_array($type, array('docspermonth'))) {
 	var data = [
 <?php
 	foreach($data as $rec) {
-		echo '{ label: "'.$rec['key'].'", data: [[1,'.$rec['total'].']]},'."\n";
+		echo '{ label: "'.htmlspecialchars($rec['key']).'", data: [[1,'.$rec['total'].']]},'."\n";
 	}
 ?>
 	];

@@ -145,7 +145,7 @@ $user = $dms->getUser(1);
 
 if(is_readable($filename)) {
 	if(filesize($filename)) {
-		$finfo = new finfo(FILEINFO_MIME);
+		$finfo = new finfo(FILEINFO_MIME_TYPE);
 		if(!$mimetype) {
 			$mimetype = $finfo->file($filename);
 		}

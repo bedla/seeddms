@@ -306,7 +306,7 @@ for ($file_num=0;$file_num<count($_FILES["userfile"]["tmp_name"]);$file_num++){
 			$index = SeedDMS_Lucene_Indexer::open($settings->_luceneDir);
 			if($index) {
 				SeedDMS_Lucene_Indexer::init($settings->_stopWordsFile);
-				$index->addDocument(new SeedDMS_Lucene_IndexedDocument($dms, $document, isset($settings->converters['fulltext']) ? $settings->converters['fulltext'] : null, true));
+				$index->addDocument(new SeedDMS_Lucene_IndexedDocument($dms, $document, isset($settings->_converters['fulltext']) ? $settings->_converters['fulltext'] : null, true));
 			}
 		}
 

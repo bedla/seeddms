@@ -41,7 +41,7 @@ class SeedDMS_View_MyDocuments extends SeedDMS_Bootstrap_Style {
 		$previewwidth = $this->params['previewWidthList'];
 
 		$db = $dms->getDB();
-		$previewer = new SeedDMS_Preview_Previewer($cachedir, $previewwidth);
+		$previewer = SeedDMS_Preview_Previewer::create($cachedir, $this->params['previewClassPhpApi'], $previewwidth);
 
 		$this->htmlStartPage(getMLText("my_documents"));
 		$this->globalNavigation();
@@ -580,7 +580,7 @@ class SeedDMS_View_MyDocuments extends SeedDMS_Bootstrap_Style {
 				print "<th><a href=\"../out/out.MyDocuments.php?orderby=e\">".getMLText("expires")."</a></th>\n";
 				print "</tr>\n</thead>\n<tbody>\n";
 
-				$previewer = new SeedDMS_Preview_Previewer($cachedir, $previewwidth);
+				$previewer = SeedDMS_Preview_Previewer::create($cachedir, $this->params['previewClassPhpApi'], $previewwidth);
 				foreach ($resArr as $res) {
 					$document = $dms->getDocument($res["documentID"]);
 				

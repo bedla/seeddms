@@ -431,7 +431,7 @@ switch($command) {
 				$document = $dms->getDocument($_REQUEST['id']);
 				if($document) {
 					if ($document->getAccessMode($user) >= M_READ) {
-						$previewer = new SeedDMS_Preview_Previewer($settings->_cacheDir, $settings->_previewWidthList);
+						$previewer = SeedDMS_Preview_Previewer::create($settings->_cacheDir, $settings->_previewClassPhpApi, $settings->_previewWidthList);
 						$view->setParam('previewWidthList', $settings->_previewWidthList);
 						$view->setParam('showtree', showtree());
 						$content = $view->documentListRow($document, $previewer, true);

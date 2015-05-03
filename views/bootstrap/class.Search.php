@@ -431,7 +431,7 @@ class SeedDMS_View_Search extends SeedDMS_Bootstrap_Style {
 			print "<th>".getMLText("action")."</th>\n";
 			print "</tr>\n</thead>\n<tbody>\n";
 
-			$previewer = new SeedDMS_Preview_Previewer($cachedir, $previewwidth);
+			$previewer = SeedDMS_Preview_Previewer::create($cachedir, $this->params['previewClassPhpApi'], $previewwidth);
 			foreach ($entries as $entry) {
 				if(get_class($entry) == $dms->getClassname('document')) {
 					$txt = $this->callHook('documentListItem', $entry, $previewer);

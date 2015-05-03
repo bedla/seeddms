@@ -77,6 +77,8 @@ class Settings { /* {{{ */
 	var $_contentDir = null;
 	// Where the preview files are saved
 	var $_cacheDir = null;
+	// Preview class shoult use Php API or exec command
+	var $_previewClassPhpApi = null;
 	// Where the partitions of an uploaded file by the jumploader is saved
 	var $_stagingDir = null;
 	// Where the lucene fulltext index is saved
@@ -373,6 +375,7 @@ class Settings { /* {{{ */
 		$this->_httpRoot = strval($tab["httpRoot"]);
 		$this->_contentDir = strval($tab["contentDir"]);
 		$this->_cacheDir = strval($tab["cacheDir"]);
+		$this->_previewClassPhpApi = Settings::boolVal($tab["previewClassPhpApi"]);
 		$this->_stagingDir = strval($tab["stagingDir"]);
 		$this->_luceneDir = strval($tab["luceneDir"]);
 		$this->_dropFolderDir = strval($tab["dropFolderDir"]);
@@ -659,6 +662,7 @@ class Settings { /* {{{ */
     $this->setXMLAttributValue($node, "httpRoot", $this->_httpRoot);
     $this->setXMLAttributValue($node, "contentDir", $this->_contentDir);
     $this->setXMLAttributValue($node, "cacheDir", $this->_cacheDir);
+    $this->setXMLAttributValue($node, "previewClassPhpApi", $this->_previewClassPhpApi);
     $this->setXMLAttributValue($node, "stagingDir", $this->_stagingDir);
     $this->setXMLAttributValue($node, "luceneDir", $this->_luceneDir);
     $this->setXMLAttributValue($node, "dropFolderDir", $this->_dropFolderDir);

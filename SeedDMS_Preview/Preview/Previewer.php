@@ -22,7 +22,7 @@
  * @copyright  Copyright (C) 2011, Uwe Steinmann
  * @version    Release: @package_version@
  */
-class SeedDMS_Preview_Previewer {
+abstract class SeedDMS_Preview_Previewer {
 	/**
 	 * @var string $cacheDir location in the file system where all the
 	 *      cached data like thumbnails are located. This should be an
@@ -37,7 +37,15 @@ class SeedDMS_Preview_Previewer {
 	 */
 	protected $width;
 
-	function __construct($previewDir, $width=40) {
+	public static function create($previewDir, $usePhpApi, $width=40) {
+		if ($usePhpApi) {
+			return new SeedDMS_Preview_PhpApiPreviewer($previewDir, $width);
+		} else {
+			return new SeedDMS_Preview_ExecPreviewer($previewDir, $width);
+		}
+	}
+
+	private function __construct($previewDir, $width) {
 		if(!is_dir($previewDir)) {
 			if (!SeedDMS_Core_File::makeDir($previewDir)) {
 				$this->previewDir = '';
@@ -92,34 +100,14 @@ class SeedDMS_Preview_Previewer {
 			return false;
 		$target = $this->getFileName($object, $width);
 		if($target !== false && (!file_exists($target) || filectime($target) < $object->getDate())) {
-			$cmd = '';
-			switch($object->getMimeType()) {
-				case "image/png":
-				case "image/gif":
-				case "image/jpeg":
-				case "image/jpg":
-				case "image/svg+xml":
-					$cmd = 'convert -resize '.$width.'x '.$file.' '.$target;
-					break;
-				case "application/pdf":
-				case "application/postscript":
-					$cmd = 'convert -density 100 -resize '.$width.'x '.$file.'[0] '.$target;
-					break;
-				case "text/plain":
-					$cmd = 'convert -resize '.$width.'x '.$file.'[0] '.$target;
-					break;
-				case "application/x-compressed-tar":
-					$cmd = 'tar tzvf '.$file.' | convert -density 100 -resize '.$width.'x text:-[0] '.$target;
-					break;
-			}
-			if($cmd) {
-				exec($cmd);
-			}
+			$this->internalCreatePreview($object->getMimeType(), $width, $file, $target);
 			return true;
 		}
 		return true;
-			
+
 	} /* }}} */
+
+	protected abstract function internalCreatePreview($mimeType, $width, $file, $target);
 
 	public function hasPreview($object, $width=0) { /* {{{ */
 		if($width == 0)

@@ -48,7 +48,7 @@ class SeedDMS_View_WorkflowSummary extends SeedDMS_Bootstrap_Style {
 		// Get document list for the current user.
 		$workflowStatus = $user->getWorkflowStatus();
 
-		$previewer = new SeedDMS_Preview_Previewer($cachedir, $previewwidth);
+		$previewer = SeedDMS_Preview_Previewer::create($cachedir, $this->params['previewClassPhpApi'], $previewwidth);
 
 		$printheader=true;
 		$iRev = array();

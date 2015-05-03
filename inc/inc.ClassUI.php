@@ -100,6 +100,7 @@ class UI extends UI_Default {
 			$view->setParam('partitionsize', $settings->_partitionSize);
 			$view->setParam('checkoutdir', $settings->_checkOutDir);
 			$view->setParam('showmissingtranslations', $settings->_showMissingTranslations);
+			$view->setParam('previewClassPhpApi', $settings->_previewClassPhpApi);
 			return $view;
 		}
 		return null;

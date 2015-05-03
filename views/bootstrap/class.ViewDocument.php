@@ -372,7 +372,7 @@ class SeedDMS_View_ViewDocument extends SeedDMS_Bootstrap_Style {
 
 		print "</ul>";
 		*/
-		$previewer = new SeedDMS_Preview_Previewer($cachedir, $previewwidthdetail);
+		$previewer = SeedDMS_Preview_Previewer::create($cachedir, $this->params['previewClassPhpApi'], $previewwidthdetail);
 		$previewer->createPreview($latestContent);
 		if ($file_exists) {
 			if ($viewonlinefiletypes && in_array(strtolower($latestContent->getFileType()), $viewonlinefiletypes)) {

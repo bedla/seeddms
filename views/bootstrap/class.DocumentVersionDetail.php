@@ -40,6 +40,7 @@ class SeedDMS_View_DocumentVersionDetail extends SeedDMS_Bootstrap_Style {
 		$viewonlinefiletypes = $this->params['viewonlinefiletypes'];
 		$enableversionmodification = $this->params['enableversionmodification'];
 		$cachedir = $this->params['cachedir'];
+		$previewClassPhpApi = $this->params['previewClassPhpApi'];
 		$previewwidthdetail = $this->params['previewwidthdetail'];
 
 		$latestContent = $document->getLatestContent();
@@ -147,7 +148,7 @@ class SeedDMS_View_DocumentVersionDetail extends SeedDMS_Bootstrap_Style {
 		print "<td><ul class=\"unstyled\">";
 
 		print "</ul>";
-		$previewer = new SeedDMS_Preview_Previewer($cachedir, $previewwidthdetail);
+		$previewer = SeedDMS_Preview_Previewer::create($cachedir, $previewClassPhpApi, $previewwidthdetail);
 		$previewer->createPreview($version);
 		if($previewer->hasPreview($version)) {
 			print("<img class=\"mimeicon\" width=\"".$previewwidthdetail."\" src=\"../op/op.Preview.php?documentid=".$document->getID()."&version=".$version->getVersion()."&width=".$previewwidthdetail."\" title=\"".htmlspecialchars($version->getMimeType())."\">");

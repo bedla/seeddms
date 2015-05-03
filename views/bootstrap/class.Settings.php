@@ -278,6 +278,10 @@ if(!is_writeable($settings->_configFilePath)) {
         <td><?php printMLText("settings_cacheDir");?>:</td>
         <td><input type="text" name="cacheDir" value="<?php echo $settings->_cacheDir ?>" size="100" /></td>
       </tr>
+      <tr title="<?php printMLText("settings_previewClassPhpApi_desc");?>">
+        <td><?php printMLText("settings_previewClassPhpApi");?>:</td>
+        <td><input name="previewClassPhpApi" type="checkbox" <?php if ($settings->_previewClassPhpApi) echo "checked" ?> /></td>
+      </tr>
       <tr title="<?php printMLText("settings_stagingDir_desc");?>">
         <td><?php printMLText("settings_stagingDir");?>:</td>
         <td><input type="text" name="stagingDir" value="<?php echo $settings->_stagingDir ?>" size="100" /></td>

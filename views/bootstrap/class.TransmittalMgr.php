@@ -86,7 +86,7 @@ class SeedDMS_View_TransmittalMgr extends SeedDMS_Bootstrap_Style {
 		$previewwidth = $this->params['previewWidthList'];
 
 		$db = $dms->getDB();
-		$previewer = new SeedDMS_Preview_Previewer($cachedir, $previewwidth);
+		$previewer = SeedDMS_Preview_Previewer::create($cachedir, $this->params['previewClassPhpApi'], $previewwidth);
 
 		$this->htmlStartPage(getMLText("my_transmittals"));
 		$this->globalNavigation();

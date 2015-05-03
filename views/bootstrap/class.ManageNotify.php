@@ -104,7 +104,7 @@ class SeedDMS_View_ManageNotify extends SeedDMS_Bootstrap_Style {
 			printMLText("empty_notify_list");
 		}
 		else {
-			$previewer = new SeedDMS_Preview_Previewer($this->cachedir, $this->previewwidth);
+			$previewer = SeedDMS_Preview_Previewer::create($this->cachedir, $this->params['previewClassPhpApi'], $this->previewwidth);
 
 			print "<table class=\"table-condensed\">";
 			print "<thead>\n<tr>\n";

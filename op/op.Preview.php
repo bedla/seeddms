@@ -70,9 +70,9 @@ if (!is_object($object)) {
 }
 
 if(!empty($_GET["width"]))
-	$previewer = new SeedDMS_Preview_Previewer($settings->_cacheDir, $_GET["width"]);
+	$previewer = SeedDMS_Preview_Previewer::create($settings->_cacheDir, $settings->_previewClassPhpApi, $_GET["width"]);
 else
-	$previewer = new SeedDMS_Preview_Previewer($settings->_cacheDir);
+	$previewer = SeedDMS_Preview_Previewer::create($settings->_cacheDir, $settings->_previewClassPhpApi);
 if(!$previewer->hasPreview($object))
 	$previewer->createPreview($object);
 header('Content-Type: image/png');

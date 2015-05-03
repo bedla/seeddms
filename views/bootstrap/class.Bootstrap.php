@@ -1326,7 +1326,7 @@ $(function() {
 				}
 			}
 		}
-		$previewer = new SeedDMS_Preview_Previewer($this->params['cachedir'], 40);
+		$previewer = SeedDMS_Preview_Previewer::create($this->params['cachedir'], $this->params['previewClassPhpApi'], 40);
 		if($clipboard['docs']) {
 			foreach($clipboard['docs'] as $docid) {
 				/* FIXME: check for access rights, which could have changed after adding the document to the clipboard */

@@ -271,8 +271,7 @@ class SeedDMS_View_ViewFolder extends SeedDMS_Bootstrap_Style {
 			}
 		}
 
-
-		$previewer = new SeedDMS_Preview_Previewer($cachedir, $previewwidth);
+		$previewer = SeedDMS_Preview_Previewer::create($cachedir, $this->params['previewClassPhpApi'], $previewwidth);
 		foreach($documents as $document) {
 			$txt = $this->callHook('documentListItem', $document, $previewer);
 			if(is_string($txt))

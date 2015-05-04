@@ -76,16 +76,18 @@ class SeedDMS_Extension_Mgr {
 
 	function getExtensions() { /* {{{ */
 		$extensions = array();
-		$handle = opendir($this->extdir);
-		while ($entry = readdir($handle) ) {
-			if ($entry == ".." || $entry == ".")
-				continue;
-			else if (is_dir($this->extdir ."/". $entry))
-				array_push($extensions, $entry);
-		}
-		closedir($handle);
+		if(file_exists($this->extdir)) {
+			$handle = opendir($this->extdir);
+			while ($entry = readdir($handle) ) {
+				if ($entry == ".." || $entry == ".")
+					continue;
+				else if (is_dir($this->extdir ."/". $entry))
+					array_push($extensions, $entry);
+			}
+			closedir($handle);
 
-		asort($extensions);
+			asort($extensions);
+		}
 		return $extensions;
 	} /* }}} */
 }

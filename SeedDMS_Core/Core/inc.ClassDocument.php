@@ -2376,10 +2376,10 @@ class SeedDMS_Core_DocumentContent extends SeedDMS_Core_Object { /* {{{ */
 		}
 
 		unset($this->_workflow); // force to be reloaded from DB
-		if ($this->getWorkflow()) $this->setStatus(S_IN_WORKFLOW,"",$user);
-		elseif ($pendingReview) $this->setStatus(S_DRAFT_REV,"",$user);
-		elseif ($pendingApproval) $this->setStatus(S_DRAFT_APP,"",$user);
-		else $this->setStatus(S_RELEASED,"",$user);
+		if ($this->getWorkflow()) $this->setStatus(S_IN_WORKFLOW,$msg,$user);
+		elseif ($pendingReview) $this->setStatus(S_DRAFT_REV,$msg,$user);
+		elseif ($pendingApproval) $this->setStatus(S_DRAFT_APP,$msg,$user);
+		else $this->setStatus(S_RELEASED,$msg,$user);
 	} /* }}} */
 
 	function SeedDMS_Core_DocumentContent($id, $document, $version, $comment, $date, $userID, $dir, $orgFileName, $fileType, $mimeType, $fileSize=0, $checksum='') { /* {{{ */

@@ -619,7 +619,7 @@ class SeedDMS_Core_DMS {
 	 * [statusName] => name of user who has initiated the status change
 	 *
 	 * @param string $listtype type of document list, can be 'AppRevByMe',
-	 * 'AppRevOwner', 'LockedByMe', 'MyDocs'
+	 * 'AppRevOwner', 'ReceiptByMe', 'LockedByMe', 'MyDocs'
 	 * @param object $param1 user
 	 * @param string $param2 sort list if listtype='MyDocs'
 	 * @return array list of documents
@@ -686,6 +686,36 @@ class SeedDMS_Core_DMS {
 			if (strlen($docCSV)>0) {
 				$queryStr .= "AND `tblDocumentStatusLog`.`status` IN (".S_DRAFT_REV.", ".S_DRAFT_APP.", ".S_EXPIRED.") ".
 							"AND `tblDocuments`.`id` IN (" . $docCSV . ") ".
+							"ORDER BY `statusDate` DESC";
+			} else {
+				$queryStr = '';
+			}
+			break;
+		case 'ReiptByMe': // Documents I have to receipt
+			$user = $param1;
+			// Get document list for the current user.
+			$receiptStatus = $user->getReceiptStatus();
+			
+			// Create a comma separated list of all the documentIDs whose information is
+			// required.
+			$dList = array();
+			foreach ($receiptStatus["indstatus"] as $st) {
+				if (!in_array($st["documentID"], $dList)) {
+					$dList[] = $st["documentID"];
+				}
+			}
+			foreach ($receiptStatus["grpstatus"] as $st) {
+				if (!in_array($st["documentID"], $dList)) {
+					$dList[] = $st["documentID"];
+				}
+			}
+			$docCSV = "";
+			foreach ($dList as $d) {
+				$docCSV .= (strlen($docCSV)==0 ? "" : ", ")."'".$d."'";
+			}
+			
+			if (strlen($docCSV)>0) {
+				$queryStr .= "AND `tblDocuments`.`id` IN (" . $docCSV . ") ".
 							"ORDER BY `statusDate` DESC";
 			} else {
 				$queryStr = '';

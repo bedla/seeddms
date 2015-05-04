@@ -2336,12 +2336,16 @@ class SeedDMS_Core_DocumentContent extends SeedDMS_Core_Object { /* {{{ */
 	 * The status of a document with the current status S_OBSOLETE, S_REJECTED,
 	 * or S_EXPIRED will not be changed unless the parameter
 	 * $ignorecurrentstatus is set to true.
+	 * This method will call {@see SeedDMS_Core_DocumentContent::setStatus()}
+	 * which checks if the state has actually changed. This is, why this
+	 * function can be called at any time without harm to the status log.
 	 *
 	 * @param boolean $ignorecurrentstatus ignore the current status and
 	 *        recalculate a new status in any case
 	 * @param object $user the user initiating this method
+	 * @param string $msg message stored in status log when status is set
 	 */
-	function verifyStatus($ignorecurrentstatus=false, $user=null) { /* {{{ */
+	function verifyStatus($ignorecurrentstatus=false, $user=null, $msg='') { /* {{{ */
 
 		unset($this->_status);
 		$st=$this->getStatus();
@@ -4239,7 +4243,7 @@ class SeedDMS_Core_DocumentContent extends SeedDMS_Core_Object { /* {{{ */
 			}
 			$this->_workflow = null;
 			$this->_workflowState = null;
-			$this->verifyStatus(false, $user);
+			$this->verifyStatus(false, $user, 'Workflow removed');
 			$db->commitTransaction();
 		}
 

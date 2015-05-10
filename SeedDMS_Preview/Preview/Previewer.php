@@ -73,7 +73,7 @@ abstract class SeedDMS_Preview_Previewer {
 	 */
 	protected function getFileName($object, $width) { /* }}} */
 		$document = $object->getDocument();
-		$dir = $this->previewDir.'/'.$document->getDir();
+		$dir = $this->previewDir.(SeedDMS_Preview_Previewer::strEndsWith($this->previewDir, '/') ? '' : '/').$document->getDir();
 		switch(get_class($object)) {
 			case "SeedDMS_Core_DocumentContent":
 				$target = $dir.'p'.$object->getVersion().'-'.$width.'.png';
@@ -153,5 +153,15 @@ abstract class SeedDMS_Preview_Previewer {
 
 		$target = $this->getFileName($object, $width);
 	} /* }}} */
+
+	private static function strEndsWith($haystack, $needle)
+	{
+		$length = strlen($needle);
+		if ($length == 0) {
+			return true;
+		} else {
+			return (substr($haystack, -$length) === $needle);
+		}
+	}
 }
 ?>

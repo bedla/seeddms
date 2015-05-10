@@ -11,6 +11,12 @@
  * @version    Release: @package_version@
  */
 
+/**
+ * Include some files
+ */
+require_once("ExecPreviewer.php");
+require_once("PhpApiPreviewer.php");
+
 
 /**
  * Class for managing creation of preview images for documents.

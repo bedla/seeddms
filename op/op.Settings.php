@@ -91,7 +91,7 @@ if ($action == "saveSettings")
   $settings->_httpRoot = $_POST["httpRoot"];
   $settings->_contentDir = $_POST["contentDir"];
   $settings->_cacheDir = $_POST["cacheDir"];
-  $settings->_previewClassPhpApi = getBoolValue($_POST["previewClassPhpApi"]);
+  $settings->_previewClassPhpApi = getBoolValue("previewClassPhpApi");
   $settings->_stagingDir = $_POST["stagingDir"];
   $settings->_luceneDir = $_POST["luceneDir"];
   $settings->_extraPath = $_POST["extraPath"];
